@@ -8,10 +8,10 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
-    "plugin:import/recommended",
+    'plugin:prettier/recommended',
+    'plugin:import/recommended',
     "plugin:import/typescript",
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs', 'vite.config.ts', 'tailwind.config.js', 'postcss.config.js', '.prettierrc.cjs'],
   parser: '@typescript-eslint/parser',
@@ -24,7 +24,7 @@ module.exports = {
     ecmaVersion: 2021,
     sourceType: 'module',
   },
-  plugins: ['react', 'import', 'react-refresh', '@typescript-eslint', 'simple-import-sort', 'import', 'prettier'],
+  plugins: ['react', 'import', 'react-refresh', '@typescript-eslint', 'simple-import-sort', 'prettier'],
   rules: {
     "import/no-extraneous-dependencies": 0,
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
@@ -59,14 +59,24 @@ module.exports = {
     ],
   },
   settings: {
+    "import/parsers": {
+      "@typescript-eslint/parser": [
+        ".ts",
+        ".tsx"
+      ]
+    },
     'import/resolver': {
       typescript: {
         alwaysTryTypes: true,
+        project: './tsconfig.json',
       },
-      react: {
-        version: 'detect',
+      node: {
+        path: ['./src'],
+        extensions: ['.js','.jsx','.ts','.tsx']
       },
-      node: true,
+    },
+    react: {
+      version: 'detect',
     },
   },
 };
