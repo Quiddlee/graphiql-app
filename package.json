@@ -6,12 +6,16 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "prettier:fix": "prettier --write \"src/**/*.{ts,tsx,css}\"",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "prepare": "husky install",
+    "prepush": "vitest --run"
   },
   "dependencies": {
+    "@types/react-test-renderer": "^18.0.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -40,7 +44,9 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-react-refresh": "^0.4.4",
     "eslint-plugin-simple-import-sort": "^10.0.0",
+    "husky": "^8.0.0",
     "jsdom": "^23.0.1",
+    "lint-staged": "^15.2.0",
     "postcss": "^8.4.32",
     "prettier": "3.1.0",
     "prettier-plugin-tailwindcss": "^0.5.8",
@@ -48,5 +54,9 @@
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
     "vitest": "^1.0.1"
+  },
+  "lint-staged": {
+    "./src/**/*.{tsx, ts}": "eslint",
+    "./src/**/*.{tsx, ts, html, css}": "prettier --write"
   }
 }
