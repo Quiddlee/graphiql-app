@@ -12,7 +12,8 @@
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "prepare": "husky install",
-    "prepush": "vitest --run"
+    "prepush": "vitest --run",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@types/react-test-renderer": "^18.0.7",
