@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useCallback, useContext, useMemo, useState } from 'react';
+import { createContext, ReactNode, useCallback, useMemo, useState } from 'react';
 
 import enTranslation from '@/locales/en';
 import ruTranslation from '@/locales/ru';
@@ -16,9 +16,9 @@ const TranslationFiles: { [key: string]: Translation } = {
   ru: ruTranslation,
 };
 
-const LanguageContext = createContext<LanguageContextType>({} as LanguageContextType);
+export const LanguageContext = createContext<LanguageContextType>({} as LanguageContextType);
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
+export default function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState('en');
 
   const changeLanguage = useCallback(() => {
@@ -34,7 +34,3 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   return <LanguageContext.Provider value={contextValue}>{children}</LanguageContext.Provider>;
 }
-
-export const useLanguage = () => {
-  return useContext(LanguageContext);
-};
