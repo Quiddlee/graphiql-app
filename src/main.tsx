@@ -2,9 +2,9 @@ import React from 'react';
 
 import ReactDOM from 'react-dom/client';
 
-import { LanguageProvider } from './shared/Context/LanguageContext';
-
 import App from '@/App';
+
+import { LanguageProvider } from './shared/Context/LanguageContext';
 
 import '@/styles/index.css';
 
