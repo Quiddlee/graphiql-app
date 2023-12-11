@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-export default function MainLayout() {
+const MainLayout = () => {
   return (
     <main>
       <header>Here will be header</header>
@@ -10,4 +10,6 @@ export default function MainLayout() {
       <footer>Here will be footer</footer>
     </main>
   );
-}
+};
+
+export default MainLayout;
