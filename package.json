@@ -19,6 +19,7 @@
     "@lit/react": "^1.0.2",
     "@material/web": "^1.0.1",
     "@types/react-test-renderer": "^18.0.7",
+    "firebase": "^10.7.1",
     "overlayscrollbars": "^2.4.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
