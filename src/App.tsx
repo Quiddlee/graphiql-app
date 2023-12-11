@@ -5,29 +5,31 @@ import LoginPage from '@pages/LoginPage';
 import MainPage from '@pages/MainPage';
 import WelcomePage from '@pages/WelcomePage';
 
+import ROUTES from './shared/constatns/routes';
+
 const router = createHashRouter([
   {
     path: '/',
     element: <MainLayout />,
     children: [
       {
-        path: '/',
+        path: ROUTES.WELCOME_PAGE,
         element: <WelcomePage />,
       },
       {
-        path: 'login',
+        path: ROUTES.LOGIN,
         element: <LoginPage />,
       },
       {
-        path: 'mainpage',
+        path: ROUTES.MAIN,
         element: <MainPage />,
       },
     ],
   },
 ]);
 
-function App() {
+const App = () => {
   return <RouterProvider router={router} />;
-}
+};
 
 export default App;

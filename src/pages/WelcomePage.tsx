@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export default function LoginPage() {
+const WelcomePage = () => {
   return (
     <section>
       Here is my fancy welcome page!
@@ -10,4 +10,6 @@ export default function LoginPage() {
       </div>
     </section>
   );
-}
+};
+
+export default WelcomePage;
