@@ -5,8 +5,8 @@ const WelcomePage = () => {
     <section>
       Here is my fancy welcome page!
       <div className="flex flex-col">
-        <Link to="../auth">login</Link>
-        <Link to="../main">main page</Link>
+        <Link to="/auth/login">login</Link>
+        <Link to="/main">main page</Link>
       </div>
     </section>
   );

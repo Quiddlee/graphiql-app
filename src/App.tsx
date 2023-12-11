@@ -5,6 +5,7 @@ import LoginPage from '@pages/LoginPage';
 import MainPage from '@pages/MainPage';
 import WelcomePage from '@pages/WelcomePage';
 
+import SignUpPage from './pages/SignUpPage';
 import ROUTES from './shared/constants/routes';
 
 const router = createHashRouter([
@@ -17,8 +18,21 @@ const router = createHashRouter([
         element: <WelcomePage />,
       },
       {
-        path: ROUTES.LOGIN,
-        element: <LoginPage />,
+        path: ROUTES.AUTH,
+        children: [
+          {
+            path: ROUTES.LOGIN,
+            element: <LoginPage />,
+          },
+          {
+            path: ROUTES.SIGNUP,
+            element: <SignUpPage />,
+          },
+          {
+            index: true,
+            element: <LoginPage />,
+          },
+        ],
       },
       {
         path: ROUTES.MAIN,

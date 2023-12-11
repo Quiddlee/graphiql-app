@@ -1,6 +1,8 @@
 const ROUTES = {
 	WELCOME_PAGE: '/',
-	LOGIN: 'auth',
+	AUTH: 'auth',
+	LOGIN: 'login',
+	SIGNUP: 'signup',
 	MAIN: 'main',
 } as const;
 
