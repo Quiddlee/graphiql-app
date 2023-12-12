@@ -4,12 +4,14 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { regValidationSchema } from '@/shared/constants/validationSchema';
-import { prepareCookie } from '@/shared/helpers/cookieHandlers';
+import useAuth from '@/shared/Context/authHook';
+import { prepareAuthCookie } from '@/shared/helpers/cookieHandlers';
 import toastifyNotation from '@/shared/helpers/toastifyNotation';
 import { ErrorType } from '@/shared/types';
 
 export default function SignUpPage() {
   const navigate = useNavigate();
+  const { switchAuth } = useAuth();
   const {
     register,
     handleSubmit,
@@ -25,10 +27,11 @@ export default function SignUpPage() {
     try {
       const { user } = await createUserWithEmailAndPassword(auth, email, password);
       if (user) {
-        document.cookie = prepareCookie(email);
+        document.cookie = prepareAuthCookie(email);
       }
       reset();
-      navigate('/');
+      switchAuth();
+      navigate('/main');
       return null;
     } catch (e) {
       if ((e as ErrorType).code === 'auth/email-already-in-use') return toastifyNotation('Error, email is occupied');
