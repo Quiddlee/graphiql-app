@@ -4,13 +4,16 @@ import ReactDOM from 'react-dom/client';
 
 import App from '@/App';
 
-import '@/styles/index.css';
 import initFirebaseApp from './firebase';
+import LanguageProvider from './shared/Context/LanguageContext';
+import '@/styles/index.css';
 
 initFirebaseApp();
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <App />
+    <LanguageProvider>
+      <App />
+    </LanguageProvider>
   </React.StrictMode>,
 );
