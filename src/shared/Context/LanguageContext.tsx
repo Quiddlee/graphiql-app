@@ -27,7 +27,10 @@ export default function LanguageProvider({ children }: { children: ReactNode }) 
   }, [language]);
 
   const translation = TranslationFiles[language];
-  const contextValue = useMemo(() => ({ language, changeLanguage, translation }), [language, changeLanguage]);
+  const contextValue = useMemo(
+    () => ({ language, changeLanguage, translation }),
+    [language, changeLanguage, translation],
+  );
 
   return <LanguageContext.Provider value={contextValue}>{children}</LanguageContext.Provider>;
 }
