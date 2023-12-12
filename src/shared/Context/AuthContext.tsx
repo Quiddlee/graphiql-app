@@ -1,10 +1,11 @@
 import { createContext, useCallback, useMemo, useState } from 'react';
 
-import { isAuthCookie } from '@shared/helpers/cookieHandlers';
+import { deleteAuthCookie, isAuthCookie, prepareAuthCookie } from '@shared/helpers/cookieHandlers';
 
 type AuthApi = {
   isAuth: boolean;
-  switchAuth: () => void;
+  logInAuth: (email: string) => void;
+  logOutAuth: () => void;
 };
 
 export const AuthContext = createContext({} as AuthApi);
@@ -13,16 +14,23 @@ const AuthProvider = ({ children }: { children: JSX.Element }) => {
   const authCookie = isAuthCookie();
   const [isAuth, setIsAuth] = useState(authCookie);
 
-  const switchAuth = useCallback(() => {
-    setIsAuth((prev) => !prev);
-  }, [setIsAuth]);
+  const logInAuth = useCallback((email: string) => {
+    document.cookie = prepareAuthCookie(email as string);
+    setIsAuth(true);
+  }, []);
+
+  const logOutAuth = useCallback(() => {
+    deleteAuthCookie();
+    setIsAuth(false);
+  }, []);
 
   const authApi = useMemo(
     () => ({
       isAuth,
-      switchAuth,
+      logInAuth,
+      logOutAuth,
     }),
-    [isAuth, switchAuth],
+    [isAuth, logInAuth, logOutAuth],
   );
   return <AuthContext.Provider value={authApi}>{children}</AuthContext.Provider>;
 };

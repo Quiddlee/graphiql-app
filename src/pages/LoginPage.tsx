@@ -5,13 +5,12 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { loginValidationSchema } from '@/shared/constants/validationSchema';
 import useAuth from '@/shared/Context/authHook';
-import { prepareAuthCookie } from '@/shared/helpers/cookieHandlers';
 import toastifyNotation from '@/shared/helpers/toastifyNotation';
 import { ErrorType } from '@/shared/types';
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const { switchAuth } = useAuth();
+  const { logInAuth } = useAuth();
   const {
     register,
     handleSubmit,
@@ -27,11 +26,10 @@ export default function LoginPage() {
     try {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
       if (user) {
-        document.cookie = prepareAuthCookie(email);
+        logInAuth(user.email as string);
+        reset();
+        navigate('/main');
       }
-      reset();
-      switchAuth();
-      navigate('/main');
       return null;
     } catch (e) {
       if ((e as ErrorType).code === 'auth/invalid-email') return toastifyNotation('Error, wrong email');
