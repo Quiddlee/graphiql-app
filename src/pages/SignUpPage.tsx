@@ -3,6 +3,7 @@ import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
+import ROUTES from '@/shared/constants/routes';
 import { regValidationSchema } from '@/shared/constants/validationSchema';
 import useAuth from '@/shared/Context/authHook';
 import toastifyNotation from '@/shared/helpers/toastifyNotation';
@@ -28,7 +29,7 @@ export default function SignUpPage() {
       if (user) {
         reset();
         logInAuth(user.email as string);
-        navigate('/main');
+        navigate(`/${ROUTES.MAIN}`);
       }
       return null;
     } catch (e) {
@@ -57,7 +58,7 @@ export default function SignUpPage() {
           Sing up
         </button>
       </form>
-      <Link to="/auth/login">go to login</Link>
+      <Link to={`/${ROUTES.AUTH}/${ROUTES.LOGIN}`}>go to login</Link>
     </>
   );
 }

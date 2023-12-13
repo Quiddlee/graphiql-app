@@ -2,7 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 const MainLayout = () => {
   return (
-    <main>
+    <main className="mx-auto max-w-[1440px]">
       <header>Here will be header</header>
       <section>
         <Outlet />
