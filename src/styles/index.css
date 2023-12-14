@@ -16,6 +16,7 @@
     --md-ref-typeface-brand: 'Readex Pro';
     --md-ref-typeface-plain: 'Roboto';
     --md-icon-font: 'Material Symbols Rounded';
+    --md-fab-icon-size: 40px
   }
 
   * {
