@@ -1,3 +1,6 @@
+/* eslint-disable react/jsx-props-no-spreading */
+import { FC, TextareaHTMLAttributes } from 'react';
+
 const DEFAULT_VALUE = `# Welcome to GraphiQL
 #
 # GraphiQL is an in-browser tool for writing, validating, and
@@ -18,9 +21,10 @@ const DEFAULT_VALUE = `# Welcome to GraphiQL
 # }
 `;
 
-const TextArea = () => {
+const TextArea: FC<TextareaHTMLAttributes<HTMLTextAreaElement>> = ({ ...props }) => {
   return (
     <textarea
+      {...props}
       name="editor"
       id="editor"
       placeholder={DEFAULT_VALUE}
