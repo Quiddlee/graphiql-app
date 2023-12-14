@@ -24,7 +24,7 @@ export default function LoginPage() {
     reset,
   } = useForm({
     resolver: yupResolver(loginValidationSchema),
-    mode: 'onChange',
+    mode: 'all',
   });
 
   async function onSubmit({ email, password }: { email: string; password: string }) {
