@@ -1,5 +1,7 @@
+import Editor from '@components/Editor/Editor';
+
 const MainPage = () => {
-  return <section>Here is my fancy main page!</section>;
+  return <Editor />;
 };
 
 export default MainPage;
