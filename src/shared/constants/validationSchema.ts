@@ -5,29 +5,27 @@ const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&~()_+\-=':"}{
 
 const email = () => {
 	return {
-		email: Yup.string()
-			.matches(emailRegEx, { message: 'Email must be email@example.com', excludeEmptyString: true })
-			.required('Email is required'),
+		email: Yup.string().matches(emailRegEx, { message: 'code1', excludeEmptyString: true }).required('code2'),
 	};
 };
 
 const password = () => {
 	return {
 		password: Yup.string()
-			.min(8, 'Minimum 8 symbols required')
+			.min(8, 'code3')
 			.matches(passwordRegex, {
-				message: 'Password must have A, a, 1, special symbols',
+				message: 'code4',
 				excludeEmptyString: true,
 			})
-			.required('Password is required'),
+			.required('code5'),
 	};
 };
 
 const confirmPassword = () => {
 	return {
 		confirmPassword: Yup.string()
-			.required('Confirm password is required')
-			.oneOf([Yup.ref('password')], 'Password mismatch'),
+			.required('code6')
+			.oneOf([Yup.ref('password')], 'code7'),
 	};
 };
 

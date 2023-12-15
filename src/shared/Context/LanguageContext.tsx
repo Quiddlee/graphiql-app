@@ -19,7 +19,7 @@ const TranslationFiles: { [key: string]: Translation } = {
 export const LanguageContext = createContext<LanguageContextType>({} as LanguageContextType);
 
 export default function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState('en');
+  const [language, setLanguage] = useState('ru');
 
   const changeLanguage = useCallback(() => {
     const newLang = language === 'en' ? 'ru' : 'en';

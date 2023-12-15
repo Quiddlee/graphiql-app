@@ -7,6 +7,7 @@ import ROUTES from '@/shared/constants/routes';
 import { loginValidationSchema } from '@/shared/constants/validationSchema';
 import useAuth from '@/shared/Context/authHook';
 import useLanguage from '@/shared/Context/hooks';
+import errorLocalizer from '@/shared/helpers/errorLocalizer';
 import toastifyNotation from '@/shared/helpers/toastifyNotation';
 import { ErrorType, TextInputProps } from '@/shared/types';
 import FormInput from '@components/loginReg/FormInput';
@@ -14,7 +15,7 @@ import SubmitBtn from '@components/loginReg/SubmitBtn';
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const { translation } = useLanguage();
+  const { translation, language } = useLanguage();
   const { title, subtitle, emailPlaceHold, passPlaceHold, btnTitle, linkClue, linkTitle } = translation.loginPage;
   const { logInAuth } = useAuth();
   const {
@@ -57,7 +58,9 @@ export default function LoginPage() {
               placeholder={emailPlaceHold}
               type="email"
             />
-            <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">{errors.email?.message}</p>
+            <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">
+              {errorLocalizer(language, errors.email?.message)}
+            </p>
           </div>
           <div className="relative mt-12">
             <FormInput
@@ -66,7 +69,9 @@ export default function LoginPage() {
               type="password"
               placeholder={passPlaceHold}
             />
-            <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">{errors.password?.message}</p>
+            <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">
+              {errorLocalizer(language, errors.password?.message)}
+            </p>
           </div>
           <SubmitBtn style={{ width: '100%', marginTop: '52px' }} disabled={!isValid}>
             {btnTitle}

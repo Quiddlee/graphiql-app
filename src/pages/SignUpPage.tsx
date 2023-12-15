@@ -9,13 +9,14 @@ import ROUTES from '@/shared/constants/routes';
 import { regValidationSchema } from '@/shared/constants/validationSchema';
 import useAuth from '@/shared/Context/authHook';
 import useLanguage from '@/shared/Context/hooks';
+import errorLocalizer from '@/shared/helpers/errorLocalizer';
 import toastifyNotation from '@/shared/helpers/toastifyNotation';
 import { ErrorType, TextInputProps } from '@/shared/types';
 
 export default function SignUpPage() {
   const navigate = useNavigate();
   const { logInAuth } = useAuth();
-  const { translation } = useLanguage();
+  const { translation, language } = useLanguage();
   const { title, subtitle, emailPlaceHold, passPlaceHold, btnTitle, linkClue, linkTitle, confPassPlaceHold } =
     translation.signUpPage;
   const {
@@ -57,7 +58,9 @@ export default function SignUpPage() {
               type="email"
               placeholder={emailPlaceHold}
             />
-            <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">{errors.email?.message}</p>
+            <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">
+              {errorLocalizer(language, errors.email?.message)}
+            </p>
           </div>
           <div className="relative mt-12">
             <FormInput
@@ -66,7 +69,9 @@ export default function SignUpPage() {
               type="password"
               placeholder={passPlaceHold}
             />
-            <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">{errors.password?.message}</p>
+            <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">
+              {errorLocalizer(language, errors.password?.message)}
+            </p>
           </div>
           <div className="relative mt-12">
             <FormInput
@@ -76,7 +81,7 @@ export default function SignUpPage() {
               placeholder={confPassPlaceHold}
             />
             <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">
-              {errors.confirmPassword?.message}
+              {errorLocalizer(language, errors.confirmPassword?.message)}
             </p>
           </div>
           <SubmitBtn style={{ width: '100%', marginTop: '52px' }} disabled={!isValid} type="submit">
