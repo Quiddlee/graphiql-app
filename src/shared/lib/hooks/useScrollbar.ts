@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react';
 
 import { OverlayScrollbars } from 'overlayscrollbars';
 
-const useScrollbar = (hasScroll: boolean = true) => {
-	const root = useRef<HTMLElement>(null);
+const useScrollbar = <TElem extends HTMLElement>(hasScroll: boolean = true) => {
+	const root = useRef<TElem>(null);
 
 	useEffect(() => {
 		let scrollbars: OverlayScrollbars;
@@ -12,7 +12,8 @@ const useScrollbar = (hasScroll: boolean = true) => {
 			scrollbars = OverlayScrollbars(root.current, {
 				scrollbars: {
 					visibility: 'auto',
-					autoHide: 'never',
+					autoHide: 'leave',
+					autoHideDelay: 500,
 				},
 			});
 		}

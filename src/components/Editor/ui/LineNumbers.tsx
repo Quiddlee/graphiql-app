@@ -4,11 +4,9 @@ type LineNumbersProps = {
   size: number;
 };
 
-// TODO: fix line numbers logic
-
 const LineNumbers: FC<LineNumbersProps> = ({ size }) => {
   return (
-    <ol className="font-jetbrains_mono text-outline">
+    <ol className="min-w-[20px] font-jetbrains_mono text-outline">
       {Array.from({ length: size }, (_, i) => (
         <li className="text-right" key={i}>
           {i + 1}

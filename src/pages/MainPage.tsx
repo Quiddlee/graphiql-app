@@ -6,7 +6,6 @@ import EditorTools from '@components/EditorTools/EditorTools';
 const MainPage = () => {
   const editorContainerRef = useRef<HTMLDivElement>(null);
 
-  // TODO: add custom scroll
   return (
     <div
       ref={editorContainerRef}

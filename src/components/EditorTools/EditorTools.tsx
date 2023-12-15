@@ -15,12 +15,15 @@ const EditorTools: FC<EditorToolsProps> = ({ containerRef }) => {
 
   return (
     <article
-      className={cn('grid h-full gap-7 rounded-t-4xl bg-surface-container py-4 duration-[inherit] ease-[inherit]', {
-        'rounded-4xl': isExpanded,
-      })}
+      className={cn(
+        'grid h-full grid-rows-[min-content_auto] gap-7 rounded-t-4xl bg-surface-container py-4 duration-[inherit] ease-[inherit]',
+        {
+          'rounded-4xl': isExpanded,
+        },
+      )}
     >
       <Header containerRef={containerRef} />
-      <div className="pl-7 pr-4">
+      <div className="overflow-y-hidden pl-7 pr-4">
         <EditorToolsField />
       </div>
     </article>

@@ -33,6 +33,15 @@
   }
 }
 
+.os-scrollbar-handle {
+  background-color: var(--md-sys-color-primary) !important;
+  cursor: grab;
+}
+
+.os-scrollbar-handle:active {
+  cursor: grabbing;
+}
+
 .display-large{
   font-family: var(--md-sys-typescale-display-large-font-family-name);
   font-style: var(--md-sys-typescale-display-large-font-family-style);

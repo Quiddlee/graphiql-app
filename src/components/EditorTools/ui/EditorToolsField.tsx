@@ -18,10 +18,12 @@ const EditorToolsField = () => {
   const [headersValue, setHeadersValue] = useState('');
 
   if (isVariablesTab) {
-    return <EditorField size={7} value={variablesValue} onChange={(e) => setVariablesValue(e.target.value)} />;
+    return (
+      <EditorField value={variablesValue} onChange={(e) => setVariablesValue((e.target as HTMLElement).innerHTML)} />
+    );
   }
 
-  return <EditorField size={7} value={headersValue} onChange={(e) => setHeadersValue(e.target.value)} />;
+  return <EditorField value={headersValue} onChange={(e) => setHeadersValue((e.target as HTMLElement).innerHTML)} />;
 };
 
 export default EditorToolsField;

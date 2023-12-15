@@ -1,17 +1,36 @@
-import { FC, TextareaHTMLAttributes } from 'react';
+import { FC, SyntheticEvent, TextareaHTMLAttributes, useState } from 'react';
 
+import useEditorSize from '@components/Editor/lib/hooks/useEditorSize';
 import LineNumbers from '@components/Editor/ui/LineNumbers';
-import TextArea from '@components/Editor/ui/TextArea';
+import useScrollbar from '@shared/lib/hooks/useScrollbar';
 
 type EditorFieldProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
-  size?: number;
+  onChange: (e: SyntheticEvent) => void;
 };
 
-const EditorField: FC<EditorFieldProps> = ({ size = 10, ...props }) => {
+const EditorField: FC<EditorFieldProps> = ({ onChange /* ...props */ }) => {
+  const [value, setValue] = useState('');
+  const rootRef = useScrollbar<HTMLElement>();
+  const { editorRef, size } = useEditorSize(value);
+
   return (
-    <article className="flex h-full w-full gap-4">
-      <LineNumbers size={size} />
-      <TextArea {...props} />
+    <article ref={rootRef} className="h-full w-full">
+      <div className="flex h-full w-full gap-4">
+        <LineNumbers size={size} />
+        <div
+          ref={editorRef}
+          tabIndex={0}
+          aria-label="The text editor"
+          role="textbox"
+          contentEditable="plaintext-only"
+          onInput={(e) => {
+            onChange(e);
+            setValue((e.target as HTMLDivElement).innerHTML);
+          }}
+          className="h-fit w-full outline-none"
+          suppressContentEditableWarning
+        />
+      </div>
     </article>
   );
 };
