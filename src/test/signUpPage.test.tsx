@@ -37,6 +37,5 @@ describe('Testing for sign up page', () => {
     expect((emailInput as HTMLInputElement).value).toMatch('asdrogachev@gmail.com');
     expect((passInput as HTMLInputElement).value).toMatch('698830Pa$$');
     expect((confPassInput as HTMLInputElement).value).toMatch('698830Pa$$');
-    screen.debug();
   });
 });
