@@ -1,24 +1,9 @@
-import { PropsWithChildren } from 'react';
-
-import { act, cleanup, screen } from '@testing-library/react';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { act, screen } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
 import App from '@/App';
 
 import userSetup from '../setupTests';
-
-vi.mock('@components/loginReg/SubmitBtn', () => ({
-  default: () => <button type="submit">Log in</button>,
-}));
-
-vi.mock('@components/loginReg/FormInput', () => ({
-  default: (props: PropsWithChildren) => <input {...props} />,
-}));
-
-afterEach(() => {
-  cleanup();
-  document.body.innerHTML = '';
-});
 
 describe('Testing the unauthorized main page route', () => {
   it('If user is unauthorized, and tries to visit main page - he should be redirected to login page.', async () => {

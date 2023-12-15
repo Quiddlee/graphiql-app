@@ -1,20 +1,10 @@
-import { PropsWithChildren } from 'react';
-
 import { act, cleanup, screen } from '@testing-library/react';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 
 import App from '@/App';
 import { prepareAuthCookie } from '@/shared/helpers/cookieHandlers';
 
 import userSetup from '../setupTests';
-
-vi.mock('@components/loginReg/SubmitBtn', () => ({
-  default: () => <button type="submit">Log in</button>,
-}));
-
-vi.mock('@components/loginReg/FormInput', () => ({
-  default: (props: PropsWithChildren) => <input {...props} />,
-}));
 
 afterEach(() => {
   cleanup();

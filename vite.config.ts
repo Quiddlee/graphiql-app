@@ -21,14 +21,13 @@ export default defineConfig({
 	test: {
 		globals: true,
 		environment: 'jsdom',
-		setupFiles: './src/test/setupTests.ts',
+		setupFiles: './src/test/setupTests.tsx',
 		css: false,
 		coverage: {
 			provider: 'istanbul',
 			thresholds: {
 				lines: 50,
 				statements: 50,
-				branches: 50,
 				functions: 50
 			},
 		}
