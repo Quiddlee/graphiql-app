@@ -4,6 +4,8 @@ type LineNumbersProps = {
   size: number;
 };
 
+// TODO: fix line numbers logic
+
 const LineNumbers: FC<LineNumbersProps> = ({ size }) => {
   return (
     <ol className="font-jetbrains_mono text-outline">
