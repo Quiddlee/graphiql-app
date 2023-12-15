@@ -26,8 +26,10 @@ module.exports = {
   },
   plugins: ['react', 'import', 'react-refresh', '@typescript-eslint', 'simple-import-sort', 'prettier'],
   rules: {
-    "import/no-extraneous-dependencies": 0,
-    "react/function-component-definition": 0,
+    'react/jsx-props-no-spreading': 0,
+    'react/require-default-props': 0,
+    'import/no-extraneous-dependencies': 0,
+    'react/function-component-definition': 0,
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'sort-imports': ['error', {ignoreCase: true, ignoreDeclarationSort: true}],
     'import/order': [

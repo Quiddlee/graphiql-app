@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { FC, TextareaHTMLAttributes } from 'react';
 
 const TextArea: FC<TextareaHTMLAttributes<HTMLTextAreaElement>> = ({ ...props }) => {
