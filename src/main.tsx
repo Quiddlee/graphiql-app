@@ -8,6 +8,7 @@ import EditorToolsProvider from '@components/EditorTools/context/EditorToolsProv
 import LanguageProvider from './shared/Context/LanguageContext';
 
 import '@/styles/index.css';
+import 'overlayscrollbars/overlayscrollbars.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
