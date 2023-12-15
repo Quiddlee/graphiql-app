@@ -1,4 +1,4 @@
-import { Dispatch, FC, RefObject, SetStateAction, useRef } from 'react';
+import { FC, RefObject, useRef } from 'react';
 
 import { MdTabs } from '@material/web/all';
 
@@ -9,14 +9,14 @@ import IconButton from '@shared/ui/IconButton';
 import PrimaryTab from '@shared/ui/PrimaryTab';
 import Tabs from '@shared/ui/Tabs';
 
+import useEditorTools from '../lib/hooks/useEditorTools';
+
 type HeaderProps = {
-  setIsVariablesTab: Dispatch<SetStateAction<boolean>>;
-  setIsExpanded: Dispatch<SetStateAction<boolean>>;
   containerRef: RefObject<HTMLElement>;
-  isExpanded: boolean;
 };
 
-const Header: FC<HeaderProps> = ({ setIsVariablesTab, setIsExpanded, containerRef, isExpanded }) => {
+const Header: FC<HeaderProps> = ({ containerRef }) => {
+  const { setIsVariablesTab, setIsExpanded, isExpanded } = useEditorTools();
   const headerRef = useExpand({ containerRef, isExpanded });
   const tabsRef = useRef<MdTabs>(null);
 
@@ -42,7 +42,7 @@ const Header: FC<HeaderProps> = ({ setIsVariablesTab, setIsExpanded, containerRe
         className={cn('rotate-180 duration-300 ease-[inherit]', {
           'rotate-0': isExpanded,
         })}
-        onClick={() => setIsExpanded((prevState) => !prevState)}
+        onClick={() => setIsExpanded((prevState: boolean) => !prevState)}
       >
         <Icon>expand_more</Icon>
       </IconButton>

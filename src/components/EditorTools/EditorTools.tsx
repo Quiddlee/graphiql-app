@@ -1,16 +1,17 @@
-import { FC, RefObject, useState } from 'react';
+import { FC, RefObject } from 'react';
 
 import EditorToolsField from '@components/EditorTools/ui/EditorToolsField';
 import Header from '@components/EditorTools/ui/Header';
 import cn from '@shared/lib/helpers/cn';
+
+import useEditorTools from './lib/hooks/useEditorTools';
 
 type EditorToolsProps = {
   containerRef: RefObject<HTMLElement>;
 };
 
 const EditorTools: FC<EditorToolsProps> = ({ containerRef }) => {
-  const [isVariablesTab, setIsVariablesTab] = useState(true);
-  const [isExpanded, setIsExpanded] = useState(true);
+  const { isExpanded } = useEditorTools();
 
   return (
     <article
@@ -19,14 +20,9 @@ const EditorTools: FC<EditorToolsProps> = ({ containerRef }) => {
         'rounded-4xl': isExpanded,
       })}
     >
-      <Header
-        isExpanded={isExpanded}
-        setIsVariablesTab={setIsVariablesTab}
-        setIsExpanded={setIsExpanded}
-        containerRef={containerRef}
-      />
+      <Header containerRef={containerRef} />
       <div className="pl-7 pr-4">
-        <EditorToolsField isVariablesTab={isVariablesTab} />
+        <EditorToolsField />
       </div>
     </article>
   );

@@ -1,10 +1,8 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 
 import EditorField from '@components/Editor/ui/EditorField';
 
-type EditorToolsFieldProps = {
-  isVariablesTab: boolean;
-};
+import useEditorTools from '../lib/hooks/useEditorTools';
 
 const DEFAULT_VALUE = `{
   ”schedule”: {
@@ -14,7 +12,8 @@ const DEFAULT_VALUE = `{
   }
 }`;
 
-const EditorToolsField: FC<EditorToolsFieldProps> = ({ isVariablesTab }) => {
+const EditorToolsField = () => {
+  const { isVariablesTab } = useEditorTools();
   const [variablesValue, setVariablesValue] = useState(DEFAULT_VALUE);
   const [headersValue, setHeadersValue] = useState('');
 
