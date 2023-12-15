@@ -1,8 +1,10 @@
-import { RefObject, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { OverlayScrollbars } from 'overlayscrollbars';
 
-const useScrollbar = (root: RefObject<HTMLElement>, hasScroll: boolean) => {
+const useScrollbar = (hasScroll: boolean = true) => {
+	const root = useRef<HTMLElement>(null);
+
 	useEffect(() => {
 		let scrollbars: OverlayScrollbars;
 
@@ -21,6 +23,8 @@ const useScrollbar = (root: RefObject<HTMLElement>, hasScroll: boolean) => {
 			}
 		};
 	}, [root, hasScroll]);
+
+	return root;
 };
 
 export default useScrollbar;
