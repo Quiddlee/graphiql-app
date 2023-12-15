@@ -1,36 +1,30 @@
-import { useRef, useState } from 'react';
-
-import { MdTabs } from '@material/web/all';
+import { FC, RefObject, useState } from 'react';
 
 import EditorToolsField from '@components/EditorTools/ui/EditorToolsField';
-import Icon from '@shared/ui/Icon';
-import IconButton from '@shared/ui/IconButton';
-import PrimaryTab from '@shared/ui/PrimaryTab';
-import Tabs from '@shared/ui/Tabs';
+import Header from '@components/EditorTools/ui/Header';
+import cn from '@shared/lib/helpers/cn';
 
-const EditorTools = () => {
+type EditorToolsProps = {
+  containerRef: RefObject<HTMLElement>;
+};
+
+const EditorTools: FC<EditorToolsProps> = ({ containerRef }) => {
   const [isVariablesTab, setIsVariablesTab] = useState(true);
-  const tabsRef = useRef<MdTabs>(null);
-
-  const handleTabSwitch = () => {
-    const activeTabIndex = tabsRef.current?.activeTabIndex;
-
-    if (activeTabIndex === undefined) return;
-
-    setIsVariablesTab(!activeTabIndex);
-  };
+  const [isExpanded, setIsExpanded] = useState(true);
 
   return (
-    <article className="grid gap-7 rounded-4xl bg-surface-container py-4">
-      <header className="flex w-full justify-between border-b-2 border-outline-variant pl-7 pr-4">
-        <Tabs className="w-[360px] rounded-full [&::part(divider)]:hidden" onchange={handleTabSwitch} ref={tabsRef}>
-          <PrimaryTab>Variables</PrimaryTab>
-          <PrimaryTab>Headers</PrimaryTab>
-        </Tabs>
-        <IconButton>
-          <Icon>expand_more</Icon>
-        </IconButton>
-      </header>
+    <article
+      ref={containerRef}
+      className={cn('grid h-full gap-7 rounded-t-4xl bg-surface-container py-4 duration-[inherit] ease-[inherit]', {
+        'rounded-4xl': isExpanded,
+      })}
+    >
+      <Header
+        isExpanded={isExpanded}
+        setIsVariablesTab={setIsVariablesTab}
+        setIsExpanded={setIsExpanded}
+        containerRef={containerRef}
+      />
       <div className="pl-7 pr-4">
         <EditorToolsField isVariablesTab={isVariablesTab} />
       </div>
