@@ -1,19 +1,26 @@
+import { useState } from 'react';
+
 import { yupResolver } from '@hookform/resolvers/yup';
+import { TextFieldType } from '@material/web/textfield/outlined-text-field';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
 import FormInput from '@/components/loginReg/FormInput';
+import PassVisibilityIcon from '@/components/loginReg/PassVisibilityIcon';
 import SubmitBtn from '@/components/loginReg/SubmitBtn';
 import ROUTES from '@/shared/constants/routes';
 import { regValidationSchema } from '@/shared/constants/validationSchema';
 import useAuth from '@/shared/Context/authHook';
 import useLanguage from '@/shared/Context/hooks';
 import errorLocalizer from '@/shared/helpers/errorLocalizer';
+import switchPassType from '@/shared/helpers/switchPassType';
 import toastifyNotation from '@/shared/helpers/toastifyNotation';
 import { ErrorType, TextInputProps } from '@/shared/types';
 
 export default function SignUpPage() {
+  const [passType, setPassType] = useState('password');
+  const [confPassType, setConfPassType] = useState('password');
   const navigate = useNavigate();
   const { logInAuth } = useAuth();
   const { translation, language } = useLanguage();
@@ -50,7 +57,7 @@ export default function SignUpPage() {
       <article className="w-[560px] rounded-[30px] bg-surface-container px-7 py-[60px] sm:px-20">
         <h1 className="text-center text-2xl font-[400] text-on-surface">{title}</h1>
         <h2 className="mt-3 text-center text-base font-[400] text-on-surface-variant">{subtitle}</h2>
-        <form className="mt-8" onSubmit={handleSubmit(onSubmit)}>
+        <form noValidate className="mt-8" onSubmit={handleSubmit(onSubmit)}>
           <div className="relative">
             <FormInput
               style={{ width: '100%' }}
@@ -66,9 +73,11 @@ export default function SignUpPage() {
             <FormInput
               style={{ width: '100%' }}
               {...(register('password') as TextInputProps)}
-              type="password"
+              type={passType as TextFieldType}
               placeholder={passPlaceHold}
-            />
+            >
+              <PassVisibilityIcon onClick={() => setPassType((prev) => switchPassType(prev))} />
+            </FormInput>
             <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">
               {errorLocalizer(language, errors.password?.message)}
             </p>
@@ -77,9 +86,11 @@ export default function SignUpPage() {
             <FormInput
               style={{ width: '100%' }}
               {...(register('confirmPassword') as TextInputProps)}
-              type="password"
+              type={confPassType as TextFieldType}
               placeholder={confPassPlaceHold}
-            />
+            >
+              <PassVisibilityIcon onClick={() => setConfPassType((prev) => switchPassType(prev))} />
+            </FormInput>
             <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">
               {errorLocalizer(language, errors.confirmPassword?.message)}
             </p>

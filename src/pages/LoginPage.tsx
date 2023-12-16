@@ -1,13 +1,18 @@
+import { useState } from 'react';
+
 import { yupResolver } from '@hookform/resolvers/yup';
+import { TextFieldType } from '@material/web/textfield/outlined-text-field';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
+import PassVisibilityIcon from '@/components/loginReg/PassVisibilityIcon';
 import ROUTES from '@/shared/constants/routes';
 import { loginValidationSchema } from '@/shared/constants/validationSchema';
 import useAuth from '@/shared/Context/authHook';
 import useLanguage from '@/shared/Context/hooks';
 import errorLocalizer from '@/shared/helpers/errorLocalizer';
+import switchPassType from '@/shared/helpers/switchPassType';
 import toastifyNotation from '@/shared/helpers/toastifyNotation';
 import { ErrorType, TextInputProps } from '@/shared/types';
 import FormInput from '@components/loginReg/FormInput';
@@ -15,9 +20,11 @@ import SubmitBtn from '@components/loginReg/SubmitBtn';
 
 export default function LoginPage() {
   const navigate = useNavigate();
+  const [passType, setPassType] = useState('password');
   const { translation, language } = useLanguage();
   const { title, subtitle, emailPlaceHold, passPlaceHold, btnTitle, linkClue, linkTitle } = translation.loginPage;
   const { logInAuth } = useAuth();
+
   const {
     register,
     handleSubmit,
@@ -50,7 +57,7 @@ export default function LoginPage() {
       <article className="w-[560px] rounded-[30px] bg-surface-container px-7 py-[60px] sm:px-20">
         <h1 className="text-center text-2xl font-[400] text-on-surface">{title}</h1>
         <h2 className="mt-3 text-center text-base font-[400] text-on-surface-variant">{subtitle}</h2>
-        <form className="mt-8" onSubmit={handleSubmit(onSubmit)}>
+        <form noValidate className="mt-8" onSubmit={handleSubmit(onSubmit)}>
           <div className="relative">
             <FormInput
               style={{ width: '100%' }}
@@ -66,9 +73,11 @@ export default function LoginPage() {
             <FormInput
               style={{ width: '100%' }}
               {...(register('password') as TextInputProps)}
-              type="password"
+              type={passType as TextFieldType}
               placeholder={passPlaceHold}
-            />
+            >
+              <PassVisibilityIcon onClick={() => setPassType((prev) => switchPassType(prev))} />
+            </FormInput>
             <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">
               {errorLocalizer(language, errors.password?.message)}
             </p>
