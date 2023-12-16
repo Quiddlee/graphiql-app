@@ -40,7 +40,15 @@ vi.mock('@components/loginReg/SubmitBtn', () => ({
 }));
 
 vi.mock('@components/loginReg/FormInput', () => ({
-  default: (props: PropsWithChildren) => <input {...props} />,
+  default: (props: PropsWithChildren) => (
+    <button type="button" {...props}>
+      {props.children}
+    </button>
+  ),
+}));
+
+vi.mock('@components/loginReg/PassVisibilityIcon', () => ({
+  default: () => <button type="button">click</button>,
 }));
 
 vi.mock('firebase/auth', () => ({

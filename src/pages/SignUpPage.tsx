@@ -89,6 +89,10 @@ export default function SignUpPage() {
               type={confPassType as TextFieldType}
               placeholder={confPassPlaceHold}
             >
+              {/* <IconSlot toggle slot="trailing-icon" onClick={() => setConfPassType((prev) => switchPassType(prev))}>
+                <Icon>visibility</Icon>
+                <Icon slot="selected">visibility_off</Icon>
+              </IconSlot> */}
               <PassVisibilityIcon onClick={() => setConfPassType((prev) => switchPassType(prev))} />
             </FormInput>
             <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">
