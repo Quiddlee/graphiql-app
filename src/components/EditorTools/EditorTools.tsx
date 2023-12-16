@@ -23,9 +23,7 @@ const EditorTools: FC<EditorToolsProps> = ({ containerRef }) => {
       )}
     >
       <Header containerRef={containerRef} />
-      <div className="overflow-y-hidden pl-7">
-        <EditorToolsField />
-      </div>
+      <EditorToolsField />
     </article>
   );
 };
