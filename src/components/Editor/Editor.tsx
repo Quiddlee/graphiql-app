@@ -7,7 +7,7 @@ import useScrollbar from '@shared/lib/hooks/useScrollbar';
 
 type EditorProps = {
   editorState: string;
-  onChange: Dispatch<SetStateAction<string>>;
+  onChange: Dispatch<SetStateAction<string>> | ((value: string) => void);
 };
 
 const Editor: FC<EditorProps> = ({ onChange, editorState }) => {

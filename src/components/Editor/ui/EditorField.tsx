@@ -3,11 +3,11 @@ import { Dispatch, forwardRef, SetStateAction, SyntheticEvent, useRef } from 're
 
 type EditorFieldProps = {
   value: string;
-  onChange: Dispatch<SetStateAction<string>>;
+  onChange: Dispatch<SetStateAction<string>> | ((value: string) => void);
 };
 
-const EditorField = forwardRef<HTMLDivElement, EditorFieldProps>(({ onChange, value }, ref) => {
-  const defaultValue = useRef(value ? `${value}\n\n` : '');
+const EditorField = forwardRef<HTMLDivElement, EditorFieldProps>(({ onChange, value = '' }, ref) => {
+  const defaultValue = useRef(value);
 
   function handleInput(e: SyntheticEvent) {
     onChange?.((e.target as HTMLElement).innerHTML);

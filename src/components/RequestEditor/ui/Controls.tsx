@@ -1,18 +1,18 @@
-import { FC } from 'react';
-
+import urlParams from '@shared/constatns/urlParams';
+import useUrl from '@shared/lib/hooks/useUrl';
 import Fab from '@shared/ui/Fab';
 import FilledIconButton from '@shared/ui/FilledIconButton';
 import Icon from '@shared/ui/Icon';
 
-type ControlProps = {
-  editorValue: string;
-};
+const Controls = () => {
+  const { readUrl } = useUrl();
 
-const Controls: FC<ControlProps> = ({ editorValue = '' }) => {
   const handleCopyText = async () => {
-    await navigator.clipboard.writeText(editorValue);
+    const query = readUrl(urlParams.QUERY);
+    await navigator.clipboard.writeText(query);
 
     // TODO: change to toastify library
+    // eslint-disable-next-line no-alert
     alert('text copied');
   };
 
