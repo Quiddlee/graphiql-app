@@ -1,7 +1,11 @@
 import * as Yup from 'yup';
 
 const emailRegEx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&~()_+\-=':"}{/?<>;,.\]\\[*]).{8,}$/;
+// const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&~()_+\-=':"}{/?<>;,.\]\\[*]).{8,}$/;
+const atLeastOneDigit = /[0-9]/;
+const atLeastOneLowerCase = /[a-z]/;
+const atLeastOneUpperCase = /[A-Z]/;
+const atLeastOneSpecialCharacter = /[^\w\s]/g;
 
 const email = () => {
 	return {
@@ -13,10 +17,10 @@ const password = () => {
 	return {
 		password: Yup.string()
 			.min(8, 'code3')
-			.matches(passwordRegex, {
-				message: 'code4',
-				excludeEmptyString: true,
-			})
+			.matches(atLeastOneDigit, 'code12')
+			.matches(atLeastOneLowerCase, 'code13')
+			.matches(atLeastOneUpperCase, 'code14')
+			.matches(atLeastOneSpecialCharacter, 'code15')
 			.required('code5'),
 	};
 };

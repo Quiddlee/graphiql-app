@@ -5,6 +5,7 @@ const toastifyNotation = (message: string) => {
 	return Toastify({
 		text: message,
 		duration: 1500,
+		position: 'center',
 	}).showToast();
 };
 
