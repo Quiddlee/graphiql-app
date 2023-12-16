@@ -36,10 +36,20 @@
 .os-scrollbar-handle {
   background-color: var(--md-sys-color-primary) !important;
   cursor: grab;
+  transition: all .5s theme(transitionTimingFunction.out) !important;
+  padding: 3px;
 }
 
 .os-scrollbar-handle:active {
   cursor: grabbing;
+}
+
+.os-scrollbar-handle:before {
+  transition: all .5s theme(transitionTimingFunction.out) !important;
+}
+
+.os-scrollbar-vertical {
+  padding: 4.2px !important;
 }
 
 .display-large{

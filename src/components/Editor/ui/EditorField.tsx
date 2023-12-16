@@ -17,7 +17,7 @@ const EditorField: FC<EditorFieldProps> = ({ onChange, value }) => {
 
   return (
     <article ref={rootRef} className="h-full w-full">
-      <div className="flex w-full gap-4 py-7">
+      <div className="flex w-full gap-4 py-7 pr-4">
         <LineNumbers ref={editorNumRef} size={editorNumbersNum} />
         <div
           ref={editorRef}
