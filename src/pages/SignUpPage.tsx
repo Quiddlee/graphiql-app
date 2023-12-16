@@ -9,11 +9,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import FormInput from '@/components/loginReg/FormInput';
 import PassVisibilityIcon from '@/components/loginReg/PassVisibilityIcon';
 import SubmitBtn from '@/components/loginReg/SubmitBtn';
+import AUTH_ERRORS from '@/shared/constants/authErrors';
 import ROUTES from '@/shared/constants/routes';
 import { regValidationSchema } from '@/shared/constants/validationSchema';
 import useAuth from '@/shared/Context/authHook';
 import useLanguage from '@/shared/Context/hooks';
-import errorLocalizer from '@/shared/helpers/errorLocalizer';
+import notationLocalizer from '@/shared/helpers/notationLocalizer';
 import switchPassType from '@/shared/helpers/switchPassType';
 import toastifyNotation from '@/shared/helpers/toastifyNotation';
 import { ErrorType, TextInputProps } from '@/shared/types';
@@ -47,8 +48,9 @@ export default function SignUpPage() {
       }
       return null;
     } catch (e) {
-      if ((e as ErrorType).code === 'auth/email-already-in-use') return toastifyNotation('Error, email is occupied');
-      return toastifyNotation('Unexpected error have happened...');
+      if ((e as ErrorType).code === AUTH_ERRORS.EMAIL_IN_USE)
+        return toastifyNotation(notationLocalizer(language, 'code10'));
+      return toastifyNotation(notationLocalizer(language, 'code11'));
     }
   }
 
@@ -60,46 +62,45 @@ export default function SignUpPage() {
         <form noValidate className="mt-8" onSubmit={handleSubmit(onSubmit)}>
           <div className="relative">
             <FormInput
-              style={{ width: '100%' }}
+              className="w-full"
               {...(register('email') as TextInputProps)}
               type="email"
               placeholder={emailPlaceHold}
+              label={emailPlaceHold}
             />
             <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">
-              {errorLocalizer(language, errors.email?.message)}
+              {notationLocalizer(language, errors.email?.message)}
             </p>
           </div>
           <div className="relative mt-12">
             <FormInput
-              style={{ width: '100%' }}
+              className="w-full"
               {...(register('password') as TextInputProps)}
               type={passType as TextFieldType}
               placeholder={passPlaceHold}
+              label={passPlaceHold}
             >
               <PassVisibilityIcon onClick={() => setPassType((prev) => switchPassType(prev))} />
             </FormInput>
             <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">
-              {errorLocalizer(language, errors.password?.message)}
+              {notationLocalizer(language, errors.password?.message)}
             </p>
           </div>
           <div className="relative mt-12">
             <FormInput
-              style={{ width: '100%' }}
+              className="w-full"
               {...(register('confirmPassword') as TextInputProps)}
               type={confPassType as TextFieldType}
               placeholder={confPassPlaceHold}
+              label={confPassPlaceHold}
             >
-              {/* <IconSlot toggle slot="trailing-icon" onClick={() => setConfPassType((prev) => switchPassType(prev))}>
-                <Icon>visibility</Icon>
-                <Icon slot="selected">visibility_off</Icon>
-              </IconSlot> */}
               <PassVisibilityIcon onClick={() => setConfPassType((prev) => switchPassType(prev))} />
             </FormInput>
             <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">
-              {errorLocalizer(language, errors.confirmPassword?.message)}
+              {notationLocalizer(language, errors.confirmPassword?.message)}
             </p>
           </div>
-          <SubmitBtn style={{ width: '100%', marginTop: '52px' }} disabled={!isValid} type="submit">
+          <SubmitBtn className="mt-[52px] w-full" disabled={!isValid} type="submit">
             {btnTitle}
           </SubmitBtn>
         </form>

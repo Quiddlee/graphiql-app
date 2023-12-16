@@ -6,6 +6,10 @@ const enLocale = {
 	code5: 'Password is required',
 	code6: 'Confirm password is required',
 	code7: 'Password mismatch',
+	code8: 'Error, wrong email',
+	code9: 'Error, wrong password',
+	code10: 'Error, email is occupied',
+	code11: 'Unexpected error have happened...',
 };
 const ruLocale = {
 	code1: 'Эл. почта должна быть email@example.com',
@@ -15,11 +19,15 @@ const ruLocale = {
 	code5: 'Пароль обязателен',
 	code6: 'Подтверждение пароля обязательно',
 	code7: 'Пароли не совпадают',
+	code8: 'Ошибка, неверная эл. почта',
+	code9: 'Ошибка, неверный пароль',
+	code10: 'Ошибка, эл. почта занята',
+	code11: 'Произошла непредвиденная ошибка...',
 };
 
 type Translation = { [key: string]: string };
 
-export default function errorLocalizer(lang: string, errCode?: string): string {
+export default function notationLocalizer(lang: string, errCode?: string): string {
 	if (!errCode) return '';
 
 	const TranslationFiles: Record<string, Translation> = {

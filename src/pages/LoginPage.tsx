@@ -7,11 +7,12 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
 import PassVisibilityIcon from '@/components/loginReg/PassVisibilityIcon';
+import AUTH_ERRORS from '@/shared/constants/authErrors';
 import ROUTES from '@/shared/constants/routes';
 import { loginValidationSchema } from '@/shared/constants/validationSchema';
 import useAuth from '@/shared/Context/authHook';
 import useLanguage from '@/shared/Context/hooks';
-import errorLocalizer from '@/shared/helpers/errorLocalizer';
+import notationLocalizer from '@/shared/helpers/notationLocalizer';
 import switchPassType from '@/shared/helpers/switchPassType';
 import toastifyNotation from '@/shared/helpers/toastifyNotation';
 import { ErrorType, TextInputProps } from '@/shared/types';
@@ -46,9 +47,11 @@ export default function LoginPage() {
       }
       return null;
     } catch (e) {
-      if ((e as ErrorType).code === 'auth/invalid-email') return toastifyNotation('Error, wrong email');
-      if ((e as ErrorType).code === 'auth/invalid-credential') return toastifyNotation('Error, wrong password');
-      return toastifyNotation('Unexpected error have happened...');
+      if ((e as ErrorType).code === AUTH_ERRORS.INVALID_EMAIL)
+        return toastifyNotation(notationLocalizer(language, 'code8'));
+      if ((e as ErrorType).code === AUTH_ERRORS.INVALID_PASS)
+        return toastifyNotation(notationLocalizer(language, 'code9'));
+      return toastifyNotation(notationLocalizer(language, 'code11'));
     }
   }
 
@@ -62,27 +65,29 @@ export default function LoginPage() {
             <FormInput
               style={{ width: '100%' }}
               {...(register('email') as TextInputProps)}
-              placeholder={emailPlaceHold}
               type="email"
+              placeholder={emailPlaceHold}
+              label={emailPlaceHold}
             />
             <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">
-              {errorLocalizer(language, errors.email?.message)}
+              {notationLocalizer(language, errors.email?.message)}
             </p>
           </div>
           <div className="relative mt-12">
             <FormInput
-              style={{ width: '100%' }}
+              className="w-full"
               {...(register('password') as TextInputProps)}
               type={passType as TextFieldType}
               placeholder={passPlaceHold}
+              label={passPlaceHold}
             >
               <PassVisibilityIcon onClick={() => setPassType((prev) => switchPassType(prev))} />
             </FormInput>
             <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">
-              {errorLocalizer(language, errors.password?.message)}
+              {notationLocalizer(language, errors.password?.message)}
             </p>
           </div>
-          <SubmitBtn style={{ width: '100%', marginTop: '52px' }} disabled={!isValid}>
+          <SubmitBtn className="mt-[52px] w-full" disabled={!isValid}>
             {btnTitle}
           </SubmitBtn>
         </form>
