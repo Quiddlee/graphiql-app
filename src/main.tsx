@@ -3,7 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import App from '@/App';
-import EditorToolsProvider from '@components/EditorTools/context/EditorToolsProvider';
 
 import LanguageProvider from './shared/Context/LanguageContext';
 
@@ -12,10 +11,8 @@ import 'overlayscrollbars/overlayscrollbars.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <EditorToolsProvider>
-      <LanguageProvider>
-        <App />
-      </LanguageProvider>
-    </EditorToolsProvider>
+    <LanguageProvider>
+      <App />
+    </LanguageProvider>
   </React.StrictMode>,
 );
