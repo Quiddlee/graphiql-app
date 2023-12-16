@@ -18,7 +18,7 @@ const Editor = () => {
   // TODO: add editor default size
 
   return (
-    <article className="flex h-full w-full gap-4 overflow-y-hidden rounded-4xl bg-surface-container pl-7 pr-4 pt-7">
+    <article className="flex h-full w-full gap-4 overflow-y-hidden rounded-4xl bg-surface-container pl-7 pr-4">
       <EditorField value={value} onChange={handleChange} />
       <Controls editorValue={value} />
     </article>

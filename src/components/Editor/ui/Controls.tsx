@@ -17,7 +17,7 @@ const Controls: FC<ControlProps> = ({ editorValue = '' }) => {
   };
 
   return (
-    <ul className="grid content-start justify-items-center">
+    <ul className="grid content-start justify-items-center pt-7">
       <li className="mb-3 flex items-center justify-center">
         <Fab variant="primary">
           <Icon slot="icon">play_arrow</Icon>
