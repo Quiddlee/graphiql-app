@@ -12,7 +12,7 @@ const useScrollbar = <TElem extends HTMLElement>(hasScroll: boolean = true) => {
 			scrollbars = OverlayScrollbars(root.current, {
 				scrollbars: {
 					visibility: 'auto',
-					autoHide: 'leave',
+					autoHide: 'scroll',
 					autoHideDelay: 500,
 				},
 			});

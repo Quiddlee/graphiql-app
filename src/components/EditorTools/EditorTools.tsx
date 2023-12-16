@@ -16,7 +16,7 @@ const EditorTools: FC<EditorToolsProps> = ({ containerRef }) => {
   return (
     <article
       className={cn(
-        'grid h-full grid-rows-[min-content_auto] gap-7 rounded-t-4xl bg-surface-container py-4 duration-[inherit] ease-[inherit]',
+        'grid h-full grid-rows-[min-content_auto] rounded-t-4xl bg-surface-container pt-4 duration-[inherit] ease-[inherit]',
         {
           'rounded-4xl': isExpanded,
         },

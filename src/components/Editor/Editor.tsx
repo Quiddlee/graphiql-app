@@ -11,7 +11,6 @@ const Editor = () => {
     if (innerHTML) setValue(innerHTML);
   };
 
-  // TODO: fix container paddings
   // TODO: fix font theme tokens
   // TODO: fix editor tools tab switching
   // TODO: add editor default value
