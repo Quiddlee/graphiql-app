@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 
-import Editor from '@components/Editor/Editor';
 import EditorTools from '@components/EditorTools/EditorTools';
+import RequestEditor from '@components/RequestEditor/RequestEditor';
 
 const MainPage = () => {
   const editorContainerRef = useRef<HTMLDivElement>(null);
@@ -11,7 +11,7 @@ const MainPage = () => {
       ref={editorContainerRef}
       className="body-large grid h-full w-full grid-rows-[auto_40%] items-end gap-4 overflow-clip transition-all duration-200 ease-emphasized-accelerate"
     >
-      <Editor />
+      <RequestEditor />
       <EditorTools containerRef={editorContainerRef} />
     </div>
   );

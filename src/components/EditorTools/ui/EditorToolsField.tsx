@@ -1,32 +1,21 @@
 import { useState } from 'react';
 
-import { EDITOR_TOOLS_DEFAULT_VALUE } from '@components/Editor/lib/const/const';
-import EditorField from '@components/Editor/ui/EditorField';
+import Editor from '@components/Editor/Editor';
+import { EDITOR_TOOLS_DEFAULT_VALUE } from '@components/RequestEditor/lib/const/const';
 
 import useEditorTools from '../lib/hooks/useEditorTools';
 
 const EditorToolsField = () => {
   const { isVariablesTab } = useEditorTools();
-  const [variablesValue, setVariablesValue] = useState(EDITOR_TOOLS_DEFAULT_VALUE);
-  const [headersValue, setHeadersValue] = useState('');
+  const [editorVariablesState, setEditorVariablesState] = useState(EDITOR_TOOLS_DEFAULT_VALUE);
+  const [editorHeadersState, setEditorHeadersState] = useState('');
 
+  // TODO: encapsulate both components
   if (isVariablesTab) {
-    return (
-      <EditorField
-        key="variables"
-        value={variablesValue}
-        onChange={(e) => setVariablesValue((e.target as HTMLElement).innerHTML)}
-      />
-    );
+    return <Editor key="variables" editorState={editorVariablesState} onChange={setEditorVariablesState} />;
   }
 
-  return (
-    <EditorField
-      key="headers"
-      value={headersValue}
-      onChange={(e) => setHeadersValue((e.target as HTMLElement).innerHTML)}
-    />
-  );
+  return <Editor key="headers" editorState={editorHeadersState} onChange={setEditorHeadersState} />;
 };
 
 export default EditorToolsField;
