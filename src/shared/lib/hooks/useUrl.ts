@@ -2,6 +2,7 @@ import { useCallback } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 
+import QUERY_PARAMS_INIT from '@shared/constatns/const';
 import { UrlParams } from '@shared/lib/types/types';
 
 type MultipleQueries = Partial<Record<UrlParams, string | number>>;
@@ -23,7 +24,7 @@ type ReadUrl = (query: UrlParams) => string;
  * @return {SetUrl} obj.setUrl - A function that takes a query parameter and its value and sets it in the URL.
  */
 function useUrl() {
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams, setSearchParams] = useSearchParams(QUERY_PARAMS_INIT);
 
 	const readUrl: ReadUrl = useCallback((query: UrlParams) => searchParams.get(query) as string, [searchParams]);
 
