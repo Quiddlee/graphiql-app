@@ -17,24 +17,24 @@ const Controls = () => {
   };
 
   return (
-    <ul className="grid content-start justify-items-center pt-7">
+    <ul data-testid="controls" className="grid content-start justify-items-center pt-7">
       <li className="mb-3 flex items-center justify-center">
-        <Fab variant="primary">
+        <Fab data-testid="fab" variant="primary">
           <Icon slot="icon">play_arrow</Icon>
         </Fab>
       </li>
       <li className="flex h-12 w-12 items-center justify-center">
-        <FilledIconButton onClick={handleCopyText}>
+        <FilledIconButton data-testid="copy-text" onClick={handleCopyText}>
           <Icon>content_copy</Icon>
         </FilledIconButton>
       </li>
       <li className="flex h-12 w-12 items-center justify-center">
-        <FilledIconButton>
+        <FilledIconButton data-testid="prettify">
           <Icon>mop</Icon>
         </FilledIconButton>
       </li>
       <li className="flex h-12 w-12 items-center justify-center">
-        <FilledIconButton>
+        <FilledIconButton data-testid="open-response">
           <Icon>info</Icon>
         </FilledIconButton>
       </li>

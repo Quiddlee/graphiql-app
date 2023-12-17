@@ -1,13 +1,13 @@
 import { forwardRef } from 'react';
 
 type LineNumbersProps = {
-  size: number;
+  size: number | string;
 };
 
 const LineNumbers = forwardRef<HTMLLIElement, LineNumbersProps>(({ size }, ref) => {
   return (
-    <ol className="min-w-[20px] font-jetbrains_mono text-outline">
-      {Array.from({ length: size }, (_, i) => (
+    <ol data-testid="line-numbers" className="min-w-[20px] text-outline">
+      {Array.from({ length: Number(size) }, (_, i) => (
         <li ref={ref} className="text-right" key={i}>
           {i + 1}
         </li>
