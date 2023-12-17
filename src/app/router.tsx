@@ -1,13 +1,12 @@
-import { createHashRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter } from 'react-router-dom';
 
 import MainLayout from '@/layouts/MainLayout';
 import LoginPage from '@pages/LoginPage';
 import MainPage from '@pages/MainPage';
 import WelcomePage from '@pages/WelcomePage';
+import ROUTES from '@shared/constatns/routes';
 
-import ROUTES from './shared/constatns/routes';
-
-const router = createHashRouter([
+export const routes = [
   {
     path: '/',
     element: <MainLayout />,
@@ -26,10 +25,6 @@ const router = createHashRouter([
       },
     ],
   },
-]);
+];
 
-const App = () => {
-  return <RouterProvider router={router} />;
-};
-
-export default App;
+export const router = createHashRouter(routes);

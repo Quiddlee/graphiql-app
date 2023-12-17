@@ -15,6 +15,7 @@ const EditorField = forwardRef<HTMLDivElement, EditorFieldProps>(({ onChange, va
 
   return (
     <div
+      data-testid="editor-field"
       ref={ref}
       tabIndex={0}
       aria-label="The text editor"

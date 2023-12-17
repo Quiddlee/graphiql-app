@@ -16,6 +16,7 @@ const EditorTools: FC<EditorToolsProps> = ({ containerRef }) => {
 
   return (
     <article
+      data-testid="editor-tools-container"
       className={cn(
         'grid h-full grid-rows-[min-content_auto] overflow-clip rounded-t-4xl bg-surface-container pt-4 duration-[inherit] ease-[inherit]',
         {

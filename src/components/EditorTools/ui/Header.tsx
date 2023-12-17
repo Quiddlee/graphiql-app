@@ -37,11 +37,21 @@ const Header: FC<HeaderProps> = ({ containerRef }) => {
       ref={headerRef}
       className="flex h-[48px] w-full justify-between border-b-2 border-outline-variant pl-7 pr-4 duration-[inherit] ease-[inherit]"
     >
-      <Tabs className="w-[360px] rounded-full [&::part(divider)]:hidden" onChange={handleTabSwitch} ref={tabsRef}>
-        <PrimaryTab active={isVariablesTab}>Variables</PrimaryTab>
-        <PrimaryTab active={!isVariablesTab}>Headers</PrimaryTab>
+      <Tabs
+        data-testid="editor-tools-tabs"
+        className="w-[360px] rounded-full [&::part(divider)]:hidden"
+        onChange={handleTabSwitch}
+        ref={tabsRef}
+      >
+        <PrimaryTab data-testid="editor-tools-variables" active={isVariablesTab}>
+          Variables
+        </PrimaryTab>
+        <PrimaryTab data-testid="editor-tools-headers" active={!isVariablesTab}>
+          Headers
+        </PrimaryTab>
       </Tabs>
       <IconButton
+        data-testid="editor-tools-expand"
         className={cn('rotate-180 duration-300 ease-[inherit]', {
           'rotate-0': isExpanded,
         })}
