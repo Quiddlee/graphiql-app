@@ -15,7 +15,7 @@ const Editor: FC<EditorProps> = ({ onChange, editorState }) => {
   const rootRef = useScrollbar<HTMLElement>();
 
   return (
-    <article ref={rootRef} className="h-full w-full">
+    <article ref={rootRef} className="h-full w-full font-jetbrains_mono">
       <div className="flex w-full gap-4 py-7 pr-4">
         <LineNumbers ref={editorNumRef} size={editorNumbersNum} />
         <EditorField ref={editorRef} onChange={onChange} value={editorState} />
