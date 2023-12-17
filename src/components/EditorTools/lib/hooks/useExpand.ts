@@ -1,12 +1,13 @@
 import { RefObject, useEffect, useRef } from 'react';
 
-type UseExpandParams = {
-	containerRef: RefObject<HTMLElement>;
-	isExpanded: boolean;
-};
+import urlParams from '@shared/constatns/urlParams';
+import useUrl from '@shared/lib/hooks/useUrl';
 
-const useExpand = ({ containerRef, isExpanded }: UseExpandParams) => {
+const useExpand = (containerRef: RefObject<HTMLElement>) => {
 	const headerRef = useRef<HTMLHeadElement>(null);
+	const { readUrl } = useUrl();
+
+	const isExpanded = readUrl(urlParams.EXPANDED) === 'true';
 
 	useEffect(() => {
 		const container = containerRef?.current;

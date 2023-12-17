@@ -8,7 +8,7 @@ const Tabs = createComponent({
   tagName: 'md-tabs',
   elementClass: MdTabs,
   events: {
-    onchange: 'change',
+    onChange: 'change',
   },
 });
 

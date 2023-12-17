@@ -11,7 +11,7 @@ import { UrlParams } from '@shared/lib/types/types';
  *
  * @returns {[string, (value: string) => void]} An array where the first element is the current state of the URL parameter and the second element is a function to update that state.
  */
-function useEditorUrlState(urlParam: UrlParams, initialState?: string) {
+function useEditorUrlState(urlParam: UrlParams, initialState: string = '') {
 	const { readUrl, setUrl } = useUrl();
 	const urlState = readUrl(urlParam) ?? initialState;
 

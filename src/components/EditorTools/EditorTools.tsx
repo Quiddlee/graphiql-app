@@ -2,16 +2,17 @@ import { FC, RefObject } from 'react';
 
 import EditorToolsField from '@components/EditorTools/ui/EditorToolsField';
 import Header from '@components/EditorTools/ui/Header';
+import urlParams from '@shared/constatns/urlParams';
 import cn from '@shared/lib/helpers/cn';
-
-import useEditorTools from './lib/hooks/useEditorTools';
+import useUrl from '@shared/lib/hooks/useUrl';
 
 type EditorToolsProps = {
   containerRef: RefObject<HTMLElement>;
 };
 
 const EditorTools: FC<EditorToolsProps> = ({ containerRef }) => {
-  const { isExpanded } = useEditorTools();
+  const { readUrl } = useUrl();
+  const isExpanded = readUrl(urlParams.EXPANDED) === 'true';
 
   return (
     <article

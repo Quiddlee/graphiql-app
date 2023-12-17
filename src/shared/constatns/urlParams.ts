@@ -2,7 +2,8 @@ const urlParams = {
 	QUERY: 'query',
 	VARIABLES: 'variables',
 	HEADERS: 'headers',
-	ACTIVE_TAB: 'varTab',
+	VARIABLES_TAB: 'tab',
+	EXPANDED: 'expanded',
 } as const;
 
 export default urlParams;

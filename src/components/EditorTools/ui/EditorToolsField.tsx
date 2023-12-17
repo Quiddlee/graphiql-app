@@ -1,10 +1,12 @@
 import VariablesEditor from '@components/EditorTools/ui/VariablesEditor';
+import urlParams from '@shared/constatns/urlParams';
+import useUrl from '@shared/lib/hooks/useUrl';
 
 import HeadersEditor from './HeadersEditor';
-import useEditorTools from '../lib/hooks/useEditorTools';
 
 const EditorToolsField = () => {
-  const { isVariablesTab } = useEditorTools();
+  const { readUrl } = useUrl();
+  const isVariablesTab = readUrl(urlParams.VARIABLES_TAB) === 'true';
 
   return <div className="overflow-y-hidden pl-7">{isVariablesTab ? <VariablesEditor /> : <HeadersEditor />}</div>;
 };

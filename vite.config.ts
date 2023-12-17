@@ -6,17 +6,17 @@ import react from '@vitejs/plugin-react';
 import { resolve } from 'path';
 
 export default defineConfig({
-  plugins: [react()],
+	plugins: [react()],
 	resolve: {
-    alias: [
+		alias: [
 			{ find: '@', replacement: resolve(__dirname, './src/') },
-      { find: '@shared', replacement: resolve(__dirname, './src/shared') },
+			{ find: '@shared', replacement: resolve(__dirname, './src/shared') },
 			{ find: '@components', replacement: resolve(__dirname, './src/components') },
 			{ find: '@services', replacement: resolve(__dirname, './src/services') },
 			{ find: '@pages', replacement: resolve(__dirname, './src/pages') },
 			{ find: '@assets', replacement: resolve(__dirname, './src/assets') },
-    ],
-  },
+		],
+	},
 	base: './',
 	test: {
 		globals: true,
@@ -29,8 +29,8 @@ export default defineConfig({
 				lines: 50,
 				statements: 50,
 				branches: 50,
-				functions: 50
+				functions: 50,
 			},
-		}
+		},
 	},
-})
+});
