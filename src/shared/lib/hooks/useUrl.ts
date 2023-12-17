@@ -1,6 +1,6 @@
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 
-import { useSearchParams } from 'react-router-dom';
+import { NavigateOptions, URLSearchParamsInit, useSearchParams } from 'react-router-dom';
 
 import QUERY_PARAMS_INIT from '@shared/constatns/const';
 import { UrlParams } from '@shared/lib/types/types';
@@ -24,9 +24,20 @@ type ReadUrl = (query: UrlParams) => string;
  * @return {SetUrl} obj.setUrl - A function that takes a query parameter and its value and sets it in the URL.
  */
 function useUrl() {
-	const [searchParams, setSearchParams] = useSearchParams(QUERY_PARAMS_INIT);
+	const [searchParams, unstableSetUrlSearchParams] = useSearchParams(QUERY_PARAMS_INIT);
 
-	const readUrl: ReadUrl = useCallback((query: UrlParams) => searchParams.get(query) as string, [searchParams]);
+	// The set search params fn is not stable, so we need to make it stable by self.
+	// https://github.com/remix-run/react-router/issues/9991
+	const fnRef = useRef(unstableSetUrlSearchParams);
+	const setSearchParams = useCallback(
+		(
+			nextInit?: URLSearchParamsInit | ((prev: URLSearchParams) => URLSearchParamsInit),
+			navigateOpts?: NavigateOptions,
+		) => fnRef.current(nextInit, navigateOpts),
+		[],
+	);
+
+	const readUrl: ReadUrl = (query: UrlParams) => searchParams.get(query) as string;
 
 	const setUrl: SetUrl = useCallback(
 		(query: UrlParams | MultipleQueries, value?: SetValue) => {
@@ -40,6 +51,7 @@ function useUrl() {
 
 			setSearchParams(searchParams);
 		},
+
 		[searchParams, setSearchParams],
 	);
 

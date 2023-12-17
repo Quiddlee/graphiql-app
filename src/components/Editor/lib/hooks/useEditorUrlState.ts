@@ -11,13 +11,13 @@ import { UrlParams } from '@shared/lib/types/types';
  *
  * @returns {[string, (value: string) => void]} An array where the first element is the current state of the URL parameter and the second element is a function to update that state.
  */
-function useEditorUrlState(urlParam: UrlParams, initialState: string = '') {
+function useEditorUrlState(urlParam: UrlParams, initialState = '') {
 	const { readUrl, setUrl } = useUrl();
-	const urlState = readUrl(urlParam) ?? initialState;
+	const urlState = readUrl(urlParam);
 
 	useEffect(() => {
-		if (initialState) setUrl(urlParam, initialState);
-	}, [initialState, setUrl, urlParam]);
+		if (urlState === null) setUrl(urlParam, initialState);
+	}, [initialState, setUrl, urlParam, urlState]);
 
 	const handleChange = useCallback(
 		function handleChange(value: string) {
