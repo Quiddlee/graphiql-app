@@ -13,10 +13,10 @@ import { UrlParams } from '@shared/lib/types/types';
  */
 function useEditorUrlState(urlParam: UrlParams, initialState = '') {
 	const { readUrl, setUrl } = useUrl();
-	const urlState = readUrl(urlParam);
+	const urlState = readUrl(urlParam) ?? initialState;
 
 	useEffect(() => {
-		if (urlState === null) setUrl(urlParam, initialState);
+		if (urlState === initialState) setUrl(urlParam, initialState);
 	}, [initialState, setUrl, urlParam, urlState]);
 
 	const handleChange = useCallback(
