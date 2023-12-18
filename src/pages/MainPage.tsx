@@ -12,6 +12,7 @@ const MainPage = () => {
   const { readUrl } = useUrl();
 
   const isExpanded = readUrl(urlParams.EXPANDED) === 'true';
+  const isResponseOpen = readUrl(urlParams.RESPONSE_OPEN) === 'true';
 
   return (
     <>
@@ -27,7 +28,14 @@ const MainPage = () => {
         <RequestEditor />
         <EditorTools containerRef={editorContainerRef} />
       </div>
-      <section className="relative col-start-3 row-start-2 row-end-4 overflow-hidden">
+      <section
+        className={cn(
+          'relative col-start-3 row-start-2 row-end-4 scale-95 overflow-hidden opacity-0 transition-all duration-200',
+          {
+            'scale-100 opacity-100 duration-500': isResponseOpen,
+          },
+        )}
+      >
         <ResponseViewer />
       </section>
     </>
