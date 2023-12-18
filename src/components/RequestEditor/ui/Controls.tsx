@@ -22,7 +22,7 @@ const Controls = () => {
   };
 
   return (
-    <ul data-testid="controls" className="grid content-start justify-items-center pt-7">
+    <ul data-testid="controls" className="absolute right-6 top-7 grid content-start justify-items-center">
       <li className="mb-3 flex items-center justify-center">
         <Fab data-testid="fab" variant="primary">
           <Icon slot="icon">play_arrow</Icon>

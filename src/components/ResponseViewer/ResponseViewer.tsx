@@ -9,7 +9,7 @@ import IconButton from '@shared/ui/IconButton';
 const PLACEHOLDER_TEXT = `{
   "errors": [
     {
-      "message": "Syntax Error: Unexpected Name \\"mutationdsdsadsads\\"",
+      "message": "Syntax Error: te",
       "locations": [
         {
           "line": 33,
@@ -54,7 +54,7 @@ const ResponseViewer = () => {
         ref={rootRef}
         className="h-full w-full justify-between overflow-y-scroll rounded-4xl bg-surface-container py-7 pl-7 pr-4"
       >
-        <article className="h-fit w-fit">
+        <article className="h-fit w-fit pr-10">
           <pre className="h-full w-full whitespace-break-spaces">{PLACEHOLDER_TEXT}</pre>
         </article>
       </div>
