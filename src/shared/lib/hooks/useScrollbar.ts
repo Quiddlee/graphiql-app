@@ -7,7 +7,7 @@ import { DeepPartial } from '@shared/lib/types/types';
 const config: DeepPartial<Options> = {
 	scrollbars: {
 		visibility: 'auto',
-		autoHide: 'scroll',
+		autoHide: 'leave',
 		autoHideDelay: 500,
 	},
 };
