@@ -5,7 +5,7 @@ import FilledIconButton from '@shared/ui/FilledIconButton';
 import Icon from '@shared/ui/Icon';
 
 const Controls = () => {
-  const { readUrl } = useUrl();
+  const { readUrl, setUrl } = useUrl();
 
   const handleCopyText = async () => {
     const query = readUrl(urlParams.QUERY);
@@ -14,6 +14,11 @@ const Controls = () => {
     // TODO: change to toastify library
     // eslint-disable-next-line no-alert
     alert('text copied');
+  };
+
+  const handleResponseOpen = () => {
+    const isResponseOpen = readUrl(urlParams.RESPONSE_OPEN) === 'true';
+    setUrl(urlParams.RESPONSE_OPEN, String(!isResponseOpen));
   };
 
   return (
@@ -34,7 +39,7 @@ const Controls = () => {
         </FilledIconButton>
       </li>
       <li className="flex h-12 w-12 items-center justify-center">
-        <FilledIconButton data-testid="open-response">
+        <FilledIconButton data-testid="open-response" onClick={handleResponseOpen}>
           <Icon>info</Icon>
         </FilledIconButton>
       </li>

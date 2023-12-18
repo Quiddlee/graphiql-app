@@ -10,25 +10,24 @@ import useUrl from '@shared/lib/hooks/useUrl';
 const MainPage = () => {
   const editorContainerRef = useRef<HTMLDivElement>(null);
   const { readUrl } = useUrl();
+
   const isExpanded = readUrl(urlParams.EXPANDED) === 'true';
 
   return (
     <>
-      <section className="col-start-2 row-start-2 row-end-4">
-        <article
-          ref={editorContainerRef}
-          className={cn(
-            'body-large grid h-full w-full grid-rows-[auto_40%] items-end gap-4 overflow-clip transition-all duration-200 ease-emphasized-accelerate',
-            {
-              'grid-rows-[auto_64px]': !isExpanded,
-            },
-          )}
-        >
-          <RequestEditor />
-          <EditorTools containerRef={editorContainerRef} />
-        </article>
-      </section>
-      <section className="col-start-3 row-start-2 row-end-4">
+      <div
+        ref={editorContainerRef}
+        className={cn(
+          'body-large col-start-2 row-start-2 row-end-4 grid h-full w-full grid-rows-[auto_40%] items-end gap-4 overflow-clip transition-all duration-200 ease-emphasized-accelerate',
+          {
+            'duration-400 ease-emphasized-decelerate': isExpanded,
+          },
+        )}
+      >
+        <RequestEditor />
+        <EditorTools containerRef={editorContainerRef} />
+      </div>
+      <section className="relative col-start-3 row-start-2 row-end-4 overflow-hidden">
         <ResponseViewer />
       </section>
     </>

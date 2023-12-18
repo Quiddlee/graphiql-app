@@ -11,8 +11,11 @@ export default {
         readex_pro: ['Readex Pro', 'sans-serif'],
         jetbrains_mono: ['JetBrains Mono', 'sans-serif'],
       },
+      transitionDuration: {
+        400: '400ms',
+      },
       transitionTimingFunction: {
-        'standard': 'cubic-bezier(0.2, 0.0, 0, 1.0)',
+        standard: 'cubic-bezier(0.2, 0.0, 0, 1.0)',
         'standard-decelerate': 'cubic-bezier(0, 0, 0, 1)',
         'standard-accelerate': 'cubic-bezier(0.3, 0, 1, 1)',
         'emphasized-decelerate': 'cubic-bezier(0.05, 0.7, 0.1, 1.0)',

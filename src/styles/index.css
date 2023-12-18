@@ -22,6 +22,11 @@
     --md-primary-tab-container-color: var(--md-sys-color-surface-container);
   }
 
+  ::selection {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+  }
+
   * {
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
