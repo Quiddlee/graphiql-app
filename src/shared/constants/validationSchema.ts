@@ -1,7 +1,6 @@
 import * as Yup from 'yup';
 
 const emailRegEx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-// const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&~()_+\-=':"}{/?<>;,.\]\\[*]).{8,}$/;
 const atLeastOneDigit = /[0-9]/;
 const atLeastOneLowerCase = /[a-z]/;
 const atLeastOneUpperCase = /[A-Z]/;
