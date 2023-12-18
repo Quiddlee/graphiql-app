@@ -1,4 +1,4 @@
-import urlParams from '@shared/constatns/urlParams';
+import urlParams from '@shared/constants/urlParams';
 import useUrl from '@shared/lib/hooks/useUrl';
 import Fab from '@shared/ui/Fab';
 import FilledIconButton from '@shared/ui/FilledIconButton';

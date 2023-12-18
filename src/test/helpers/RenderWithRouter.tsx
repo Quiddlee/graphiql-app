@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { render } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 
-import { routes as ROUTES } from '@/app/router';
+import { routes as ROUTES } from '@/router/router';
 
 function RenderWithRouter(element?: ReactNode | null, initialEntries?: string[], initialIndex?: number) {
   const routes = element ? [{ path: '/', element }] : ROUTES;

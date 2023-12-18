@@ -1,4 +1,4 @@
-import urlParams from '@shared/constatns/urlParams';
+import urlParams from '@shared/constants/urlParams';
 
 const QUERY_PARAMS_INIT = {
 	[urlParams.EXPANDED]: 'true',

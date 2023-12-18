@@ -1,16 +1,15 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
 
-import {defineConfig} from 'vite';
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import {resolve} from 'path';
+import { resolve } from 'path';
 
 export default defineConfig({
 	plugins: [react()],
 	resolve: {
 		alias: [
 			{ find: '@', replacement: resolve(__dirname, './src/') },
-			{ find: '@app', replacement: resolve(__dirname, './src/app') },
 			{ find: '@shared', replacement: resolve(__dirname, './src/shared') },
 			{ find: '@components', replacement: resolve(__dirname, './src/components') },
 			{ find: '@services', replacement: resolve(__dirname, './src/services') },

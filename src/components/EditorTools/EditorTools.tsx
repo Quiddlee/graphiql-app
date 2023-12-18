@@ -2,7 +2,7 @@ import { FC, RefObject } from 'react';
 
 import EditorToolsField from '@components/EditorTools/ui/EditorToolsField';
 import Header from '@components/EditorTools/ui/Header';
-import urlParams from '@shared/constatns/urlParams';
+import urlParams from '@shared/constants/urlParams';
 import cn from '@shared/lib/helpers/cn';
 import useUrl from '@shared/lib/hooks/useUrl';
 

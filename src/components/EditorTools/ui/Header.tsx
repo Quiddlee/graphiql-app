@@ -3,7 +3,7 @@ import { FC, RefObject, useRef } from 'react';
 import { MdTabs } from '@material/web/all';
 
 import useExpand from '@components/EditorTools/lib/hooks/useExpand';
-import urlParams from '@shared/constatns/urlParams';
+import urlParams from '@shared/constants/urlParams';
 import cn from '@shared/lib/helpers/cn';
 import useUrl from '@shared/lib/hooks/useUrl';
 import Icon from '@shared/ui/Icon';

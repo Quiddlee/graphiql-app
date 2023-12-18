@@ -1,5 +1,5 @@
 import VariablesEditor from '@components/EditorTools/ui/VariablesEditor';
-import urlParams from '@shared/constatns/urlParams';
+import urlParams from '@shared/constants/urlParams';
 import useUrl from '@shared/lib/hooks/useUrl';
 
 import HeadersEditor from './HeadersEditor';

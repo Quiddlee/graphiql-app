@@ -2,17 +2,17 @@ import React from 'react';
 
 import ReactDOM from 'react-dom/client';
 
-import App from '@app/App';
+import App from '@/app/App';
 
-import LanguageProvider from './shared/Context/LanguageContext';
+import initFirebaseApp from './firebase';
 
 import '@/styles/index.css';
 import 'overlayscrollbars/overlayscrollbars.css';
 
+initFirebaseApp();
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <LanguageProvider>
-      <App />
-    </LanguageProvider>
+    <App />
   </React.StrictMode>,
 );

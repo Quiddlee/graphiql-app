@@ -2,7 +2,7 @@ import { useRef } from 'react';
 
 import EditorTools from '@components/EditorTools/EditorTools';
 import RequestEditor from '@components/RequestEditor/RequestEditor';
-import urlParams from '@shared/constatns/urlParams';
+import urlParams from '@shared/constants/urlParams';
 import cn from '@shared/lib/helpers/cn';
 import useUrl from '@shared/lib/hooks/useUrl';
 

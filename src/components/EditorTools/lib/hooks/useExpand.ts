@@ -1,6 +1,6 @@
 import { RefObject, useEffect, useRef } from 'react';
 
-import urlParams from '@shared/constatns/urlParams';
+import urlParams from '@shared/constants/urlParams';
 import useUrl from '@shared/lib/hooks/useUrl';
 
 const useExpand = (containerRef: RefObject<HTMLElement>) => {

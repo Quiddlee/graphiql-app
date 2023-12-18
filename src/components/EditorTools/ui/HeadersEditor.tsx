@@ -1,6 +1,6 @@
 import Editor from '@components/Editor/Editor';
 import useEditorUrlState from '@components/Editor/lib/hooks/useEditorUrlState';
-import urlParams from '@shared/constatns/urlParams';
+import urlParams from '@shared/constants/urlParams';
 
 const HeadersEditor = () => {
   const [editorState, setEditorState] = useEditorUrlState(urlParams.HEADERS);
