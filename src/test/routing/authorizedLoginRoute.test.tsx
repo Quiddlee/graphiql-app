@@ -1,7 +1,7 @@
 import { act, cleanup, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it } from 'vitest';
 
-import App from '@/App';
+import App from '@/app/App';
 import { prepareAuthCookie } from '@/shared/helpers/cookieHandlers';
 
 import userSetup from '../setupTests';
@@ -22,6 +22,6 @@ describe('Testing the authorized login page route', () => {
     expect(screen.queryByPlaceholderText('Email')).toBeNull();
     expect(screen.queryByPlaceholderText('Password')).toBeNull();
     expect(screen.queryByText('to continue to GraphiQL 🚀')).toBeNull();
-    expect(await screen.findByText('Here is my fancy main page!')).toBeInTheDocument();
+    expect(await screen.findAllByTestId('editor-field')).toHaveLength(2);
   });
 });

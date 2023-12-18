@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;300;400;500;600;700&family=Roboto:wght@100;300;400;500;700;900&display=swap');
 @import 'theme.light.css' (prefers-color-scheme: light);
 @import 'theme.dark.css' (prefers-color-scheme: dark);
 @import 'tokens.css';
@@ -14,8 +15,11 @@
     --md-ref-typeface-weight-medium: '600';
     --md-ref-typeface-weight-regular: '600';
     --md-ref-typeface-brand: 'Readex Pro';
-    --md-ref-typeface-plain: 'Readex Pro';
+    --md-ref-typeface-plain: 'Roboto';
     --md-icon-font: 'Material Symbols Rounded';
+    --md-fab-icon-size: 40px;
+    --md-secondary-tab-container-color: var(--md-sys-color-surface-container);
+    --md-primary-tab-container-color: var(--md-sys-color-surface-container);
   }
 
   * {
@@ -24,12 +28,32 @@
   }
 
   body {
-    font-family: 'Readex Pro', sans-serif;
+    font-family: 'Roboto', system-ui;
     font-weight: 600;
+    background-color: var(--md-sys-color-surface);
   }
 }
 
-.display-large{
+.os-scrollbar-handle {
+  background-color: var(--md-sys-color-primary) !important;
+  cursor: grab;
+  transition: all 0.5s theme(transitionTimingFunction.out) !important;
+  padding: 3px;
+}
+
+.os-scrollbar-handle:active {
+  cursor: grabbing;
+}
+
+.os-scrollbar-handle:before {
+  transition: all 0.5s theme(transitionTimingFunction.out) !important;
+}
+
+.os-scrollbar-vertical {
+  padding: 4.2px !important;
+}
+
+.display-large {
   font-family: var(--md-sys-typescale-display-large-font-family-name);
   font-style: var(--md-sys-typescale-display-large-font-family-style);
   font-weight: var(--md-sys-typescale-display-large-font-weight);
@@ -39,7 +63,7 @@
   text-transform: var(--md-sys-typescale-display-large-text-transform);
   text-decoration: var(--md-sys-typescale-display-large-text-decoration);
 }
-.display-medium{
+.display-medium {
   font-family: var(--md-sys-typescale-display-medium-font-family-name);
   font-style: var(--md-sys-typescale-display-medium-font-family-style);
   font-weight: var(--md-sys-typescale-display-medium-font-weight);
@@ -49,7 +73,7 @@
   text-transform: var(--md-sys-typescale-display-medium-text-transform);
   text-decoration: var(--md-sys-typescale-display-medium-text-decoration);
 }
-.display-small{
+.display-small {
   font-family: var(--md-sys-typescale-display-small-font-family-name);
   font-style: var(--md-sys-typescale-display-small-font-family-style);
   font-weight: var(--md-sys-typescale-display-small-font-weight);
@@ -59,7 +83,7 @@
   text-transform: var(--md-sys-typescale-display-small-text-transform);
   text-decoration: var(--md-sys-typescale-display-small-text-decoration);
 }
-.headline-large{
+.headline-large {
   font-family: var(--md-sys-typescale-headline-large-font-family-name);
   font-style: var(--md-sys-typescale-headline-large-font-family-style);
   font-weight: var(--md-sys-typescale-headline-large-font-weight);
@@ -69,7 +93,7 @@
   text-transform: var(--md-sys-typescale-headline-large-text-transform);
   text-decoration: var(--md-sys-typescale-headline-large-text-decoration);
 }
-.headline-medium{
+.headline-medium {
   font-family: var(--md-sys-typescale-headline-medium-font-family-name);
   font-style: var(--md-sys-typescale-headline-medium-font-family-style);
   font-weight: var(--md-sys-typescale-headline-medium-font-weight);
@@ -79,7 +103,7 @@
   text-transform: var(--md-sys-typescale-headline-medium-text-transform);
   text-decoration: var(--md-sys-typescale-headline-medium-text-decoration);
 }
-.headline-small{
+.headline-small {
   font-family: var(--md-sys-typescale-headline-small-font-family-name);
   font-style: var(--md-sys-typescale-headline-small-font-family-style);
   font-weight: var(--md-sys-typescale-headline-small-font-weight);
@@ -89,7 +113,7 @@
   text-transform: var(--md-sys-typescale-headline-small-text-transform);
   text-decoration: var(--md-sys-typescale-headline-small-text-decoration);
 }
-.body-large{
+.body-large {
   font-family: var(--md-sys-typescale-body-large-font-family-name);
   font-style: var(--md-sys-typescale-body-large-font-family-style);
   font-weight: var(--md-sys-typescale-body-large-font-weight);
@@ -99,7 +123,7 @@
   text-transform: var(--md-sys-typescale-body-large-text-transform);
   text-decoration: var(--md-sys-typescale-body-large-text-decoration);
 }
-.body-medium{
+.body-medium {
   font-family: var(--md-sys-typescale-body-medium-font-family-name);
   font-style: var(--md-sys-typescale-body-medium-font-family-style);
   font-weight: var(--md-sys-typescale-body-medium-font-weight);
@@ -109,7 +133,7 @@
   text-transform: var(--md-sys-typescale-body-medium-text-transform);
   text-decoration: var(--md-sys-typescale-body-medium-text-decoration);
 }
-.body-small{
+.body-small {
   font-family: var(--md-sys-typescale-body-small-font-family-name);
   font-style: var(--md-sys-typescale-body-small-font-family-style);
   font-weight: var(--md-sys-typescale-body-small-font-weight);
@@ -119,7 +143,7 @@
   text-transform: var(--md-sys-typescale-body-small-text-transform);
   text-decoration: var(--md-sys-typescale-body-small-text-decoration);
 }
-.label-large{
+.label-large {
   font-family: var(--md-sys-typescale-label-large-font-family-name);
   font-style: var(--md-sys-typescale-label-large-font-family-style);
   font-weight: var(--md-sys-typescale-label-large-font-weight);
@@ -129,7 +153,7 @@
   text-transform: var(--md-sys-typescale-label-large-text-transform);
   text-decoration: var(--md-sys-typescale-label-large-text-decoration);
 }
-.label-medium{
+.label-medium {
   font-family: var(--md-sys-typescale-label-medium-font-family-name);
   font-style: var(--md-sys-typescale-label-medium-font-family-style);
   font-weight: var(--md-sys-typescale-label-medium-font-weight);
@@ -139,7 +163,7 @@
   text-transform: var(--md-sys-typescale-label-medium-text-transform);
   text-decoration: var(--md-sys-typescale-label-medium-text-decoration);
 }
-.label-small{
+.label-small {
   font-family: var(--md-sys-typescale-label-small-font-family-name);
   font-style: var(--md-sys-typescale-label-small-font-family-style);
   font-weight: var(--md-sys-typescale-label-small-font-weight);
@@ -149,7 +173,7 @@
   text-transform: var(--md-sys-typescale-label-small-text-transform);
   text-decoration: var(--md-sys-typescale-label-small-text-decoration);
 }
-.title-large{
+.title-large {
   font-family: var(--md-sys-typescale-title-large-font-family-name);
   font-style: var(--md-sys-typescale-title-large-font-family-style);
   font-weight: var(--md-sys-typescale-title-large-font-weight);
@@ -159,7 +183,7 @@
   text-transform: var(--md-sys-typescale-title-large-text-transform);
   text-decoration: var(--md-sys-typescale-title-large-text-decoration);
 }
-.title-medium{
+.title-medium {
   font-family: var(--md-sys-typescale-title-medium-font-family-name);
   font-style: var(--md-sys-typescale-title-medium-font-family-style);
   font-weight: var(--md-sys-typescale-title-medium-font-weight);
@@ -169,7 +193,7 @@
   text-transform: var(--md-sys-typescale-title-medium-text-transform);
   text-decoration: var(--md-sys-typescale-title-medium-text-decoration);
 }
-.title-small{
+.title-small {
   font-family: var(--md-sys-typescale-title-small-font-family-name);
   font-style: var(--md-sys-typescale-title-small-font-family-style);
   font-weight: var(--md-sys-typescale-title-small-font-weight);

@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import App from '@/App';
+import App from '@/app/App';
 import toastifyNotation from '@/shared/helpers/toastifyNotation';
 
 describe('Testing for toastify notaions', () => {

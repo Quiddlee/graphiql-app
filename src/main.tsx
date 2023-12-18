@@ -2,10 +2,12 @@ import React from 'react';
 
 import ReactDOM from 'react-dom/client';
 
-import App from '@/App';
+import App from '@/app/App';
 
 import initFirebaseApp from './firebase';
+
 import '@/styles/index.css';
+import 'overlayscrollbars/overlayscrollbars.css';
 
 initFirebaseApp();
 

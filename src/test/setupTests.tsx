@@ -28,12 +28,51 @@ afterEach(() => {
   document.body.innerHTML = '';
 });
 
+window.ResizeObserver = vi.fn().mockReturnValue({
+  observe: vi.fn(),
+  disconnect: vi.fn(),
+  unobserve: vi.fn(),
+} as ResizeObserver);
+
+window.getComputedStyle = vi.fn().mockReturnValue({
+  height: '400px',
+});
+
+window.alert = vi.fn();
+
+Object.defineProperty(window, 'getComputedStyle', {
+  value: () => ({
+    getPropertyValue: () => {
+      return '';
+    },
+  }),
+});
+
 export default function userSetup(jsx: JSX.Element) {
   return {
     user: userEvent.setup(),
     ...render(jsx),
   };
 }
+
+const internalsMock = () => ({
+  setFormValue: vi.fn(),
+  setValidity: vi.fn(),
+});
+
+Object.defineProperty(window.HTMLElement.prototype, 'attachInternals', { value: internalsMock });
+
+vi.mock('@shared/ui/Tabs', () => ({
+  default: (props: { active?: boolean }) => {
+    return <div {...{ ...props, active: 'true', ref: null }} />;
+  },
+}));
+
+vi.mock('@shared/ui/PrimaryTab', () => ({
+  default: (props: { active?: boolean }) => {
+    return <button {...{ ...props, active: 'true', ref: null }} type="button" />;
+  },
+}));
 
 vi.mock('@components/loginReg/SubmitBtn', () => ({
   default: () => <button type="submit">Log in</button>,

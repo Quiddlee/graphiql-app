@@ -10,7 +10,7 @@ import ROUTES from '@/shared/constants/routes';
 import AuthAllowedOnly from './AuthAllowedOnly';
 import UnauthAllowedOnly from './UnauthAllowedOnly';
 
-const router = createHashRouter([
+export const routes = [
   {
     path: '/',
     element: <MainLayout />,
@@ -58,6 +58,8 @@ const router = createHashRouter([
       },
     ],
   },
-]);
+];
+
+const router = createHashRouter(routes);
 
 export default router;
