@@ -15,7 +15,7 @@ const MainPage = () => {
   return (
     <>
       <section className="col-start-2 row-start-2 row-end-4">
-        <div
+        <article
           ref={editorContainerRef}
           className={cn(
             'body-large grid h-full w-full grid-rows-[auto_40%] items-end gap-4 overflow-clip transition-all duration-200 ease-emphasized-accelerate',
@@ -26,7 +26,7 @@ const MainPage = () => {
         >
           <RequestEditor />
           <EditorTools containerRef={editorContainerRef} />
-        </div>
+        </article>
       </section>
       <section className="col-start-3 row-start-2 row-end-4">
         <ResponseViewer />

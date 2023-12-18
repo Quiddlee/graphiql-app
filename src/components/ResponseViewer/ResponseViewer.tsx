@@ -38,12 +38,12 @@ const ResponseViewer = () => {
       ref={rootRef}
       className="h-full w-full justify-between overflow-y-scroll rounded-4xl bg-surface-container py-7 pl-7 pr-4"
     >
-      <div className="flex h-fit w-fit">
+      <article className="flex h-fit w-fit">
         <pre className="h-full w-full whitespace-break-spaces">{PLACEHOLDER_TEXT}</pre>
         <IconButton>
           <Icon>close</Icon>
         </IconButton>
-      </div>
+      </article>
     </div>
   );
 };
