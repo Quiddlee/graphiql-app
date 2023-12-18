@@ -2,12 +2,11 @@ import { Outlet } from 'react-router-dom';
 
 const MainLayout = () => {
   return (
-    <main>
-      <header>Here will be header</header>
-      <section>
+    <main className="mx-auto flex min-h-[100dvh] max-w-[1440px] flex-col">
+      <section className="flex h-full w-full grow items-center justify-center">
         <Outlet />
       </section>
-      <footer>Here will be footer</footer>
+      <footer className="grow-0">Here will be footer</footer>
     </main>
   );
 };

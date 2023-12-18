@@ -1,35 +1,18 @@
-import { createHashRouter, RouterProvider } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 
-import MainLayout from '@/layouts/MainLayout';
-import LoginPage from '@pages/LoginPage';
-import MainPage from '@pages/MainPage';
-import WelcomePage from '@pages/WelcomePage';
+import router from '@/router/router';
 
-import ROUTES from './shared/constatns/routes';
-
-const router = createHashRouter([
-  {
-    path: '/',
-    element: <MainLayout />,
-    children: [
-      {
-        path: ROUTES.WELCOME_PAGE,
-        element: <WelcomePage />,
-      },
-      {
-        path: ROUTES.LOGIN,
-        element: <LoginPage />,
-      },
-      {
-        path: ROUTES.MAIN,
-        element: <MainPage />,
-      },
-    ],
-  },
-]);
+import AuthProvider from './shared/Context/AuthContext';
+import LanguageProvider from './shared/Context/LanguageContext';
 
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <LanguageProvider>
+        <RouterProvider router={router} />
+      </LanguageProvider>
+    </AuthProvider>
+  );
 };
 
 export default App;
