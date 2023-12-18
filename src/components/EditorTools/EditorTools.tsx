@@ -11,7 +11,7 @@ type EditorToolsProps = {
 const EditorTools: FC<EditorToolsProps> = ({ containerRef }) => {
   return (
     <section
-      data-testid="editor-tools-container"
+      data-testid="editor-tools"
       className={cn(
         'grid h-full grid-rows-[min-content_auto] overflow-clip rounded-4xl bg-surface-container pt-4 duration-[inherit] ease-[inherit]',
       )}

@@ -17,6 +17,7 @@ const MainLayout = () => {
 
   return (
     <main
+      data-testid="main-layout"
       ref={mainLayoutRef}
       className={cn(
         'grid h-screen origin-center transform-gpu grid-cols-[384px_1fr_0fr] grid-rows-[80px_1fr] gap-4 overflow-hidden px-4 pb-4 transition-all duration-200 ease-emphasized-accelerate',

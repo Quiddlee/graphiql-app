@@ -47,10 +47,11 @@ const ResponseViewer = () => {
 
   return (
     <>
-      <IconButton className="absolute right-4 top-4 z-10" onClick={handleClick}>
+      <IconButton data-testid="close-response" className="absolute right-4 top-4 z-10" onClick={handleClick}>
         <Icon>close</Icon>
       </IconButton>
       <div
+        data-testid="response-viewer"
         ref={rootRef}
         className="h-full w-full justify-between overflow-y-scroll rounded-4xl bg-surface-container py-7 pl-7 pr-4"
       >
