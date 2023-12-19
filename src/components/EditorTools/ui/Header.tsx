@@ -1,4 +1,4 @@
-import { FC, RefObject, useRef } from 'react';
+import { FC, useRef } from 'react';
 
 import { MdTabs } from '@material/web/all';
 
@@ -12,11 +12,11 @@ import PrimaryTab from '@shared/ui/PrimaryTab';
 import Tabs from '@shared/ui/Tabs';
 
 type HeaderProps = {
-  containerRef: RefObject<HTMLElement>;
+  onExpand: (up: boolean) => void;
 };
 
-const Header: FC<HeaderProps> = ({ containerRef }) => {
-  const headerRef = useExpand(containerRef);
+const Header: FC<HeaderProps> = ({ onExpand }) => {
+  const headerRef = useExpand(onExpand);
   const tabsRef = useRef<MdTabs>(null);
   const { setUrl, readUrl } = useUrl();
 
