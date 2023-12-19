@@ -80,7 +80,7 @@ vi.mock('@components/loginReg/SubmitBtn', () => ({
 
 vi.mock('@components/loginReg/FormInput', () => ({
   default: (props: PropsWithChildren) => (
-    <button type="button" {...props}>
+    <button type="button" {...{ ...props, ref: null }}>
       {props.children}
     </button>
   ),
