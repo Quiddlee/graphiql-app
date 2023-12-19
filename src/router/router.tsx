@@ -7,6 +7,7 @@ import SignUpPage from '@/pages/SignUpPage';
 import WelcomePage from '@/pages/WelcomePage';
 import ROUTES from '@/shared/constants/routes';
 
+import AuthAllowedOnly from './AuthAllowedOnly';
 import UnauthAllowedOnly from './UnauthAllowedOnly';
 
 export const routes = [
@@ -50,9 +51,9 @@ export const routes = [
       {
         path: ROUTES.MAIN,
         element: (
-          // <AuthAllowedOnly>
-          <MainPage />
-          // </AuthAllowedOnly>
+          <AuthAllowedOnly>
+            <MainPage />
+          </AuthAllowedOnly>
         ),
       },
     ],
