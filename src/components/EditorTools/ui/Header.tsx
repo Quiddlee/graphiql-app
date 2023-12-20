@@ -5,7 +5,6 @@ import { MdTabs } from '@material/web/all';
 import useExpand from '@components/EditorTools/lib/hooks/useExpand';
 import urlParams from '@shared/constants/urlParams';
 import cn from '@shared/lib/helpers/cn';
-import useLocalStorage from '@shared/lib/hooks/useLocalStorage';
 import useUrl from '@shared/lib/hooks/useUrl';
 import Icon from '@shared/ui/Icon';
 import IconButton from '@shared/ui/IconButton';
@@ -24,9 +23,6 @@ const Header: FC<HeaderProps> = ({ onExpand }) => {
   const isExpanded = readUrl(urlParams.EXPANDED) === 'true';
   const isVariablesTab = readUrl(urlParams.VARIABLES_TAB) === 'true';
 
-  // TODO: move key to constants
-  useLocalStorage('editor-tools-is-expanded', isExpanded);
-
   const handleTabSwitch = () => {
     const activeTabIndex = tabsRef.current?.activeTabIndex;
 
@@ -37,7 +33,11 @@ const Header: FC<HeaderProps> = ({ onExpand }) => {
   };
 
   const handleExpand = () => {
-    setUrl(urlParams.EXPANDED, !isExpanded);
+    const newExpandedState = !isExpanded;
+    setUrl(urlParams.EXPANDED, newExpandedState);
+
+    // TODO: move key to constants
+    localStorage.setItem('editor-tools-is-expanded', String(newExpandedState));
   };
 
   return (
