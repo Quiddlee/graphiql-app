@@ -15,6 +15,7 @@ import cn from '@shared/lib/helpers/cn';
 import useElementProp from '@shared/lib/hooks/useElementProp';
 import useLocalStorage from '@shared/lib/hooks/useLocalStorage';
 import useResize from '@shared/lib/hooks/useResize';
+import ResizeBar from '@shared/ui/ResizeBar';
 
 const RequestEditorResized = () => {
   const [initialHeight] = useState(() => Number(localStorage.getItem('request-height')) || INITIAL_HEIGHT);
@@ -71,12 +72,7 @@ const RequestEditorResized = () => {
           'transition-none': isResized.current,
         })}
       >
-        <button
-          type="button"
-          aria-label="resize editor"
-          className="absolute -top-4 h-4 w-full cursor-row-resize rounded-full"
-          onMouseDown={handleResize}
-        />
+        <ResizeBar onMouseDown={handleResize} />
         <EditorTools isExpanded={isExpanded} onExpand={handleExpand} />
       </div>
     </div>
