@@ -39,6 +39,7 @@ const RequestEditorResized = () => {
     interpolationStart: START_VALUE,
     interpolationEnd: END_VALUE,
     maxSize: editorContainerHeight,
+    expandSize: INITIAL_HEIGHT,
   });
 
   useLocalStorage(localStorageKeys.REQUEST_EDITOR_HEIGHT, height);

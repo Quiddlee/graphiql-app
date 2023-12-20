@@ -11,6 +11,7 @@ type UseResizeParams = {
 	interpolationEnd: number;
 	hideThreshold: number;
 	startThreshold?: number;
+	expandSize?: number;
 };
 
 /**
@@ -41,6 +42,7 @@ function useResize({
 	interpolationEnd,
 	hideThreshold,
 	startThreshold = hideThreshold,
+	expandSize = initSize,
 }: UseResizeParams) {
 	const [size, setSize] = useState(initSize);
 	const [isHidden, setIsHidden] = useState(false);
@@ -60,20 +62,20 @@ function useResize({
 			const isFn = typeof up === 'function';
 
 			if (isFn) {
-				const newState = up(isExpanded);
-				setSize(newState ? initSize : minSize);
+				const isExpand = up(isExpanded);
+				setSize(isExpand ? expandSize : minSize);
 				return;
 			}
 
 			if (!isExpanded && up) {
-				setSize(initSize);
+				setSize(expandSize);
 			}
 
 			if (isExpanded && !up) {
 				setSize(minSize);
 			}
 		},
-		[isExpanded, isResized, setSize],
+		[isExpanded, isResized.current, setSize],
 	);
 
 	useEffect(() => {
