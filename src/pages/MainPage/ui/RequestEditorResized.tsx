@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import EditorTools from '@components/EditorTools/EditorTools';
-import useExpand from '@components/EditorTools/lib/hooks/useExpand';
 import RequestEditor from '@components/RequestEditor/RequestEditor';
 import {
   COLLAPSED_HEIGHT,
@@ -54,7 +53,7 @@ const RequestEditorResized = () => {
     [isResized, setSize],
   );
 
-  useExpand(handleExpand);
+  // useExpandClick(setSize, isResized.current);
 
   const oneToZeroInterpolation = (editorInterpolation - END_VALUE) / (START_VALUE - END_VALUE);
 
@@ -88,7 +87,7 @@ const RequestEditorResized = () => {
           className="absolute -top-4 h-4 w-full cursor-row-resize rounded-full"
           onMouseDown={handleResize}
         />
-        <EditorTools />
+        <EditorTools onExpand={handleExpand} />
       </div>
     </div>
   );

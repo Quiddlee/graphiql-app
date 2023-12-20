@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { FC, useRef } from 'react';
 
 import { MdTabs } from '@material/web/all';
 
@@ -10,7 +10,11 @@ import IconButton from '@shared/ui/IconButton';
 import PrimaryTab from '@shared/ui/PrimaryTab';
 import Tabs from '@shared/ui/Tabs';
 
-const Header = () => {
+type HeaderProps = {
+  onExpand: (up: boolean) => void;
+};
+
+const Header: FC<HeaderProps> = ({ onExpand }) => {
   const tabsRef = useRef<MdTabs>(null);
   const { setUrl, readUrl } = useUrl();
 
@@ -29,6 +33,8 @@ const Header = () => {
   const handleExpand = () => {
     const newExpandedState = !isExpanded;
     setUrl(urlParams.EXPANDED, newExpandedState);
+
+    onExpand(newExpandedState);
 
     // TODO: move key to constants
     localStorage.setItem('editor-tools-is-expanded', String(newExpandedState));
