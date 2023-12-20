@@ -21,18 +21,18 @@ type UseElementProp = {
  */
 function useElementProp({ propName, initialValue }: UseElementProp) {
 	const elementRef = useRef<HTMLDivElement>(null);
-	const [elementHeight, setElementHeight] = useState(initialValue);
+	const [elementProp, setElementProp] = useState(initialValue);
 
 	useEffect(() => {
 		const elem = elementRef.current;
 
 		if (elem) {
 			const prop = Number.parseInt(String(getComputedStyle(elem)[propName]), 10);
-			setElementHeight(prop);
+			setElementProp(prop);
 		}
 	}, [propName]);
 
-	return { elementRef, elementHeight };
+	return { elementRef, elementProp };
 }
 
 export default useElementProp;

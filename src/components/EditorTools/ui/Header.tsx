@@ -32,7 +32,7 @@ const Header: FC<HeaderProps> = ({ onExpand, isExpanded }) => {
   };
 
   return (
-    <header className="flex h-[48px] w-full justify-between border-b-2 border-outline-variant pl-7 pr-4 duration-[inherit] ease-[inherit]">
+    <header className="flex h-[48px] w-full justify-between overflow-hidden border-b-2 border-outline-variant pl-7 pr-4 duration-[inherit] ease-[inherit]">
       <Tabs
         data-testid="editor-tools-tabs"
         className="w-[360px] rounded-full [&::part(divider)]:hidden"

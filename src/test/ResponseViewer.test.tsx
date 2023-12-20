@@ -23,20 +23,20 @@ describe('Response viewer', () => {
     renderWithRouter(null, [`/${ROUTES.MAIN}`]);
 
     const openResponseViewerButton = screen.getByTestId('open-response');
-    expect(screen.getByTestId('main-layout')).toHaveClass('grid-cols-[384px_1fr_.6fr]');
+    expect(screen.getByTestId('main-layout')).toHaveClass('grid-cols-[384px_auto]');
 
     await userEvent.click(openResponseViewerButton);
     expect(screen.getByTestId('main-layout')).toHaveClass('grid-cols-[384px_1fr_0fr]');
 
     await userEvent.click(openResponseViewerButton);
-    expect(screen.getByTestId('main-layout')).toHaveClass('grid-cols-[384px_1fr_.6fr]');
+    expect(screen.getByTestId('main-layout')).toHaveClass('grid-cols-[384px_auto]');
   });
 
   it('should close the response viewer on close click', async () => {
     renderWithRouter(null, [`/${ROUTES.MAIN}`]);
 
     const closeResponseViewerButton = screen.getByTestId('close-response');
-    expect(screen.getByTestId('main-layout')).toHaveClass('grid-cols-[384px_1fr_.6fr]');
+    expect(screen.getByTestId('main-layout')).toHaveClass('grid-cols-[384px_auto]');
 
     await userEvent.click(closeResponseViewerButton);
     expect(screen.getByTestId('main-layout')).toHaveClass('grid-cols-[384px_1fr_0fr]');

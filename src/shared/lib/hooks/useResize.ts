@@ -12,6 +12,7 @@ type UseResizeParams = {
 	hideThreshold: number;
 	startThreshold?: number;
 	expandSize?: number;
+	direction?: 'vertical' | 'horizontal';
 };
 
 /**
@@ -43,6 +44,7 @@ function useResize({
 	hideThreshold,
 	startThreshold = hideThreshold,
 	expandSize = initSize,
+	direction = 'vertical',
 }: UseResizeParams) {
 	const [size, setSize] = useState(initSize);
 	const [isHidden, setIsHidden] = useState(false);
@@ -75,7 +77,7 @@ function useResize({
 				setSize(minSize);
 			}
 		},
-		[isExpanded, isResized.current, setSize],
+		[expandSize, isExpanded, minSize],
 	);
 
 	useEffect(() => {
@@ -83,7 +85,7 @@ function useResize({
 			if (!isResized.current) return;
 
 			setSize((prevSize) => {
-				const newSize = prevSize - e.movementY;
+				const newSize = direction === 'vertical' ? prevSize - e.movementY : prevSize - e.movementX;
 				const isHideThresholdHit = newSize >= maxSize - hideThreshold;
 
 				if (isHideThresholdHit) {
@@ -118,6 +120,7 @@ function useResize({
 
 			if (isHideThresholdHit) {
 				setSize(maxSize);
+				setInterpolation(interpolationEnd);
 			}
 		};
 
@@ -141,7 +144,7 @@ function useResize({
 		}
 	}, [hideThreshold, interpolationEnd, interpolationStart, maxSize, size]);
 
-	return { height: size, isHidden, interpolation, isResized, isExpanded, handleResize, handleExpand };
+	return { size, isHidden, interpolation, isResized, isExpanded, handleResize, handleExpand };
 }
 
 export default useResize;

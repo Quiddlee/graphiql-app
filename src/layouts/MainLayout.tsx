@@ -22,7 +22,7 @@ const MainLayout = () => {
       className={cn(
         'grid h-screen origin-center transform-gpu grid-cols-[384px_1fr_0fr] grid-rows-[80px_1fr] gap-4 overflow-hidden px-4 pb-4 transition-all duration-200 ease-emphasized-accelerate',
         {
-          'grid-cols-[384px_1fr_.6fr] duration-500 ease-emphasized-decelerate': isResponseOpen,
+          'grid-cols-[384px_auto] duration-500 ease-emphasized-decelerate': isResponseOpen,
         },
       )}
     >

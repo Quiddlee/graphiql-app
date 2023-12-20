@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { FC, HTMLAttributes, useMemo, useState } from 'react';
 
 import EditorTools from '@components/EditorTools/EditorTools';
 import RequestEditor from '@components/RequestEditor/RequestEditor';
@@ -17,9 +17,9 @@ import useLocalStorage from '@shared/lib/hooks/useLocalStorage';
 import useResize from '@shared/lib/hooks/useResize';
 import ResizeBar from '@shared/ui/ResizeBar';
 
-const RequestEditorResized = () => {
+const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => {
   const [initialHeight] = useState(() => Number(localStorage.getItem('request-height')) || INITIAL_HEIGHT);
-  const { elementRef: editorContainerRef, elementHeight: editorContainerHeight } = useElementProp({
+  const { elementRef: editorContainerRef, elementProp: editorContainerHeight } = useElementProp({
     propName: 'height',
     initialValue: 0,
   });
@@ -27,7 +27,7 @@ const RequestEditorResized = () => {
   const {
     interpolation: editorInterpolation,
     isHidden: isEditorHidden,
-    height,
+    size: height,
     isResized,
     isExpanded,
     handleResize,
@@ -50,13 +50,11 @@ const RequestEditorResized = () => {
 
   return (
     <div
+      {...props}
       ref={editorContainerRef}
-      className={cn(
-        'body-large col-start-2 row-start-2 row-end-4 grid h-full w-full grid-rows-[1fr_max-content] content-end gap-4',
-        {
-          'grid-rows-[0fr_max-content] gap-0 duration-0': isEditorHidden,
-        },
-      )}
+      className={cn('body-large grid h-full w-full grid-rows-[1fr_max-content] content-end gap-4', className, {
+        'grid-rows-[0fr_max-content] gap-0 duration-0': isEditorHidden,
+      })}
     >
       <RequestEditor
         style={{
@@ -72,7 +70,7 @@ const RequestEditorResized = () => {
           'transition-none': isResized.current,
         })}
       >
-        <ResizeBar onMouseDown={handleResize} />
+        <ResizeBar className="absolute -top-4 h-4" onMouseDown={handleResize} />
         <EditorTools isExpanded={isExpanded} onExpand={handleExpand} />
       </div>
     </div>
