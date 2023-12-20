@@ -2,6 +2,7 @@ import { FC, useRef } from 'react';
 
 import { MdTabs } from '@material/web/all';
 
+import localStorageKeys from '@shared/constants/localStorageKeys';
 import urlParams from '@shared/constants/urlParams';
 import cn from '@shared/lib/helpers/cn';
 import useUrl from '@shared/lib/hooks/useUrl';
@@ -33,11 +34,8 @@ const Header: FC<HeaderProps> = ({ onExpand }) => {
   const handleExpand = () => {
     const newExpandedState = !isExpanded;
     setUrl(urlParams.EXPANDED, newExpandedState);
-
     onExpand(newExpandedState);
-
-    // TODO: move key to constants
-    localStorage.setItem('editor-tools-is-expanded', String(newExpandedState));
+    localStorage.setItem(localStorageKeys.REQUEST_EDITOR_EXPAND, String(newExpandedState));
   };
 
   return (

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import EditorTools from '@components/EditorTools/EditorTools';
 import RequestEditor from '@components/RequestEditor/RequestEditor';
@@ -11,19 +11,18 @@ import {
   START_VALUE,
 } from '@pages/MainPage/const/const';
 import useDefineIsExpanded from '@pages/MainPage/hooks/useDefineIsExpanded';
+import localStorageKeys from '@shared/constants/localStorageKeys';
 import cn from '@shared/lib/helpers/cn';
+import useElementProp from '@shared/lib/hooks/useElementProp';
 import useLocalStorage from '@shared/lib/hooks/useLocalStorage';
 import useResize from '@shared/lib/hooks/useResize';
 
 const RequestEditorResized = () => {
-  const editorContainerRef = useRef<HTMLDivElement>(null);
-  const [editorContainerHeight, setEditorContainerHeight] = useState(0);
-
-  const initialHeight = Number(localStorage.getItem('request-height')) || INITIAL_HEIGHT;
-
-  useEffect(() => {
-    setEditorContainerHeight(editorContainerRef.current?.offsetHeight as number);
-  }, []);
+  const [initialHeight] = useState(() => Number(localStorage.getItem('request-height')) || INITIAL_HEIGHT);
+  const { elementRef: editorContainerRef, elementHeight: editorContainerHeight } = useElementProp({
+    propName: 'height',
+    initialValue: 0,
+  });
 
   const {
     interpolation: editorInterpolation,
@@ -42,7 +41,7 @@ const RequestEditorResized = () => {
     maxSize: editorContainerHeight,
   });
 
-  useLocalStorage('request-height', height);
+  useLocalStorage(localStorageKeys.REQUEST_EDITOR_HEIGHT, height);
   useDefineIsExpanded(height, isResized.current);
 
   const handleExpand = useCallback(
@@ -53,9 +52,9 @@ const RequestEditorResized = () => {
     [isResized, setSize],
   );
 
-  // useExpandClick(setSize, isResized.current);
-
-  const oneToZeroInterpolation = (editorInterpolation - END_VALUE) / (START_VALUE - END_VALUE);
+  const oneToZeroInterpolation = useMemo(() => {
+    return (editorInterpolation - END_VALUE) / (START_VALUE - END_VALUE);
+  }, [editorInterpolation]);
 
   return (
     <div
