@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import calcInterpolation from '@shared/lib/helpers/calcInterpolation';
+import { HandleExpand } from '@shared/types';
 
 type UseResizeParams = {
 	initSize: number;
@@ -51,6 +52,29 @@ function useResize({
 	function handleResize() {
 		isResized.current = true;
 	}
+
+	const handleExpand: HandleExpand = useCallback(
+		function handleExpand(up: boolean | ((prevState: boolean) => boolean)) {
+			if (isResized.current) return;
+
+			const isFn = typeof up === 'function';
+
+			if (isFn) {
+				const newState = up(isExpanded);
+				setSize(newState ? initSize : minSize);
+				return;
+			}
+
+			if (!isExpanded && up) {
+				setSize(initSize);
+			}
+
+			if (isExpanded && !up) {
+				setSize(minSize);
+			}
+		},
+		[isExpanded, isResized, setSize],
+	);
 
 	useEffect(() => {
 		const handleMouseMove = (e: MouseEvent) => {
@@ -115,7 +139,7 @@ function useResize({
 		}
 	}, [hideThreshold, interpolationEnd, interpolationStart, maxSize, size]);
 
-	return { height: size, isHidden, interpolation, isResized, isExpanded, handleResize, setSize };
+	return { height: size, isHidden, interpolation, isResized, isExpanded, handleResize, handleExpand };
 }
 
 export default useResize;

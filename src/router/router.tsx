@@ -4,10 +4,10 @@ import MainLayout from '@/layouts/MainLayout';
 import LoginPage from '@/pages/LoginPage';
 import SignUpPage from '@/pages/SignUpPage';
 import WelcomePage from '@/pages/WelcomePage';
+import AuthAllowedOnly from '@/router/AuthAllowedOnly';
 import ROUTES from '@/shared/constants/routes';
 import MainPage from '@pages/MainPage/MainPage';
 
-import AuthAllowedOnly from './AuthAllowedOnly';
 import UnauthAllowedOnly from './UnauthAllowedOnly';
 
 export const routes = [

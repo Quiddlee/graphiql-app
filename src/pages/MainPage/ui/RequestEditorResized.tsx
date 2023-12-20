@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import EditorTools from '@components/EditorTools/EditorTools';
 import RequestEditor from '@components/RequestEditor/RequestEditor';
@@ -15,7 +15,6 @@ import cn from '@shared/lib/helpers/cn';
 import useElementProp from '@shared/lib/hooks/useElementProp';
 import useLocalStorage from '@shared/lib/hooks/useLocalStorage';
 import useResize from '@shared/lib/hooks/useResize';
-import { HandleExpand } from '@shared/types';
 
 const RequestEditorResized = () => {
   const [initialHeight] = useState(() => Number(localStorage.getItem('request-height')) || INITIAL_HEIGHT);
@@ -28,10 +27,10 @@ const RequestEditorResized = () => {
     interpolation: editorInterpolation,
     isHidden: isEditorHidden,
     height,
-    handleResize,
-    setSize,
     isResized,
     isExpanded,
+    handleResize,
+    handleExpand,
   } = useResize({
     hideThreshold: HIDE_EDITOR_THRESHOLD,
     startThreshold: START_EDITOR_THRESHOLD,
@@ -43,28 +42,6 @@ const RequestEditorResized = () => {
   });
 
   useLocalStorage(localStorageKeys.REQUEST_EDITOR_HEIGHT, height);
-
-  const handleExpand: HandleExpand = useCallback(
-    function handleExpand(up: boolean | ((prevState: boolean) => boolean)) {
-      if (isResized.current) return;
-
-      if (typeof up === 'function') {
-        const newState = up(isExpanded);
-        setSize(newState ? INITIAL_HEIGHT : COLLAPSED_HEIGHT);
-        return;
-      }
-
-      if (!isExpanded && up) {
-        setSize(INITIAL_HEIGHT);
-      }
-
-      if (isExpanded && !up) {
-        setSize(COLLAPSED_HEIGHT);
-      }
-    },
-    [isExpanded, isResized, setSize],
-  );
-
   const oneToZeroInterpolation = useMemo(() => {
     return (editorInterpolation - END_VALUE) / (START_VALUE - END_VALUE);
   }, [editorInterpolation]);
