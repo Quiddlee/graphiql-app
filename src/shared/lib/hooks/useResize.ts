@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import calcInterpolation from '@shared/lib/helpers/calcInterpolation';
 
 type UseResizeParams = {
-	initialHeight: number;
+	initSize: number;
 	minSize: number;
 	maxSize: number;
 	interpolationStart: number;
@@ -33,7 +33,7 @@ type UseResizeParams = {
  * @returns {function} .setSize - A function to set the size of the resizable element.
  */
 function useResize({
-	initialHeight,
+	initSize,
 	minSize,
 	maxSize,
 	interpolationStart,
@@ -41,10 +41,12 @@ function useResize({
 	hideThreshold,
 	startThreshold = hideThreshold,
 }: UseResizeParams) {
-	const [size, setSize] = useState(initialHeight);
+	const [size, setSize] = useState(initSize);
 	const [isHidden, setIsHidden] = useState(false);
 	const [interpolation, setInterpolation] = useState(interpolationStart);
 	const isResized = useRef(false);
+
+	const isExpanded = size > minSize && size <= maxSize;
 
 	function handleResize() {
 		isResized.current = true;
@@ -113,7 +115,7 @@ function useResize({
 		}
 	}, [hideThreshold, interpolationEnd, interpolationStart, maxSize, size]);
 
-	return { height: size, isHidden, interpolation, isResized, handleResize, setSize };
+	return { height: size, isHidden, interpolation, isResized, isExpanded, handleResize, setSize };
 }
 
 export default useResize;

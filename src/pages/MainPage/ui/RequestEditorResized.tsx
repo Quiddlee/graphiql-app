@@ -10,12 +10,12 @@ import {
   START_EDITOR_THRESHOLD,
   START_VALUE,
 } from '@pages/MainPage/const/const';
-import useDefineIsExpanded from '@pages/MainPage/hooks/useDefineIsExpanded';
 import localStorageKeys from '@shared/constants/localStorageKeys';
 import cn from '@shared/lib/helpers/cn';
 import useElementProp from '@shared/lib/hooks/useElementProp';
 import useLocalStorage from '@shared/lib/hooks/useLocalStorage';
 import useResize from '@shared/lib/hooks/useResize';
+import { HandleExpand } from '@shared/types';
 
 const RequestEditorResized = () => {
   const [initialHeight] = useState(() => Number(localStorage.getItem('request-height')) || INITIAL_HEIGHT);
@@ -31,10 +31,11 @@ const RequestEditorResized = () => {
     handleResize,
     setSize,
     isResized,
+    isExpanded,
   } = useResize({
     hideThreshold: HIDE_EDITOR_THRESHOLD,
     startThreshold: START_EDITOR_THRESHOLD,
-    initialHeight,
+    initSize: initialHeight,
     minSize: COLLAPSED_HEIGHT,
     interpolationStart: START_VALUE,
     interpolationEnd: END_VALUE,
@@ -42,14 +43,26 @@ const RequestEditorResized = () => {
   });
 
   useLocalStorage(localStorageKeys.REQUEST_EDITOR_HEIGHT, height);
-  useDefineIsExpanded(height, isResized.current);
 
-  const handleExpand = useCallback(
-    function handleExpand(up: boolean) {
+  const handleExpand: HandleExpand = useCallback(
+    function handleExpand(up: boolean | ((prevState: boolean) => boolean)) {
       if (isResized.current) return;
-      setSize(up ? INITIAL_HEIGHT : COLLAPSED_HEIGHT);
+
+      if (typeof up === 'function') {
+        const newState = up(isExpanded);
+        setSize(newState ? INITIAL_HEIGHT : COLLAPSED_HEIGHT);
+        return;
+      }
+
+      if (!isExpanded && up) {
+        setSize(INITIAL_HEIGHT);
+      }
+
+      if (isExpanded && !up) {
+        setSize(COLLAPSED_HEIGHT);
+      }
     },
-    [isResized, setSize],
+    [isExpanded, isResized, setSize],
   );
 
   const oneToZeroInterpolation = useMemo(() => {
@@ -86,7 +99,7 @@ const RequestEditorResized = () => {
           className="absolute -top-4 h-4 w-full cursor-row-resize rounded-full"
           onMouseDown={handleResize}
         />
-        <EditorTools onExpand={handleExpand} />
+        <EditorTools isExpanded={isExpanded} onExpand={handleExpand} />
       </div>
     </div>
   );

@@ -2,24 +2,24 @@ import { FC, useRef } from 'react';
 
 import { MdTabs } from '@material/web/all';
 
-import localStorageKeys from '@shared/constants/localStorageKeys';
 import urlParams from '@shared/constants/urlParams';
 import cn from '@shared/lib/helpers/cn';
 import useUrl from '@shared/lib/hooks/useUrl';
+import { HandleExpand } from '@shared/types';
 import Icon from '@shared/ui/Icon';
 import IconButton from '@shared/ui/IconButton';
 import PrimaryTab from '@shared/ui/PrimaryTab';
 import Tabs from '@shared/ui/Tabs';
 
 type HeaderProps = {
-  onExpand: (up: boolean) => void;
+  onExpand: HandleExpand;
+  isExpanded: boolean;
 };
 
-const Header: FC<HeaderProps> = ({ onExpand }) => {
+const Header: FC<HeaderProps> = ({ onExpand, isExpanded }) => {
   const tabsRef = useRef<MdTabs>(null);
   const { setUrl, readUrl } = useUrl();
 
-  const isExpanded = readUrl(urlParams.EXPANDED) === 'true';
   const isVariablesTab = readUrl(urlParams.VARIABLES_TAB) === 'true';
 
   const handleTabSwitch = () => {
@@ -28,14 +28,7 @@ const Header: FC<HeaderProps> = ({ onExpand }) => {
     if (activeTabIndex === undefined) return;
 
     setUrl(urlParams.VARIABLES_TAB, !activeTabIndex);
-    if (!isExpanded) setUrl(urlParams.EXPANDED, true);
-  };
-
-  const handleExpand = () => {
-    const newExpandedState = !isExpanded;
-    setUrl(urlParams.EXPANDED, newExpandedState);
-    onExpand(newExpandedState);
-    localStorage.setItem(localStorageKeys.REQUEST_EDITOR_EXPAND, String(newExpandedState));
+    onExpand(true);
   };
 
   return (
@@ -58,7 +51,7 @@ const Header: FC<HeaderProps> = ({ onExpand }) => {
         className={cn('rotate-180 duration-[inherit] ease-[inherit]', {
           'rotate-0': isExpanded,
         })}
-        onClick={handleExpand}
+        onClick={() => onExpand((prevState) => !prevState)}
       >
         <Icon>expand_more</Icon>
       </IconButton>

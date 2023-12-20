@@ -6,7 +6,6 @@ import useUrl from '@shared/lib/hooks/useUrl';
 
 const MainPage = () => {
   const { readUrl } = useUrl();
-
   const isResponseOpen = readUrl(urlParams.RESPONSE_OPEN) === 'true';
 
   return (

@@ -7,13 +7,13 @@ import { useEffect } from 'react';
  * @param {string | number | boolean} val - The value to be stored.
  * @returns {Function} A function that retrieves the stored value from local storage.
  */
-function useLocalStorage(key: string, val: string | number | boolean) {
+function useLocalStorage(key: string, val?: string | number | boolean) {
 	useEffect(() => {
-		localStorage.setItem(key, String(val));
+		if (val) localStorage.setItem(key, String(val));
 	}, [key, val]);
 
 	function getItem() {
-		return localStorage.getItem(key);
+		return localStorage.getItem(key) as string;
 	}
 
 	return getItem;
