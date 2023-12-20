@@ -1,8 +1,7 @@
-import { FC, useRef } from 'react';
+import { useRef } from 'react';
 
 import { MdTabs } from '@material/web/all';
 
-import useExpand from '@components/EditorTools/lib/hooks/useExpand';
 import urlParams from '@shared/constants/urlParams';
 import cn from '@shared/lib/helpers/cn';
 import useUrl from '@shared/lib/hooks/useUrl';
@@ -11,12 +10,7 @@ import IconButton from '@shared/ui/IconButton';
 import PrimaryTab from '@shared/ui/PrimaryTab';
 import Tabs from '@shared/ui/Tabs';
 
-type HeaderProps = {
-  onExpand: (up: boolean) => void;
-};
-
-const Header: FC<HeaderProps> = ({ onExpand }) => {
-  const headerRef = useExpand(onExpand);
+const Header = () => {
   const tabsRef = useRef<MdTabs>(null);
   const { setUrl, readUrl } = useUrl();
 
@@ -41,10 +35,7 @@ const Header: FC<HeaderProps> = ({ onExpand }) => {
   };
 
   return (
-    <header
-      ref={headerRef}
-      className="flex h-[48px] w-full justify-between border-b-2 border-outline-variant pl-7 pr-4 duration-[inherit] ease-[inherit]"
-    >
+    <header className="flex h-[48px] w-full justify-between border-b-2 border-outline-variant pl-7 pr-4 duration-[inherit] ease-[inherit]">
       <Tabs
         data-testid="editor-tools-tabs"
         className="w-[360px] rounded-full [&::part(divider)]:hidden"
