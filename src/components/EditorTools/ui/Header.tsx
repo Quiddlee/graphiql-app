@@ -5,6 +5,7 @@ import { MdTabs } from '@material/web/all';
 import useExpand from '@components/EditorTools/lib/hooks/useExpand';
 import urlParams from '@shared/constants/urlParams';
 import cn from '@shared/lib/helpers/cn';
+import useLocalStorage from '@shared/lib/hooks/useLocalStorage';
 import useUrl from '@shared/lib/hooks/useUrl';
 import Icon from '@shared/ui/Icon';
 import IconButton from '@shared/ui/IconButton';
@@ -23,6 +24,9 @@ const Header: FC<HeaderProps> = ({ onExpand }) => {
   const isExpanded = readUrl(urlParams.EXPANDED) === 'true';
   const isVariablesTab = readUrl(urlParams.VARIABLES_TAB) === 'true';
 
+  // TODO: move key to constants
+  useLocalStorage('editor-tools-is-expanded', isExpanded);
+
   const handleTabSwitch = () => {
     const activeTabIndex = tabsRef.current?.activeTabIndex;
 
@@ -30,6 +34,10 @@ const Header: FC<HeaderProps> = ({ onExpand }) => {
 
     setUrl(urlParams.VARIABLES_TAB, !activeTabIndex);
     if (!isExpanded) setUrl(urlParams.EXPANDED, true);
+  };
+
+  const handleExpand = () => {
+    setUrl(urlParams.EXPANDED, !isExpanded);
   };
 
   return (
@@ -55,7 +63,7 @@ const Header: FC<HeaderProps> = ({ onExpand }) => {
         className={cn('rotate-180 duration-[inherit] ease-[inherit]', {
           'rotate-0': isExpanded,
         })}
-        onClick={() => setUrl(urlParams.EXPANDED, !isExpanded)}
+        onClick={handleExpand}
       >
         <Icon>expand_more</Icon>
       </IconButton>
