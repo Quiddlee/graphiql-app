@@ -52,7 +52,7 @@ const Header: FC<HeaderProps> = ({ containerRef }) => {
       </Tabs>
       <IconButton
         data-testid="editor-tools-expand"
-        className={cn('rotate-180 duration-300 ease-[inherit]', {
+        className={cn('rotate-180 duration-[inherit] ease-[inherit]', {
           'rotate-0': isExpanded,
         })}
         onClick={() => setUrl(urlParams.EXPANDED, !isExpanded)}

@@ -8,10 +8,13 @@ const RequestEditor = () => {
   const [editorState, setEditorState] = useEditorUrlState(urlParams.QUERY, EDITOR_DEFAULT_VALUE);
 
   return (
-    <article className="flex h-full w-full gap-4 overflow-y-hidden rounded-4xl bg-surface-container pl-6 pr-4">
-      <Editor editorState={editorState} onChange={setEditorState} />
+    <section
+      data-testid="editor-request"
+      className="relative flex h-full w-full gap-4 overflow-y-hidden rounded-4xl bg-surface-container pl-6"
+    >
+      <Editor className="pr-20" editorState={editorState} onChange={setEditorState} />
       <Controls />
-    </article>
+    </section>
   );
 };
 

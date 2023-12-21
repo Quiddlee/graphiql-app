@@ -22,6 +22,11 @@
     --md-primary-tab-container-color: var(--md-sys-color-surface-container);
   }
 
+  ::selection {
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+  }
+
   * {
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
@@ -37,16 +42,12 @@
 .os-scrollbar-handle {
   background-color: var(--md-sys-color-primary) !important;
   cursor: grab;
-  transition: all 0.5s theme(transitionTimingFunction.out) !important;
+  transition: all 0.1s theme(transitionTimingFunction.out) !important;
   padding: 3px;
 }
 
 .os-scrollbar-handle:active {
   cursor: grabbing;
-}
-
-.os-scrollbar-handle:before {
-  transition: all 0.5s theme(transitionTimingFunction.out) !important;
 }
 
 .os-scrollbar-vertical {

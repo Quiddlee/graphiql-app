@@ -5,7 +5,7 @@ import FilledIconButton from '@shared/ui/FilledIconButton';
 import Icon from '@shared/ui/Icon';
 
 const Controls = () => {
-  const { readUrl } = useUrl();
+  const { readUrl, setUrl } = useUrl();
 
   const handleCopyText = async () => {
     const query = readUrl(urlParams.QUERY);
@@ -16,8 +16,13 @@ const Controls = () => {
     alert('text copied');
   };
 
+  const handleResponseOpen = () => {
+    const isResponseOpen = readUrl(urlParams.RESPONSE_OPEN) === 'true';
+    setUrl(urlParams.RESPONSE_OPEN, String(!isResponseOpen));
+  };
+
   return (
-    <ul data-testid="controls" className="grid content-start justify-items-center pt-7">
+    <ul data-testid="controls" className="absolute right-6 top-7 grid content-start justify-items-center">
       <li className="mb-3 flex items-center justify-center">
         <Fab data-testid="fab" variant="primary">
           <Icon slot="icon">play_arrow</Icon>
@@ -34,7 +39,7 @@ const Controls = () => {
         </FilledIconButton>
       </li>
       <li className="flex h-12 w-12 items-center justify-center">
-        <FilledIconButton data-testid="open-response">
+        <FilledIconButton data-testid="open-response" onClick={handleResponseOpen}>
           <Icon>info</Icon>
         </FilledIconButton>
       </li>
