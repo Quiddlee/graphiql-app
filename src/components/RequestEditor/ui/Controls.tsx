@@ -1,3 +1,5 @@
+import submitRequest from '@/components/Editor/lib/submitRequest';
+import { useAppContext } from '@/shared/Context/hooks';
 import urlParams from '@shared/constants/urlParams';
 import useUrl from '@shared/lib/hooks/useUrl';
 import Fab from '@shared/ui/Fab';
@@ -6,6 +8,7 @@ import Icon from '@shared/ui/Icon';
 
 const Controls = () => {
   const { readUrl, setUrl } = useUrl();
+  const { getCurrentResponse } = useAppContext();
 
   const handleCopyText = async () => {
     const query = readUrl(urlParams.QUERY);
@@ -16,6 +19,13 @@ const Controls = () => {
     alert('text copied');
   };
 
+  const handleSubmitRequest = async () => {
+    const query = readUrl(urlParams.QUERY);
+    const variables = readUrl(urlParams.VARIABLES);
+    getCurrentResponse('res');
+    submitRequest(query, variables);
+  };
+
   const handleResponseOpen = () => {
     const isResponseOpen = readUrl(urlParams.RESPONSE_OPEN) === 'true';
     setUrl(urlParams.RESPONSE_OPEN, String(!isResponseOpen));
@@ -24,7 +34,7 @@ const Controls = () => {
   return (
     <ul data-testid="controls" className="absolute right-6 top-7 grid content-start justify-items-center">
       <li className="mb-3 flex items-center justify-center">
-        <Fab data-testid="fab" variant="primary">
+        <Fab data-testid="fab" variant="primary" onClick={handleSubmitRequest}>
           <Icon slot="icon">play_arrow</Icon>
         </Fab>
       </li>

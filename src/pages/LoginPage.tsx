@@ -11,7 +11,7 @@ import AUTH_ERRORS from '@/shared/constants/authErrors';
 import ROUTES from '@/shared/constants/routes';
 import { loginValidationSchema } from '@/shared/constants/validationSchema';
 import useAuth from '@/shared/Context/authHook';
-import useLanguage from '@/shared/Context/hooks';
+import { useLanguage } from '@/shared/Context/hooks';
 import notationLocalizer from '@/shared/helpers/notationLocalizer';
 import switchPassType from '@/shared/helpers/switchPassType';
 import toastifyNotation from '@/shared/helpers/toastifyNotation';

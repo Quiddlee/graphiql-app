@@ -20,7 +20,7 @@ const EditorField = forwardRef<HTMLDivElement, EditorFieldProps>(({ onChange, va
       tabIndex={0}
       aria-label="The text editor"
       role="textbox"
-      contentEditable
+      contentEditable="plaintext-only"
       onInput={handleInput}
       className="h-fit w-full whitespace-pre-wrap outline-none"
       dangerouslySetInnerHTML={{ __html: defaultValue.current }}
