@@ -1,5 +1,6 @@
 import { useCallback } from 'react';
 
+import { useAppContext } from '@/shared/Context/hooks';
 import urlParams from '@shared/constants/urlParams';
 import useScrollbar from '@shared/lib/hooks/useScrollbar';
 import useUrl from '@shared/lib/hooks/useUrl';
@@ -36,6 +37,7 @@ const PLACEHOLDER_TEXT = `{
 
 const ResponseViewer = () => {
   const rootRef = useScrollbar<HTMLDivElement>();
+  const { currentResponse } = useAppContext();
   const { setUrl } = useUrl();
 
   const handleClick = useCallback(
@@ -56,7 +58,7 @@ const ResponseViewer = () => {
         className="h-full w-full justify-between overflow-y-scroll rounded-4xl bg-surface-container py-7 pl-7 pr-4"
       >
         <article className="h-fit w-fit pr-10">
-          <pre className="h-full w-full whitespace-break-spaces">{PLACEHOLDER_TEXT}</pre>
+          <pre className="h-full w-full whitespace-break-spaces">{currentResponse}</pre>
         </article>
       </div>
     </>

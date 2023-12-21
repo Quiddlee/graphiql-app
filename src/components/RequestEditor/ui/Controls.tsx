@@ -8,7 +8,7 @@ import Icon from '@shared/ui/Icon';
 
 const Controls = () => {
   const { readUrl, setUrl } = useUrl();
-  const { getCurrentResponse } = useAppContext();
+  const { updateCurrentResponse } = useAppContext();
 
   const handleCopyText = async () => {
     const query = readUrl(urlParams.QUERY);
@@ -22,8 +22,8 @@ const Controls = () => {
   const handleSubmitRequest = async () => {
     const query = readUrl(urlParams.QUERY);
     const variables = readUrl(urlParams.VARIABLES);
-    getCurrentResponse('res');
-    submitRequest(query, variables);
+    const response = await submitRequest(query, variables);
+    updateCurrentResponse(JSON.stringify(response));
   };
 
   const handleResponseOpen = () => {
