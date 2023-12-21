@@ -11,7 +11,9 @@ export default function AppContextProvider({ children }: { children: ReactNode }
   const [currentResponse, setCurrentResponse] = useState<string>('');
 
   const updateCurrentResponse = useCallback((response: string) => {
-    setCurrentResponse(response);
+    const formattedResponse = response.replace(/\\r\\n|\\n/g, '<br>').replace(/\r\n|\n/g, '<br>');
+    setCurrentResponse(formattedResponse);
+    console.log(formattedResponse);
   }, []);
 
   const contextValue = useMemo(
