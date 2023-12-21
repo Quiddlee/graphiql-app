@@ -1,21 +1,17 @@
 import { useState } from 'react';
 
-import { rickAndMortySchema } from '@/shared/constants/schemaData';
+import { swapiSchema } from '@/shared/constants/schemaData';
 
 type SchemaTypeFieldOfType = {
   kind: string;
-  name?: string | null;
-  ofType?: SchemaTypeFieldOfType;
+  name: string | null;
+  ofType: SchemaTypeFieldOfType;
 } | null;
 
 type SchemaTypeFieldArgs = {
   name: string;
   description?: string | null;
-  type: {
-    kind: string;
-    name?: string | null;
-    ofType?: SchemaTypeFieldOfType;
-  };
+  type: SchemaTypeFieldOfType;
   defaultValue?: null | string;
 };
 
@@ -28,15 +24,34 @@ type SchemaTypeField = {
   deprecationReason?: null | string;
 };
 
+type SchemaInterfaceType = {
+  kind: string;
+  name: string;
+  ofType: null;
+};
+
+type SchemaEnumType = {
+  name: string;
+  description: string;
+  isDeprecated: boolean;
+  deprecationReason: null | string;
+};
+
+type SchemaPossibleTypes = {
+  kind: string;
+  name: string;
+  ofType: null;
+};
+
 type SchemaTypeObj = {
   kind: string;
   name: string;
-  description?: string;
+  description: string;
   fields: SchemaTypeField[];
   inputFields: SchemaTypeField[] | null;
-  interfaces: [];
-  enumValues: null;
-  possibleTypes?: null | { kind: string; name: string };
+  interfaces: SchemaInterfaceType[] | null;
+  enumValues: SchemaEnumType[] | null;
+  possibleTypes?: SchemaPossibleTypes[] | null;
 };
 
 const DocsRoot = ({
@@ -143,7 +158,9 @@ const DocsType = ({
     return ['', inputString, ''];
   }
 
-  const currType = rickAndMortySchema.data.__schema.types.find((elem) => elem.name === explorer.current());
+  const currType: SchemaTypeObj = swapiSchema.data.__schema.types.find(
+    (elem) => elem.name === explorer.current(),
+  ) as SchemaTypeObj;
   const fields = currType?.fields?.map((field) => {
     const args = field.args.map((arg, i) => {
       const argTypeName = getTypeName(arg.type);
@@ -187,8 +204,12 @@ const DocsType = ({
     return (
       <li key={field.name}>
         {field.name}:&nbsp;
-        <a className="text-yellow-400" href={field.type.name} onClick={(e) => clinkHandler(e, field.type.name)}>
-          {field.type.name}
+        <a
+          className="text-yellow-400"
+          href={field?.type?.name || '#'}
+          onClick={(e) => clinkHandler(e, field?.type?.name as string)}
+        >
+          {field?.type?.name}
         </a>
       </li>
     );
@@ -222,7 +243,7 @@ const DocsType = ({
       </button>
       <h2>{currType?.name}</h2>
       <p>{currType?.description}</p>
-      {interfaces && <h3>Implements:</h3>}
+      {interfaces && interfaces?.length > 0 && <h3>Implements:</h3>}
       <ul className="flex flex-col gap-[20px]">{interfaces}</ul>
       {isFields && <h3>Fields:</h3>}
       <ul className="flex flex-col gap-[20px]">{fields}</ul>
@@ -262,7 +283,7 @@ const MyDocs = () => {
   const myExplorer = useSchemaExplorer();
 
   const content = myExplorer.isDocs() ? (
-    <DocsRoot types={rickAndMortySchema.data.__schema.types as SchemaTypeObj[]} explorer={myExplorer} />
+    <DocsRoot types={swapiSchema.data.__schema.types as SchemaTypeObj[]} explorer={myExplorer} />
   ) : (
     <DocsType explorer={myExplorer} />
   );
