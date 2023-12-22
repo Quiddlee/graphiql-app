@@ -17,7 +17,9 @@ const START_EDITOR_THRESHOLD = 50;
 const INITIAL_HEIGHT = 300;
 
 const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => {
-  const [initialHeight] = useState(() => Number(localStorage.getItem('request-height')) || INITIAL_HEIGHT);
+  const [initialHeight] = useState(
+    () => Number(localStorage.getItem(localStorageKeys.REQUEST_EDITOR_HEIGHT)) || INITIAL_HEIGHT,
+  );
   const { elementRef: editorContainerRef, elementProp: editorContainerHeight } = useElementProp({
     propName: 'height',
     initialValue: 0,

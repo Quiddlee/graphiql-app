@@ -1,9 +1,13 @@
+import { useState } from 'react';
+
 import ResponseViewer from '@components/ResponseViewer/ResponseViewer';
 import RequestEditorResized from '@pages/MainPage/ui/RequestEditorResized';
 import { INTERPOLATION_END, INTERPOLATION_START } from '@shared/constants/const';
+import localStorageKeys from '@shared/constants/localStorageKeys';
 import cn from '@shared/lib/helpers/cn';
 import useElementProp from '@shared/lib/hooks/useElementProp';
 import useInterpolation from '@shared/lib/hooks/useInterpolation';
+import useLocalStorage from '@shared/lib/hooks/useLocalStorage';
 import useResize from '@shared/lib/hooks/useResize';
 import ResizeBar from '@shared/ui/ResizeBar';
 
@@ -12,6 +16,7 @@ const INITIAL_WIDTH = 400;
 const COLLAPSED_WIDTH = 0;
 
 const MainPage = () => {
+  const [initialWidth] = useState(() => Number(localStorage.getItem(localStorageKeys.RESPONSE_WIDTH)) || INITIAL_WIDTH);
   const { elementRef: containerRef, elementProp: maxWidth } = useElementProp({
     propName: 'width',
     initialValue: 0,
@@ -23,7 +28,7 @@ const MainPage = () => {
     handleResize,
     isHidden: isEditorHidden,
   } = useResize({
-    initSize: INITIAL_WIDTH,
+    initSize: initialWidth,
     minSize: COLLAPSED_WIDTH,
     maxSize: maxWidth,
     startThreshold: HIDE_THRESHOLD,
@@ -50,6 +55,8 @@ const MainPage = () => {
     hideThreshold: HIDE_THRESHOLD,
     isSizeIncrease: true,
   });
+
+  useLocalStorage(localStorageKeys.RESPONSE_WIDTH, width);
 
   const isResponseHidden = width === 0;
 
