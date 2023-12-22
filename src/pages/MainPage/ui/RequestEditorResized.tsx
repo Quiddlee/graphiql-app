@@ -11,6 +11,7 @@ import {
   START_VALUE,
 } from '@pages/MainPage/const/const';
 import localStorageKeys from '@shared/constants/localStorageKeys';
+import calcOneToZeroInterpolation from '@shared/lib/helpers/calcOneToZeroInterpolation';
 import cn from '@shared/lib/helpers/cn';
 import useElementProp from '@shared/lib/hooks/useElementProp';
 import useLocalStorage from '@shared/lib/hooks/useLocalStorage';
@@ -45,11 +46,9 @@ const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, .
 
   const isCollapsed = height === COLLAPSED_HEIGHT;
 
-  console.log(editorInterpolation);
-
   useLocalStorage(localStorageKeys.REQUEST_EDITOR_HEIGHT, height);
   const oneToZeroInterpolation = useMemo(() => {
-    return (editorInterpolation - END_VALUE) / (START_VALUE - END_VALUE);
+    return calcOneToZeroInterpolation(editorInterpolation, START_VALUE, END_VALUE);
   }, [editorInterpolation]);
 
   return (

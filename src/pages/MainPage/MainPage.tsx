@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import calcInterpolation from '@/shared/lib/helpers/calcInterpolation';
 import ResponseViewer from '@components/ResponseViewer/ResponseViewer';
 import RequestEditorResized from '@pages/MainPage/ui/RequestEditorResized';
+import calcOneToZeroInterpolation from '@shared/lib/helpers/calcOneToZeroInterpolation';
 import cn from '@shared/lib/helpers/cn';
 import useResize from '@shared/lib/hooks/useResize';
 import ResizeBar from '@shared/ui/ResizeBar';
@@ -60,11 +61,11 @@ const MainPage = () => {
   }, [maxWidth, width]);
 
   const oneToZeroInterpolation = useMemo(() => {
-    return (interpolation - INTERPOLATION_END) / (INTERPOLATION_START - INTERPOLATION_END);
+    return calcOneToZeroInterpolation(interpolation, INTERPOLATION_START, INTERPOLATION_END);
   }, [interpolation]);
 
   const oneToZeroInterpolationResponse = useMemo(() => {
-    return (interpolationResponse - INTERPOLATION_END) / (INTERPOLATION_START - INTERPOLATION_END);
+    return calcOneToZeroInterpolation(interpolationResponse, INTERPOLATION_START, INTERPOLATION_END);
   }, [interpolationResponse]);
 
   return (
