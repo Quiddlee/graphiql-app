@@ -1,8 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
-
 import ResponseViewer from '@components/ResponseViewer/ResponseViewer';
 import RequestEditorResized from '@pages/MainPage/ui/RequestEditorResized';
 import cn from '@shared/lib/helpers/cn';
+import useElementProp from '@shared/lib/hooks/useElementProp';
 import useInterpolation from '@shared/lib/hooks/useInterpolation';
 import useResize from '@shared/lib/hooks/useResize';
 import ResizeBar from '@shared/ui/ResizeBar';
@@ -14,21 +13,16 @@ const INTERPOLATION_START = 1;
 const INTERPOLATION_END = 0.9;
 
 const MainPage = () => {
-  const [maxWidth, setMaxWidth] = useState(0);
-  const containerRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    if (containerRef.current) {
-      const width = containerRef.current.parentElement?.clientWidth ?? 0;
-      setMaxWidth(width);
-    }
-  }, []);
+  const { elementRef: containerRef, elementProp: maxWidth } = useElementProp({
+    propName: 'width',
+    initialValue: 0,
+  });
 
   const {
     size: width,
     isResized,
     handleResize,
-    isHidden,
+    isHidden: isEditorHidden,
   } = useResize({
     initSize: INITIAL_WIDTH,
     minSize: COLLAPSED_WIDTH,
@@ -62,10 +56,11 @@ const MainPage = () => {
 
   return (
     <div
+      ref={containerRef}
       className={cn(
         'col-start-2 col-end-3 row-start-2 row-end-4 grid h-full w-full grid-cols-[auto_max-content] grid-rows-1 gap-4',
         {
-          'justify-end gap-0': isHidden,
+          'justify-end gap-0': isEditorHidden,
           'gap-0': isResponseHidden,
         },
       )}
@@ -74,12 +69,12 @@ const MainPage = () => {
         style={{
           transform: `scale3d(${interpolateEditor}, ${interpolateEditor}, 1)`,
           opacity: oneZeroEditor,
-          width: isHidden ? '0px' : '100%',
-          overflow: isHidden ? 'hidden' : 'visible',
+          width: isEditorHidden ? '0px' : '100%',
+          overflow: isEditorHidden ? 'hidden' : 'visible',
           transition: isResized.current ? 'none' : '',
         }}
       />
-      <section ref={containerRef} className={cn('relative flex h-full w-full justify-end')}>
+      <section className={cn('relative flex h-full w-full justify-end')}>
         <ResizeBar direction="horizontal" className="absolute -left-4" onMouseDown={handleResize} />
         <div
           style={{

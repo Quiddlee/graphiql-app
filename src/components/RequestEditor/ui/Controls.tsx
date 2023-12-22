@@ -5,7 +5,7 @@ import FilledIconButton from '@shared/ui/FilledIconButton';
 import Icon from '@shared/ui/Icon';
 
 const Controls = () => {
-  const { readUrl, setUrl } = useUrl();
+  const { readUrl } = useUrl();
 
   const handleCopyText = async () => {
     const query = readUrl(urlParams.QUERY);
@@ -17,8 +17,7 @@ const Controls = () => {
   };
 
   const handleResponseOpen = () => {
-    const isResponseOpen = readUrl(urlParams.RESPONSE_OPEN) === 'true';
-    setUrl(urlParams.RESPONSE_OPEN, String(!isResponseOpen));
+    // TODO: handle response open
   };
 
   return (
