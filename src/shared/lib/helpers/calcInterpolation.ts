@@ -8,8 +8,9 @@
  * @returns {number} The interpolated value for the current step.
  */
 function calcInterpolation(startValue: number, endValue: number, numOfPoints: number, currentStep: number): number {
-	const interpolationDecrement = (startValue - endValue) / numOfPoints;
-	const interpolationValue = startValue - (numOfPoints - currentStep) * interpolationDecrement;
+	const decrement = (startValue - endValue) / numOfPoints;
+	const interpolationValue = startValue - (numOfPoints - currentStep) * decrement;
+
 	return interpolationValue;
 }
 
