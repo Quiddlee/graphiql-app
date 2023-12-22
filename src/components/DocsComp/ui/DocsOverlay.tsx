@@ -1,4 +1,4 @@
-const clazzName = 'overlay absolute left-0 top-0 flex min-h-full w-full justify-start bg-black/60 flex';
+const clazzName = 'overlay absolute left-0 top-0 flex h-full w-full justify-start bg-black/60 flex z-10';
 const invisibleClazz = 'hidden opacity-0 pointer-events-none';
 const visibleClazz = 'visible opacity-100 pointer-events-auto';
 

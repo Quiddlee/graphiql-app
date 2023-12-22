@@ -1,3 +1,4 @@
+import useScrollbar from '@/shared/lib/hooks/useScrollbar';
 import { DocsExplorerType, SchemaTypeObj } from '@/shared/types';
 
 const DocsRootComp = ({ types, explorer }: { types: SchemaTypeObj[]; explorer: DocsExplorerType }) => {
@@ -23,8 +24,9 @@ const DocsRootComp = ({ types, explorer }: { types: SchemaTypeObj[]; explorer: D
       }
       return null;
     });
+  const rootRef = useScrollbar<HTMLDivElement>();
   return (
-    <>
+    <div ref={rootRef} className="h-full">
       <div className="rounded-[24px] bg-surface-container px-10 py-[56px] text-left text-on-surface sm:px-[56px]">
         <h3 className="text-[57px] font-[500]">Docs</h3>
         <p className="text-md text-left">A GraphQL schema provides a root type for each kind of operation.</p>
@@ -44,7 +46,7 @@ const DocsRootComp = ({ types, explorer }: { types: SchemaTypeObj[]; explorer: D
         <h4 className="mt-[56px] text-[28px]">All schema types:</h4>
         <ul className="mt-4">{allTypes}</ul>
       </div>
-    </>
+    </div>
   );
 };
 

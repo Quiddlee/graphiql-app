@@ -1,3 +1,4 @@
+import useScrollbar from '@/shared/lib/hooks/useScrollbar';
 import { DocsExplorerType, SchemaTypeObj } from '@/shared/types';
 
 import BackDocsBtn from './BackDocsBtn';
@@ -97,20 +98,23 @@ const DocsTypeComp = ({ explorer, currType }: { explorer: DocsExplorerType; curr
       </li>
     );
   });
+  const rootRef = useScrollbar<HTMLDivElement>();
   return (
-    <div className="p-10 py-[56px] text-left text-on-surface sm:px-[56px]">
-      <BackDocsBtn onClick={() => explorer.back()} title={explorer.prev()} />
-      <h2 className="mt-8 w-full text-3xl">{currType?.name}</h2>
-      <p className="mt-8">{currType?.description}</p>
-      {interfaces && interfaces?.length > 0 && <h3 className="text-xl">Implements:</h3>}
-      <ul className="mt-8 flex flex-col gap-5">{interfaces}</ul>
-      {isFields && <h3 className="text-xl">Fields:</h3>}
-      <ul className="mt-8 flex flex-col gap-5">{fields}</ul>
-      <ul className="mt-8 flex flex-col gap-5">{inputFields}</ul>
-      {enumValues && <h3 className="text-xl">Enum values:</h3>}
-      <ul className="mt-8 flex flex-col gap-5">{enumValues}</ul>
-      {possibleTypes && <h3 className="text-xl">Implementations</h3>}
-      <ul className="mt-8 flex flex-col gap-5">{possibleTypes}</ul>
+    <div ref={rootRef} className="h-full">
+      <div className="p-10 py-[56px] text-left text-on-surface sm:px-[56px]">
+        <BackDocsBtn onClick={() => explorer.back()} title={explorer.prev()} />
+        <h2 className="mt-8 w-full text-3xl">{currType?.name}</h2>
+        <p className="mt-8">{currType?.description}</p>
+        {interfaces && interfaces?.length > 0 && <h3 className="text-xl">Implements:</h3>}
+        <ul className="mt-8 flex flex-col gap-5">{interfaces}</ul>
+        {isFields && <h3 className="text-xl">Fields:</h3>}
+        <ul className="mt-8 flex flex-col gap-5">{fields}</ul>
+        <ul className="mt-8 flex flex-col gap-5">{inputFields}</ul>
+        {enumValues && <h3 className="text-xl">Enum values:</h3>}
+        <ul className="mt-8 flex flex-col gap-5">{enumValues}</ul>
+        {possibleTypes && <h3 className="text-xl">Implementations</h3>}
+        <ul className="mt-8 flex flex-col gap-5">{possibleTypes}</ul>
+      </div>
     </div>
   );
 };
