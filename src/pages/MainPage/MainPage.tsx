@@ -1,5 +1,6 @@
 import ResponseViewer from '@components/ResponseViewer/ResponseViewer';
 import RequestEditorResized from '@pages/MainPage/ui/RequestEditorResized';
+import { INTERPOLATION_END, INTERPOLATION_START } from '@shared/constants/const';
 import cn from '@shared/lib/helpers/cn';
 import useElementProp from '@shared/lib/hooks/useElementProp';
 import useInterpolation from '@shared/lib/hooks/useInterpolation';
@@ -9,8 +10,6 @@ import ResizeBar from '@shared/ui/ResizeBar';
 const HIDE_THRESHOLD = 200;
 const INITIAL_WIDTH = 400;
 const COLLAPSED_WIDTH = 0;
-const INTERPOLATION_START = 1;
-const INTERPOLATION_END = 0.9;
 
 const MainPage = () => {
   const { elementRef: containerRef, elementProp: maxWidth } = useElementProp({

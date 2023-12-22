@@ -2,14 +2,7 @@ import { FC, HTMLAttributes, useState } from 'react';
 
 import EditorTools from '@components/EditorTools/EditorTools';
 import RequestEditor from '@components/RequestEditor/RequestEditor';
-import {
-  COLLAPSED_HEIGHT,
-  HIDE_EDITOR_THRESHOLD,
-  INITIAL_HEIGHT,
-  INTERPOLATION_END,
-  INTERPOLATION_START,
-  START_EDITOR_THRESHOLD,
-} from '@pages/MainPage/const/const';
+import { INTERPOLATION_END, INTERPOLATION_START } from '@shared/constants/const';
 import localStorageKeys from '@shared/constants/localStorageKeys';
 import cn from '@shared/lib/helpers/cn';
 import useElementProp from '@shared/lib/hooks/useElementProp';
@@ -17,6 +10,11 @@ import useInterpolation from '@shared/lib/hooks/useInterpolation';
 import useLocalStorage from '@shared/lib/hooks/useLocalStorage';
 import useResize from '@shared/lib/hooks/useResize';
 import ResizeBar from '@shared/ui/ResizeBar';
+
+const COLLAPSED_HEIGHT = 65;
+const HIDE_EDITOR_THRESHOLD = 120;
+const START_EDITOR_THRESHOLD = 50;
+const INITIAL_HEIGHT = 300;
 
 const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => {
   const [initialHeight] = useState(() => Number(localStorage.getItem('request-height')) || INITIAL_HEIGHT);

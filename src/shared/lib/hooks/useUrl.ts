@@ -2,7 +2,7 @@ import { useCallback, useRef } from 'react';
 
 import { NavigateOptions, URLSearchParamsInit, useSearchParams } from 'react-router-dom';
 
-import QUERY_PARAMS_INIT from '@shared/constants/const';
+import { QUERY_PARAMS_INIT } from '@shared/constants/const';
 import { UrlParams } from '@shared/lib/types/types';
 
 type MultipleQueries = Partial<Record<UrlParams, string | number>>;
