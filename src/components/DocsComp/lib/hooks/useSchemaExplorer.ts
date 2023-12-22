@@ -20,8 +20,11 @@ function useSchemaExplorer() {
 	function isDocs() {
 		return current() === 'Docs';
 	}
+	function setInitState() {
+		setTypeNames(['Docs']);
+	}
 
-	return { current, next, prev, isDocs, back };
+	return { current, next, prev, isDocs, back, setInitState };
 }
 
 export default useSchemaExplorer;

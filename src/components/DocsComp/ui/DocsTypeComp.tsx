@@ -1,69 +1,15 @@
-import { swapiSchema } from '@/shared/constants/schemaData';
-import { SchemaTypeFieldOfType, SchemaTypeObj } from '@/shared/types';
+import { DocsExplorerType, SchemaTypeObj } from '@/shared/types';
 
-type SchemaType = typeof swapiSchema;
+import BackDocsBtn from './BackDocsBtn';
+import getTypeName from '../lib/helpers/getTypeName';
+import separateString from '../lib/helpers/separateString';
 
-const DocsTypeComp = ({
-  explorer,
-  apiSchema,
-}: {
-  explorer: {
-    current: () => string;
-    next: (elem: string) => void;
-    prev: () => string;
-    isDocs: () => boolean;
-    back: () => void;
-  };
-  apiSchema: SchemaType;
-}) => {
+const DocsTypeComp = ({ explorer, currType }: { explorer: DocsExplorerType; currType: SchemaTypeObj }) => {
   function clinkHandler(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, typeName: string) {
     e.preventDefault();
     explorer.next(typeName);
   }
 
-  function getTypeName(type: SchemaTypeFieldOfType) {
-    if (type?.name) return type?.name;
-
-    const modifiers: string[] = [];
-
-    if (type?.kind === 'NON_NULL') modifiers.push('!');
-    if (type?.kind === 'LIST') modifiers.push('[]');
-
-    function getOfTypeName(argOfType: SchemaTypeFieldOfType): number | string {
-      if (argOfType?.name) {
-        return modifiers.push(argOfType.name);
-      }
-      if (argOfType?.kind === 'NON_NULL') modifiers.push('!');
-      if (argOfType?.kind === 'LIST') modifiers.push('[]');
-
-      return getOfTypeName(argOfType?.ofType as SchemaTypeFieldOfType);
-    }
-
-    getOfTypeName(type?.ofType as SchemaTypeFieldOfType);
-
-    const output = modifiers.reduceRight((acc, curr) => {
-      if (curr === '!') return `${acc}!`;
-      if (curr === '[]') return `[${acc}]`;
-      return acc + curr;
-    });
-
-    return output;
-  }
-
-  function separateString(inputString: string) {
-    const regex = /([^a-zA-Z]*)([a-zA-Z]+)([^a-zA-Z]*$)/;
-    const matches = inputString.match(regex);
-
-    if (matches) {
-      const [, beforeLetters, letters, afterLetters] = matches;
-      return [beforeLetters, letters, afterLetters];
-    }
-    return ['', inputString, ''];
-  }
-
-  const currType: SchemaTypeObj = apiSchema.data.__schema.types.find(
-    (elem) => elem.name === explorer.current(),
-  ) as SchemaTypeObj;
   const fields = currType?.fields?.map((field) => {
     const args = field.args.map((arg, i) => {
       const argTypeName = getTypeName(arg.type);
@@ -75,9 +21,9 @@ const DocsTypeComp = ({
         <>
           {separation && beforeSeparator}
           <span className={separation ? 'pl-3' : ''} key={argTypeName}>
-            <span className="text-red-400">{arg.name}</span>:&nbsp;
+            <span className="text-tertiary">{arg.name}</span>:&nbsp;
             {before}
-            <a className="text-yellow-400" href={link} onClick={(e) => clinkHandler(e, link)}>
+            <a className="text-docs-link-text-color hover:underline" href={link} onClick={(e) => clinkHandler(e, link)}>
               {link}
             </a>
             {after}
@@ -90,11 +36,15 @@ const DocsTypeComp = ({
     const [prevType, typeLink, afterType] = separateString(returnType);
     return (
       <li key={field.name}>
-        <span className="text-blue-400">{field.name}</span>
+        <span className="text-docs-field-text-color">{field.name}</span>
         {args.length > 0 && '('}
         {args}
         {args.length > 0 && ')'}: {prevType}
-        <a className="text-yellow-400" href={typeLink} onClick={(e) => clinkHandler(e, typeLink)}>
+        <a
+          className="text-docs-link-text-color hover:underline"
+          href={typeLink}
+          onClick={(e) => clinkHandler(e, typeLink)}
+        >
           {typeLink}
         </a>
         {afterType}
@@ -108,7 +58,7 @@ const DocsTypeComp = ({
       <li key={field.name}>
         {field.name}:&nbsp;
         <a
-          className="text-yellow-400"
+          className="text-docs-link-text-color hover:underline"
           href={field?.type?.name || '#'}
           onClick={(e) => clinkHandler(e, field?.type?.name as string)}
         >
@@ -124,7 +74,11 @@ const DocsTypeComp = ({
   const possibleTypes = currType?.possibleTypes?.map((type) => {
     return (
       <li key={type.name}>
-        <a className="text-yellow-400" href={type.name} onClick={(e) => clinkHandler(e, type.name)}>
+        <a
+          className="text-docs-link-text-color hover:underline"
+          href={type.name}
+          onClick={(e) => clinkHandler(e, type.name)}
+        >
           {type.name}
         </a>
       </li>
@@ -133,28 +87,30 @@ const DocsTypeComp = ({
   const interfaces = currType?.interfaces?.map((inter) => {
     return (
       <li key={inter.name}>
-        <a className="text-yellow-400" href={inter.name} onClick={(e) => clinkHandler(e, inter.name)}>
+        <a
+          className="text-docs-link-text-color hover:underline"
+          href={inter.name}
+          onClick={(e) => clinkHandler(e, inter.name)}
+        >
           {inter.name}
         </a>
       </li>
     );
   });
   return (
-    <div>
-      <button onClick={() => explorer.back()} type="button">
-        &lt;&nbsp;{explorer.prev()}
-      </button>
-      <h2>{currType?.name}</h2>
-      <p>{currType?.description}</p>
-      {interfaces && interfaces?.length > 0 && <h3>Implements:</h3>}
-      <ul className="flex flex-col gap-[20px]">{interfaces}</ul>
-      {isFields && <h3>Fields:</h3>}
-      <ul className="flex flex-col gap-[20px]">{fields}</ul>
-      <ul className="flex flex-col gap-[20px]">{inputFields}</ul>
-      {enumValues && <h3>Enum values:</h3>}
-      <ul className="flex flex-col gap-[20px]">{enumValues}</ul>
-      {possibleTypes && <h3>Implementations</h3>}
-      <ul className="flex flex-col gap-[20px]">{possibleTypes}</ul>
+    <div className="p-10 py-[56px] text-left text-on-surface sm:px-[56px]">
+      <BackDocsBtn onClick={() => explorer.back()} title={explorer.prev()} />
+      <h2 className="mt-8 w-full text-3xl">{currType?.name}</h2>
+      <p className="mt-8">{currType?.description}</p>
+      {interfaces && interfaces?.length > 0 && <h3 className="text-xl">Implements:</h3>}
+      <ul className="mt-8 flex flex-col gap-5">{interfaces}</ul>
+      {isFields && <h3 className="text-xl">Fields:</h3>}
+      <ul className="mt-8 flex flex-col gap-5">{fields}</ul>
+      <ul className="mt-8 flex flex-col gap-5">{inputFields}</ul>
+      {enumValues && <h3 className="text-xl">Enum values:</h3>}
+      <ul className="mt-8 flex flex-col gap-5">{enumValues}</ul>
+      {possibleTypes && <h3 className="text-xl">Implementations</h3>}
+      <ul className="mt-8 flex flex-col gap-5">{possibleTypes}</ul>
     </div>
   );
 };

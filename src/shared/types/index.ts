@@ -57,3 +57,12 @@ export type SchemaTypeObj = {
 	enumValues: SchemaTypeEnumType[] | null;
 	possibleTypes?: SchemaTypePossibleTypes[] | null;
 };
+
+export type DocsExplorerType = {
+	current: () => string;
+	next: (elem: string) => void;
+	prev: () => string;
+	isDocs: () => boolean;
+	back: () => void;
+	setInitState: () => void;
+};

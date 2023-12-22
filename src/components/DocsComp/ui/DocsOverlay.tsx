@@ -5,13 +5,22 @@ const visibleClazz = 'visible opacity-100 pointer-events-auto';
 type PropsType = {
   setIsDocsShown: React.Dispatch<React.SetStateAction<boolean>>;
   isShown: boolean;
+  explorer: {
+    current: () => string;
+    next: (elem: string) => void;
+    prev: () => string;
+    isDocs: () => boolean;
+    back: () => void;
+    setInitState: () => void;
+  };
   children: JSX.Element;
 };
 
-const DocsOverlay = ({ isShown, setIsDocsShown, children }: PropsType) => {
+const DocsOverlay = ({ isShown, setIsDocsShown, explorer, children }: PropsType) => {
   function closeHandler(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     if ((e.target as HTMLButtonElement).classList.contains('overlay')) {
       setIsDocsShown((prev) => !prev);
+      explorer.setInitState();
     }
   }
   return (

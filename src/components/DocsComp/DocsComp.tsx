@@ -1,3 +1,4 @@
+import useSchemaExplorer from './lib/hooks/useSchemaExplorer';
 import DocsModal from './ui/DocsModal';
 import DocsOverlay from './ui/DocsOverlay';
 
@@ -7,9 +8,10 @@ type PropsType = {
 };
 
 const DocsComp = ({ isShown, setIsDocsShown }: PropsType) => {
+  const schemaExplorer = useSchemaExplorer();
   return (
-    <DocsOverlay isShown={isShown} setIsDocsShown={setIsDocsShown}>
-      <DocsModal setIsDocsShown={setIsDocsShown} />
+    <DocsOverlay isShown={isShown} setIsDocsShown={setIsDocsShown} explorer={schemaExplorer}>
+      <DocsModal setIsDocsShown={setIsDocsShown} explorer={schemaExplorer} />
     </DocsOverlay>
   );
 };
