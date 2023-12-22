@@ -1,10 +1,9 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import calcInterpolation from '@/shared/lib/helpers/calcInterpolation';
 import ResponseViewer from '@components/ResponseViewer/ResponseViewer';
 import RequestEditorResized from '@pages/MainPage/ui/RequestEditorResized';
-import calcOneToZeroInterpolation from '@shared/lib/helpers/calcOneToZeroInterpolation';
 import cn from '@shared/lib/helpers/cn';
+import useInterpolation from '@shared/lib/hooks/useInterpolation';
 import useResize from '@shared/lib/hooks/useResize';
 import ResizeBar from '@shared/ui/ResizeBar';
 
@@ -16,7 +15,6 @@ const INTERPOLATION_END = 0.9;
 
 const MainPage = () => {
   const [maxWidth, setMaxWidth] = useState(0);
-  const [interpolationResponse, setInterpolationResponse] = useState(INTERPOLATION_START);
   const containerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -30,7 +28,6 @@ const MainPage = () => {
     size: width,
     isResized,
     handleResize,
-    interpolation,
     isHidden,
   } = useResize({
     initSize: INITIAL_WIDTH,
@@ -38,35 +35,30 @@ const MainPage = () => {
     maxSize: maxWidth,
     startThreshold: HIDE_THRESHOLD,
     hideThreshold: HIDE_THRESHOLD,
-    interpolationStart: INTERPOLATION_START,
-    interpolationEnd: INTERPOLATION_END,
     direction: 'horizontal',
   });
 
+  const { interpolation: interpolateResponse, oneToZeroInterpolation: oneZeroResponse } = useInterpolation({
+    size: width,
+    maxSize: maxWidth,
+    minSize: COLLAPSED_WIDTH,
+    interpolationEnd: INTERPOLATION_END,
+    interpolationStart: INTERPOLATION_START,
+    hideThreshold: HIDE_THRESHOLD,
+    isSizeIncrease: false,
+  });
+
+  const { interpolation: interpolateEditor, oneToZeroInterpolation: oneZeroEditor } = useInterpolation({
+    size: width,
+    maxSize: maxWidth,
+    minSize: COLLAPSED_WIDTH,
+    interpolationEnd: INTERPOLATION_END,
+    interpolationStart: INTERPOLATION_START,
+    hideThreshold: HIDE_THRESHOLD,
+    isSizeIncrease: true,
+  });
+
   const isResponseHidden = width === 0;
-
-  useEffect(() => {
-    const isShowThresholdHit = width <= COLLAPSED_WIDTH + HIDE_THRESHOLD;
-
-    if (isShowThresholdHit) {
-      const currStep = width - COLLAPSED_WIDTH;
-      const interpolationValue = calcInterpolation(INTERPOLATION_START, INTERPOLATION_END, HIDE_THRESHOLD, currStep);
-      const isInterpolationInRange =
-        interpolationValue >= INTERPOLATION_END && interpolationValue <= INTERPOLATION_START;
-
-      if (isInterpolationInRange) setInterpolationResponse(interpolationValue);
-    } else {
-      setInterpolationResponse(INTERPOLATION_START);
-    }
-  }, [maxWidth, width]);
-
-  const oneToZeroInterpolation = useMemo(() => {
-    return calcOneToZeroInterpolation(interpolation, INTERPOLATION_START, INTERPOLATION_END);
-  }, [interpolation]);
-
-  const oneToZeroInterpolationResponse = useMemo(() => {
-    return calcOneToZeroInterpolation(interpolationResponse, INTERPOLATION_START, INTERPOLATION_END);
-  }, [interpolationResponse]);
 
   return (
     <div
@@ -80,8 +72,8 @@ const MainPage = () => {
     >
       <RequestEditorResized
         style={{
-          transform: `scale3d(${interpolation}, ${interpolation}, 1)`,
-          opacity: oneToZeroInterpolation,
+          transform: `scale3d(${interpolateEditor}, ${interpolateEditor}, 1)`,
+          opacity: oneZeroEditor,
           width: isHidden ? '0px' : '100%',
           overflow: isHidden ? 'hidden' : 'visible',
           transition: isResized.current ? 'none' : '',
@@ -92,8 +84,8 @@ const MainPage = () => {
         <div
           style={{
             width: `${width}px`,
-            transform: `scale3d(${interpolationResponse}, ${interpolationResponse}, 1)`,
-            opacity: oneToZeroInterpolationResponse,
+            transform: `scale3d(${interpolateResponse}, ${interpolateResponse}, 1)`,
+            opacity: oneZeroResponse,
           }}
           className={cn('relative h-full w-full transition-all duration-500 ease-emphasized-decelerate', {
             'transition-none': isResized.current,

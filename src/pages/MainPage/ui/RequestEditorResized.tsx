@@ -1,4 +1,4 @@
-import { FC, HTMLAttributes, useMemo, useState } from 'react';
+import { FC, HTMLAttributes, useState } from 'react';
 
 import EditorTools from '@components/EditorTools/EditorTools';
 import RequestEditor from '@components/RequestEditor/RequestEditor';
@@ -11,9 +11,9 @@ import {
   START_VALUE,
 } from '@pages/MainPage/const/const';
 import localStorageKeys from '@shared/constants/localStorageKeys';
-import calcOneToZeroInterpolation from '@shared/lib/helpers/calcOneToZeroInterpolation';
 import cn from '@shared/lib/helpers/cn';
 import useElementProp from '@shared/lib/hooks/useElementProp';
+import useInterpolation from '@shared/lib/hooks/useInterpolation';
 import useLocalStorage from '@shared/lib/hooks/useLocalStorage';
 import useResize from '@shared/lib/hooks/useResize';
 import ResizeBar from '@shared/ui/ResizeBar';
@@ -26,7 +26,6 @@ const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, .
   });
 
   const {
-    interpolation: editorInterpolation,
     isHidden: isEditorHidden,
     size: height,
     isResized,
@@ -38,18 +37,23 @@ const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, .
     startThreshold: START_EDITOR_THRESHOLD,
     initSize: initialHeight,
     minSize: COLLAPSED_HEIGHT,
-    interpolationStart: START_VALUE,
-    interpolationEnd: END_VALUE,
     maxSize: editorContainerHeight,
     expandSize: INITIAL_HEIGHT,
   });
 
-  const isCollapsed = height === COLLAPSED_HEIGHT;
+  const { interpolation: interpolateEditor, oneToZeroInterpolation: oneZeroInterpolateEditor } = useInterpolation({
+    size: height,
+    maxSize: editorContainerHeight,
+    minSize: COLLAPSED_HEIGHT,
+    interpolationEnd: END_VALUE,
+    interpolationStart: START_VALUE,
+    hideThreshold: HIDE_EDITOR_THRESHOLD,
+    isSizeIncrease: true,
+  });
 
   useLocalStorage(localStorageKeys.REQUEST_EDITOR_HEIGHT, height);
-  const oneToZeroInterpolation = useMemo(() => {
-    return calcOneToZeroInterpolation(editorInterpolation, START_VALUE, END_VALUE);
-  }, [editorInterpolation]);
+
+  const isCollapsed = height === COLLAPSED_HEIGHT;
 
   return (
     <div
@@ -66,8 +70,8 @@ const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, .
     >
       <RequestEditor
         style={{
-          transform: `scale3d(${editorInterpolation}, ${editorInterpolation}, 1)`,
-          opacity: oneToZeroInterpolation,
+          transform: `scale3d(${interpolateEditor}, ${interpolateEditor}, 1)`,
+          opacity: oneZeroInterpolateEditor,
           transition: isResized.current ? 'none' : '',
         }}
       />
