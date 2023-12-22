@@ -4,11 +4,11 @@ import EditorTools from '@components/EditorTools/EditorTools';
 import RequestEditor from '@components/RequestEditor/RequestEditor';
 import {
   COLLAPSED_HEIGHT,
-  END_VALUE,
   HIDE_EDITOR_THRESHOLD,
   INITIAL_HEIGHT,
+  INTERPOLATION_END,
+  INTERPOLATION_START,
   START_EDITOR_THRESHOLD,
-  START_VALUE,
 } from '@pages/MainPage/const/const';
 import localStorageKeys from '@shared/constants/localStorageKeys';
 import cn from '@shared/lib/helpers/cn';
@@ -45,8 +45,8 @@ const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, .
     size: height,
     maxSize: editorContainerHeight,
     minSize: COLLAPSED_HEIGHT,
-    interpolationEnd: END_VALUE,
-    interpolationStart: START_VALUE,
+    interpolationEnd: INTERPOLATION_END,
+    interpolationStart: INTERPOLATION_START,
     hideThreshold: HIDE_EDITOR_THRESHOLD,
     isSizeIncrease: true,
   });
