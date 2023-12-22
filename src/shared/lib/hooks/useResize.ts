@@ -106,7 +106,7 @@ function useResize({
 
 		window.addEventListener('mousemove', handleMouseMove);
 		return () => window.removeEventListener('mousemove', handleMouseMove);
-	}, [hideThreshold, interpolationEnd, interpolationStart, maxSize, minSize, startThreshold]);
+	}, [direction, hideThreshold, interpolationEnd, interpolationStart, maxSize, minSize, startThreshold]);
 
 	useEffect(() => {
 		const handleMouseUp = () => {

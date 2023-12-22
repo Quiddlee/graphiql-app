@@ -52,9 +52,14 @@ const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, .
     <div
       {...props}
       ref={editorContainerRef}
-      className={cn('body-large grid h-full w-full grid-rows-[1fr_max-content] content-end gap-4', className, {
-        'grid-rows-[0fr_max-content] gap-0 duration-0': isEditorHidden,
-      })}
+      className={cn(
+        'body-large grid h-full w-full grid-rows-[1fr_max-content] content-end gap-4 transition-all duration-500 ease-emphasized-decelerate',
+        className,
+        {
+          'grid-rows-[0fr_max-content]': isEditorHidden,
+          'transition-none': isResized.current,
+        },
+      )}
     >
       <RequestEditor
         style={{
