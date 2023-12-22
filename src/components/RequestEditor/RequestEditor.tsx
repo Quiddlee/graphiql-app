@@ -15,7 +15,7 @@ const RequestEditor: FC<HTMLAttributes<HTMLElement>> = ({ ...props }) => {
       {...props}
       data-testid="editor-request"
       className={cn(
-        'visible relative flex h-full w-full gap-4 overflow-y-hidden rounded-4xl bg-surface-container pl-6',
+        'relative flex h-full w-full gap-4 overflow-y-hidden rounded-4xl bg-surface-container pl-6 transition-all duration-500 ease-emphasized-decelerate',
       )}
     >
       <Editor className="pr-20" editorState={editorState} onChange={setEditorState} />

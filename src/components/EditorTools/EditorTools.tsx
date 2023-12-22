@@ -12,7 +12,7 @@ type EditorToolsProps = {
 
 const EditorTools: FC<EditorToolsProps> = ({ onExpand, isExpanded }) => {
   return (
-    <section
+    <div
       data-testid="editor-tools"
       className={cn(
         'grid h-full grid-rows-[min-content_auto] overflow-clip rounded-4xl bg-surface-container pt-4 transition-all duration-[inherit] ease-[inherit]',
@@ -20,7 +20,7 @@ const EditorTools: FC<EditorToolsProps> = ({ onExpand, isExpanded }) => {
     >
       <Header isExpanded={isExpanded} onExpand={onExpand} />
       <EditorToolsField />
-    </section>
+    </div>
   );
 };
 

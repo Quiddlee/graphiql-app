@@ -43,6 +43,10 @@ const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, .
     expandSize: INITIAL_HEIGHT,
   });
 
+  const isCollapsed = height === COLLAPSED_HEIGHT;
+
+  console.log(editorInterpolation);
+
   useLocalStorage(localStorageKeys.REQUEST_EDITOR_HEIGHT, height);
   const oneToZeroInterpolation = useMemo(() => {
     return (editorInterpolation - END_VALUE) / (START_VALUE - END_VALUE);
@@ -56,8 +60,8 @@ const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, .
         'body-large grid h-full w-full grid-rows-[1fr_max-content] content-end gap-4 transition-all duration-500 ease-emphasized-decelerate',
         className,
         {
-          'grid-rows-[0fr_max-content]': isEditorHidden,
-          'transition-none': isResized.current,
+          'grid-rows-[0fr_max-content] gap-0': isEditorHidden,
+          'transition-none': isCollapsed || isResized.current,
         },
       )}
     >
@@ -65,9 +69,10 @@ const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, .
         style={{
           transform: `scale3d(${editorInterpolation}, ${editorInterpolation}, 1)`,
           opacity: oneToZeroInterpolation,
+          transition: isResized.current ? 'none' : '',
         }}
       />
-      <div
+      <section
         style={{
           height: `${height}px`,
         }}
@@ -77,7 +82,7 @@ const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, .
       >
         <ResizeBar className="absolute -top-4 h-4" onMouseDown={handleResize} />
         <EditorTools isExpanded={isExpanded} onExpand={handleExpand} />
-      </div>
+      </section>
     </div>
   );
 };

@@ -3,10 +3,8 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import calcInterpolation from '@/shared/lib/helpers/calcInterpolation';
 import ResponseViewer from '@components/ResponseViewer/ResponseViewer';
 import RequestEditorResized from '@pages/MainPage/ui/RequestEditorResized';
-import urlParams from '@shared/constants/urlParams';
 import cn from '@shared/lib/helpers/cn';
 import useResize from '@shared/lib/hooks/useResize';
-import useUrl from '@shared/lib/hooks/useUrl';
 import ResizeBar from '@shared/ui/ResizeBar';
 
 const HIDE_THRESHOLD = 200;
@@ -16,10 +14,9 @@ const INTERPOLATION_START = 1;
 const INTERPOLATION_END = 0.9;
 
 const MainPage = () => {
-  const { readUrl } = useUrl();
   const [maxWidth, setMaxWidth] = useState(0);
-  const containerRef = useRef<HTMLElement>(null);
   const [interpolationResponse, setInterpolationResponse] = useState(INTERPOLATION_START);
+  const containerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -27,8 +24,6 @@ const MainPage = () => {
       setMaxWidth(width);
     }
   }, []);
-
-  const isResponseOpen = readUrl(urlParams.RESPONSE_OPEN) === 'true';
 
   const {
     size: width,
@@ -91,12 +86,7 @@ const MainPage = () => {
           transition: isResized.current ? 'none' : '',
         }}
       />
-      <section
-        ref={containerRef}
-        className={cn('relative flex h-full w-full scale-95 justify-end opacity-0 transition-all duration-200', {
-          'scale-100 opacity-100 duration-500': isResponseOpen,
-        })}
-      >
+      <section ref={containerRef} className={cn('relative flex h-full w-full justify-end')}>
         <ResizeBar direction="horizontal" className="absolute -left-4" onMouseDown={handleResize} />
         <div
           style={{
