@@ -1,3 +1,7 @@
+// THIS IS TEMPORARY SCHEMA DATA FOR TESTING OF DOCS SECTION
+
+// WHEN SETTINGS COMPONENT WILL BE READY WITH AN OPTION TO CHOOSE ENDPOINT - FILE WILL BE DELETED
+
 const rickAndMortySchema = {
 	data: {
 		__schema: {
@@ -7951,7 +7955,5 @@ const swapiSchema = {
 		},
 	},
 };
-
-// console.log(SWApiSchema.data.__schema.types.find(elem => elem.name === 'PersonFilmsConnection'))
 
 export { rickAndMortySchema, swapiSchema };

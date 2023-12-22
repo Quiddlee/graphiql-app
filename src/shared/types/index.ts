@@ -5,3 +5,55 @@ export type ErrorType = {
 };
 
 export type TextInputProps = Partial<Omit<MdOutlinedTextField, keyof HTMLElement>>;
+
+export type SchemaTypeFieldOfType = {
+	kind: string;
+	name: string | null;
+	ofType: SchemaTypeFieldOfType;
+} | null;
+
+export type SchemaTypeFieldArgs = {
+	name: string;
+	description?: string | null;
+	type: SchemaTypeFieldOfType;
+	defaultValue?: null | string;
+};
+
+export type SchemaTypeField = {
+	name: string;
+	description?: string;
+	args: SchemaTypeFieldArgs[];
+	type: SchemaTypeFieldOfType;
+	isDeprecated?: false;
+	deprecationReason?: null | string;
+};
+
+export type SchemaTypeInterfaceType = {
+	kind: string;
+	name: string;
+	ofType: null;
+};
+
+export type SchemaTypeEnumType = {
+	name: string;
+	description: string;
+	isDeprecated: boolean;
+	deprecationReason: null | string;
+};
+
+export type SchemaTypePossibleTypes = {
+	kind: string;
+	name: string;
+	ofType: null;
+};
+
+export type SchemaTypeObj = {
+	kind: string;
+	name: string;
+	description: string;
+	fields: SchemaTypeField[];
+	inputFields: SchemaTypeField[] | null;
+	interfaces: SchemaTypeInterfaceType[] | null;
+	enumValues: SchemaTypeEnumType[] | null;
+	possibleTypes?: SchemaTypePossibleTypes[] | null;
+};

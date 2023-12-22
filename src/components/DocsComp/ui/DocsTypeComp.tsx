@@ -1,57 +1,11 @@
-import useSchemaExplorer from '@/components/DocsComp/lib/hooks/useSchemaExplorer';
 import { swapiSchema } from '@/shared/constants/schemaData';
 import { SchemaTypeFieldOfType, SchemaTypeObj } from '@/shared/types';
 
-const DocsRoot = ({
-  types,
-  explorer,
-}: {
-  types: SchemaTypeObj[];
-  explorer: {
-    current: () => string;
-    next: (elem: string) => void;
-    prev: () => string;
-    isDocs: () => boolean;
-    back: () => void;
-  };
-}) => {
-  function clinkHandler(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, typeName: string) {
-    e.preventDefault();
-    explorer.next(typeName);
-  }
-  const allTypes = types
-    .filter((type) => type.name[0] !== '_' && type.name[1] !== '_')
-    .map((type, i) => {
-      if (i > 0) {
-        return (
-          <li key={type.name}>
-            <a className="text-yellow-400" href={type.name} onClick={(e) => clinkHandler(e, type.name)}>
-              {type.name}
-            </a>
-          </li>
-        );
-      }
-      return null;
-    });
-  return (
-    <div>
-      <h3>Docs</h3>
-      <p>A GraphQL schema provides a root type for each kind of operation.</p>
-      <h4>Root types:</h4>
-      <p>
-        query:&nbsp;
-        <a className="text-yellow-400" href={types[0].name} onClick={(e) => clinkHandler(e, types[0].name)}>
-          {types[0].name}
-        </a>
-      </p>
-      <h4>All schema types:</h4>
-      <ul>{allTypes}</ul>
-    </div>
-  );
-};
+type SchemaType = typeof swapiSchema;
 
-const DocsType = ({
+const DocsTypeComp = ({
   explorer,
+  apiSchema,
 }: {
   explorer: {
     current: () => string;
@@ -60,6 +14,7 @@ const DocsType = ({
     isDocs: () => boolean;
     back: () => void;
   };
+  apiSchema: SchemaType;
 }) => {
   function clinkHandler(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, typeName: string) {
     e.preventDefault();
@@ -106,7 +61,7 @@ const DocsType = ({
     return ['', inputString, ''];
   }
 
-  const currType: SchemaTypeObj = swapiSchema.data.__schema.types.find(
+  const currType: SchemaTypeObj = apiSchema.data.__schema.types.find(
     (elem) => elem.name === explorer.current(),
   ) as SchemaTypeObj;
   const fields = currType?.fields?.map((field) => {
@@ -204,15 +159,4 @@ const DocsType = ({
   );
 };
 
-const MyDocs = () => {
-  const myExplorer = useSchemaExplorer();
-
-  const content = myExplorer.isDocs() ? (
-    <DocsRoot types={swapiSchema.data.__schema.types as SchemaTypeObj[]} explorer={myExplorer} />
-  ) : (
-    <DocsType explorer={myExplorer} />
-  );
-  return <div>{content}</div>;
-};
-
-export default MyDocs;
+export default DocsTypeComp;
