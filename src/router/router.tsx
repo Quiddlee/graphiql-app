@@ -3,7 +3,6 @@ import { createHashRouter } from 'react-router-dom';
 import MainLayout from '@/layouts/MainLayout';
 import LoginPage from '@/pages/LoginPage';
 import MainPage from '@/pages/MainPage';
-import MyDocs from '@/pages/MyDocs';
 import SignUpPage from '@/pages/SignUpPage';
 import WelcomePage from '@/pages/WelcomePage';
 import ROUTES from '@/shared/constants/routes';
@@ -56,10 +55,6 @@ export const routes = [
             <MainPage />
           </AuthAllowedOnly>
         ),
-      },
-      {
-        path: 'docs',
-        element: <MyDocs />,
       },
     ],
   },
