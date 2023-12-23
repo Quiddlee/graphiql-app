@@ -1,4 +1,5 @@
 import urlParams from '@shared/constants/urlParams';
+import toastifyNotation from '@shared/helpers/toastifyNotation';
 import useUrl from '@shared/lib/hooks/useUrl';
 import Fab from '@shared/ui/Fab';
 import FilledIconButton from '@shared/ui/FilledIconButton';
@@ -11,9 +12,7 @@ const Controls = () => {
     const query = readUrl(urlParams.QUERY);
     await navigator.clipboard.writeText(query);
 
-    // TODO: change to toastify library
-    // eslint-disable-next-line no-alert
-    alert('text copied');
+    toastifyNotation('Request copied!');
   };
 
   const handleResponseOpen = () => {
