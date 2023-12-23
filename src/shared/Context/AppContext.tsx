@@ -12,7 +12,8 @@ export default function AppContextProvider({ children }: { children: ReactNode }
 
   const updateCurrentResponse = useCallback((response: string) => {
     const formattedResponse = response.replace(/\\r\\n|\\n/g, '<br>').replace(/\r\n|\n/g, '<br>');
-    setCurrentResponse(formattedResponse);
+    console.log(response);
+    setCurrentResponse(response);
     console.log(formattedResponse);
   }, []);
 

@@ -23,8 +23,7 @@ const Controls = () => {
     const query = readUrl(urlParams.QUERY);
     const variables = readUrl(urlParams.VARIABLES);
     const response = await submitRequest(query, variables);
-    console.log(variables);
-    console.log(response);
+    console.log(variables, query);
     updateCurrentResponse(JSON.stringify(response));
   };
 
