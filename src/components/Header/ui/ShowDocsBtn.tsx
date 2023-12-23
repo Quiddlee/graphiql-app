@@ -18,7 +18,7 @@ const IconSlot = createComponent({
 
 const ShowDocsBtn = ({ onClick }: { onClick: () => void }) => {
   return (
-    <IconSlot onClick={onClick}>
+    <IconSlot onClick={onClick} data-testid="show_docs">
       <Icon>article</Icon>
     </IconSlot>
   );

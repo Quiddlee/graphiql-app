@@ -1,7 +1,3 @@
-const clazzName = 'overlay absolute left-0 top-0 flex h-full w-full justify-start bg-black/60 flex z-10';
-const invisibleClazz = 'hidden opacity-0 pointer-events-none';
-const visibleClazz = 'visible opacity-100 pointer-events-auto';
-
 type PropsType = {
   setIsDocsShown: React.Dispatch<React.SetStateAction<boolean>>;
   isShown: boolean;
@@ -23,11 +19,15 @@ const DocsOverlay = ({ isShown, setIsDocsShown, explorer, children }: PropsType)
       explorer.setInitState();
     }
   }
+  if (!isShown) {
+    return null;
+  }
   return (
     <button
+      data-testid="overlay"
       type="button"
       onClick={(e) => closeHandler(e)}
-      className={`overlay ${isShown ? visibleClazz : invisibleClazz} ${clazzName}`}
+      className="overlay absolute left-0 top-0 z-10 flex h-full w-full justify-start bg-black/60 "
     >
       {children}
     </button>

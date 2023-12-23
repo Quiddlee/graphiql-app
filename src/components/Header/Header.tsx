@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
 import DocsComp from '@components/DocsComp/DocsComp';
-
-import ShowDocsBtn from './ui/ShowDocsBtn';
+import ShowDocsBtn from '@components/Header/ui/ShowDocsBtn';
 
 const Header = () => {
   const [isDocsShown, setIsDocsShown] = useState(false);

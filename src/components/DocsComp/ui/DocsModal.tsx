@@ -2,8 +2,8 @@
 
 import { swapiSchema } from '@/shared/constants/schemaData';
 import { DocsExplorerType, SchemaTypeObj } from '@/shared/types';
+import CloseDocsBtn from '@components/DocsComp/ui/CloseDocsBtn';
 
-import CloseDocsBtn from './CloseDocsBtn';
 import DocsRootComp from './DocsRootComp';
 import DocsTypeComp from './DocsTypeComp';
 
