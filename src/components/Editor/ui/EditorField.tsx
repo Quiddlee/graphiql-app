@@ -1,9 +1,7 @@
-/* eslint-disable react/no-danger */
-import { Dispatch, forwardRef, SetStateAction, SyntheticEvent, useEffect, useRef, useState } from 'react';
+import { Dispatch, forwardRef, SetStateAction, useEffect, useRef, useState } from 'react';
 
 import { defaultKeymap } from '@codemirror/commands';
 import { javascript } from '@codemirror/lang-javascript';
-import { json } from '@codemirror/lang-json';
 import { EditorState } from '@codemirror/state';
 import { oneDark } from '@codemirror/theme-one-dark';
 import { EditorView, keymap } from '@codemirror/view';
@@ -13,13 +11,9 @@ type EditorFieldProps = {
   onChange: Dispatch<SetStateAction<string>> | ((value: string) => void);
 };
 
-const EditorField = forwardRef<HTMLDivElement, EditorFieldProps>(({ onChange, value = '' }, ref) => {
+const EditorField = forwardRef<HTMLDivElement, EditorFieldProps>(({ onChange, value = '' }) => {
   const editor = useRef<HTMLPreElement>(null);
   const [code, setCode] = useState(value);
-
-  // function handleInput() {
-  //   onChange(code);
-  // }
 
   const onUpdate = EditorView.updateListener.of((v) => {
     const newValue = v.state.doc.toString();

@@ -5,7 +5,6 @@ import urlParams from '@shared/constants/urlParams';
 
 const VariablesEditor = () => {
   const [editorState, setEditorState] = useEditorUrlState(urlParams.VARIABLES, EDITOR_TOOLS_DEFAULT_VALUE);
-
   return <Editor key="variables" editorState={editorState} onChange={setEditorState} />;
 };
 
