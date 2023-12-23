@@ -67,7 +67,7 @@ const MainPage = () => {
     <div
       ref={containerRef}
       className={cn(
-        'col-start-2 col-end-3 row-start-2 row-end-4 grid h-full w-full grid-cols-[auto_max-content] grid-rows-1 gap-4',
+        'col-start-2 col-end-3 row-start-2 row-end-4 grid h-full w-full origin-bottom-left grid-cols-[auto_max-content] grid-rows-1 gap-4',
         {
           'justify-end gap-0': isEditorHidden,
           'gap-0': isResponseHidden,
@@ -93,9 +93,12 @@ const MainPage = () => {
             transform: `scale3d(${interpolateResponse}, ${interpolateResponse}, 1)`,
             opacity: oneZeroResponse,
           }}
-          className={cn('relative h-full w-full transition-all duration-500 ease-emphasized-decelerate', {
-            'transition-none': isResized.current,
-          })}
+          className={cn(
+            'animation-delay-600 relative h-full w-full origin-bottom-right animate-fade-in-screen transition-all duration-500 ease-emphasized-decelerate',
+            {
+              'transition-none': isResized.current,
+            },
+          )}
         >
           <ResponseViewer onResponseClose={handleExpand} />
         </div>

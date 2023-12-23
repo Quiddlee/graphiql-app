@@ -25,6 +25,21 @@ export default {
       height: {
         screen: '100dvh',
       },
+      keyframes: {
+        'fade-in': {
+          from: {
+            opacity: 0,
+            scale: 0,
+          },
+          to: {
+            opacity: 1,
+            scale: 1,
+          },
+        },
+      },
+      animation: {
+        'fade-in-screen': 'fade-in 400ms cubic-bezier(0.05, 0.7, 0.1, 1.0) backwards',
+      },
       colors: {
         primary: 'var(--md-sys-color-primary)',
         'primary-text': 'var(--md-sys-color-primary)',

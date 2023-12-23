@@ -61,7 +61,7 @@ const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, c
       {...props}
       ref={editorContainerRef}
       className={cn(
-        'body-large grid h-full w-full grid-rows-[1fr_max-content] content-end gap-4 transition-all duration-500 ease-emphasized-decelerate',
+        'body-large grid h-full w-full origin-bottom-left grid-rows-[1fr_max-content] content-end gap-4 transition-all duration-500 ease-emphasized-decelerate',
         className,
         {
           'grid-rows-[0fr_max-content] gap-0': isEditorHidden,
@@ -82,9 +82,12 @@ const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, c
         style={{
           height: `${height}px`,
         }}
-        className={cn('relative h-full w-full transition-all duration-500 ease-emphasized-decelerate', {
-          'transition-none': isResized.current,
-        })}
+        className={cn(
+          'animation-delay-400 relative h-full w-full origin-bottom-left animate-fade-in-screen transition-all duration-500 ease-emphasized-decelerate',
+          {
+            'transition-none': isResized.current,
+          },
+        )}
       >
         <ResizeBar className="absolute -top-4 h-4" onMouseDown={handleResize} />
         <EditorTools isExpanded={isExpanded} onExpand={handleExpand}>

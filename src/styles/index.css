@@ -39,6 +39,20 @@
   }
 }
 
+@layer utilities {
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+}
+
 .os-scrollbar-handle {
   background-color: var(--md-sys-color-primary) !important;
   cursor: grab;
