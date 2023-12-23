@@ -17,7 +17,7 @@ const INITIAL_WIDTH = 400;
 const COLLAPSED_WIDTH = 0;
 
 const MainPage = () => {
-  const [initialWidth] = useState(() => Number(localStorage.getItem(localStorageKeys.RESPONSE_WIDTH)) || INITIAL_WIDTH);
+  const [initialWidth] = useState(() => Number(localStorage.getItem(localStorageKeys.RESPONSE_WIDTH)) ?? INITIAL_WIDTH);
   const { elementRef: containerRef, elementProp: maxWidth } = useElementProp({
     propName: 'width',
     initialValue: 0,
@@ -78,7 +78,7 @@ const MainPage = () => {
         style={{
           transform: `scale3d(${interpolateEditor}, ${interpolateEditor}, 1)`,
           opacity: oneZeroEditor,
-          width: isEditorHidden ? '0px' : '100%',
+          width: isEditorHidden ? '0px' : '',
           overflow: isEditorHidden ? 'hidden' : 'visible',
           transition: isResized.current ? 'none' : '',
         }}

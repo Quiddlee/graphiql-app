@@ -9,7 +9,7 @@ const MainLayout = () => {
   return (
     <main
       data-testid="main-layout"
-      className={cn('grid h-screen grid-cols-[384px_1fr_0fr] grid-rows-[80px_1fr] gap-4 overflow-hidden px-4 pb-4')}
+      className={cn('grid h-screen grid-cols-[384px_1fr_0fr] grid-rows-[80px_1fr] gap-4 overflow-hidden pb-4 pl-4')}
     >
       <Header />
       <Nav />

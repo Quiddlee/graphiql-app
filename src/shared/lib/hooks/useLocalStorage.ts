@@ -9,7 +9,7 @@ import { useEffect } from 'react';
  */
 function useLocalStorage(key: string, val?: string | number | boolean) {
 	useEffect(() => {
-		if (val) localStorage.setItem(key, String(val));
+		if (val !== undefined) localStorage.setItem(key, JSON.stringify(val));
 	}, [key, val]);
 
 	function getItem() {

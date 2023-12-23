@@ -39,7 +39,7 @@ function useResize({
 	direction = 'vertical',
 }: UseResizeParams) {
 	const [size, setSize] = useState(initSize);
-	const [isHidden, setIsHidden] = useState(false);
+	const [isHidden, setIsHidden] = useState(true);
 	const isResized = useRef(false);
 
 	const isExpanded = size > minSize && size <= maxSize;
