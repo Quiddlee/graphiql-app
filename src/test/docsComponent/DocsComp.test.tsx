@@ -41,7 +41,7 @@ describe('Testing for docs component', () => {
       expect(overlay).toBeNull();
       expect(screen.queryByText('Docs')).toBeNull();
       expect(screen.queryByText('A GraphQL schema provides a root type for each kind of operation.')).toBeNull();
-    }).catch(() => console.log('Error during testing closing of docs section was caught.'));
+    }).catch(() => {});
   });
   it('Should close docs section after clicking on close docs button', async () => {
     render(<App />);
@@ -65,7 +65,7 @@ describe('Testing for docs component', () => {
       expect(screen.queryByTestId('overlay')).toBeNull();
       expect(screen.queryByText('Docs')).toBeNull();
       expect(screen.queryByText('A GraphQL schema provides a root type for each kind of operation.')).toBeNull();
-    }).catch(() => console.log('Error during testing closing of docs section was caught.'));
+    }).catch(() => {});
   });
   it('Should navigate and display info about proper type after cliking on that type', async () => {
     render(<App />);
