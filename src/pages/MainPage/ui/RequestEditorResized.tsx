@@ -16,7 +16,7 @@ const HIDE_EDITOR_THRESHOLD = 120;
 const START_EDITOR_THRESHOLD = 50;
 const INITIAL_HEIGHT = 300;
 
-const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => {
+const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, children, ...props }) => {
   const [initialHeight] = useState(
     () => Number(localStorage.getItem(localStorageKeys.REQUEST_EDITOR_HEIGHT)) || INITIAL_HEIGHT,
   );
@@ -74,7 +74,9 @@ const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, .
           opacity: oneZeroInterpolateEditor,
           transition: isResized.current ? 'none' : '',
         }}
-      />
+      >
+        {children}
+      </RequestEditor>
       <section
         style={{
           height: `${height}px`,

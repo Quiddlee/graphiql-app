@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import Controls from '@components/RequestEditor/ui/Controls';
 import ResponseViewer from '@components/ResponseViewer/ResponseViewer';
 import RequestEditorResized from '@pages/MainPage/ui/RequestEditorResized';
 import { INTERPOLATION_END, INTERPOLATION_START } from '@shared/constants/const';
@@ -27,8 +28,10 @@ const MainPage = () => {
     isResized,
     handleResize,
     isHidden: isEditorHidden,
+    handleExpand,
   } = useResize({
     initSize: initialWidth,
+    expandSize: INITIAL_WIDTH,
     minSize: COLLAPSED_WIDTH,
     maxSize: maxWidth,
     startThreshold: HIDE_THRESHOLD,
@@ -79,7 +82,9 @@ const MainPage = () => {
           overflow: isEditorHidden ? 'hidden' : 'visible',
           transition: isResized.current ? 'none' : '',
         }}
-      />
+      >
+        <Controls onResponseOpen={handleExpand} />
+      </RequestEditorResized>
       <section className={cn('relative flex h-full w-full justify-end')}>
         <ResizeBar direction="horizontal" className="absolute -left-4" onMouseDown={handleResize} />
         <div

@@ -3,11 +3,10 @@ import { FC, HTMLAttributes } from 'react';
 import Editor from '@components/Editor/Editor';
 import useEditorUrlState from '@components/Editor/lib/hooks/useEditorUrlState';
 import { EDITOR_DEFAULT_VALUE } from '@components/RequestEditor/lib/const/const';
-import Controls from '@components/RequestEditor/ui/Controls';
 import urlParams from '@shared/constants/urlParams';
 import cn from '@shared/lib/helpers/cn';
 
-const RequestEditor: FC<HTMLAttributes<HTMLElement>> = ({ ...props }) => {
+const RequestEditor: FC<HTMLAttributes<HTMLElement>> = ({ children, ...props }) => {
   const [editorState, setEditorState] = useEditorUrlState(urlParams.QUERY, EDITOR_DEFAULT_VALUE);
 
   return (
@@ -19,7 +18,7 @@ const RequestEditor: FC<HTMLAttributes<HTMLElement>> = ({ ...props }) => {
       )}
     >
       <Editor className="pr-20" editorState={editorState} onChange={setEditorState} />
-      <Controls />
+      {children}
     </section>
   );
 };
