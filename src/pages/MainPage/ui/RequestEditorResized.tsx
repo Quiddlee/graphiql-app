@@ -1,6 +1,7 @@
 import { FC, HTMLAttributes, useState } from 'react';
 
 import EditorTools from '@components/EditorTools/EditorTools';
+import EditorToolsField from '@components/EditorTools/ui/EditorToolsField';
 import RequestEditor from '@components/RequestEditor/RequestEditor';
 import { INTERPOLATION_END, INTERPOLATION_START } from '@shared/constants/const';
 import localStorageKeys from '@shared/constants/localStorageKeys';
@@ -86,7 +87,9 @@ const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, c
         })}
       >
         <ResizeBar className="absolute -top-4 h-4" onMouseDown={handleResize} />
-        <EditorTools isExpanded={isExpanded} onExpand={handleExpand} />
+        <EditorTools isExpanded={isExpanded} onExpand={handleExpand}>
+          <EditorToolsField />
+        </EditorTools>
       </section>
     </div>
   );

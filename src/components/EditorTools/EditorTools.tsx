@@ -1,16 +1,15 @@
-import { FC } from 'react';
+import { FC, PropsWithChildren } from 'react';
 
-import EditorToolsField from '@components/EditorTools/ui/EditorToolsField';
 import Header from '@components/EditorTools/ui/Header';
 import cn from '@shared/lib/helpers/cn';
 import { HandleExpand } from '@shared/types';
 
-type EditorToolsProps = {
+type EditorToolsProps = PropsWithChildren & {
   onExpand: HandleExpand;
   isExpanded: boolean;
 };
 
-const EditorTools: FC<EditorToolsProps> = ({ onExpand, isExpanded }) => {
+const EditorTools: FC<EditorToolsProps> = ({ onExpand, isExpanded, children }) => {
   return (
     <div
       data-testid="editor-tools"
@@ -19,7 +18,7 @@ const EditorTools: FC<EditorToolsProps> = ({ onExpand, isExpanded }) => {
       )}
     >
       <Header isExpanded={isExpanded} onExpand={onExpand} />
-      <EditorToolsField />
+      {children}
     </div>
   );
 };
