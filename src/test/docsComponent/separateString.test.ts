@@ -16,7 +16,5 @@ describe('Testing the getTypeName helper function', () => {
 		expect(outputThree[0]).toMatch('');
 		expect(outputThree[1]).toMatch('ID');
 		expect(outputThree[2]).toMatch('!');
-		// expect(separateString(mockObjTwo)).toMatch('FilterCharacter');
-		// expect(separateString(mockObjThree)).toMatch('ID!');
 	});
 });

@@ -1,26 +1,15 @@
-import React from 'react';
+import { FC } from 'react';
 
-import { createComponent } from '@lit/react';
-import { MdIcon } from '@material/web/icon/icon';
-import { MdIconButton } from '@material/web/iconbutton/icon-button';
+import Icon from '@/shared/ui/Icon';
+import IconButton from '@/shared/ui/IconButton';
 
-const Icon = createComponent({
-  react: React,
-  tagName: 'md-icon',
-  elementClass: MdIcon,
-});
+type PropsType = { onClick: () => void; className: string };
 
-const IconSlot = createComponent({
-  react: React,
-  tagName: 'md-icon-button',
-  elementClass: MdIconButton,
-});
-
-const CloseDocsBtn = ({ onClick, className }: { onClick: () => void; className: string }) => {
+const CloseDocsBtn: FC<PropsType> = ({ onClick, className }) => {
   return (
-    <IconSlot onClick={onClick} className={className}>
+    <IconButton onClick={onClick} className={className}>
       <Icon>close</Icon>
-    </IconSlot>
+    </IconButton>
   );
 };
 

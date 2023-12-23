@@ -1,5 +1,7 @@
 // AFTER LOGIC FOR SAVING AND FETCHING ENDPOINT SHEMA WILL BE ADDED - MUST REMOVE SCHEMA IMPORT AND REPLACE IT FOR DOWNLOADED SCHEMA IN FURTHER CODE
 
+import { Dispatch, SetStateAction } from 'react';
+
 import { swapiSchema } from '@/shared/constants/schemaData';
 import { DocsExplorerType, SchemaTypeObj } from '@/shared/types';
 import CloseDocsBtn from '@components/DocsComp/ui/CloseDocsBtn';
@@ -8,7 +10,7 @@ import DocsRootComp from './DocsRootComp';
 import DocsTypeComp from './DocsTypeComp';
 
 type PropsType = {
-  setIsDocsShown: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsDocsShown: Dispatch<SetStateAction<boolean>>;
   explorer: DocsExplorerType;
 };
 

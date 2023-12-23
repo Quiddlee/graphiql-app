@@ -14,7 +14,7 @@ type PropsType = {
 
 const DocsOverlay = ({ isShown, setIsDocsShown, explorer, children }: PropsType) => {
   function closeHandler(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    if ((e.target as HTMLButtonElement).classList.contains('overlay')) {
+    if ((e.target as HTMLButtonElement).hasAttribute('data-overlay')) {
       setIsDocsShown((prev) => !prev);
       explorer.setInitState();
     }
@@ -25,6 +25,7 @@ const DocsOverlay = ({ isShown, setIsDocsShown, explorer, children }: PropsType)
   return (
     <button
       data-testid="overlay"
+      data-overlay
       type="button"
       onClick={(e) => closeHandler(e)}
       className="overlay absolute left-0 top-0 z-10 flex h-full w-full justify-start bg-black/60 "

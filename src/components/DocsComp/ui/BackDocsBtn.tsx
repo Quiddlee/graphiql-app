@@ -1,15 +1,10 @@
-import React from 'react';
+import { FC } from 'react';
 
-import { createComponent } from '@lit/react';
-import { MdIcon } from '@material/web/icon/icon';
+import Icon from '@/shared/ui/Icon';
 
-const Icon = createComponent({
-  react: React,
-  tagName: 'md-icon',
-  elementClass: MdIcon,
-});
+type PropsType = { onClick: () => void; title: string };
 
-const BackDocsBtn = ({ onClick, title }: { onClick: () => void; title: string }) => {
+const BackDocsBtn: FC<PropsType> = ({ onClick, title }: PropsType) => {
   return (
     <button type="button" onClick={onClick} className="flex items-center gap-1 rounded-full p-2 hover:bg-slate-500/30">
       <Icon>arrow_back_ios</Icon>
