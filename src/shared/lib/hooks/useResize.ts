@@ -49,22 +49,22 @@ function useResize({
 	}
 
 	const handleExpand: HandleExpand = useCallback(
-		function handleExpand(up: boolean | ((prevState: boolean) => boolean)) {
+		function handleExpand(expand: boolean | ((prevState: boolean) => boolean)) {
 			if (isResized.current) return;
 
-			const isFn = typeof up === 'function';
+			const isFn = typeof expand === 'function';
 
 			if (isFn) {
-				const isExpand = up(isExpanded);
+				const isExpand = expand(isExpanded);
 				setSize(isExpand ? expandSize : minSize);
 				return;
 			}
 
-			if (!isExpanded && up) {
+			if (!isExpanded && expand) {
 				setSize(expandSize);
 			}
 
-			if (isExpanded && !up) {
+			if (isExpanded && !expand) {
 				setSize(minSize);
 			}
 		},
