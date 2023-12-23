@@ -1,5 +1,6 @@
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 
+import cn from '@shared/lib/helpers/cn';
 import useScrollbar from '@shared/lib/hooks/useScrollbar';
 import { HandleExpand } from '@shared/types';
 import Icon from '@shared/ui/Icon';
@@ -35,16 +36,33 @@ const PLACEHOLDER_TEXT = `{
 
 type ResponseViewerProps = {
   onResponseClose: HandleExpand;
+  isHidden: boolean;
 };
 
-const ResponseViewer: FC<ResponseViewerProps> = ({ onResponseClose }) => {
+const ResponseViewer: FC<ResponseViewerProps> = ({ onResponseClose, isHidden }) => {
   const rootRef = useScrollbar<HTMLDivElement>();
+  const closeBtnRef = useRef(null);
+
+  useEffect(() => {
+    // initial render close btn animation
+    const closeBtn = closeBtnRef.current as HTMLElement | null;
+
+    if (!closeBtn) return undefined;
+    closeBtn.classList.add('animation-delay-800');
+
+    return () => {
+      closeBtn.classList.remove('animation-delay-800');
+    };
+  }, []);
 
   return (
     <>
       <IconButton
+        ref={closeBtnRef}
         data-testid="close-response"
-        className="absolute right-4 top-4 z-10"
+        className={cn('absolute right-4 top-4 z-10 animate-fade-out-standard', {
+          'animation-delay-200 animate-fade-in-standard': !isHidden,
+        })}
         onClick={() => onResponseClose(false)}
       >
         <Icon>close</Icon>

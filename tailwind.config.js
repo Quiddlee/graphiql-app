@@ -39,6 +39,9 @@ export default {
       },
       animation: {
         'fade-in-screen': 'fade-in 400ms cubic-bezier(0.05, 0.7, 0.1, 1.0) backwards',
+        'fade-out-screen': 'fade-in 200ms cubic-bezier(0.3, 0.0, 0.8, 0.15) forward reverse',
+        'fade-in-standard': 'fade-in 250ms cubic-bezier(0, 0, 0, 1) backwards',
+        'fade-out-standard': 'fade-in 200ms cubic-bezier(0.3, 0, 1, 1) forward reverse',
       },
       colors: {
         primary: 'var(--md-sys-color-primary)',

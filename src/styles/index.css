@@ -40,6 +40,10 @@
 }
 
 @layer utilities {
+  .animation-delay-0 {
+    animation-delay: none;
+  }
+
   .animation-delay-200 {
     animation-delay: 200ms;
   }
@@ -50,6 +54,10 @@
 
   .animation-delay-600 {
     animation-delay: 600ms;
+  }
+
+  .animation-delay-800 {
+    animation-delay: 800ms;
   }
 }
 

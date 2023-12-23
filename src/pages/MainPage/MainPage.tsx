@@ -100,7 +100,7 @@ const MainPage = () => {
             },
           )}
         >
-          <ResponseViewer onResponseClose={handleExpand} />
+          <ResponseViewer onResponseClose={handleExpand} isHidden={isResponseHidden} />
         </div>
       </section>
     </div>
