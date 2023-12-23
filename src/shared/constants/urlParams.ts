@@ -3,7 +3,6 @@ const urlParams = {
 	VARIABLES: 'variables',
 	HEADERS: 'headers',
 	VARIABLES_TAB: 'tab',
-	EXPANDED: 'expanded',
 	RESPONSE_OPEN: 'response',
 } as const;
 
