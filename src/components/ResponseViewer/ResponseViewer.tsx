@@ -48,10 +48,10 @@ const ResponseViewer: FC<ResponseViewerProps> = ({ onResponseClose, isHidden }) 
     const closeBtn = closeBtnRef.current as HTMLElement | null;
 
     if (!closeBtn) return undefined;
-    closeBtn.classList.add('animation-delay-800');
+    closeBtn.classList.add('[animation-delay:900ms_!important]');
 
     return () => {
-      closeBtn.classList.remove('animation-delay-800');
+      closeBtn.classList.remove('[animation-delay:900ms_!important]');
     };
   }, []);
 
@@ -61,7 +61,7 @@ const ResponseViewer: FC<ResponseViewerProps> = ({ onResponseClose, isHidden }) 
         ref={closeBtnRef}
         data-testid="close-response"
         className={cn('absolute right-4 top-4 z-10 animate-fade-out-standard', {
-          'animation-delay-200 animate-fade-in-standard': !isHidden,
+          'animate-fade-in-standard [animation-delay:250ms]': !isHidden,
         })}
         onClick={() => onResponseClose(false)}
       >

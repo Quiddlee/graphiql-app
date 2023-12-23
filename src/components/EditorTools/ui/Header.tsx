@@ -48,7 +48,7 @@ const Header: FC<HeaderProps> = ({ onExpand, isExpanded }) => {
       </Tabs>
       <IconButton
         data-testid="editor-tools-expand"
-        className={cn('rotate-180 duration-[inherit] ease-[inherit]', {
+        className={cn('animation-delay-700 rotate-180 animate-fade-in-standard duration-[inherit] ease-[inherit]', {
           'rotate-0': isExpanded,
         })}
         onClick={() => onExpand((prevState) => !prevState)}

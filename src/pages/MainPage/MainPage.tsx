@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import Controls from '@components/RequestEditor/ui/Controls';
 import ResponseViewer from '@components/ResponseViewer/ResponseViewer';
 import RequestEditorResized from '@pages/MainPage/ui/RequestEditorResized';
 import { INTERPOLATION_END, INTERPOLATION_START } from '@shared/constants/const';
@@ -75,6 +74,8 @@ const MainPage = () => {
       )}
     >
       <RequestEditorResized
+        onResponseOpen={handleExpand}
+        isOutEditorHidden={isEditorHidden}
         style={{
           transform: `scale3d(${interpolateEditor}, ${interpolateEditor}, 1)`,
           opacity: oneZeroEditor,
@@ -82,9 +83,7 @@ const MainPage = () => {
           overflow: isEditorHidden ? 'hidden' : 'visible',
           transition: isResized.current ? 'none' : '',
         }}
-      >
-        <Controls onResponseOpen={handleExpand} />
-      </RequestEditorResized>
+      />
       <section className="relative flex h-full w-full justify-end">
         <ResizeBar direction="horizontal" className="absolute -left-4" onMouseDown={handleResize} />
         <div

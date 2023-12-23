@@ -3,6 +3,7 @@ import { FC, HTMLAttributes, useState } from 'react';
 import EditorTools from '@components/EditorTools/EditorTools';
 import EditorToolsField from '@components/EditorTools/ui/EditorToolsField';
 import RequestEditor from '@components/RequestEditor/RequestEditor';
+import Controls from '@components/RequestEditor/ui/Controls';
 import { INTERPOLATION_END, INTERPOLATION_START } from '@shared/constants/const';
 import localStorageKeys from '@shared/constants/localStorageKeys';
 import cn from '@shared/lib/helpers/cn';
@@ -10,6 +11,7 @@ import useElementProp from '@shared/lib/hooks/useElementProp';
 import useInterpolation from '@shared/lib/hooks/useInterpolation';
 import useLocalStorage from '@shared/lib/hooks/useLocalStorage';
 import useResize from '@shared/lib/hooks/useResize';
+import { HandleExpand } from '@shared/types';
 import ResizeBar from '@shared/ui/ResizeBar';
 
 const COLLAPSED_HEIGHT = 65;
@@ -17,7 +19,18 @@ const HIDE_EDITOR_THRESHOLD = 120;
 const START_EDITOR_THRESHOLD = 50;
 const INITIAL_HEIGHT = 300;
 
-const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, children, ...props }) => {
+type RequestEditorResizedProps = HTMLAttributes<HTMLDivElement> & {
+  onResponseOpen: HandleExpand;
+  isOutEditorHidden: boolean;
+};
+
+const RequestEditorResized: FC<RequestEditorResizedProps> = ({
+  className,
+  isOutEditorHidden,
+  onResponseOpen,
+  children,
+  ...props
+}) => {
   const [initialHeight] = useState(
     () => Number(localStorage.getItem(localStorageKeys.REQUEST_EDITOR_HEIGHT)) || INITIAL_HEIGHT,
   );
@@ -76,7 +89,7 @@ const RequestEditorResized: FC<HTMLAttributes<HTMLDivElement>> = ({ className, c
           transition: isResized.current ? 'none' : '',
         }}
       >
-        {children}
+        <Controls onResponseOpen={onResponseOpen} isHidden={isEditorHidden || isOutEditorHidden} />
       </RequestEditor>
       <section
         style={{
