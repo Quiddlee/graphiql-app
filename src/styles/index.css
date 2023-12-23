@@ -61,6 +61,16 @@
   }
 }
 
+@layer components {
+  .transition-enter-screen {
+    @apply transition-all duration-500 ease-emphasized-decelerate;
+  }
+
+  .transition-exit-screen {
+    @apply transition-all duration-400 ease-emphasized-decelerate;
+  }
+}
+
 .os-scrollbar-handle {
   background-color: var(--md-sys-color-primary) !important;
   cursor: grab;

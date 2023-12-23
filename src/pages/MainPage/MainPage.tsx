@@ -85,7 +85,7 @@ const MainPage = () => {
       >
         <Controls onResponseOpen={handleExpand} />
       </RequestEditorResized>
-      <section className={cn('relative flex h-full w-full justify-end')}>
+      <section className="relative flex h-full w-full justify-end">
         <ResizeBar direction="horizontal" className="absolute -left-4" onMouseDown={handleResize} />
         <div
           style={{
@@ -93,12 +93,11 @@ const MainPage = () => {
             transform: `scale3d(${interpolateResponse}, ${interpolateResponse}, 1)`,
             opacity: oneZeroResponse,
           }}
-          className={cn(
-            'animation-delay-600 relative h-full w-full origin-bottom-right animate-fade-in-screen transition-all duration-500 ease-emphasized-decelerate',
-            {
-              'transition-none': isResized.current,
-            },
-          )}
+          className={cn('animation-delay-600 relative h-full w-full origin-bottom-right animate-fade-in-screen', {
+            'transition-enter-screen': !isResponseHidden,
+            'transition-exit-screen': isResponseHidden,
+            'transition-none': isResized.current,
+          })}
         >
           <ResponseViewer onResponseClose={handleExpand} isHidden={isResponseHidden} />
         </div>
