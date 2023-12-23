@@ -1,8 +1,7 @@
-import { useCallback } from 'react';
+import { FC } from 'react';
 
-import urlParams from '@shared/constants/urlParams';
 import useScrollbar from '@shared/lib/hooks/useScrollbar';
-import useUrl from '@shared/lib/hooks/useUrl';
+import { HandleExpand } from '@shared/types';
 import Icon from '@shared/ui/Icon';
 import IconButton from '@shared/ui/IconButton';
 
@@ -34,20 +33,20 @@ const PLACEHOLDER_TEXT = `{
   ]
 }`;
 
-const ResponseViewer = () => {
-  const rootRef = useScrollbar<HTMLDivElement>();
-  const { setUrl } = useUrl();
+type ResponseViewerProps = {
+  onResponseClose: HandleExpand;
+};
 
-  const handleClick = useCallback(
-    function handleClick() {
-      setUrl(urlParams.RESPONSE_OPEN, 'false');
-    },
-    [setUrl],
-  );
+const ResponseViewer: FC<ResponseViewerProps> = ({ onResponseClose }) => {
+  const rootRef = useScrollbar<HTMLDivElement>();
 
   return (
     <>
-      <IconButton data-testid="close-response" className="absolute right-4 top-4 z-10" onClick={handleClick}>
+      <IconButton
+        data-testid="close-response"
+        className="absolute right-4 top-4 z-10"
+        onClick={() => onResponseClose(false)}
+      >
         <Icon>close</Icon>
       </IconButton>
       <div

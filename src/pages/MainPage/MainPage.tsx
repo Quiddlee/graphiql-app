@@ -97,7 +97,7 @@ const MainPage = () => {
             'transition-none': isResized.current,
           })}
         >
-          <ResponseViewer />
+          <ResponseViewer onResponseClose={handleExpand} />
         </div>
       </section>
     </div>
