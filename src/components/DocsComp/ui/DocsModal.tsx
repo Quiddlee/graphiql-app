@@ -24,7 +24,7 @@ const DocsModal = ({ setIsDocsShown, explorer }: PropsType) => {
     />
   );
   return (
-    <section className="relative z-20 h-[100dvh] w-[420px] cursor-auto bg-surface p-3">
+    <section className="relative z-20 h-[100dvh] w-[420px] cursor-auto rounded-r-[28px] bg-surface p-3">
       <CloseDocsBtn
         onClick={() => {
           setIsDocsShown((prev) => !prev);
