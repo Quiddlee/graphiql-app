@@ -5,7 +5,7 @@ import urlParams from '@shared/constants/urlParams';
 const HeadersEditor = () => {
   const [editorState, setEditorState] = useEditorUrlState(urlParams.HEADERS);
 
-  return <Editor key="headers" editorState={editorState} onChange={setEditorState} isJson />;
+  return <Editor key="headers" editorState={editorState} onChange={setEditorState} isJson readOnly={false} />;
 };
 
 export default HeadersEditor;

@@ -11,9 +11,10 @@ type EditorFieldProps = {
   value: string;
   onChange: Dispatch<SetStateAction<string>> | ((value: string) => void);
   isJson: boolean;
+  readOnly: boolean;
 };
 
-const EditorField = ({ onChange, value = '', isJson }: EditorFieldProps) => {
+const EditorField = ({ onChange, value = '', isJson, readOnly }: EditorFieldProps) => {
   const editor = useRef<HTMLPreElement>(null);
   const [code, setCode] = useState(value);
 
@@ -28,8 +29,14 @@ const EditorField = ({ onChange, value = '', isJson }: EditorFieldProps) => {
   useEffect(() => {
     const startState = EditorState.create({
       doc: code,
-      // doc: '{"data":{"film":{"title":"A New Hope","director":"George Lucas","releaseDate":"1977-05-25","openingCrawl":"It is a period of civil war.\r\nRebel spaceships, striking\r\nfrom a hidden base, have won\r\ntheir first victory against\r\nthe evil Galactic Empire.\r\n\r\nDuring the battle, Rebel\r\nspies managed to steal secret\r\nplans to the Empire`s\r\nultimate weapon, the DEATH\r\nSTAR, an armored space\r\nstation with enough power\r\nto destroy an entire planet.\r\n\r\nPursued by the Empire`s\r\nsinister agents, Princess\r\nLeia races home aboard her\r\nstarship, custodian of the\r\nstolen plans that can save her\r\npeople and restore\r\nfreedom to the galaxy...."}}}',
-      extensions: [keymap.of(defaultKeymap), codemirrorLanguage, oneDark, EditorView.lineWrapping, onUpdate],
+      extensions: [
+        keymap.of(defaultKeymap),
+        codemirrorLanguage,
+        oneDark,
+        EditorView.lineWrapping,
+        onUpdate,
+        EditorState.readOnly.of(readOnly),
+      ],
     });
     const view = new EditorView({
       state: startState,
