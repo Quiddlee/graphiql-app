@@ -1,12 +1,18 @@
 import { FC, HTMLAttributes } from 'react';
 
 import cn from '@shared/lib/helpers/cn';
+import useScreen from '@shared/lib/hooks/useScreen';
 
 type ResizeBarProps = HTMLAttributes<HTMLButtonElement> & {
   direction?: 'horizontal' | 'vertical';
 };
 
 const ResizeBar: FC<ResizeBarProps> = ({ className, direction = 'vertical', ...props }) => {
+  const screenType = useScreen();
+  const isTablet = screenType === 'tablet';
+
+  if (isTablet) return null;
+
   return (
     <button
       {...props}

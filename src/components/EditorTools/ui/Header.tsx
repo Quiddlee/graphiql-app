@@ -35,7 +35,7 @@ const Header: FC<HeaderProps> = ({ onExpand, isExpanded }) => {
     <header className="flex h-[48px] w-full justify-between overflow-hidden border-b-2 border-outline-variant pl-7 pr-4 duration-[inherit] ease-[inherit]">
       <Tabs
         data-testid="editor-tools-tabs"
-        className="w-[360px] rounded-full [&::part(divider)]:hidden"
+        className="w-full rounded-full lg:w-[360px] [&::part(divider)]:hidden"
         onChange={handleTabSwitch}
         ref={tabsRef}
       >
@@ -48,9 +48,12 @@ const Header: FC<HeaderProps> = ({ onExpand, isExpanded }) => {
       </Tabs>
       <IconButton
         data-testid="editor-tools-expand"
-        className={cn('animation-delay-700 rotate-180 animate-fade-in-standard duration-[inherit] ease-[inherit]', {
-          'rotate-0': isExpanded,
-        })}
+        className={cn(
+          'animation-delay-700 hidden rotate-180 animate-fade-in-standard duration-[inherit] ease-[inherit] lg:flex',
+          {
+            'rotate-0': isExpanded,
+          },
+        )}
         onClick={() => onExpand((prevState) => !prevState)}
       >
         <Icon>expand_more</Icon>

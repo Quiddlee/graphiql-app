@@ -32,7 +32,7 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden }) => {
       )}
     >
       <li
-        className={cn('mb-3 flex origin-bottom items-center justify-center', {
+        className={cn('mb-3 hidden origin-bottom items-center justify-center lg:flex', {
           'animate-fade-in-standard [animation-delay:400ms]': !isHidden,
           'animate-fade-out-screen': isHidden,
         })}
@@ -62,7 +62,7 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden }) => {
         </FilledIconButton>
       </li>
       <li
-        className={cn('flex h-12 w-12 origin-bottom items-center justify-center', {
+        className={cn('hidden h-12 w-12 origin-bottom items-center justify-center lg:flex', {
           'animation-delay-600 animate-fade-in-screen': !isHidden,
           'animate-fade-out-screen': isHidden,
         })}
