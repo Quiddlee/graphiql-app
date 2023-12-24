@@ -48,7 +48,7 @@ const ResponseViewer = () => {
         className="h-full w-full justify-between overflow-y-scroll rounded-4xl bg-surface-container py-7 pl-7 pr-4"
       >
         <article className="h-fit w-fit pr-10">
-          <EditorField key={currentResponse} value={currentResponse} onChange={() => {}} />
+          <EditorField key={currentResponse} value={currentResponse} onChange={() => {}} isJson />
         </article>
       </div>
     </>

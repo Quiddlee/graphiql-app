@@ -12,7 +12,7 @@ const RequestEditor = () => {
       data-testid="editor-request"
       className="relative flex h-full w-full gap-4 overflow-y-hidden rounded-4xl bg-surface-container pl-6"
     >
-      <Editor className="pr-20" editorState={editorState} onChange={setEditorState} />
+      <Editor className="pr-20" editorState={editorState} onChange={setEditorState} isJson={false} />
       <Controls />
     </section>
   );
