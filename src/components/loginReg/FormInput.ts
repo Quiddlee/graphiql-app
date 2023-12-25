@@ -7,6 +7,9 @@ const FormInput = createComponent({
 	react: React,
 	tagName: 'md-outlined-text-field',
 	elementClass: MdOutlinedTextField,
+	events: {
+		onChange: 'change',
+	},
 });
 
 export default FormInput;
