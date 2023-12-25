@@ -8,7 +8,7 @@ import Icon from '@shared/ui/Icon';
 
 const Controls = () => {
   const { readUrl, setUrl } = useUrl();
-  const { updateCurrentResponse } = useAppContext();
+  const { updateCurrentResponse, prettifyEditors } = useAppContext();
 
   const handleCopyText = async () => {
     const query = readUrl(urlParams.QUERY);
@@ -23,8 +23,11 @@ const Controls = () => {
     const query = readUrl(urlParams.QUERY);
     const variables = readUrl(urlParams.VARIABLES);
     const response = await submitRequest(query, variables);
-    console.log(variables, query);
     updateCurrentResponse(JSON.stringify(response));
+  };
+
+  const handlePrettifier = () => {
+    prettifyEditors(true);
   };
 
   const handleResponseOpen = () => {
@@ -45,7 +48,7 @@ const Controls = () => {
         </FilledIconButton>
       </li>
       <li className="flex h-12 w-12 items-center justify-center">
-        <FilledIconButton data-testid="prettify">
+        <FilledIconButton data-testid="prettify" onClick={handlePrettifier}>
           <Icon>mop</Icon>
         </FilledIconButton>
       </li>

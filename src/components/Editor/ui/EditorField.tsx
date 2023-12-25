@@ -7,6 +7,8 @@ import { EditorState } from '@codemirror/state';
 import { oneDark } from '@codemirror/theme-one-dark';
 import { EditorView, keymap } from '@codemirror/view';
 
+import { useAppContext } from '@/shared/Context/hooks';
+
 type EditorFieldProps = {
   value: string;
   onChange: Dispatch<SetStateAction<string>> | ((value: string) => void);
@@ -17,11 +19,13 @@ type EditorFieldProps = {
 const EditorField = ({ onChange, value = '', isJson, readOnly }: EditorFieldProps) => {
   const editor = useRef<HTMLPreElement>(null);
   const [code, setCode] = useState(value);
+  const { prettifyEditors } = useAppContext();
 
   const onUpdate = EditorView.updateListener.of((v) => {
     const newValue = v.state.doc.toString();
     setCode(newValue);
     onChange(newValue);
+    prettifyEditors(false);
   });
 
   const codemirrorLanguage = isJson ? json() : javascript();
