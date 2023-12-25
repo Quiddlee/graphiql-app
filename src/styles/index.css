@@ -18,8 +18,13 @@
     --md-ref-typeface-plain: 'Roboto';
     --md-icon-font: 'Material Symbols Rounded';
     --md-fab-icon-size: 40px;
-    --md-secondary-tab-container-color: var(--md-sys-color-surface-container);
-    --md-primary-tab-container-color: var(--md-sys-color-surface-container);
+    --md-secondary-tab-container-color: var(--md-sys-color-surface);
+    --md-primary-tab-container-color: var(--md-sys-color-surface);
+
+    @media (min-width: 640px) {
+      --md-secondary-tab-container-color: var(--md-sys-color-surface-container);
+      --md-primary-tab-container-color: var(--md-sys-color-surface-container);
+    }
   }
 
   ::selection {

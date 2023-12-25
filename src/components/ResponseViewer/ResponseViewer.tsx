@@ -72,7 +72,7 @@ const ResponseViewer: FC<ResponseViewerProps> = ({ onResponseClose, isHidden }) 
         <div
           data-testid="response-viewer"
           ref={rootRef}
-          className="h-full w-full justify-between overflow-hidden overflow-y-scroll py-7 pl-7 pr-4"
+          className="h-full w-full justify-between overflow-hidden overflow-y-scroll py-7 pl-4 pr-4 sm:pl-7"
         >
           <article className="h-fit w-fit pr-10">
             <pre className="h-full w-full whitespace-break-spaces">{PLACEHOLDER_TEXT}</pre>

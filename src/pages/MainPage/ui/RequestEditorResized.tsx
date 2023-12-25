@@ -1,8 +1,8 @@
 import { FC, HTMLAttributes, useState } from 'react';
 
-import RequestEditor from '@/components/RequestEditor/RequestEditor';
 import EditorTools from '@components/EditorTools/EditorTools';
 import EditorToolsField from '@components/EditorTools/ui/EditorToolsField';
+import RequestEditor from '@components/RequestEditor/RequestEditor';
 import Controls from '@components/RequestEditor/ui/Controls';
 import { INTERPOLATION_END, INTERPOLATION_START } from '@shared/constants/const';
 import localStorageKeys from '@shared/constants/localStorageKeys';
@@ -16,6 +16,7 @@ import { HandleExpand } from '@shared/types';
 import ResizeBar from '@shared/ui/ResizeBar';
 
 const COLLAPSED_HEIGHT = 65;
+const COLLAPSED_HEIGHT_MOBILE = 50;
 const HIDE_EDITOR_THRESHOLD = 120;
 const START_EDITOR_THRESHOLD = 50;
 const INITIAL_HEIGHT = 300;
@@ -41,6 +42,8 @@ const RequestEditorResized: FC<RequestEditorResizedProps> = ({
   });
   const screenType = useScreen();
   const isTablet = screenType === 'tablet';
+  const isMobile = screenType === 'mobile';
+  const isResizeDisabled = isTablet || isMobile;
 
   const {
     isHidden: isEditorHidden,
@@ -53,7 +56,7 @@ const RequestEditorResized: FC<RequestEditorResizedProps> = ({
     hideThreshold: HIDE_EDITOR_THRESHOLD,
     startThreshold: START_EDITOR_THRESHOLD,
     initSize: initialHeight,
-    minSize: COLLAPSED_HEIGHT,
+    minSize: isMobile ? COLLAPSED_HEIGHT_MOBILE : COLLAPSED_HEIGHT,
     maxSize: editorContainerHeight,
     expandSize: INITIAL_HEIGHT,
   });
@@ -77,29 +80,33 @@ const RequestEditorResized: FC<RequestEditorResizedProps> = ({
       {...props}
       ref={editorContainerRef}
       className={cn(
-        'body-large grid h-full w-full origin-bottom-left grid-rows-[355px_270px] content-end gap-3 transition-all duration-500 ease-emphasized-decelerate lg:grid-rows-[1fr_max-content] lg:gap-4',
+        'body-large row-start-1 row-end-2 grid h-full w-full origin-bottom-left grid-rows-1 content-end gap-2 transition-all duration-500 ease-emphasized-decelerate sm:grid-rows-[355px_270px] sm:gap-3 lg:grid-rows-[1fr_max-content] lg:gap-4',
         className,
         {
-          'grid-rows-[0fr_max-content] gap-0': isEditorHidden,
-          'transition-none': isCollapsed || isResized.current,
+          'grid-rows-[0fr_max-content] gap-0': isEditorHidden && !isResizeDisabled,
+          'transition-none': (isCollapsed || isResized.current) && !isResizeDisabled,
         },
       )}
     >
       <RequestEditor
         style={{
-          transform: !isTablet ? `scale3d(${interpolateEditor}, ${interpolateEditor}, 1)` : '',
-          opacity: !isTablet ? oneZeroInterpolateEditor : '',
+          transform: !isResizeDisabled ? `scale3d(${interpolateEditor}, ${interpolateEditor}, 1)` : '',
+          opacity: !isResizeDisabled ? oneZeroInterpolateEditor : '',
           transition: isResized.current ? 'none' : '',
         }}
       >
-        <Controls onResponseOpen={onResponseOpen} isHidden={isEditorHidden || isOutEditorHidden} />
+        <Controls
+          className="absolute right-6 top-7 hidden sm:grid"
+          onResponseOpen={onResponseOpen}
+          isHidden={isEditorHidden || isOutEditorHidden}
+        />
       </RequestEditor>
       <section
         style={{
           height: !isTablet ? `${height}px` : '',
         }}
         className={cn(
-          'animation-delay-400 relative row-start-2 row-end-3 h-full w-full origin-bottom-left animate-fade-in-screen',
+          'animation-delay-400 absolute bottom-0 left-0 z-10 row-start-2 row-end-3 h-full w-full origin-bottom-left animate-fade-in-screen sm:relative',
           {
             'transition-enter-screen': !isCollapsed,
             'transition-exit-screen': isCollapsed,

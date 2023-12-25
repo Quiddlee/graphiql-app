@@ -9,9 +9,9 @@ type ResizeBarProps = HTMLAttributes<HTMLButtonElement> & {
 
 const ResizeBar: FC<ResizeBarProps> = ({ className, direction = 'vertical', ...props }) => {
   const screenType = useScreen();
-  const isTablet = screenType === 'tablet';
+  const isResizeDisabled = screenType === 'tablet' || screenType === 'mobile';
 
-  if (isTablet) return null;
+  if (isResizeDisabled) return null;
 
   return (
     <button

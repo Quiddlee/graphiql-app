@@ -23,7 +23,7 @@ const MainPage = () => {
     initialValue: 0,
   });
   const screenType = useScreen();
-  const isTablet = screenType === 'tablet';
+  const isTablet = screenType === 'tablet' || screenType === 'mobile';
 
   const {
     size: width,
@@ -69,7 +69,7 @@ const MainPage = () => {
     <div
       ref={containerRef}
       className={cn(
-        'col-start-2 col-end-3 row-start-2 row-end-3 grid h-full w-full origin-bottom-left grid-rows-[640px_400px] gap-3 lg:row-end-4 lg:grid-cols-[auto_max-content] lg:grid-rows-1 lg:gap-4',
+        'row-start-2 row-end-3 grid h-full w-full origin-bottom-left grid-rows-2 gap-2 overflow-scroll px-2 pb-[58px] sm:col-start-2 sm:col-end-3 sm:grid-rows-[640px_400px] sm:gap-3 sm:overflow-visible sm:px-0 sm:pb-0 lg:row-end-4 lg:grid-cols-[auto_max-content] lg:grid-rows-1 lg:gap-4',
         {
           'lg:justify-end lg:gap-0': isEditorHidden && !isTablet,
           'lg:gap-0': isResponseHidden && !isTablet,
@@ -95,7 +95,7 @@ const MainPage = () => {
             transform: !isTablet ? `scale3d(${interpolateResponse}, ${interpolateResponse}, 1)` : '',
             opacity: !isTablet ? oneZeroResponse : '',
           }}
-          className={cn('animation-delay-600 relative h-full w-full origin-bottom-right animate-fade-in-screen', {
+          className={cn('animation-delay-600 relative mb-24 h-full w-full origin-bottom-right animate-fade-in-screen', {
             'transition-enter-screen': !isResponseHidden,
             'transition-exit-screen': isResponseHidden,
             'transition-none': isResized.current,
