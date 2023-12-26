@@ -28,7 +28,7 @@ const ViewItem: FC<TabItemProps> = ({ children, id }) => {
     <button type="button" onClick={handleClick} className="block w-full">
       <span
         className={cn(
-          'flex origin-left animate-fade-in-standard items-center gap-3 rounded-full py-4 pl-4 pr-6 transition-all ease-standard hover:bg-[color-mix(in_srgb,_var(--md-sys-color-inverse-surface)_8%,_transparent)]',
+          'flex origin-left animate-fade-in-screen items-center gap-3 rounded-full py-4 pl-4 pr-6 transition-all ease-standard hover:bg-[color-mix(in_srgb,_var(--md-sys-color-inverse-surface)_8%,_transparent)]',
           {
             'bg-secondary-container text-on-secondary-container-text hover:bg-[color-mix(in_srgb,_var(--md-sys-color-secondary)_18%,_transparent)]':
               isActive,

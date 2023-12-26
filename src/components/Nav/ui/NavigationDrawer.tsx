@@ -1,4 +1,5 @@
 import NavItem from '@components/Nav/ui/NavItem';
+import VirtualScroll from '@components/Nav/ui/VirtualScroll';
 import AddView from '@components/ViewList/ui/AddView';
 import ViewItem from '@components/ViewList/ui/ViewItem';
 import ViewList from '@components/ViewList/ViewList';
@@ -7,7 +8,7 @@ import Icon from '@shared/ui/Icon';
 
 const NavigationDrawer = () => {
   return (
-    <div className="grid h-fit w-full text-on-surface-variant-text">
+    <article className="grid h-fit w-full text-on-surface-variant-text">
       <ul>
         <NavItem to={ROUTES.WELCOME_PAGE}>
           <Icon>spa</Icon> Welcome
@@ -22,13 +23,17 @@ const NavigationDrawer = () => {
       <ViewList
         render={(view, i) => (
           <ViewItem key={i} id={i}>
-            <Icon>tab</Icon> {view.name}
+            <span className="animation-delay-200 flex animate-fade-in-standard items-center">
+              <Icon>tab</Icon>
+            </span>
+            {view.name}
           </ViewItem>
         )}
       >
         <AddView />
+        <VirtualScroll size="7" />
       </ViewList>
-    </div>
+    </article>
   );
 };
 
