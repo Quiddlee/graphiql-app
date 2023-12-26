@@ -20,10 +20,7 @@ const SettignsPage = () => {
           checked={settingsState.headers}
           switcher={() => setSettingsState((prev) => ({ ...prev, headers: !prev.headers }))}
         />
-        <DarkModeComp
-          checked={settingsState.darkmode}
-          switcher={() => setSettingsState((prev) => ({ ...prev, darkmode: !prev.darkmode }))}
-        />
+        <DarkModeComp />
         <EndpointComp
           endpoint={settingsState.endpoint}
           saveEndpoint={(value: string) => setSettingsState((prev) => ({ ...prev, endpoint: value }))}
@@ -36,4 +33,3 @@ const SettignsPage = () => {
 };
 
 export default SettignsPage;
-// setSettingsState((prev) => ({ ...prev, headers: !prev.headers }))

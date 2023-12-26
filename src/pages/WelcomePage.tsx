@@ -4,7 +4,7 @@ import ROUTES from '@shared/constants/routes';
 
 const WelcomePage = () => {
   return (
-    <section>
+    <section className="text-on-surface">
       Here is my fancy welcome page!
       <div className="flex flex-col">
         <Link to={`/${ROUTES.AUTH}/${ROUTES.LOGIN}`}>login</Link>
