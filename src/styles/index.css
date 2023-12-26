@@ -260,3 +260,7 @@
   text-transform: var(--md-sys-typescale-title-small-text-transform);
   text-decoration: var(--md-sys-typescale-title-small-text-decoration);
 }
+
+[data-clear-btn] {
+  --md-filled-tonal-button-label-text-color: var(--md-sys-color-primary)
+}

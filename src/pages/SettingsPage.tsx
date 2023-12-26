@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import ClearStorageComp from '@/components/SettingsPageComp/ClearStorageComp';
 import DarkModeComp from '@/components/SettingsPageComp/DarkModeComp';
 import EndpointComp from '@/components/SettingsPageComp/EndpointComp';
 import LangSelectorComp from '@/components/SettingsPageComp/LangSelectorComp';
@@ -29,6 +30,7 @@ const SettignsPage = () => {
           saveEndpoint={(value: string) => setSettingsState((prev) => ({ ...prev, endpoint: value }))}
         />
         <LangSelectorComp language={language} changeLanguage={changeLanguage} />
+        <ClearStorageComp />
       </div>
     </section>
   );

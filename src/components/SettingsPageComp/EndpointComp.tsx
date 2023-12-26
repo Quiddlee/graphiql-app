@@ -13,8 +13,8 @@ const EndpointComp: FC<PropsType> = ({ endpoint, saveEndpoint }) => {
   return (
     <div className="mt-6 flex items-center justify-between border-b-[1px] border-outline-variant pb-6">
       <div className="flex flex-col justify-between">
-        <h4 className="text-[22px]">Dark mode</h4>
-        <p className="mt-4">Adjust how the interface looks like.</p>
+        <h4 className="text-[22px]">API endpoint</h4>
+        <p className="mt-4">Change API endpoint.</p>
       </div>
       <FilledTextField
         className="relative"

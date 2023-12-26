@@ -38,7 +38,7 @@ const LangSelectorComp: FC<PropsType> = ({ language, changeLanguage }) => {
           type="button"
           className="flex w-[104px] items-center justify-center gap-[10px] rounded-br-3xl rounded-tr-3xl border-[1px] border-outline bg-secondary-container transition-all duration-200 hover:bg-outline-variant"
         >
-          <Icon>check</Icon>Russian
+          Russian<Icon>check</Icon>
         </button>
       </>
     );
@@ -48,26 +48,7 @@ const LangSelectorComp: FC<PropsType> = ({ language, changeLanguage }) => {
         <h4 className="text-[22px]">Language</h4>
         <p className="mt-4">Change app language.</p>
       </div>
-      <div className="box-border flex h-[40px] text-sm font-[500]">
-        {buttons}
-        {/* <button
-          type="button"
-          className="flex w-[104px] items-center justify-center gap-[10px] rounded-bl-3xl rounded-tl-3xl border-[1px] border-outline bg-secondary-container transition-all duration-200 hover:bg-outline-variant"
-        >
-          <Icon>check</Icon>English
-        </button>
-        <button
-          type="button"
-          className="w-[104px] rounded-br-3xl rounded-tr-3xl border-[1px] border-l-0 border-outline transition-all duration-200 hover:bg-outline-variant"
-        >
-          Russian
-        </button> */}
-
-        {/* <OutlinedButton>Russian</OutlinedButton>
-        <FilledTonalButton className="">
-          English<Icon slot="icon">check</Icon>
-        </FilledTonalButton> */}
-      </div>
+      <div className="box-border flex h-[40px] text-sm font-[500]">{buttons}</div>
     </div>
   );
 };
