@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import useLanguage from '@/shared/Context/hooks';
 import FilledTextField from '@/shared/ui/FilledTextField';
 import Icon from '@/shared/ui/Icon';
 import IconButton from '@/shared/ui/IconButton';
@@ -10,11 +11,12 @@ type PropsType = {
 };
 
 const EndpointComp: FC<PropsType> = ({ endpoint, saveEndpoint }) => {
+  const { translation } = useLanguage();
   return (
     <div className="mt-6 flex items-center justify-between border-b-[1px] border-outline-variant pb-6">
       <div className="flex flex-col justify-between">
-        <h4 className="text-[22px]">API endpoint</h4>
-        <p className="mt-4">Change API endpoint.</p>
+        <h4 className="text-[22px]">{translation.settingsPage.endpoint.title}</h4>
+        <p className="mt-4">{translation.settingsPage.endpoint.subtitle}</p>
       </div>
       <FilledTextField
         className="relative"

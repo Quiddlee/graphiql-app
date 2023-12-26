@@ -1,13 +1,8 @@
-import { FC } from 'react';
-
+import useLanguage from '@/shared/Context/hooks';
 import Icon from '@/shared/ui/Icon';
 
-type PropsType = {
-  language: string;
-  changeLanguage: () => void;
-};
-
-const LangSelectorComp: FC<PropsType> = ({ language, changeLanguage }) => {
+const LangSelectorComp = () => {
+  const { translation, language, changeLanguage } = useLanguage();
   const buttons =
     language === 'en' ? (
       <>
@@ -22,7 +17,7 @@ const LangSelectorComp: FC<PropsType> = ({ language, changeLanguage }) => {
           className="w-[104px] rounded-br-3xl rounded-tr-3xl border-[1px] border-l-0 border-outline transition-all duration-200 hover:bg-outline-variant"
           onClick={changeLanguage}
         >
-          Russian
+          Русский
         </button>
       </>
     ) : (
@@ -38,15 +33,15 @@ const LangSelectorComp: FC<PropsType> = ({ language, changeLanguage }) => {
           type="button"
           className="flex w-[104px] items-center justify-center gap-[10px] rounded-br-3xl rounded-tr-3xl border-[1px] border-outline bg-secondary-container transition-all duration-200 hover:bg-outline-variant"
         >
-          Russian<Icon>check</Icon>
+          Русский<Icon>check</Icon>
         </button>
       </>
     );
   return (
     <div className="mt-6 flex items-center justify-between border-b-[1px] border-outline-variant pb-6">
       <div className="flex flex-col justify-between">
-        <h4 className="text-[22px]">Language</h4>
-        <p className="mt-4">Change app language.</p>
+        <h4 className="text-[22px]">{translation.settingsPage.lang.title}</h4>
+        <p className="mt-4">{translation.settingsPage.lang.subtitle}</p>
       </div>
       <div className="box-border flex h-[40px] text-sm font-[500]">{buttons}</div>
     </div>

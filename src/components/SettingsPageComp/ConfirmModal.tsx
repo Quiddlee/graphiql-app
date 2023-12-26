@@ -6,19 +6,24 @@ import TextButton from '@/shared/ui/TextButton';
 
 type PropsType = {
   setIsShown: Dispatch<SetStateAction<boolean>>;
+  locales: {
+    title: string;
+    subtitle: string;
+    cancel: string;
+    confirm: string;
+  };
 };
 
-const ConfirmModal: FC<PropsType> = ({ setIsShown }) => {
+const ConfirmModal: FC<PropsType> = ({ setIsShown, locales }) => {
+  const { title, subtitle, cancel, confirm } = locales;
   return (
     <div className="w-[312px] rounded-4xl bg-surface-container-high p-6 font-[500] text-on-surface">
       <Icon>delete</Icon>
-      <h3 className="mt-4 text-2xl">Clear data</h3>
-      <p className="mt-4 text-start text-sm text-on-surface-variant">
-        Are you sure you want to clear all local storage data?
-      </p>
+      <h3 className="mt-4 text-2xl">{title}</h3>
+      <p className="mt-4 text-start text-sm text-on-surface-variant">{subtitle}</p>
       <div className="mt-6 flex justify-end gap-2">
-        <TextButton onClick={() => setIsShown((prev) => !prev)}>Cancel</TextButton>
-        <FilledTonalButton>Clear</FilledTonalButton>
+        <TextButton onClick={() => setIsShown((prev) => !prev)}>{cancel}</TextButton>
+        <FilledTonalButton>{confirm}</FilledTonalButton>
       </div>
     </div>
   );
