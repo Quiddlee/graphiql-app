@@ -5,7 +5,7 @@ on:
     types: [opened, synchronize]
 
 env:
-  NODE_VERSION: 18.16.0
+  NODE_VERSION: 21.5.0
 
 jobs:
   linting:
