@@ -4,6 +4,7 @@ const ROUTES = {
 	LOGIN: 'login',
 	SIGNUP: 'signup',
 	MAIN: 'main',
+	SETTINGS: 'settings',
 } as const;
 
 export default ROUTES;
