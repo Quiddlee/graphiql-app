@@ -25,13 +25,25 @@ const ViewItem: FC<TabItemProps> = ({ children, id }) => {
   }
 
   return (
-    <button type="button" onClick={handleClick} className="block w-full">
+    <button
+      type="button"
+      onClick={handleClick}
+      className="group relative block w-full animate-fade-in-screen overflow-hidden rounded-full"
+    >
       <span
         className={cn(
-          'flex origin-left animate-fade-in-screen items-center gap-3 rounded-full py-4 pl-4 pr-6 transition-all ease-standard hover:bg-[color-mix(in_srgb,_var(--md-sys-color-inverse-surface)_8%,_transparent)]',
+          'absolute left-0 top-0 h-full w-full scale-x-[.32] rounded-full py-4 pl-4 pr-6 opacity-0 transition-all duration-200 ease-linear',
           {
-            'bg-secondary-container text-on-secondary-container-text hover:bg-[color-mix(in_srgb,_var(--md-sys-color-secondary)_18%,_transparent)]':
+            'scale-x-100 bg-secondary-container opacity-100 group-hover:bg-[color-mix(in_srgb,_var(--md-sys-color-secondary)_18%,_transparent)] group-active:bg-[color-mix(in_srgb,_var(--md-sys-color-secondary)_20%,_transparent)]':
               isActive,
+          },
+        )}
+      />
+      <span
+        className={cn(
+          'relative z-10 flex origin-left items-center gap-3 py-4 pl-4 pr-6 group-hover:bg-[color-mix(in_srgb,_var(--md-sys-color-inverse-surface)_8%,_transparent)] group-active:bg-[color-mix(in_srgb,_var(--md-sys-color-inverse-surface)_10%,_transparent)]',
+          {
+            'text-on-secondary-container-text': isActive,
           },
         )}
       >
