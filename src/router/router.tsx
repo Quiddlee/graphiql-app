@@ -5,6 +5,7 @@ import LoginPage from '@/pages/LoginPage';
 import SignUpPage from '@/pages/SignUpPage';
 import WelcomePage from '@/pages/WelcomePage';
 import ROUTES from '@/shared/constants/routes';
+import Settings from '@components/Settings/Settings';
 import MainPage from '@pages/MainPage/MainPage';
 
 import UnauthAllowedOnly from './UnauthAllowedOnly';
@@ -54,6 +55,10 @@ export const routes = [
           <MainPage />
           // </AuthAllowedOnly>
         ),
+      },
+      {
+        path: ROUTES.SETTINGS,
+        element: <Settings />,
       },
     ],
   },
