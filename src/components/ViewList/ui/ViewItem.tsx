@@ -20,7 +20,7 @@ const ViewItem: FC<TabItemProps> = ({ children, id }) => {
   const isActive = isMain && isActiveView;
 
   function handleClick() {
-    if (id === activeView) return;
+    if (id === activeView && isMain) return;
     handleActiveView(id);
   }
 
