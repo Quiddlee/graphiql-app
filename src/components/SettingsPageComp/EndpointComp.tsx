@@ -19,13 +19,13 @@ const EndpointComp: FC<PropsType> = ({ endpoint, saveEndpoint }) => {
         <p className="mt-4">{translation.settingsPage.endpoint.subtitle}</p>
       </div>
       <FilledTextField
-        className="relative"
+        className="relative h-[68px] w-[360px] text-base"
         label="API endpoint"
         value={endpoint}
         name="endpoint"
         onChange={(e) => saveEndpoint((e?.target as HTMLInputElement).value)}
       >
-        <IconButton slot="trailing-icon" onClick={() => saveEndpoint('')}>
+        <IconButton className="absolute right-0 top-[10px]" slot="trailing-icon" onClick={() => saveEndpoint('')}>
           <Icon>cancel</Icon>
         </IconButton>
       </FilledTextField>

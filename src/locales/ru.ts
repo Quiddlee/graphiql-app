@@ -46,6 +46,10 @@ const ru = {
 				cancel: 'Отмена',
 				confirm: 'Очистить',
 			},
+			undo: {
+				undoTitle: 'Данные хранилища очищены',
+				cancelBtn: 'Отменить',
+			},
 		},
 	},
 };

@@ -9,6 +9,7 @@ import ConfirmOverlay from './ConfirmOverlay';
 const ClearStorageComp = () => {
   const [isModalShown, setIsModalShown] = useState(false);
   const { translation } = useLanguage();
+
   return (
     <>
       <div className="mt-6 flex items-center justify-between pb-6">
@@ -21,7 +22,10 @@ const ClearStorageComp = () => {
         </FilledTonalButton>
       </div>
       <ConfirmOverlay isShown={isModalShown} setIsShown={setIsModalShown}>
-        <ConfirmModal setIsShown={setIsModalShown} locales={translation.settingsPage.clear.modal} />
+        <ConfirmModal
+          setIsShown={setIsModalShown}
+          locales={{ ...translation.settingsPage.clear.modal, ...translation.settingsPage.clear.undo }}
+        />
       </ConfirmOverlay>
     </>
   );

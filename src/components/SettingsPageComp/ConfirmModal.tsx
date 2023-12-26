@@ -1,8 +1,14 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import FilledTonalButton from '@/shared/ui/FilledTonalButton';
 import Icon from '@/shared/ui/Icon';
 import TextButton from '@/shared/ui/TextButton';
+
+import 'toastify-js/src/toastify.css';
+import ClearUndo from './ClearUndo';
 
 type PropsType = {
   setIsShown: Dispatch<SetStateAction<boolean>>;
@@ -11,11 +17,13 @@ type PropsType = {
     subtitle: string;
     cancel: string;
     confirm: string;
+    undoTitle: string;
+    cancelBtn: string;
   };
 };
 
 const ConfirmModal: FC<PropsType> = ({ setIsShown, locales }) => {
-  const { title, subtitle, cancel, confirm } = locales;
+  const { title, subtitle, cancel, confirm, undoTitle, cancelBtn } = locales;
   return (
     <div className="w-[312px] rounded-4xl bg-surface-container-high p-6 font-[500] text-on-surface">
       <Icon>delete</Icon>
@@ -23,7 +31,14 @@ const ConfirmModal: FC<PropsType> = ({ setIsShown, locales }) => {
       <p className="mt-4 text-start text-sm text-on-surface-variant">{subtitle}</p>
       <div className="mt-6 flex justify-end gap-2">
         <TextButton onClick={() => setIsShown((prev) => !prev)}>{cancel}</TextButton>
-        <FilledTonalButton>{confirm}</FilledTonalButton>
+        <FilledTonalButton
+          onClick={() => {
+            toast(<ClearUndo closeToast={() => {}} title={undoTitle} btn={cancelBtn} />);
+            setIsShown((prev) => !prev);
+          }}
+        >
+          {confirm}
+        </FilledTonalButton>
       </div>
     </div>
   );

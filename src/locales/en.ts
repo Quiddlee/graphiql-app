@@ -46,6 +46,10 @@ const en = {
 				cancel: 'Cancel',
 				confirm: 'Clear',
 			},
+			undo: {
+				undoTitle: 'Local storage data cleared',
+				cancelBtn: 'Undo',
+			},
 		},
 	},
 };
