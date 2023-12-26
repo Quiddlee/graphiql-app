@@ -22,7 +22,7 @@ const DarkModeComp = () => {
         <h4 className="text-[22px]">{translation.settingsPage.mode.title}</h4>
         <p className="mt-4">{translation.settingsPage.mode.subtitle}</p>
       </div>
-      <Switch selected={isDarkMode} onClick={() => handleThemeSwitch()} />
+      <Switch selected={isDarkMode} onClick={() => handleThemeSwitch()} data-testid="themeSwitcher" />
     </div>
   );
 };

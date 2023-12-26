@@ -1,7 +1,7 @@
 const colorThemeSwitcher = {
 	setLight: () => {
-		document.body.setAttribute('data-user-theme', 'ligth');
-		localStorage.setItem('graphiQlColorTheme', 'ligth');
+		document.body.setAttribute('data-user-theme', 'light');
+		localStorage.setItem('graphiQlColorTheme', 'light');
 	},
 	setDark: () => {
 		document.body.removeAttribute('data-user-theme');
