@@ -43,6 +43,14 @@ const Details: FC<DetailsProps> = ({ id }) => {
     [handleDeleteView, id],
   );
 
+  const handleRename = useCallback(
+    (e: MouseEvent) => {
+      e.stopPropagation();
+      handleDialogToggle(true);
+    },
+    [handleDialogToggle],
+  );
+
   return (
     <article id={`details-menu-${id}`} className="relative ml-auto flex items-center">
       <RenameViewDialog id={id} ref={dialogRef} onToggle={handleDialogToggle} />
@@ -55,7 +63,7 @@ const Details: FC<DetailsProps> = ({ id }) => {
       </FilledTonalIconButton>
 
       <Menu positioning="popover" ref={menuRef} anchor={`details-menu-${id}`}>
-        <MenuItem onClick={() => handleDialogToggle(true)}>
+        <MenuItem onClick={handleRename}>
           <span className="flex items-center justify-start gap-[10px]">
             <Icon>edit</Icon> Rename
           </span>
