@@ -2,6 +2,7 @@ import { forwardRef, useCallback, useState } from 'react';
 
 import { MdDialog } from '@material/web/all';
 import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field';
+import { createPortal } from 'react-dom';
 
 import useView from '@components/Nav/hooks/useView';
 import Dialog from '@shared/ui/Dialog';
@@ -35,7 +36,7 @@ const RenameViewDialog = forwardRef<MdDialog, RenameViewDialogProps>(({ id, onTo
     [handleRenameView, id, onToggle],
   );
 
-  return (
+  return createPortal(
     <Dialog ref={ref}>
       <h3 className="pr-60" slot="headline">
         Rename this view
@@ -56,7 +57,8 @@ const RenameViewDialog = forwardRef<MdDialog, RenameViewDialogProps>(({ id, onTo
           Rename
         </FilledTonalButton>
       </div>
-    </Dialog>
+    </Dialog>,
+    document.body,
   );
 });
 
