@@ -18,7 +18,7 @@ type RenameViewDialogProps = {
 const RenameViewDialog = forwardRef<MdDialog, RenameViewDialogProps>(({ id, onToggle }, ref) => {
   const { handleRenameView, views } = useView();
 
-  const viewName = views[id].name;
+  const viewName = views.find((view) => view.id === id)?.name ?? '';
   const [val, setVal] = useState(viewName);
   const [isDisabled, setIsDisabled] = useState(true);
 

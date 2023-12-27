@@ -1,3 +1,4 @@
+/* eslint-disable no-case-declarations */
 import { createContext, PropsWithChildren, useCallback, useEffect, useMemo, useReducer } from 'react';
 
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -34,14 +35,24 @@ function reducer(state: ViewInitialState, action: Action): ViewInitialState {
     case 'view/viewRenamed':
       return {
         ...state,
-        views: state.views.map((view, i) => {
-          if (i !== action.payload.id) return view;
+        views: state.views.map((view) => {
+          if (view.id !== action.payload.id) return view;
 
           return {
             ...view,
             name: action.payload.name,
           };
         }),
+      };
+
+    case 'view/viewDeleted':
+      const updatedViews = state.views.filter((view) => view.id !== action.payload);
+      const activeView = state.activeView === action.payload ? updatedViews[0].id : state.activeView;
+
+      return {
+        ...state,
+        activeView,
+        views: updatedViews,
       };
 
     default:
@@ -63,7 +74,7 @@ const ViewProvider = ({ children }: PropsWithChildren) => {
 
   const handleActiveView = useCallback(
     (id: number) => {
-      const newActiveView = views[id];
+      const newActiveView = views.find((view) => view.id === id);
 
       if (!newActiveView) return;
       if (!isMain) navigate(ROUTES.MAIN);
@@ -80,16 +91,26 @@ const ViewProvider = ({ children }: PropsWithChildren) => {
   );
 
   const handleAddView = useCallback(() => {
-    dispatch({ type: 'view/viewAdded', payload: { view: NEW_VIEW, activeView: views.length } });
+    const id = Date.now();
+
+    dispatch({
+      type: 'view/viewAdded',
+      payload: { view: { ...NEW_VIEW, id }, activeView: id },
+    });
+
     setUrl({
       query: NEW_VIEW.query,
       variables: NEW_VIEW.variables,
       headers: NEW_VIEW.headers,
     });
-  }, [setUrl, views.length]);
+  }, [setUrl]);
 
   const handleRenameView = useCallback((id: number, newName: string) => {
     dispatch({ type: 'view/viewRenamed', payload: { name: newName, id } });
+  }, []);
+
+  const handleDeleteView = useCallback((id: number) => {
+    dispatch({ type: 'view/viewDeleted', payload: id });
   }, []);
 
   useEffect(() => {
@@ -101,9 +122,13 @@ const ViewProvider = ({ children }: PropsWithChildren) => {
     const headers = readUrl(urlParams.HEADERS) ?? '';
     const variables = readUrl(urlParams.VARIABLES) ?? '';
 
-    views[activeView].query = query;
-    views[activeView].headers = headers;
-    views[activeView].variables = variables;
+    const currView = views.find((view) => view.id === activeView);
+
+    if (!currView) return;
+
+    currView.query = query;
+    currView.headers = headers;
+    currView.variables = variables;
 
     localStorage.setItem(localStorageKeys.VIEWS, JSON.stringify(views));
   }, [activeView, readUrl, views]);
@@ -115,8 +140,9 @@ const ViewProvider = ({ children }: PropsWithChildren) => {
       handleActiveView,
       handleAddView,
       handleRenameView,
+      handleDeleteView,
     };
-  }, [activeView, handleActiveView, handleAddView, handleRenameView, views]);
+  }, [activeView, handleActiveView, handleAddView, handleDeleteView, handleRenameView, views]);
 
   return <ViewContext.Provider value={value}>{children}</ViewContext.Provider>;
 };

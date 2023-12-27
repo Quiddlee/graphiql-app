@@ -22,13 +22,13 @@ const NavigationDrawer = () => {
         <hr className="ml-4 border-outline-variant" />
       </ul>
       <ViewList
-        render={(view, i) => (
-          <ViewItem key={i} id={i}>
+        render={(view) => (
+          <ViewItem key={view.id} id={view.id}>
             <span className="animation-delay-200 flex animate-fade-in-standard items-center">
               <Icon>tab</Icon>
             </span>
             {view.name}
-            <Details id={i} />
+            <Details id={view.id} />
           </ViewItem>
         )}
       >

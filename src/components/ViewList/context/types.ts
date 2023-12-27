@@ -1,4 +1,5 @@
 export type View = {
+	id: number;
 	name: string;
 	query: string;
 	variables: string;
@@ -14,6 +15,7 @@ export type ViewContext = ViewInitialState & {
 	handleActiveView: (index: number) => void;
 	handleAddView: () => void;
 	handleRenameView: (id: number, name: string) => void;
+	handleDeleteView: (id: number) => void;
 };
 
 type ActionViewAdded = {
@@ -31,4 +33,9 @@ type ActionRenameView = {
 	payload: { id: number; name: string };
 };
 
-export type Action = ActionViewAdded | ActionActiveViewChanged | ActionRenameView;
+type ActionDeleteView = {
+	type: 'view/viewDeleted';
+	payload: number;
+};
+
+export type Action = ActionViewAdded | ActionActiveViewChanged | ActionRenameView | ActionDeleteView;
