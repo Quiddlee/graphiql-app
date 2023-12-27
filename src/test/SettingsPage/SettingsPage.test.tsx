@@ -52,7 +52,6 @@ describe('Testing for settings page', () => {
     waitForElementToBeRemoved(() => {
       expect(screen.queryByTestId('overlay')).toBeNull();
     }).catch(() => {});
-    screen.debug();
   });
   it('Should open confirm modal and close it after clicking corresponding buttons', async () => {
     render(<App />);
