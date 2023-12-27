@@ -1,3 +1,5 @@
+import { nanoid } from 'nanoid';
+
 import useScrollbar from '@/shared/lib/hooks/useScrollbar';
 import { DocsExplorerType, SchemaTypeObj } from '@/shared/types';
 
@@ -19,9 +21,9 @@ const DocsTypeComp = ({ explorer, currType }: { explorer: DocsExplorerType; curr
       const beforeSeparator = <br />;
       const afterSeparator = i >= field.args.length - 1 ? <br /> : null;
       return (
-        <>
+        <p key={nanoid()} className="inline">
           {separation && beforeSeparator}
-          <span className={separation ? 'pl-3' : ''} key={argTypeName}>
+          <span className={separation ? 'pl-3' : ''} key={nanoid()}>
             <span className="text-tertiary">{arg.name}</span>:&nbsp;
             {before}
             <a className="text-docs-link-text-color hover:underline" href={link} onClick={(e) => clinkHandler(e, link)}>
@@ -30,14 +32,14 @@ const DocsTypeComp = ({ explorer, currType }: { explorer: DocsExplorerType; curr
             {after}
           </span>
           {separation && afterSeparator}
-        </>
+        </p>
       );
     });
     const returnType = getTypeName(field.type);
     const [prevType, typeLink, afterType] = separateString(returnType);
     return (
-      <li key={field.name}>
-        <span className="text-docs-field-text-color">{field.name}</span>
+      <li key={nanoid()}>
+        <span className="text-docs-field-text-color">{nanoid()}</span>
         {args.length > 0 && '('}
         {args}
         {args.length > 0 && ')'}: {prevType}
@@ -56,7 +58,7 @@ const DocsTypeComp = ({ explorer, currType }: { explorer: DocsExplorerType; curr
   });
   const inputFields = currType?.inputFields?.map((field) => {
     return (
-      <li key={field.name}>
+      <li key={nanoid()}>
         {field.name}:&nbsp;
         <a
           className="text-docs-link-text-color hover:underline"
@@ -70,11 +72,11 @@ const DocsTypeComp = ({ explorer, currType }: { explorer: DocsExplorerType; curr
   });
   const isFields = fields || inputFields;
   const enumValues = currType?.enumValues?.map((value) => {
-    return <li key={value.name}>{value.name}</li>;
+    return <li key={nanoid()}>{value.name}</li>;
   });
   const possibleTypes = currType?.possibleTypes?.map((type) => {
     return (
-      <li key={type.name}>
+      <li key={nanoid()}>
         <a
           className="text-docs-link-text-color hover:underline"
           href={type.name}
@@ -87,7 +89,7 @@ const DocsTypeComp = ({ explorer, currType }: { explorer: DocsExplorerType; curr
   });
   const interfaces = currType?.interfaces?.map((inter) => {
     return (
-      <li key={inter.name}>
+      <li key={nanoid()}>
         <a
           className="text-docs-link-text-color hover:underline"
           href={inter.name}
