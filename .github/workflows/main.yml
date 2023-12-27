@@ -5,7 +5,7 @@ on:
     types: [opened, synchronize]
 
 env:
-  NODE_VERSION: 18.16.0
+  NODE_VERSION: 21.5.0
 
 jobs:
   linting:
@@ -42,9 +42,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Setup Continuous integration
-        uses: ./.github/actions/ci-setup
+        
+      - name: Npm Clean Install
+        run: npm ci
 
       - name: test
         run: npm run test
