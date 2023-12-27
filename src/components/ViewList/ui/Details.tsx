@@ -1,6 +1,6 @@
-import { FC, MouseEvent, useCallback, useRef } from 'react';
+import { FC, MouseEvent, useRef, useState } from 'react';
 
-import { MdDialog, MdMenu } from '@material/web/all';
+import { MdMenu } from '@material/web/all';
 
 import useView from '@components/Nav/hooks/useView';
 import RenameViewDialog from '@components/ViewList/ui/RenameViewDialog';
@@ -15,8 +15,8 @@ type DetailsProps = {
 
 const Details: FC<DetailsProps> = ({ id }) => {
   const menuRef = useRef<MdMenu>(null);
-  const dialogRef = useRef<MdDialog>(null);
   const { handleDeleteView, views } = useView();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const isDeleteDisabled = views.length === 1;
 
@@ -25,35 +25,9 @@ const Details: FC<DetailsProps> = ({ id }) => {
     if (menuRef.current) menuRef.current.open = !menuRef.current.open;
   }
 
-  const handleDialogToggle = useCallback((open: boolean) => {
-    if (!dialogRef.current) return;
-
-    if (open) {
-      dialogRef.current.show();
-    } else {
-      dialogRef.current.close();
-    }
-  }, []);
-
-  const handleDelete = useCallback(
-    (e: MouseEvent) => {
-      e.stopPropagation();
-      handleDeleteView(id);
-    },
-    [handleDeleteView, id],
-  );
-
-  const handleRename = useCallback(
-    (e: MouseEvent) => {
-      e.stopPropagation();
-      handleDialogToggle(true);
-    },
-    [handleDialogToggle],
-  );
-
   return (
     <article id={`details-menu-${id}`} className="relative ml-auto flex items-center">
-      <RenameViewDialog id={id} ref={dialogRef} onToggle={handleDialogToggle} />
+      <RenameViewDialog open={isMenuOpen} id={id} onToggle={setIsMenuOpen} />
 
       <FilledTonalIconButton
         className="invisible absolute -right-4 group-hover:visible"
@@ -63,12 +37,23 @@ const Details: FC<DetailsProps> = ({ id }) => {
       </FilledTonalIconButton>
 
       <Menu positioning="popover" ref={menuRef} anchor={`details-menu-${id}`}>
-        <MenuItem onClick={handleRename}>
+        <MenuItem
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsMenuOpen(true);
+          }}
+        >
           <span className="flex items-center justify-start gap-[10px]">
             <Icon>edit</Icon> Rename
           </span>
         </MenuItem>
-        <MenuItem disabled={isDeleteDisabled} onClick={handleDelete}>
+        <MenuItem
+          disabled={isDeleteDisabled}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleDeleteView(id);
+          }}
+        >
           <span className="flex items-center justify-start gap-[10px]">
             <Icon>delete</Icon> Delete
           </span>

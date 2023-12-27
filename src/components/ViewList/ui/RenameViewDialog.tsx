@@ -1,6 +1,5 @@
-import { forwardRef, useCallback, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 
-import { MdDialog } from '@material/web/all';
 import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field';
 import { createPortal } from 'react-dom';
 
@@ -13,9 +12,10 @@ import TextButton from '@shared/ui/TextButton';
 type RenameViewDialogProps = {
   id: number;
   onToggle: (open: boolean) => void;
+  open: boolean;
 };
 
-const RenameViewDialog = forwardRef<MdDialog, RenameViewDialogProps>(({ id, onToggle }, ref) => {
+const RenameViewDialog: FC<RenameViewDialogProps> = ({ id, open, onToggle }) => {
   const { handleRenameView, views } = useView();
 
   const viewName = views.find((view) => view.id === id)?.name ?? '';
@@ -37,7 +37,7 @@ const RenameViewDialog = forwardRef<MdDialog, RenameViewDialogProps>(({ id, onTo
   );
 
   return createPortal(
-    <Dialog ref={ref}>
+    <Dialog open={open}>
       <h3 className="pr-60" slot="headline">
         Rename this view
       </h3>
@@ -60,8 +60,6 @@ const RenameViewDialog = forwardRef<MdDialog, RenameViewDialogProps>(({ id, onTo
     </Dialog>,
     document.body,
   );
-});
-
-RenameViewDialog.displayName = 'RenameViewDialog';
+};
 
 export default RenameViewDialog;
