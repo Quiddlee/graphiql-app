@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { RouterProvider } from 'react-router-dom';
 
 import router from '@/router/router';
@@ -6,10 +8,12 @@ import AuthProvider from '@shared/Context/AuthContext';
 import LanguageProvider from '@shared/Context/LanguageContext';
 
 const App = () => {
-  const isLightTheme = localStorage.getItem('graphiQlColorTheme');
-  if (isLightTheme) {
-    colorThemeSwitcher.setLight();
-  }
+  useEffect(() => {
+    const isLightTheme = localStorage.getItem('graphiQlColorTheme');
+    if (isLightTheme) {
+      colorThemeSwitcher.setLight();
+    }
+  }, []);
   return (
     <AuthProvider>
       <LanguageProvider>

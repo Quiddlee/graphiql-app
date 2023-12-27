@@ -25,7 +25,7 @@ type PropsType = {
 const ConfirmModal: FC<PropsType> = ({ setIsShown, locales }) => {
   const { title, subtitle, cancel, confirm, undoTitle, cancelBtn } = locales;
   return (
-    <div className="w-[312px] rounded-4xl bg-surface-container-high p-6 font-[500] text-on-surface">
+    <div className="w-[312px] rounded-4xl bg-surface-container-high p-6 text-center font-[500] text-on-surface">
       <Icon>delete</Icon>
       <h3 className="mt-4 text-2xl">{title}</h3>
       <p className="mt-4 text-start text-sm text-on-surface-variant">{subtitle}</p>

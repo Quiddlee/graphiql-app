@@ -39,7 +39,7 @@ const DocsTypeComp = ({ explorer, currType }: { explorer: DocsExplorerType; curr
     const [prevType, typeLink, afterType] = separateString(returnType);
     return (
       <li key={nanoid()}>
-        <span className="text-docs-field-text-color">{nanoid()}</span>
+        <span className="text-docs-field-text-color">{field.name}</span>
         {args.length > 0 && '('}
         {args}
         {args.length > 0 && ')'}: {prevType}

@@ -8,11 +8,10 @@ type UndoPropsType = {
 
 const ClearUndo = (props: UndoPropsType) => {
   const { closeToast, title, btn } = props;
-  const timeOutStab = setTimeout(() => {});
-  const [deleteDataTimeout, setDeleteDataTimeout] = useState(timeOutStab);
+  const [deleteDataTimeout, setDeleteDataTimeout] = useState(null as unknown as NodeJS.Timeout);
 
   const dataClearance = () => {
-    localStorage.removeItem('Some_very_inportant_app_info');
+    localStorage.clear();
   };
 
   useEffect(() => {
