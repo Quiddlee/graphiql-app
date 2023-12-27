@@ -90,6 +90,22 @@ vi.mock('@components/loginReg/PassVisibilityIcon', () => ({
   default: () => <button type="button">click</button>,
 }));
 
+vi.mock('@components/Header/ui/ShowDocsBtn', () => ({
+  default: (props: { onClick: () => void }) => (
+    <button type="button" onClick={props.onClick}>
+      show docs
+    </button>
+  ),
+}));
+
+vi.mock('@components/DocsComp/ui/CloseDocsBtn', () => ({
+  default: (props: { onClick: () => void }) => (
+    <button type="button" onClick={props.onClick}>
+      closeDocs
+    </button>
+  ),
+}));
+
 vi.mock('firebase/auth', () => ({
   getAuth: () => {},
   signInWithEmailAndPassword: () => ({ user: { email: 'test@gmail.com' } }),

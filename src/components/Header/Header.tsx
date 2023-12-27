@@ -1,8 +1,20 @@
+import { useState } from 'react';
+
+import DocsComp from '@components/DocsComp/DocsComp';
+import ShowDocsBtn from '@components/Header/ui/ShowDocsBtn';
+
 const Header = () => {
+  const [isDocsShown, setIsDocsShown] = useState(false);
   return (
-    <header className="col-span-full row-start-1 row-end-2 flex items-center py-2 pl-6 font-readex_pro sm:py-3">
-      GraphiQL
-    </header>
+    <>
+      <header className="col-span-full flex justify-between">
+        <p>Here is still header</p>
+        <div>
+          <ShowDocsBtn onClick={() => setIsDocsShown((prev) => !prev)} />
+        </div>
+      </header>
+      <DocsComp isShown={isDocsShown} setIsDocsShown={setIsDocsShown} />
+    </>
   );
 };
 
