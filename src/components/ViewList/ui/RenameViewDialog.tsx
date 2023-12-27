@@ -37,7 +37,7 @@ const RenameViewDialog: FC<RenameViewDialogProps> = ({ id, open, onToggle }) => 
   );
 
   return createPortal(
-    <Dialog open={open}>
+    <Dialog closed={() => onToggle(false)} open={open}>
       <h3 className="pr-60" slot="headline">
         Rename this view
       </h3>

@@ -4,6 +4,7 @@ import { MdMenu } from '@material/web/all';
 
 import useView from '@components/Nav/hooks/useView';
 import RenameViewDialog from '@components/ViewList/ui/RenameViewDialog';
+import cn from '@shared/lib/helpers/cn';
 import FilledTonalIconButton from '@shared/ui/FilledTonalIconButton';
 import Icon from '@shared/ui/Icon';
 import Menu from '@shared/ui/Menu';
@@ -16,7 +17,7 @@ type DetailsProps = {
 const Details: FC<DetailsProps> = ({ id }) => {
   const menuRef = useRef<MdMenu>(null);
   const { handleDeleteView, views } = useView();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const isDeleteDisabled = views.length === 1;
 
@@ -26,11 +27,13 @@ const Details: FC<DetailsProps> = ({ id }) => {
   }
 
   return (
-    <article id={`details-menu-${id}`} className="relative ml-auto flex items-center">
-      <RenameViewDialog open={isMenuOpen} id={id} onToggle={setIsMenuOpen} />
+    <article id={`details-menu-${id}`} className="relative ml-auto flex items-center brightness-125">
+      <RenameViewDialog open={isDialogOpen} id={id} onToggle={setIsDialogOpen} />
 
       <FilledTonalIconButton
-        className="invisible absolute -right-4 group-hover:visible"
+        className={cn('invisible absolute -right-4 group-hover:visible', {
+          visible: isDialogOpen,
+        })}
         onClick={(e) => handleMenuToggle(e)}
       >
         <Icon>more_vert</Icon>
@@ -40,7 +43,7 @@ const Details: FC<DetailsProps> = ({ id }) => {
         <MenuItem
           onClick={(e) => {
             e.stopPropagation();
-            setIsMenuOpen(true);
+            setIsDialogOpen(true);
           }}
         >
           <span className="flex items-center justify-start gap-[10px]">

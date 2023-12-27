@@ -7,6 +7,9 @@ const Dialog = createComponent({
   react: React,
   tagName: 'md-dialog',
   elementClass: MdDialog,
+  events: {
+    closed: 'closed',
+  },
 });
 
 export default Dialog;
