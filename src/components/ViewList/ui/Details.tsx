@@ -26,6 +26,8 @@ const Details: FC<DetailsProps> = ({ id }) => {
     if (menuRef.current) menuRef.current.open = !menuRef.current.open;
   }
 
+  // TODO: add confirm dialog when deleting view
+
   return (
     <article id={`details-menu-${id}`} className="relative ml-auto flex items-center brightness-125">
       <RenameViewDialog open={isDialogOpen} id={id} onToggle={setIsDialogOpen} />
