@@ -8,7 +8,11 @@ import Icon from '@shared/ui/Icon';
 import Menu from '@shared/ui/Menu';
 import MenuItem from '@shared/ui/MenuItem';
 
-const Details: FC<{ id: number }> = ({ id }) => {
+type DetailsProps = {
+  id: number;
+};
+
+const Details: FC<DetailsProps> = ({ id }) => {
   const menuRef = useRef<MdMenu>(null);
   const dialogRef = useRef<MdDialog>(null);
 

@@ -6,9 +6,7 @@ import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
-import FormInput from '@/components/loginReg/FormInput';
 import PassVisibilityIcon from '@/components/loginReg/PassVisibilityIcon';
-import SubmitBtn from '@/components/loginReg/SubmitBtn';
 import AUTH_ERRORS from '@/shared/constants/authErrors';
 import ROUTES from '@/shared/constants/routes';
 import { regValidationSchema } from '@/shared/constants/validationSchema';
@@ -18,6 +16,8 @@ import notationLocalizer from '@/shared/helpers/notationLocalizer';
 import switchPassType from '@/shared/helpers/switchPassType';
 import toastifyNotation from '@/shared/helpers/toastifyNotation';
 import { ErrorType, TextInputProps } from '@/shared/types';
+import FilledTonalButton from '@shared/ui/FilledTonalButton';
+import OutlinedTextField from '@shared/ui/OutlinedTextField';
 
 export default function SignUpPage() {
   const [passType, setPassType] = useState('password');
@@ -61,7 +61,7 @@ export default function SignUpPage() {
         <h2 className="mt-3 text-center text-base font-[400] text-on-surface-variant">{subtitle}</h2>
         <form noValidate className="mt-8" onSubmit={handleSubmit(onSubmit)}>
           <div className="relative">
-            <FormInput
+            <OutlinedTextField
               className="w-full"
               {...(register('email') as TextInputProps)}
               type="email"
@@ -73,7 +73,7 @@ export default function SignUpPage() {
             </p>
           </div>
           <div className="relative mt-12">
-            <FormInput
+            <OutlinedTextField
               className="w-full"
               {...(register('password') as TextInputProps)}
               type={passType as TextFieldType}
@@ -81,13 +81,13 @@ export default function SignUpPage() {
               label={passPlaceHold}
             >
               <PassVisibilityIcon onClick={() => setPassType((prev) => switchPassType(prev))} />
-            </FormInput>
+            </OutlinedTextField>
             <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">
               {notationLocalizer(language, errors.password?.message)}
             </p>
           </div>
           <div className="relative mt-12">
-            <FormInput
+            <OutlinedTextField
               className="w-full"
               {...(register('confirmPassword') as TextInputProps)}
               type={confPassType as TextFieldType}
@@ -95,14 +95,14 @@ export default function SignUpPage() {
               label={confPassPlaceHold}
             >
               <PassVisibilityIcon onClick={() => setConfPassType((prev) => switchPassType(prev))} />
-            </FormInput>
+            </OutlinedTextField>
             <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">
               {notationLocalizer(language, errors.confirmPassword?.message)}
             </p>
           </div>
-          <SubmitBtn className="mt-[52px] w-full" disabled={!isValid} type="submit">
+          <FilledTonalButton className="mt-[52px] w-full" disabled={!isValid} type="submit">
             {btnTitle}
-          </SubmitBtn>
+          </FilledTonalButton>
         </form>
         <p className="mt-8 text-center text-sm font-[400] text-on-surface-variant">
           {linkClue}{' '}

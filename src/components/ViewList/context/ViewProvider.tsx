@@ -116,7 +116,7 @@ const ViewProvider = ({ children }: PropsWithChildren) => {
       handleAddView,
       handleRenameView,
     };
-  }, [activeView, handleActiveView, handleAddView, views]);
+  }, [activeView, handleActiveView, handleAddView, handleRenameView, views]);
 
   return <ViewContext.Provider value={value}>{children}</ViewContext.Provider>;
 };
