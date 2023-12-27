@@ -28,7 +28,7 @@ const ViewItem: FC<TabItemProps> = ({ children, id }) => {
     <button
       type="button"
       onClick={handleClick}
-      className="group relative block w-full animate-fade-in-screen rounded-full"
+      className="group relative inline-block w-full animate-fade-in-screen rounded-full"
     >
       <span
         className={cn(

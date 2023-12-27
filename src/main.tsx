@@ -8,6 +8,7 @@ import initFirebaseApp from './firebase';
 
 import '@/styles/index.css';
 import 'overlayscrollbars/overlayscrollbars.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 initFirebaseApp();
 

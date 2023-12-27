@@ -2,6 +2,7 @@ import { FC, useCallback, useState } from 'react';
 
 import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field';
 import { createPortal } from 'react-dom';
+import { toast } from 'react-toastify';
 
 import useView from '@components/Nav/hooks/useView';
 import Dialog from '@shared/ui/Dialog';
@@ -32,6 +33,11 @@ const RenameViewDialog: FC<RenameViewDialogProps> = ({ id, open, onToggle }) => 
     (newName: string) => {
       handleRenameView(id, newName);
       onToggle(false);
+      toast(
+        <>
+          Renamed to <span className="font-bold">{newName}</span>
+        </>,
+      );
     },
     [handleRenameView, id, onToggle],
   );

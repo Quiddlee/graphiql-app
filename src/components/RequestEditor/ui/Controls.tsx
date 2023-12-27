@@ -1,7 +1,8 @@
 import { FC, HTMLAttributes } from 'react';
 
+import { toast } from 'react-toastify';
+
 import urlParams from '@shared/constants/urlParams';
-import toastifyNotation from '@shared/helpers/toastifyNotation';
 import cn from '@shared/lib/helpers/cn';
 import useScreen from '@shared/lib/hooks/useScreen';
 import useUrl from '@shared/lib/hooks/useUrl';
@@ -23,8 +24,7 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
   const handleCopyText = async () => {
     const query = readUrl(urlParams.QUERY);
     await navigator.clipboard.writeText(query);
-
-    toastifyNotation('Request copied!');
+    toast('Copied to clipboard');
   };
 
   return (

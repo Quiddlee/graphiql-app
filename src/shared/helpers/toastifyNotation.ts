@@ -6,6 +6,10 @@ const toastifyNotation = (message: string) => {
 		text: message,
 		duration: 1500,
 		position: 'center',
+		className: 'text-inverse-on-surface rounded-sm',
+		style: {
+			background: '#E6E0E9',
+		},
 	}).showToast();
 };
 

@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import { cssTransition, ToastContainer } from 'react-toastify';
 
 import Footer from '@components/Footer/Footer';
 import Header from '@components/Header/Header';
@@ -6,6 +7,11 @@ import Nav from '@components/Nav/Nav';
 import Controls from '@components/RequestEditor/ui/Controls';
 import ViewProvider from '@components/ViewList/context/ViewProvider';
 import useScrollbar from '@shared/lib/hooks/useScrollbar';
+
+const SnackBarTransition = cssTransition({
+  enter: 'animate-fade-in-snackbar',
+  exit: 'animate-fade-out-snackbar',
+});
 
 const MainLayout = () => {
   const navContainerRef = useScrollbar<HTMLDivElement>();
@@ -29,6 +35,20 @@ const MainLayout = () => {
         </div>
         <Controls className="absolute bottom-36 right-6 z-10 sm:hidden" />
       </main>
+
+      <ToastContainer
+        closeOnClick={false}
+        closeButton={false}
+        autoClose={4000}
+        hideProgressBar
+        pauseOnHover={false}
+        draggable={false}
+        limit={1}
+        transition={SnackBarTransition}
+        position="bottom-left"
+        toastClassName="!text-inverse-on-surface origin-bottom !bg-inverse-surface !min-w-[336px] !pl-4 !min-h-[48px] text-left"
+        bodyClassName="text-sm font-normal [&>div]:origin-bottom [&>div]:animate-fade-in-snackbar-body [&>div]:truncate w-full [&>div]:pe-16"
+      />
     </ViewProvider>
   );
 };

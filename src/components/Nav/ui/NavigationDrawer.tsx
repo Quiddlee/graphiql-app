@@ -9,7 +9,7 @@ import Icon from '@shared/ui/Icon';
 
 const NavigationDrawer = () => {
   return (
-    <article className="grid h-fit w-full text-on-surface-variant-text">
+    <article className="h-fit w-full text-on-surface-variant-text">
       <ul>
         <NavItem to={ROUTES.WELCOME_PAGE}>
           <Icon>spa</Icon> Welcome
@@ -27,7 +27,7 @@ const NavigationDrawer = () => {
             <span className="animation-delay-200 flex animate-fade-in-standard items-center">
               <Icon>tab</Icon>
             </span>
-            {view.name}
+            <span className="truncate group-hover:pe-8 [&:has(+_article_.visible)]:pe-8">{view.name}</span>
             <Details id={view.id} />
           </ViewItem>
         )}
