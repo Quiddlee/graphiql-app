@@ -16,8 +16,8 @@ import notationLocalizer from '@/shared/helpers/notationLocalizer';
 import switchPassType from '@/shared/helpers/switchPassType';
 import toastifyNotation from '@/shared/helpers/toastifyNotation';
 import { ErrorType, TextInputProps } from '@/shared/types';
-import FilledTonalButton from '@shared/ui/FilledTonalButton';
-import OutlinedTextField from '@shared/ui/OutlinedTextField';
+import FormInput from '@components/loginReg/FormInput';
+import SubmitBtn from '@components/loginReg/SubmitBtn';
 
 export default function SignUpPage() {
   const [passType, setPassType] = useState('password');
@@ -61,7 +61,7 @@ export default function SignUpPage() {
         <h2 className="mt-3 text-center text-base font-[400] text-on-surface-variant">{subtitle}</h2>
         <form noValidate className="mt-8" onSubmit={handleSubmit(onSubmit)}>
           <div className="relative">
-            <OutlinedTextField
+            <FormInput
               className="w-full"
               {...(register('email') as TextInputProps)}
               type="email"
@@ -73,7 +73,7 @@ export default function SignUpPage() {
             </p>
           </div>
           <div className="relative mt-12">
-            <OutlinedTextField
+            <FormInput
               className="w-full"
               {...(register('password') as TextInputProps)}
               type={passType as TextFieldType}
@@ -81,13 +81,13 @@ export default function SignUpPage() {
               label={passPlaceHold}
             >
               <PassVisibilityIcon onClick={() => setPassType((prev) => switchPassType(prev))} />
-            </OutlinedTextField>
+            </FormInput>
             <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">
               {notationLocalizer(language, errors.password?.message)}
             </p>
           </div>
           <div className="relative mt-12">
-            <OutlinedTextField
+            <FormInput
               className="w-full"
               {...(register('confirmPassword') as TextInputProps)}
               type={confPassType as TextFieldType}
@@ -95,14 +95,14 @@ export default function SignUpPage() {
               label={confPassPlaceHold}
             >
               <PassVisibilityIcon onClick={() => setConfPassType((prev) => switchPassType(prev))} />
-            </OutlinedTextField>
+            </FormInput>
             <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">
               {notationLocalizer(language, errors.confirmPassword?.message)}
             </p>
           </div>
-          <FilledTonalButton className="mt-[52px] w-full" disabled={!isValid} type="submit">
+          <SubmitBtn className="mt-[52px] w-full" disabled={!isValid} type="submit">
             {btnTitle}
-          </FilledTonalButton>
+          </SubmitBtn>
         </form>
         <p className="mt-8 text-center text-sm font-[400] text-on-surface-variant">
           {linkClue}{' '}
