@@ -9,6 +9,7 @@ import useElementProp from '@shared/lib/hooks/useElementProp';
 import useInterpolation from '@shared/lib/hooks/useInterpolation';
 import useLocalStorage from '@shared/lib/hooks/useLocalStorage';
 import useResize from '@shared/lib/hooks/useResize';
+import useScreen from '@shared/lib/hooks/useScreen';
 import ResizeBar from '@shared/ui/ResizeBar';
 
 const HIDE_THRESHOLD = 200;
@@ -21,6 +22,8 @@ const MainPage = () => {
     propName: 'width',
     initialValue: 0,
   });
+  const screenType = useScreen();
+  const isTablet = screenType === 'tablet' || screenType === 'mobile';
 
   const {
     size: width,
@@ -66,10 +69,10 @@ const MainPage = () => {
     <div
       ref={containerRef}
       className={cn(
-        'col-start-2 col-end-3 row-start-2 row-end-4 grid h-full w-full origin-bottom-left grid-cols-[auto_max-content] grid-rows-1 gap-4',
+        'row-start-2 row-end-3 grid h-full w-full origin-bottom-left grid-rows-2 gap-2 overflow-scroll px-2 pb-[58px] sm:col-start-2 sm:col-end-3 sm:grid-rows-[640px_400px] sm:gap-3 sm:overflow-visible sm:px-0 sm:pb-0 lg:row-end-4 lg:grid-cols-[auto_max-content] lg:grid-rows-1 lg:gap-4',
         {
-          'justify-end gap-0': isEditorHidden,
-          'gap-0': isResponseHidden,
+          'lg:justify-end lg:gap-0': isEditorHidden && !isTablet,
+          'lg:gap-0': isResponseHidden && !isTablet,
         },
       )}
     >
@@ -77,10 +80,10 @@ const MainPage = () => {
         onResponseOpen={handleExpand}
         isOutEditorHidden={isEditorHidden}
         style={{
-          transform: `scale3d(${interpolateEditor}, ${interpolateEditor}, 1)`,
-          opacity: oneZeroEditor,
-          width: isEditorHidden ? '0px' : '',
-          overflow: isEditorHidden ? 'hidden' : 'visible',
+          transform: !isTablet ? `scale3d(${interpolateEditor}, ${interpolateEditor}, 1)` : '',
+          opacity: !isTablet ? oneZeroEditor : '',
+          width: isEditorHidden && !isTablet ? '0px' : '',
+          overflow: isEditorHidden && !isTablet ? 'hidden' : '',
           transition: isResized.current ? 'none' : '',
         }}
       />
@@ -88,11 +91,11 @@ const MainPage = () => {
         <ResizeBar direction="horizontal" className="absolute -left-4" onMouseDown={handleResize} />
         <div
           style={{
-            width: `${width}px`,
-            transform: `scale3d(${interpolateResponse}, ${interpolateResponse}, 1)`,
-            opacity: oneZeroResponse,
+            width: !isTablet ? `${width}px` : '',
+            transform: !isTablet ? `scale3d(${interpolateResponse}, ${interpolateResponse}, 1)` : '',
+            opacity: !isTablet ? oneZeroResponse : '',
           }}
-          className={cn('animation-delay-600 relative h-full w-full origin-bottom-right animate-fade-in-screen', {
+          className={cn('animation-delay-600 relative mb-24 h-full w-full origin-bottom-right animate-fade-in-screen', {
             'transition-enter-screen': !isResponseHidden,
             'transition-exit-screen': isResponseHidden,
             'transition-none': isResized.current,

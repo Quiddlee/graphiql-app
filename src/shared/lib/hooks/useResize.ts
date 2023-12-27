@@ -42,7 +42,7 @@ function useResize({
 	const [isHidden, setIsHidden] = useState(true);
 	const isResized = useRef(false);
 
-	const isExpanded = size > minSize && size <= maxSize;
+	const isExpanded = size > minSize && (size <= expandSize || size <= maxSize);
 
 	function handleResize() {
 		isResized.current = true;
