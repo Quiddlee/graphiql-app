@@ -28,7 +28,7 @@ const ViewItem: FC<TabItemProps> = ({ children, id }) => {
     <button
       type="button"
       onClick={handleClick}
-      className="group relative block w-full animate-fade-in-screen overflow-hidden rounded-full"
+      className="group relative block w-full animate-fade-in-screen rounded-full"
     >
       <span
         className={cn(
@@ -41,7 +41,7 @@ const ViewItem: FC<TabItemProps> = ({ children, id }) => {
       />
       <span
         className={cn(
-          'relative z-10 flex origin-left items-center gap-3 py-4 pl-4 pr-6 group-hover:bg-[color-mix(in_srgb,_var(--md-sys-color-inverse-surface)_8%,_transparent)] group-active:bg-[color-mix(in_srgb,_var(--md-sys-color-inverse-surface)_10%,_transparent)]',
+          'relative z-10 flex origin-left items-center gap-3 rounded-full py-4 pl-4 pr-6 group-hover:bg-[color-mix(in_srgb,_var(--md-sys-color-inverse-surface)_8%,_transparent)] group-active:bg-[color-mix(in_srgb,_var(--md-sys-color-inverse-surface)_10%,_transparent)]',
           {
             'text-on-secondary-container-text': isActive,
           },

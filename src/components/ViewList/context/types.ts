@@ -13,6 +13,7 @@ export type ViewInitialState = {
 export type ViewContext = ViewInitialState & {
 	handleActiveView: (index: number) => void;
 	handleAddView: () => void;
+	handleRenameView: (id: number, name: string) => void;
 };
 
 type ActionViewAdded = {
@@ -25,4 +26,9 @@ type ActionActiveViewChanged = {
 	payload: number;
 };
 
-export type Action = ActionViewAdded | ActionActiveViewChanged;
+type ActionRenameView = {
+	type: 'view/viewRenamed';
+	payload: { id: number; name: string };
+};
+
+export type Action = ActionViewAdded | ActionActiveViewChanged | ActionRenameView;

@@ -24,11 +24,26 @@ function reducer(state: ViewInitialState, action: Action): ViewInitialState {
         views: [...state.views, action.payload.view],
         activeView: action.payload.activeView,
       };
+
     case 'view/viewChanged':
       return {
         ...state,
         activeView: action.payload,
       };
+
+    case 'view/viewRenamed':
+      return {
+        ...state,
+        views: state.views.map((view, i) => {
+          if (i !== action.payload.id) return view;
+
+          return {
+            ...view,
+            name: action.payload.name,
+          };
+        }),
+      };
+
     default:
       return state;
   }
@@ -73,6 +88,10 @@ const ViewProvider = ({ children }: PropsWithChildren) => {
     });
   }, [setUrl, views.length]);
 
+  const handleRenameView = useCallback((id: number, newName: string) => {
+    dispatch({ type: 'view/viewRenamed', payload: { name: newName, id } });
+  }, []);
+
   useEffect(() => {
     // mutating current view object when user typing in the editor
     // and saving the view array in the localStorage
@@ -95,6 +114,7 @@ const ViewProvider = ({ children }: PropsWithChildren) => {
       activeView,
       handleActiveView,
       handleAddView,
+      handleRenameView,
     };
   }, [activeView, handleActiveView, handleAddView, views]);
 
