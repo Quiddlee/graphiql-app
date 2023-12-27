@@ -4,7 +4,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import renderWithRouter from '@/test/helpers/RenderWithRouter';
 import * as useEditorUrlState from '@components/Editor/lib/hooks/useEditorUrlState';
-import RequestEditor from '@components/RequestEditor/RequestEditor';
+import MainPage from '@pages/MainPage/MainPage';
 import * as useUrl from '@shared/lib/hooks/useUrl';
 
 const mockWriteText = vi.fn();
@@ -26,10 +26,10 @@ describe('Request editor', () => {
   });
 
   it('should render the request editor', () => {
-    renderWithRouter(<RequestEditor />);
+    renderWithRouter(<MainPage />);
 
     const controls = screen.getByTestId('controls');
-    const editor = screen.getByTestId('editor-field');
+    const editor = screen.getByTestId('editor-request');
 
     expect(controls).toBeInTheDocument();
     expect(editor).toBeInTheDocument();
@@ -42,7 +42,7 @@ describe('Request editor', () => {
       setUrl: () => {},
     });
 
-    renderWithRouter(<RequestEditor />);
+    renderWithRouter(<MainPage />);
 
     const copyText = screen.getByTestId('copy-text');
 

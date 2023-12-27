@@ -39,6 +39,62 @@
   }
 }
 
+@layer utilities {
+  .animation-delay-0 {
+    animation-delay: 0ms;
+  }
+
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+
+  .animation-delay-700 {
+    animation-delay: 700ms;
+  }
+
+  .animation-delay-800 {
+    animation-delay: 800ms;
+  }
+
+  .animation-delay-900 {
+    animation-delay: 900ms;
+  }
+
+  .animation-delay-1000 {
+    animation-delay: 1000ms;
+  }
+}
+
+@layer components {
+  .transition-enter-screen {
+    @apply transition-all duration-500 ease-emphasized-decelerate;
+  }
+
+  .transition-exit-screen {
+    @apply transition-all duration-400 ease-emphasized-decelerate;
+  }
+}
+
 .os-scrollbar-handle {
   background-color: var(--md-sys-color-primary) !important;
   cursor: grab;
