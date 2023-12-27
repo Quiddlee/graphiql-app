@@ -122,6 +122,8 @@ export default {
         'surface-bright-text': 'var(--md-sys-color-surface-bright)',
         'surface-dim': 'var(--md-sys-color-surface-dim)',
         'surface-dim-text': 'var(--md-sys-color-surface-dim)',
+        'docs-link-text-color': '#B392F0',
+        'docs-field-text-color': '#9ECBFF',
       },
     },
   },
