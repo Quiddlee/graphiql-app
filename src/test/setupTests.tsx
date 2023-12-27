@@ -1,9 +1,9 @@
 import { PropsWithChildren } from 'react';
 
-import * as matchers from '@testing-library/jest-dom/matchers';
-import { cleanup, render } from '@testing-library/react';
-import '@testing-library/jest-dom/vitest';
 import '@testing-library/jest-dom';
+import * as matchers from '@testing-library/jest-dom/matchers';
+import '@testing-library/jest-dom/vitest';
+import { cleanup, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, expect, vi } from 'vitest';
 
@@ -33,6 +33,12 @@ window.ResizeObserver = vi.fn().mockReturnValue({
   disconnect: vi.fn(),
   unobserve: vi.fn(),
 } as ResizeObserver);
+
+window.IntersectionObserver = vi.fn().mockReturnValue({
+  observe: vi.fn(),
+  disconnect: vi.fn(),
+  unobserve: vi.fn(),
+} as unknown as IntersectionObserver);
 
 window.getComputedStyle = vi.fn().mockReturnValue({
   height: '400px',
