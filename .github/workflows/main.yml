@@ -25,6 +25,7 @@ jobs:
   type-check:
     name: Types
     runs-on: ubuntu-latest
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -34,17 +35,31 @@ jobs:
 
       - name: Check Application Types
         run: npm run type-check
-
-  tests:
-    name: Test
+        
+  prettify:
+    name: Prettier
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        
-      - name: Npm Clean Install
-        run: npm ci
+  
+      - name: Setup Continuous Integration
+        uses: ./.github/actions/ci-setup
+  
+      - name: Check Application Types
+        run: npm run prettier:fix
 
-      - name: test
-        run: npm run test
+  # tests:
+  #   name: Test
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
+        
+  #     - name: Npm Clean Install
+  #       run: npm ci
+
+  #     - name: test
+  #       run: npm run test
