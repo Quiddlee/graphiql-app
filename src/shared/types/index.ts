@@ -11,6 +11,8 @@ export type HandleExpand = {
 
 export type TextInputProps = Partial<Omit<MdOutlinedTextField, keyof HTMLElement>>;
 
+export type ScreenTypes = 'mobile' | 'tablet' | 'desktop';
+
 export type SchemaTypeFieldOfType = {
 	kind: string;
 	name: string | null;

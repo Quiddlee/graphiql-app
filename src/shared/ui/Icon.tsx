@@ -7,6 +7,9 @@ const Icon = createComponent({
   react: React,
   tagName: 'md-icon',
   elementClass: MdIcon,
+  events: {
+    onChange: 'change',
+  },
 });
 
 export default Icon;

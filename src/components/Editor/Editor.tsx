@@ -18,7 +18,7 @@ const Editor: FC<EditorProps> = ({ onChange, editorState, className }) => {
 
   return (
     <article ref={rootRef} className={cn('h-full w-full font-jetbrains_mono', className)}>
-      <div className="flex w-full gap-4 py-7 pr-4">
+      <div className="flex w-full gap-4 py-4 pr-4 sm:py-7">
         <LineNumbers ref={editorNumRef} size={editorNumbersNum} />
         <EditorField ref={editorRef} onChange={onChange} value={editorState} />
       </div>

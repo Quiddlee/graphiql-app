@@ -14,7 +14,10 @@ const EditorTools: FC<EditorToolsProps> = ({ onExpand, isExpanded, children }) =
     <div
       data-testid="editor-tools"
       className={cn(
-        'grid h-full grid-rows-[min-content_auto] overflow-clip rounded-4xl bg-surface-container pt-4 transition-all duration-[inherit] ease-[inherit]',
+        'grid h-full grid-rows-[min-content_auto] overflow-clip rounded-none rounded-b-4xl bg-surface transition-all duration-[inherit] ease-[inherit] sm:rounded-4xl sm:bg-surface-container sm:pt-4',
+        {
+          'rounded-none': !isExpanded,
+        },
       )}
     >
       <Header isExpanded={isExpanded} onExpand={onExpand} />
