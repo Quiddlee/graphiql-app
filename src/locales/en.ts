@@ -1,4 +1,31 @@
 const en = {
+	nav: {
+		navbar: {
+			welcome: 'Welcome',
+			settings: 'Settings',
+		},
+		viewList: {
+			title: 'Recent',
+			addNewView: 'New view',
+			newView: 'Empty view',
+			rename: 'Rename',
+			delete: 'Delete',
+			renameDialog: {
+				title: 'Rename this view',
+				cancel: 'Cancel',
+				rename: 'Rename',
+				snackbar: 'Renamed to',
+			},
+			deleteDialog: {
+				title: 'Delete view?',
+				content:
+					"You'll no longer see this view. This will also delete related activity like headers, responses and variables.",
+				cancel: 'Cancel',
+				delete: 'Delete',
+				snackbar: 'Deleted',
+			},
+		},
+	},
 	loginPage: {
 		title: 'Log in',
 		subtitle: 'to continue to GraphiQL 🚀',
@@ -19,7 +46,6 @@ const en = {
 		linkTitle: 'Log in',
 	},
 	header: { h1: { h2: 'english' } },
-	button: 'Press me',
 };
 
 export default en;

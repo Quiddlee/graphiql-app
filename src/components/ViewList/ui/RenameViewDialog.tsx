@@ -5,6 +5,7 @@ import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field
 import { toast } from 'react-toastify';
 
 import useView from '@components/ViewList/hooks/useView';
+import useLanguage from '@shared/Context/hooks';
 import Dialog from '@shared/ui/Dialog';
 import FilledTonalButton from '@shared/ui/FilledTonalButton';
 import OutlinedTextField from '@shared/ui/OutlinedTextField';
@@ -18,6 +19,7 @@ type RenameViewDialogProps = {
 
 const RenameViewDialog: FC<RenameViewDialogProps> = ({ id, open, onToggle }) => {
   const { handleRenameView, views } = useView();
+  const { translation } = useLanguage();
 
   const viewName = views.find((view) => view.id === id)?.name ?? '';
   const [val, setVal] = useState(viewName);
@@ -41,7 +43,7 @@ const RenameViewDialog: FC<RenameViewDialogProps> = ({ id, open, onToggle }) => 
       handleCloseDialog();
       toast(
         <>
-          Renamed to <span className="font-bold">{newName}</span>
+          {translation.nav.viewList.renameDialog.snackbar} <span className="font-bold">{newName}</span>
         </>,
       );
     },
@@ -50,7 +52,7 @@ const RenameViewDialog: FC<RenameViewDialogProps> = ({ id, open, onToggle }) => 
 
   return (
     <Dialog ref={dialogRef} closed={() => onToggle(false)} open={open}>
-      <h3 slot="headline">Rename this view</h3>
+      <h3 slot="headline">{translation.nav.viewList.renameDialog.title}</h3>
       <form slot="content" id="form-id" method="dialog">
         <OutlinedTextField
           onInput={(e) => {
@@ -62,9 +64,9 @@ const RenameViewDialog: FC<RenameViewDialogProps> = ({ id, open, onToggle }) => 
         />
       </form>
       <div slot="actions">
-        <TextButton onClick={handleCloseDialog}>Cancel</TextButton>
+        <TextButton onClick={handleCloseDialog}>{translation.nav.viewList.renameDialog.cancel}</TextButton>
         <FilledTonalButton onClick={() => handleRename(val)} disabled={isDisabled}>
-          Rename
+          {translation.nav.viewList.renameDialog.rename}
         </FilledTonalButton>
       </div>
     </Dialog>

@@ -4,6 +4,7 @@ import { MdDialog } from '@material/web/all';
 import { toast } from 'react-toastify';
 
 import useView from '@components/ViewList/hooks/useView';
+import useLanguage from '@shared/Context/hooks';
 import Dialog from '@shared/ui/Dialog';
 import TextButton from '@shared/ui/TextButton';
 
@@ -16,6 +17,7 @@ type DeleteViewDialogProps = {
 const DeleteViewDialog: FC<DeleteViewDialogProps> = ({ id, onToggle, open }) => {
   const { handleDeleteView, views } = useView();
   const dialogRef = useRef<MdDialog>(null);
+  const { translation } = useLanguage();
 
   const handleCloseDialog = useCallback(function handleCloseDialog() {
     return dialogRef.current?.close();
@@ -30,7 +32,7 @@ const DeleteViewDialog: FC<DeleteViewDialogProps> = ({ id, onToggle, open }) => 
 
       toast(
         <>
-          Deleted <span className="font-bold">{viewName}</span>
+          {translation.nav.viewList.deleteDialog.snackbar} <span className="font-bold">{viewName}</span>
         </>,
       );
     },
@@ -39,14 +41,11 @@ const DeleteViewDialog: FC<DeleteViewDialogProps> = ({ id, onToggle, open }) => 
 
   return (
     <Dialog ref={dialogRef} open={open} closed={() => onToggle(false)}>
-      <h3 slot="headline">Delete view?</h3>
-      <p slot="content">
-        You&apos;ll no longer see this view. This will also delete related activity like headers, responses, and
-        variables.
-      </p>
+      <h3 slot="headline">{translation.nav.viewList.deleteDialog.title}</h3>
+      <p slot="content">{translation.nav.viewList.deleteDialog.content}</p>
       <div slot="actions">
-        <TextButton onClick={handleCloseDialog}>Cancel</TextButton>
-        <TextButton onClick={handleDelete}>Delete</TextButton>
+        <TextButton onClick={handleCloseDialog}>{translation.nav.viewList.deleteDialog.cancel}</TextButton>
+        <TextButton onClick={handleDelete}>{translation.nav.viewList.deleteDialog.delete}</TextButton>
       </div>
     </Dialog>
   );

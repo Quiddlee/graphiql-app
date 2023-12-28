@@ -8,6 +8,7 @@ import { Action, ViewContext as TViewContext, ViewInitialState } from '@componen
 import localStorageKeys from '@shared/constants/localStorageKeys';
 import ROUTES from '@shared/constants/routes';
 import urlParams from '@shared/constants/urlParams';
+import useLanguage from '@shared/Context/hooks';
 import useLocalStorage from '@shared/lib/hooks/useLocalStorage';
 import useUrl from '@shared/lib/hooks/useUrl';
 
@@ -69,6 +70,7 @@ const ViewProvider = ({ children }: PropsWithChildren) => {
   const location = useLocation();
   useLocalStorage(localStorageKeys.ACTIVE_VIEW, activeView);
   useLocalStorage(localStorageKeys.VIEWS, views);
+  const { translation } = useLanguage();
 
   const isMain = location.pathname.slice(1) === ROUTES.MAIN;
 
@@ -95,7 +97,7 @@ const ViewProvider = ({ children }: PropsWithChildren) => {
 
     dispatch({
       type: 'view/viewAdded',
-      payload: { view: { ...NEW_VIEW, id }, activeView: id },
+      payload: { view: { ...NEW_VIEW, id, name: translation.nav.viewList.newView }, activeView: id },
     });
 
     setUrl({

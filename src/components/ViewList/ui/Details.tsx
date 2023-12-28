@@ -5,6 +5,7 @@ import { MdMenu } from '@material/web/all';
 import useView from '@components/ViewList/hooks/useView';
 import DeleteViewDialog from '@components/ViewList/ui/DeleteViewDialog';
 import RenameViewDialog from '@components/ViewList/ui/RenameViewDialog';
+import useLanguage from '@shared/Context/hooks';
 import cn from '@shared/lib/helpers/cn';
 import FilledTonalIconButton from '@shared/ui/FilledTonalIconButton';
 import Icon from '@shared/ui/Icon';
@@ -20,6 +21,7 @@ const Details: FC<DetailsProps> = ({ id }) => {
   const { views } = useView();
   const [isDialogRenameOpen, setIsDialogRenameOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const { translation } = useLanguage();
 
   const isDeleteDisabled = views.length === 1;
 
@@ -55,12 +57,12 @@ const Details: FC<DetailsProps> = ({ id }) => {
           }}
         >
           <span className="flex items-center justify-start gap-[10px]">
-            <Icon>edit</Icon> Rename
+            <Icon>edit</Icon> {translation.nav.viewList.rename}
           </span>
         </MenuItem>
         <MenuItem disabled={isDeleteDisabled} onClick={handleOpenDeleteDialog}>
           <span className="flex items-center justify-start gap-[10px]">
-            <Icon>delete</Icon> Delete
+            <Icon>delete</Icon> {translation.nav.viewList.delete}
           </span>
         </MenuItem>
       </Menu>

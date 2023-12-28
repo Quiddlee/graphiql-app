@@ -5,18 +5,21 @@ import Details from '@components/ViewList/ui/Details';
 import ViewItem from '@components/ViewList/ui/ViewItem';
 import ViewList from '@components/ViewList/ViewList';
 import ROUTES from '@shared/constants/routes';
+import useLanguage from '@shared/Context/hooks';
 import Icon from '@shared/ui/Icon';
 
 const NavigationDrawer = () => {
+  const { translation } = useLanguage();
+
   return (
     <article className="h-fit w-full text-on-surface-variant-text">
       <ul>
         <NavItem to={ROUTES.WELCOME_PAGE}>
-          <Icon>spa</Icon> Welcome
+          <Icon>spa</Icon> {translation.nav.navbar.welcome}
         </NavItem>
 
         <NavItem to={ROUTES.SETTINGS}>
-          <Icon>settings</Icon> Settings
+          <Icon>settings</Icon> {translation.nav.navbar.settings}
         </NavItem>
 
         <hr className="ml-4 border-outline-variant" />
