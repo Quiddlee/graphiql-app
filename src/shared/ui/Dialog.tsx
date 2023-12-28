@@ -4,6 +4,8 @@ import { createComponent } from '@lit/react';
 import { MdDialog } from '@material/web/all';
 import { createPortal } from 'react-dom';
 
+import cn from '@shared/lib/helpers/cn';
+
 const DialogComponent = createComponent({
   react: React,
   tagName: 'md-dialog',
@@ -19,9 +21,9 @@ type DialogProps = HTMLAttributes<MdDialog> &
     closed: () => void;
   };
 
-const Dialog = forwardRef<MdDialog, DialogProps>(({ children, closed, ...props }, ref) => {
+const Dialog = forwardRef<MdDialog, DialogProps>(({ children, closed, className, ...props }, ref) => {
   return createPortal(
-    <DialogComponent ref={ref} closed={closed} {...props}>
+    <DialogComponent className={cn('w-[512px]', className)} ref={ref} closed={closed} {...props}>
       {children}
     </DialogComponent>,
     document.body,

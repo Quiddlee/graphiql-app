@@ -65,9 +65,9 @@ export default {
         'fade-out-screen': 'fade-in 200ms cubic-bezier(0.3, 0.0, 0.8, 0.15) forward reverse',
         'fade-in-standard': 'fade-in 250ms cubic-bezier(0, 0, 0, 1) backwards',
         'fade-out-standard': 'fade-in 200ms cubic-bezier(0.3, 0, 1, 1) forward reverse',
-        'fade-in-snackbar': 'fade-in-snackbar 700ms cubic-bezier(0.05, 0.7, 0.1, 1.0) backwards',
-        'fade-in-snackbar-body': 'fade-in-snackbar-body 700ms cubic-bezier(0.05, 0.7, 0.1, 1.0) backwards',
-        'fade-out-snackbar': 'fade-out-snackbar 250ms cubic-bezier(0.3, 0, 1, 1) forwards',
+        'fade-in-snackbar': 'fade-in-snackbar 500ms cubic-bezier(0, 0, 0, 1) backwards',
+        'fade-in-snackbar-body': 'fade-in-snackbar-body 500ms cubic-bezier(0, 0, 0, 1) backwards',
+        'fade-out-snackbar': 'fade-out-snackbar 200ms cubic-bezier(0.3, 0, 1, 1) forwards',
       },
       colors: {
         primary: 'var(--md-sys-color-primary)',

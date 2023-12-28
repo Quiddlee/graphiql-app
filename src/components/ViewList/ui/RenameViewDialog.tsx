@@ -50,9 +50,7 @@ const RenameViewDialog: FC<RenameViewDialogProps> = ({ id, open, onToggle }) => 
 
   return (
     <Dialog ref={dialogRef} closed={() => onToggle(false)} open={open}>
-      <h3 className="pr-60" slot="headline">
-        Rename this view
-      </h3>
+      <h3 slot="headline">Rename this view</h3>
       <form slot="content" id="form-id" method="dialog">
         <OutlinedTextField
           onInput={(e) => {
