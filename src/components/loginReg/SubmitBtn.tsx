@@ -7,7 +7,7 @@ import FilledIconButton from '@shared/ui/FilledIconButton';
 type SubmitBtnProps = HTMLAttributes<MdFilledIconButton> & {
   children: string;
   disabled: boolean;
-  type: 'submit' | 'button';
+  type?: 'submit' | 'button';
 };
 
 const SubmitBtn: FC<SubmitBtnProps> = ({ children, ...props }) => {
