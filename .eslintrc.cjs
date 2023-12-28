@@ -31,6 +31,7 @@ module.exports = {
     'react/require-default-props': 0,
     'import/no-extraneous-dependencies': 0,
     'react/function-component-definition': 0,
+    'no-underscore-dangle': 0,
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'sort-imports': ['error', {ignoreCase: true, ignoreDeclarationSort: true}],
     'import/order': [
