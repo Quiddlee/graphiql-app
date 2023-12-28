@@ -36,7 +36,7 @@ const DeleteViewDialog: FC<DeleteViewDialogProps> = ({ id, onToggle, open }) => 
         </>,
       );
     },
-    [handleCloseDialog, handleDeleteView, id, views],
+    [handleCloseDialog, handleDeleteView, id, translation.nav.viewList.deleteDialog.snackbar, views],
   );
 
   return (
