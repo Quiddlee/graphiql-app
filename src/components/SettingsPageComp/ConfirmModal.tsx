@@ -1,13 +1,11 @@
 import { Dispatch, FC, SetStateAction } from 'react';
 
 import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import FilledTonalButton from '@/shared/ui/FilledTonalButton';
 import Icon from '@/shared/ui/Icon';
 import TextButton from '@/shared/ui/TextButton';
 
-import 'toastify-js/src/toastify.css';
 import ClearUndo from './ClearUndo';
 
 type PropsType = {

@@ -1,12 +1,13 @@
 import { useState } from 'react';
 
+import localStorageKeys from '@/shared/constants/localStorageKeys';
 import useLanguage from '@/shared/Context/hooks';
 import colorThemeSwitcher from '@/shared/helpers/colorThemeSwitcher';
 import Switch from '@/shared/ui/Switch';
 
 const DarkModeComp = () => {
   const { translation } = useLanguage();
-  const [isDarkMode, setIsDarkMode] = useState(!localStorage.getItem('graphiQlColorTheme'));
+  const [isDarkMode, setIsDarkMode] = useState(() => !localStorage.getItem(localStorageKeys.LIGHT_THEME));
 
   function handleThemeSwitch() {
     if (isDarkMode) {

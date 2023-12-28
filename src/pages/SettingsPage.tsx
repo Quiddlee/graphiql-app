@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import { ToastContainer } from 'react-toastify';
-
 import ClearStorageComp from '@/components/SettingsPageComp/ClearStorageComp';
 import DarkModeComp from '@/components/SettingsPageComp/DarkModeComp';
 import EndpointComp from '@/components/SettingsPageComp/EndpointComp';
@@ -29,14 +27,6 @@ const SettignsPage = () => {
         <LangSelectorComp />
         <ClearStorageComp />
       </div>
-      <ToastContainer
-        closeOnClick={false}
-        closeButton={false}
-        autoClose={2000}
-        hideProgressBar
-        pauseOnHover={false}
-        position="bottom-center"
-      />
     </section>
   );
 };
