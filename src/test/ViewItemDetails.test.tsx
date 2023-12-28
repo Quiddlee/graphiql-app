@@ -6,18 +6,16 @@ import renderWithRouter from '@/test/helpers/RenderWithRouter';
 import * as useView from '@components/ViewList/hooks/useView';
 import Details from '@components/ViewList/ui/Details';
 
-export const mockHandleActiveView = vi.fn();
-export const mockHandleAddView = vi.fn();
-export const mockedUseView = vi.spyOn(useView, 'default');
+const mockedUseView = vi.spyOn(useView, 'default');
 const mockViews = [
   { id: 1, name: 'Test View', variables: '', headers: '', query: '' },
   { id: 2, name: 'Test View2', variables: '', headers: '', query: '' },
 ];
 mockedUseView.mockReturnValue({
-  handleActiveView: mockHandleActiveView,
+  handleActiveView: vi.fn(),
   activeView: 1,
   views: mockViews,
-  handleAddView: mockHandleAddView,
+  handleAddView: vi.fn(),
   handleRenameView: vi.fn(),
   handleDeleteView: vi.fn(),
 });
@@ -59,10 +57,10 @@ describe('Details', () => {
 
   it('should disable the delete menu item when there is only one view', async () => {
     mockedUseView.mockReturnValue({
-      handleActiveView: mockHandleActiveView,
+      handleActiveView: vi.fn(),
       activeView: 1,
       views: [{ id: 1, name: 'Test View', variables: '', headers: '', query: '' }],
-      handleAddView: mockHandleAddView,
+      handleAddView: vi.fn(),
       handleRenameView: vi.fn(),
       handleDeleteView: vi.fn(),
     });

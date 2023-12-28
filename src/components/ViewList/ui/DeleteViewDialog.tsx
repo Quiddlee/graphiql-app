@@ -45,7 +45,9 @@ const DeleteViewDialog: FC<DeleteViewDialogProps> = ({ id, onToggle, open }) => 
       <p slot="content">{translation.nav.viewList.deleteDialog.content}</p>
       <div slot="actions">
         <TextButton onClick={handleCloseDialog}>{translation.nav.viewList.deleteDialog.cancel}</TextButton>
-        <TextButton onClick={handleDelete}>{translation.nav.viewList.deleteDialog.delete}</TextButton>
+        <TextButton data-testid="delete-button" onClick={handleDelete}>
+          {translation.nav.viewList.deleteDialog.delete}
+        </TextButton>
       </div>
     </Dialog>
   );

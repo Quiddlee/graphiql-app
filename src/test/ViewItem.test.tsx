@@ -27,16 +27,23 @@ mockedUseView.mockReturnValue({
 
 describe('ViewItem', () => {
   beforeEach(() => {
-    renderWithRouter(<ViewItem id={1}>Test View</ViewItem>);
     vi.clearAllMocks();
   });
 
   it('should render the provided children', () => {
+    renderWithRouter(<ViewItem id={1}>Test View</ViewItem>);
     expect(screen.getByText('Test View')).toBeInTheDocument();
   });
 
   it('should call handleActiveView with the correct id when clicked', async () => {
+    renderWithRouter(<ViewItem id={1}>Test View</ViewItem>);
     await userEvent.click(screen.getByText('Test View'));
     expect(mockHandleActiveView).toHaveBeenCalledWith(1);
+  });
+
+  it('should call handleAddView with the correct id when clicked', async () => {
+    renderWithRouter();
+    await userEvent.click(screen.getByTestId('add-view'));
+    expect(mockHandleAddView).toHaveBeenCalledOnce();
   });
 });

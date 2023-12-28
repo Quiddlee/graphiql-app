@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { HTMLAttributes, PropsWithChildren } from 'react';
 
 import '@testing-library/jest-dom';
 import * as matchers from '@testing-library/jest-dom/matchers';
@@ -96,6 +96,16 @@ vi.mock('@components/loginReg/FormInput', () => ({
       {props.children}
     </button>
   ),
+}));
+
+vi.mock('@shared/ui/OutlinedTextField', () => ({
+  default: (props: HTMLAttributes<HTMLInputElement>) => <input type="text" {...{ ...props, ref: null }} />,
+}));
+
+vi.mock('@shared/ui/FilledTonalButton', () => ({
+  default: (props: { active?: boolean }) => {
+    return <button {...{ ...props, active: 'true', ref: null }} type="button" />;
+  },
 }));
 
 vi.mock('@components/loginReg/PassVisibilityIcon', () => ({

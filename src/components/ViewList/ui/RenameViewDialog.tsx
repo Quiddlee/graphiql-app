@@ -55,6 +55,7 @@ const RenameViewDialog: FC<RenameViewDialogProps> = ({ id, open, onToggle }) => 
       <h3 slot="headline">{translation.nav.viewList.renameDialog.title}</h3>
       <form slot="content" id="form-id" method="dialog">
         <OutlinedTextField
+          data-testid="rename-input"
           onInput={(e) => {
             setVal((e.target as MdOutlinedTextField).value);
           }}
@@ -64,8 +65,10 @@ const RenameViewDialog: FC<RenameViewDialogProps> = ({ id, open, onToggle }) => 
         />
       </form>
       <div slot="actions">
-        <TextButton onClick={handleCloseDialog}>{translation.nav.viewList.renameDialog.cancel}</TextButton>
-        <FilledTonalButton onClick={() => handleRename(val)} disabled={isDisabled}>
+        <TextButton data-testid="close-dialog" onClick={handleCloseDialog}>
+          {translation.nav.viewList.renameDialog.cancel}
+        </TextButton>
+        <FilledTonalButton data-testid="rename-button" onClick={() => handleRename(val)} disabled={isDisabled}>
           {translation.nav.viewList.renameDialog.rename}
         </FilledTonalButton>
       </div>

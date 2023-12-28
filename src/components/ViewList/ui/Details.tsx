@@ -35,8 +35,6 @@ const Details: FC<DetailsProps> = ({ id }) => {
     setIsDeleteDialogOpen(true);
   }, []);
 
-  // TODO: add delete dialog & add rename dialog tests
-
   return (
     <article id={`details-menu-${id}`} className="relative ml-auto flex items-center brightness-125">
       {isDialogRenameOpen && <RenameViewDialog open={isDialogRenameOpen} id={id} onToggle={setIsDialogRenameOpen} />}

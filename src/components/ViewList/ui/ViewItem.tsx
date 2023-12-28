@@ -26,6 +26,7 @@ const ViewItem: FC<TabItemProps> = ({ children, id }) => {
 
   return (
     <button
+      data-testid="view-item"
       type="button"
       onClick={handleClick}
       className="group relative inline-block w-full animate-fade-in-screen rounded-full"
