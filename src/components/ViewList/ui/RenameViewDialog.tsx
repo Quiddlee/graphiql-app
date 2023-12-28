@@ -1,7 +1,7 @@
-import { FC, useCallback, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useCallback, useRef, useState } from 'react';
 
+import { MdDialog } from '@material/web/all';
 import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field';
-import { createPortal } from 'react-dom';
 import { toast } from 'react-toastify';
 
 import useView from '@components/Nav/hooks/useView';
@@ -12,7 +12,7 @@ import TextButton from '@shared/ui/TextButton';
 
 type RenameViewDialogProps = {
   id: number;
-  onToggle: (open: boolean) => void;
+  onToggle: Dispatch<SetStateAction<boolean>>;
   open: boolean;
 };
 
@@ -23,27 +23,33 @@ const RenameViewDialog: FC<RenameViewDialogProps> = ({ id, open, onToggle }) => 
   const [val, setVal] = useState(viewName);
   const [isDisabled, setIsDisabled] = useState(true);
 
+  const dialogRef = useRef<MdDialog>(null);
+
   if (val === viewName && !isDisabled) {
     setIsDisabled(true);
   } else if (val !== viewName && isDisabled) {
     setIsDisabled(false);
   }
 
+  const handleCloseDialog = useCallback(function handleCloseDialog() {
+    if (dialogRef.current) dialogRef.current.close();
+  }, []);
+
   const handleRename = useCallback(
     (newName: string) => {
       handleRenameView(id, newName);
-      onToggle(false);
+      handleCloseDialog();
       toast(
         <>
           Renamed to <span className="font-bold">{newName}</span>
         </>,
       );
     },
-    [handleRenameView, id, onToggle],
+    [handleCloseDialog, handleRenameView, id],
   );
 
-  return createPortal(
-    <Dialog closed={() => onToggle(false)} open={open}>
+  return (
+    <Dialog ref={dialogRef} closed={() => onToggle(false)} open={open}>
       <h3 className="pr-60" slot="headline">
         Rename this view
       </h3>
@@ -58,13 +64,12 @@ const RenameViewDialog: FC<RenameViewDialogProps> = ({ id, open, onToggle }) => 
         />
       </form>
       <div slot="actions">
-        <TextButton onClick={() => onToggle(false)}>Cancel</TextButton>
+        <TextButton onClick={handleCloseDialog}>Cancel</TextButton>
         <FilledTonalButton onClick={() => handleRename(val)} disabled={isDisabled}>
           Rename
         </FilledTonalButton>
       </div>
-    </Dialog>,
-    document.body,
+    </Dialog>
   );
 };
 

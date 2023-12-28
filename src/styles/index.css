@@ -13,8 +13,8 @@
   :root {
     color-scheme: dark;
     --md-ref-typeface-weight-medium: '600';
-    --md-ref-typeface-weight-regular: '600';
-    --md-ref-typeface-brand: 'Readex Pro';
+    --md-ref-typeface-weight-regular: '400';
+    --md-ref-typeface-brand: 'Roboto';
     --md-ref-typeface-plain: 'Roboto';
     --md-icon-font: 'Material Symbols Rounded';
     --md-fab-icon-size: 40px;
@@ -39,7 +39,7 @@
 
   body {
     font-family: 'Roboto', system-ui;
-    font-weight: 600;
+    font-weight: 500;
     background-color: var(--md-sys-color-surface);
   }
 }

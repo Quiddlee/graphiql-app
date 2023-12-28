@@ -1,8 +1,9 @@
-import { FC, MouseEvent, useRef, useState } from 'react';
+import { FC, MouseEvent, useCallback, useRef, useState } from 'react';
 
 import { MdMenu } from '@material/web/all';
 
 import useView from '@components/Nav/hooks/useView';
+import DeleteViewDialog from '@components/ViewList/ui/DeleteViewDialog';
 import RenameViewDialog from '@components/ViewList/ui/RenameViewDialog';
 import cn from '@shared/lib/helpers/cn';
 import FilledTonalIconButton from '@shared/ui/FilledTonalIconButton';
@@ -16,8 +17,9 @@ type DetailsProps = {
 
 const Details: FC<DetailsProps> = ({ id }) => {
   const menuRef = useRef<MdMenu>(null);
-  const { handleDeleteView, views } = useView();
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { views } = useView();
+  const [isDialogRenameOpen, setIsDialogRenameOpen] = useState(false);
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
 
   const isDeleteDisabled = views.length === 1;
 
@@ -26,15 +28,19 @@ const Details: FC<DetailsProps> = ({ id }) => {
     if (menuRef.current) menuRef.current.open = !menuRef.current.open;
   }
 
-  // TODO: add confirm dialog when deleting view
+  const handleOpenDeleteDialog = useCallback(function handleOpenDeleteDialog(e: MouseEvent) {
+    e.stopPropagation();
+    setIsDeleteDialogOpen(true);
+  }, []);
 
   return (
     <article id={`details-menu-${id}`} className="relative ml-auto flex items-center brightness-125">
-      <RenameViewDialog open={isDialogOpen} id={id} onToggle={setIsDialogOpen} />
+      {isDialogRenameOpen && <RenameViewDialog open={isDialogRenameOpen} id={id} onToggle={setIsDialogRenameOpen} />}
+      {isDeleteDialogOpen && <DeleteViewDialog open={isDeleteDialogOpen} id={id} onToggle={setIsDeleteDialogOpen} />}
 
       <FilledTonalIconButton
         className={cn('invisible absolute -right-4 group-hover:visible', {
-          visible: isDialogOpen,
+          visible: isDialogRenameOpen || isDeleteDialogOpen,
         })}
         onClick={(e) => handleMenuToggle(e)}
       >
@@ -45,20 +51,14 @@ const Details: FC<DetailsProps> = ({ id }) => {
         <MenuItem
           onClick={(e) => {
             e.stopPropagation();
-            setIsDialogOpen(true);
+            setIsDialogRenameOpen(true);
           }}
         >
           <span className="flex items-center justify-start gap-[10px]">
             <Icon>edit</Icon> Rename
           </span>
         </MenuItem>
-        <MenuItem
-          disabled={isDeleteDisabled}
-          onClick={(e) => {
-            e.stopPropagation();
-            handleDeleteView(id);
-          }}
-        >
+        <MenuItem disabled={isDeleteDisabled} onClick={handleOpenDeleteDialog}>
           <span className="flex items-center justify-start gap-[10px]">
             <Icon>delete</Icon> Delete
           </span>
