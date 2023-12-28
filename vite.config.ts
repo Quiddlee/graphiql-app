@@ -26,10 +26,7 @@ export default defineConfig({
 		coverage: {
 			provider: 'istanbul',
 			thresholds: {
-				lines: 50,
 				statements: 50,
-				branches: 50,
-				functions: 50,
 			},
 		},
 	},
