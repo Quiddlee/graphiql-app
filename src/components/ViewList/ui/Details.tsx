@@ -2,7 +2,7 @@ import { FC, MouseEvent, useCallback, useRef, useState } from 'react';
 
 import { MdMenu } from '@material/web/all';
 
-import useView from '@components/Nav/hooks/useView';
+import useView from '@components/ViewList/hooks/useView';
 import DeleteViewDialog from '@components/ViewList/ui/DeleteViewDialog';
 import RenameViewDialog from '@components/ViewList/ui/RenameViewDialog';
 import cn from '@shared/lib/helpers/cn';

@@ -3,7 +3,7 @@ import { Dispatch, FC, SetStateAction, useCallback, useRef } from 'react';
 import { MdDialog } from '@material/web/all';
 import { toast } from 'react-toastify';
 
-import useView from '@components/Nav/hooks/useView';
+import useView from '@components/ViewList/hooks/useView';
 import Dialog from '@shared/ui/Dialog';
 import TextButton from '@shared/ui/TextButton';
 

@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren, ReactNode } from 'react';
 
-import useView from '@components/Nav/hooks/useView';
 import { View } from '@components/ViewList/context/types';
+import useView from '@components/ViewList/hooks/useView';
 
 type ViewListProps = PropsWithChildren & {
   render: (view: View, i: number) => ReactNode;

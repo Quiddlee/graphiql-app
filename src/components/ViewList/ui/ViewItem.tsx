@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 
 import { useLocation } from 'react-router-dom';
 
-import useView from '@components/Nav/hooks/useView';
+import useView from '@components/ViewList/hooks/useView';
 import ROUTES from '@shared/constants/routes';
 import cn from '@shared/lib/helpers/cn';
 

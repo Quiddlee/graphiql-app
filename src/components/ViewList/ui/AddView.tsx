@@ -1,4 +1,4 @@
-import useView from '@components/Nav/hooks/useView';
+import useView from '@components/ViewList/hooks/useView';
 import Icon from '@shared/ui/Icon';
 
 const AddView = () => {
