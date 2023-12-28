@@ -4,7 +4,7 @@ import { View } from '@components/ViewList/context/types';
 export const INITIAL_VIEWS: View[] = [
 	{
 		id: Date.now(),
-		name: 'Welcome!',
+		name: 'Welcome! 👋',
 		query: EDITOR_DEFAULT_VALUE,
 		variables: EDITOR_TOOLS_DEFAULT_VALUE,
 		headers: '',
