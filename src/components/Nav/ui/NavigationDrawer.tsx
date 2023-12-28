@@ -14,11 +14,11 @@ const NavigationDrawer = () => {
   return (
     <article className="h-fit w-full text-on-surface-variant-text">
       <ul>
-        <NavItem to={ROUTES.WELCOME_PAGE}>
+        <NavItem data-testid="nav-welcome" to={ROUTES.WELCOME_PAGE}>
           <Icon>spa</Icon> {translation.nav.navbar.welcome}
         </NavItem>
 
-        <NavItem to={ROUTES.SETTINGS}>
+        <NavItem data-testid="nav-settings" to={ROUTES.SETTINGS}>
           <Icon>settings</Icon> {translation.nav.navbar.settings}
         </NavItem>
 

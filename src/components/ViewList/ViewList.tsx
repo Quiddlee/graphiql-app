@@ -13,7 +13,7 @@ const ViewList: FC<ViewListProps> = ({ render, children }) => {
   const { translation } = useLanguage();
 
   return (
-    <ul>
+    <ul data-testid="view-list">
       <h2 className="relative px-4 py-[18px]">{translation.nav.viewList.title}</h2>
       {views.map(render)}
       {children}

@@ -105,7 +105,7 @@ const ViewProvider = ({ children }: PropsWithChildren) => {
       variables: NEW_VIEW.variables,
       headers: NEW_VIEW.headers,
     });
-  }, [setUrl]);
+  }, [setUrl, translation.nav.viewList.newView]);
 
   const handleRenameView = useCallback((id: number, newName: string) => {
     dispatch({ type: 'view/viewRenamed', payload: { name: newName, id } });

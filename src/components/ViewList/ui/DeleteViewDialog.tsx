@@ -40,7 +40,7 @@ const DeleteViewDialog: FC<DeleteViewDialogProps> = ({ id, onToggle, open }) => 
   );
 
   return (
-    <Dialog ref={dialogRef} open={open} closed={() => onToggle(false)}>
+    <Dialog data-testid="delete-dialog" ref={dialogRef} open={open} closed={() => onToggle(false)}>
       <h3 slot="headline">{translation.nav.viewList.deleteDialog.title}</h3>
       <p slot="content">{translation.nav.viewList.deleteDialog.content}</p>
       <div slot="actions">

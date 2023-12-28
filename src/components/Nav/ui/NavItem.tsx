@@ -9,9 +9,9 @@ type NavButtonProps = {
   children: ReactNode;
 };
 
-const NavItem: FC<NavButtonProps> = ({ to, children }) => {
+const NavItem: FC<NavButtonProps> = ({ to, children, ...props }) => {
   return (
-    <NavLink to={to}>
+    <NavLink {...props} to={to}>
       {({ isActive }) => (
         <span
           className={cn(

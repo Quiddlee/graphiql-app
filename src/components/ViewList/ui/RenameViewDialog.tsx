@@ -47,11 +47,11 @@ const RenameViewDialog: FC<RenameViewDialogProps> = ({ id, open, onToggle }) => 
         </>,
       );
     },
-    [handleCloseDialog, handleRenameView, id],
+    [handleCloseDialog, handleRenameView, id, translation.nav.viewList.renameDialog.snackbar],
   );
 
   return (
-    <Dialog ref={dialogRef} closed={() => onToggle(false)} open={open}>
+    <Dialog data-testid="rename-dialog" ref={dialogRef} closed={() => onToggle(false)} open={open}>
       <h3 slot="headline">{translation.nav.viewList.renameDialog.title}</h3>
       <form slot="content" id="form-id" method="dialog">
         <OutlinedTextField

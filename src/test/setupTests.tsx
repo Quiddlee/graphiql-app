@@ -80,6 +80,12 @@ vi.mock('@shared/ui/PrimaryTab', () => ({
   },
 }));
 
+vi.mock('@shared/ui/MenuItem', () => ({
+  default: (props: { active?: boolean }) => {
+    return <button {...{ ...props, active: 'true', ref: null }} type="button" />;
+  },
+}));
+
 vi.mock('@components/loginReg/SubmitBtn', () => ({
   default: () => <button type="submit">Log in</button>,
 }));
