@@ -87,6 +87,9 @@ const en = {
 				prettify: 'Prettify',
 				openResp: 'Open response',
 			},
+			snackbar: {
+				copy: 'Copied to clipboard',
+			},
 		},
 	},
 	mainLayout: {

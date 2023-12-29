@@ -23,7 +23,10 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
   const { readUrl } = useUrl();
   const screenType = useScreen();
   const { translation } = useLanguage();
-  const { copy, play, prettify, openResp } = translation.mainPage.requestEditor.controlsTooltips;
+  const {
+    controlsTooltips: { copy, play, prettify, openResp },
+    snackbar: { copy: copySnackbar },
+  } = translation.mainPage.requestEditor;
   const isAnimationsDisabled = screenType === 'tablet' || screenType === 'mobile';
 
   const { pathname } = useLocation();
@@ -33,8 +36,7 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
   const handleCopyText = async () => {
     const query = readUrl(urlParams.QUERY);
     await navigator.clipboard.writeText(query);
-
-    toast(<p className="text-center">Request copied!</p>);
+    toast(copySnackbar);
   };
 
   return (
