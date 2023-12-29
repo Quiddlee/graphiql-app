@@ -7,7 +7,7 @@ const Header = () => {
   const [isDocsShown, setIsDocsShown] = useState(false);
   return (
     <>
-      <header className="col-span-full flex justify-between">
+      <header className="col-start-1 col-end-2 flex justify-between sm:col-end-3">
         <p>Here is still header</p>
         <div>
           <ShowDocsBtn onClick={() => setIsDocsShown((prev) => !prev)} />
