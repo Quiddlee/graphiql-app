@@ -5,7 +5,18 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import renderWithRouter from '@/test/helpers/RenderWithRouter';
 import * as useEditorUrlState from '@components/Editor/lib/hooks/useEditorUrlState';
 import MainPage from '@pages/MainPage/MainPage';
+import ROUTES from '@shared/constants/routes';
 import * as useUrl from '@shared/lib/hooks/useUrl';
+
+vi.mock('react-router-dom', async () => {
+  const reactRouterDom = await vi.importActual('react-router-dom');
+  return {
+    ...reactRouterDom,
+    useLocation: () => ({
+      pathname: `/${ROUTES.MAIN}`,
+    }),
+  };
+});
 
 const mockWriteText = vi.fn();
 const mockEditorText = 'test text';
