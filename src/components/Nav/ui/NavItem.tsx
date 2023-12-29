@@ -25,7 +25,7 @@ const NavItem: FC<NavButtonProps> = ({ to, children, ...props }) => {
             className={cn(
               'absolute -top-1 left-3 h-[32px] w-[56px] scale-x-[.32] rounded-full py-4 pl-4 pr-6 opacity-0 transition-all duration-200 ease-linear lg:left-0 lg:top-0 lg:h-full lg:w-full',
               {
-                'scale-x-100 bg-secondary-container opacity-100 group-hover:bg-[color-mix(in_srgb,_var(--md-sys-color-secondary)_18%,_transparent)] group-active:bg-[color-mix(in_srgb,_var(--md-sys-color-secondary)_20%,_transparent)]':
+                'scale-x-100 bg-secondary-container opacity-100 group-active:bg-[color-mix(in_srgb,_var(--md-sys-color-secondary)_20%,_transparent)] lg:group-hover:bg-[color-mix(in_srgb,_var(--md-sys-color-secondary)_18%,_transparent)]':
                   isActive,
               },
             )}
