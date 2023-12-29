@@ -29,7 +29,7 @@ const DocsRootComp = ({ types, explorer }: { types: SchemaTypeObj[]; explorer: D
     <div ref={rootRef} className="h-full">
       <div className="rounded-[24px] bg-surface-container px-10 py-[56px] text-left text-on-surface sm:px-[56px]">
         <h3 className="text-[57px] font-[500]">Docs</h3>
-        <p className="text-md text-left">A GraphQL schema provides a root type for each kind of operation.</p>
+        <p className="text-md mt-10 text-left">A GraphQL schema provides a root type for each kind of operation.</p>
       </div>
       <div className="mt-[56px] p-10 text-left font-[500] sm:px-[56px]">
         <h4 className="text-[28px]">Root types:</h4>

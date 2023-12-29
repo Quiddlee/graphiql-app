@@ -3,6 +3,7 @@ const localStorageKeys = {
 	RESPONSE_WIDTH: 'response-width',
 	ACTIVE_VIEW: 'active-view',
 	VIEWS: 'views',
+	LIGHT_THEME: 'graphiQlColorTheme',
 };
 
 export default localStorageKeys;

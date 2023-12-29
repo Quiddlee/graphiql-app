@@ -3,7 +3,7 @@ import IconButton from '@shared/ui/IconButton';
 
 const PassVisibilityIcon = ({ onClick }: { onClick: () => void }) => {
   return (
-    <IconButton toggle slot="trailing-icon" onClick={onClick}>
+    <IconButton toggle slot="trailing-icon" onClick={onClick} type="button">
       <Icon>visibility</Icon>
       <Icon slot="selected">visibility_off</Icon>
     </IconButton>
