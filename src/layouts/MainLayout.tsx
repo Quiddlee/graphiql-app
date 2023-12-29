@@ -6,6 +6,7 @@ import Header from '@components/Header/Header';
 import Nav from '@components/Nav/Nav';
 import Controls from '@components/RequestEditor/ui/Controls';
 import ViewProvider from '@components/ViewList/context/ViewProvider';
+import { SNACKBAR_AUTO_HIDE_DURATION } from '@shared/constants/const';
 import useScrollbar from '@shared/lib/hooks/useScrollbar';
 
 const SnackBarTransition = cssTransition({
@@ -39,7 +40,7 @@ const MainLayout = () => {
       <ToastContainer
         closeOnClick={false}
         closeButton={false}
-        autoClose={4000}
+        autoClose={SNACKBAR_AUTO_HIDE_DURATION}
         hideProgressBar
         pauseOnHover={false}
         draggable={false}
@@ -47,7 +48,7 @@ const MainLayout = () => {
         transition={SnackBarTransition}
         position="bottom-left"
         toastClassName="!text-inverse-on-surface origin-bottom !bg-inverse-surface !min-w-[336px] !pl-4 !min-h-[48px] text-left"
-        bodyClassName="text-sm font-normal [&>div]:origin-bottom [&>div]:animate-fade-in-snackbar-body [&>div]:truncate w-full [&>div]:pe-16"
+        bodyClassName="text-sm font-normal relative !p-0 [&>div]:origin-bottom [&>div]:animate-fade-in-snackbar-body [&>div]:truncate w-full [&>div]:pe-16"
       />
     </ViewProvider>
   );

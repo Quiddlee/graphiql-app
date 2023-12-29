@@ -79,7 +79,26 @@ const en = {
 			},
 		},
 	},
-	header: { h1: { h2: 'english' } },
+	mainPage: {
+		requestEditor: {
+			controlsTooltips: {
+				play: 'Execute query',
+				copy: 'Copy query',
+				prettify: 'Prettify query',
+				openResp: 'Open response',
+			},
+			snackbar: {
+				copy: 'Copied to clipboard',
+			},
+		},
+	},
+	mainLayout: {
+		header: {
+			tooltips: {
+				docs: 'Show docs',
+			},
+		},
+	},
 };
 
 export default en;
