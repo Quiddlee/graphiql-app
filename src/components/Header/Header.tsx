@@ -1,16 +1,27 @@
 import { useState } from 'react';
 
+import useLanguage from '@/shared/Context/hooks';
+import Icon from '@/shared/ui/Icon';
+import IconButton from '@/shared/ui/IconButton';
 import DocsComp from '@components/DocsComp/DocsComp';
-import ShowDocsBtn from '@components/Header/ui/ShowDocsBtn';
 
 const Header = () => {
   const [isDocsShown, setIsDocsShown] = useState(false);
+  const { translation } = useLanguage();
+  const docsTooltip = translation.mainLayout.header.tooltips.docs;
   return (
     <>
       <header className="col-start-1 col-end-2 flex justify-between sm:col-end-3">
         <p>Here is still header</p>
         <div>
-          <ShowDocsBtn onClick={() => setIsDocsShown((prev) => !prev)} />
+          <IconButton
+            onClick={() => setIsDocsShown((prev) => !prev)}
+            data-tooltip={docsTooltip}
+            data-testid="show_docs"
+            className="tooltipElem"
+          >
+            <Icon>article</Icon>
+          </IconButton>
         </div>
       </header>
       <DocsComp isShown={isDocsShown} setIsDocsShown={setIsDocsShown} />

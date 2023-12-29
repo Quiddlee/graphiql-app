@@ -376,3 +376,31 @@
 .toasttest {
   background-color: red;
 }
+
+.tooltipElem {
+  position: relative;
+}
+
+.tooltipElem::before {
+  --scale: 0;
+  position: absolute;
+  top: 0;
+  right: 65px;
+  transform: translateY(30%) scale(var(--scale));
+  transition: 150ms transform 300ms;
+  transform-origin: center right;
+  content: attr(data-tooltip);
+  width: max-content;
+  z-index: 20;
+  border-radius: 2px;
+  height: 24px;
+  background-color: var(--md-sys-color-inverse-surface);
+  color: var(--md-sys-color-inverse-on-surface);
+  padding: 0 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.tooltipElem:hover::before {
+  --scale: 1;
+}
