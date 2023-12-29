@@ -32,9 +32,9 @@ const ClearUndo = (props: UndoPropsType) => {
   };
 
   return (
-    <div className="flex items-center justify-around text-sm">
+    <div className="flex items-center text-sm">
       <p className="font-[400] text-inverse-on-surface">{title}</p>
-      <button className="font-[500] text-inverse-primary" type="button" onClick={handleClick}>
+      <button className="absolute right-3 font-[500] text-inverse-primary" type="button" onClick={handleClick}>
         {btn}
       </button>
     </div>
