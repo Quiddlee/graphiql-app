@@ -36,12 +36,38 @@ export default {
             scale: 1,
           },
         },
+        'fade-in-snackbar': {
+          from: {
+            opacity: 0,
+            scale: '1 0',
+          },
+          to: {
+            opacity: 1,
+            scaleY: '1',
+          },
+        },
+        'fade-in-snackbar-body': {
+          from: {
+            scale: '1 2',
+          },
+          to: {
+            scaleY: '1',
+          },
+        },
+        'fade-out-snackbar': {
+          to: {
+            opacity: 0,
+          },
+        },
       },
       animation: {
         'fade-in-screen': 'fade-in 400ms cubic-bezier(0.05, 0.7, 0.1, 1.0) backwards',
         'fade-out-screen': 'fade-in 200ms cubic-bezier(0.3, 0.0, 0.8, 0.15) forward reverse',
         'fade-in-standard': 'fade-in 250ms cubic-bezier(0, 0, 0, 1) backwards',
         'fade-out-standard': 'fade-in 200ms cubic-bezier(0.3, 0, 1, 1) forward reverse',
+        'fade-in-snackbar': 'fade-in-snackbar 500ms cubic-bezier(0, 0, 0, 1) backwards',
+        'fade-in-snackbar-body': 'fade-in-snackbar-body 500ms cubic-bezier(0, 0, 0, 1) backwards',
+        'fade-out-snackbar': 'fade-out-snackbar 200ms cubic-bezier(0.3, 0, 1, 1) forwards',
       },
       colors: {
         primary: 'var(--md-sys-color-primary)',

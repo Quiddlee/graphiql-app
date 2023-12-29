@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import { Dispatch, forwardRef, SetStateAction, SyntheticEvent, useRef } from 'react';
+import { Dispatch, forwardRef, SetStateAction, SyntheticEvent } from 'react';
 
 type EditorFieldProps = {
   value: string;
@@ -7,8 +7,6 @@ type EditorFieldProps = {
 };
 
 const EditorField = forwardRef<HTMLDivElement, EditorFieldProps>(({ onChange, value = '' }, ref) => {
-  const defaultValue = useRef(value);
-
   function handleInput(e: SyntheticEvent) {
     onChange?.((e.target as HTMLElement).innerHTML);
   }
@@ -23,7 +21,7 @@ const EditorField = forwardRef<HTMLDivElement, EditorFieldProps>(({ onChange, va
       contentEditable
       onInput={handleInput}
       className="h-fit w-full whitespace-pre-wrap outline-none"
-      dangerouslySetInnerHTML={{ __html: defaultValue.current }}
+      dangerouslySetInnerHTML={{ __html: value }}
     />
   );
 });

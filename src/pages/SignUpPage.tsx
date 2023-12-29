@@ -7,9 +7,7 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import FormInput from '@/components/loginReg/FormInput';
 import PassVisibilityIcon from '@/components/loginReg/PassVisibilityIcon';
-import SubmitBtn from '@/components/loginReg/SubmitBtn';
 import AUTH_ERRORS from '@/shared/constants/authErrors';
 import ROUTES from '@/shared/constants/routes';
 import { regValidationSchema } from '@/shared/constants/validationSchema';
@@ -18,6 +16,8 @@ import useLanguage from '@/shared/Context/hooks';
 import notationLocalizer from '@/shared/helpers/notationLocalizer';
 import switchPassType from '@/shared/helpers/switchPassType';
 import { ErrorType, TextInputProps } from '@/shared/types';
+import FormInput from '@components/loginReg/FormInput';
+import SubmitBtn from '@components/loginReg/SubmitBtn';
 
 export default function SignUpPage() {
   const [passType, setPassType] = useState('password');
