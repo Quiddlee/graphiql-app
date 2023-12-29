@@ -1,9 +1,19 @@
+import { PropsWithChildren } from 'react';
+
 import { act, fireEvent, screen, waitFor } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import App from '@/app/App';
 
 import userSetup from './setupTests';
+
+vi.mock('@shared/ui/OutlinedTextField', () => ({
+  default: (props: PropsWithChildren) => (
+    <button type="button" {...{ ...props, ref: null }}>
+      {props.children}
+    </button>
+  ),
+}));
 
 describe('Testing for login page', () => {
   it('Should render login page properly', async () => {
@@ -12,6 +22,7 @@ describe('Testing for login page', () => {
     await act(async () => {
       user.click(loginLink);
     });
+    screen.debug();
     const emailInput = await screen.findByPlaceholderText('Email');
     const passInput = await screen.findByPlaceholderText('Password');
     await act(async () => {
