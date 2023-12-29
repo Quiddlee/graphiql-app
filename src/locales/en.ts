@@ -82,9 +82,9 @@ const en = {
 	mainPage: {
 		requestEditor: {
 			controlsTooltips: {
-				play: 'Send request',
-				copy: 'Copy text',
-				prettify: 'Prettify',
+				play: 'Execute query',
+				copy: 'Copy query',
+				prettify: 'Prettify query',
 				openResp: 'Open response',
 			},
 			snackbar: {

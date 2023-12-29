@@ -84,8 +84,8 @@ const ru = {
 		requestEditor: {
 			controlsTooltips: {
 				play: 'Отправить запрос',
-				copy: 'Скопировать текст',
-				prettify: 'Форматировать',
+				copy: 'Скопировать запрос',
+				prettify: 'Форматировать запрос',
 				openResp: 'Открыть ответ',
 			},
 			snackbar: {
