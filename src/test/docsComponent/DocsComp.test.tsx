@@ -6,7 +6,7 @@ import App from '@/app/App';
 describe('Testing for docs component', () => {
   it('Should render docs components after clicking on show docs btn', async () => {
     render(<App />);
-    const showDocsBtn = screen.getByText('show docs');
+    const showDocsBtn = screen.getByTestId('show_docs');
     expect(screen.queryByTestId('overlay')).toBeNull();
     expect(screen.queryByText('Docs')).toBeNull();
     expect(screen.queryByText('A GraphQL schema provides a root type for each kind of operation')).toBeNull();
@@ -21,7 +21,7 @@ describe('Testing for docs component', () => {
   });
   it('Should close docs section after clicking on overlay', async () => {
     render(<App />);
-    const showDocsBtn = screen.getByText('show docs');
+    const showDocsBtn = screen.getByTestId('show_docs');
     expect(screen.queryByTestId('overlay')).toBeNull();
     expect(screen.queryByText('Docs')).toBeNull();
     expect(screen.queryByText('A GraphQL schema provides a root type for each kind of operation')).toBeNull();
@@ -45,7 +45,7 @@ describe('Testing for docs component', () => {
   });
   it('Should close docs section after clicking on close docs button', async () => {
     render(<App />);
-    const showDocsBtn = screen.getByText('show docs');
+    const showDocsBtn = screen.getByTestId('show_docs');
     expect(screen.queryByTestId('overlay')).toBeNull();
     expect(screen.queryByText('Docs')).toBeNull();
     expect(screen.queryByText('A GraphQL schema provides a root type for each kind of operation')).toBeNull();
@@ -69,7 +69,7 @@ describe('Testing for docs component', () => {
   });
   it('Should navigate and display info about proper type after cliking on that type', async () => {
     render(<App />);
-    const showDocsBtn = screen.getByText('show docs');
+    const showDocsBtn = screen.getByTestId('show_docs');
     await act(async () => {
       fireEvent.click(showDocsBtn);
     });
@@ -82,7 +82,7 @@ describe('Testing for docs component', () => {
   });
   it('Should navigate and display info about proper info about root type after cliking on that type', async () => {
     render(<App />);
-    const showDocsBtn = screen.getByText('show docs');
+    const showDocsBtn = screen.getByTestId('show_docs');
     await act(async () => {
       fireEvent.click(showDocsBtn);
     });
@@ -94,7 +94,7 @@ describe('Testing for docs component', () => {
   });
   it('Should navigate and display info about proper info about root type after cliking on that type and all following clicked types as well as navigating back', async () => {
     render(<App />);
-    const showDocsBtn = screen.getByText('show docs');
+    const showDocsBtn = screen.getByTestId('show_docs');
     await act(async () => {
       fireEvent.click(showDocsBtn);
     });
