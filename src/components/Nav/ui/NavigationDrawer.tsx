@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import NavItem from '@components/Nav/ui/NavItem';
 import VirtualScroll from '@components/Nav/ui/VirtualScroll';
 import AddView from '@components/ViewList/ui/AddView';
@@ -6,17 +8,21 @@ import ViewItem from '@components/ViewList/ui/ViewItem';
 import ViewList from '@components/ViewList/ViewList';
 import ROUTES from '@shared/constants/routes';
 import useLanguage from '@shared/Context/hooks';
+import Blackout from '@shared/ui/Blackout';
 import Fab from '@shared/ui/Fab';
 import Icon from '@shared/ui/Icon';
 import IconButton from '@shared/ui/IconButton';
 
 const NavigationDrawer = () => {
   const { translation } = useLanguage();
+  const [isActive, setIsActive] = useState(false);
 
   return (
     <article className="h-fit w-full overflow-hidden text-on-surface-variant-text lg:overflow-auto">
+      <Blackout isBlackout={isActive} unlock={() => setIsActive(false)} />
+
       <ul className="mb-11 grid justify-items-center gap-2 lg:hidden">
-        <IconButton>
+        <IconButton onClick={() => setIsActive(true)}>
           <Icon>menu</Icon>
         </IconButton>
         <Fab variant="tertiary">
