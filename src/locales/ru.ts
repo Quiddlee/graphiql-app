@@ -75,7 +75,7 @@ const ru = {
 				confirm: 'Очистить',
 			},
 			undo: {
-				undoTitle: 'Данные Удалены',
+				undoTitle: 'Данные хранилища очищены',
 				cancelBtn: 'Отменить',
 			},
 		},
@@ -84,8 +84,8 @@ const ru = {
 		requestEditor: {
 			controlsTooltips: {
 				play: 'Отправить запрос',
-				copy: 'Копир. текст',
-				prettify: 'Притификация',
+				copy: 'Скопировать текст',
+				prettify: 'Форматировать',
 				openResp: 'Открыть ответ',
 			},
 			snackbar: {
