@@ -52,6 +52,23 @@ const ru = {
 			},
 		},
 	},
+	mainPage: {
+		requestEditor: {
+			controlsTooltips: {
+				play: 'Отправить запрос',
+				copy: 'Копир. текст',
+				prettify: 'Притификация',
+				openResp: 'Открыть ответ',
+			},
+		},
+	},
+	mainLayout: {
+		header: {
+			tooltips: {
+				docs: 'Документация',
+			},
+		},
+	},
 };
 
 export default ru;

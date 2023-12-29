@@ -52,6 +52,23 @@ const en = {
 			},
 		},
 	},
+	mainPage: {
+		requestEditor: {
+			controlsTooltips: {
+				play: 'Send request',
+				copy: 'Copy text',
+				prettify: 'Prettify',
+				openResp: 'Open response',
+			},
+		},
+	},
+	mainLayout: {
+		header: {
+			tooltips: {
+				docs: 'Show docs',
+			},
+		},
+	},
 };
 
 export default en;

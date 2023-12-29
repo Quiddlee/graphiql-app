@@ -2,6 +2,7 @@ import { FC, HTMLAttributes } from 'react';
 
 import { toast } from 'react-toastify';
 
+import useLanguage from '@/shared/Context/hooks';
 import urlParams from '@shared/constants/urlParams';
 import cn from '@shared/lib/helpers/cn';
 import useScreen from '@shared/lib/hooks/useScreen';
@@ -19,6 +20,8 @@ type ControlsProps = HTMLAttributes<HTMLUListElement> & {
 const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) => {
   const { readUrl } = useUrl();
   const screenType = useScreen();
+  const { translation } = useLanguage();
+  const { copy, play, prettify, openResp } = translation.mainPage.requestEditor.controlsTooltips;
   const isAnimationsDisabled = screenType === 'tablet' || screenType === 'mobile';
 
   const handleCopyText = async () => {
@@ -39,7 +42,7 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
           'animate-fade-out-screen': isHidden,
         })}
       >
-        <Fab data-testid="fab" variant="primary">
+        <Fab data-testid="fab" variant="primary" data-tooltip={play} className="tooltipElem">
           <Icon slot="icon">play_arrow</Icon>
         </Fab>
       </li>
@@ -49,7 +52,7 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
           'animate-fade-out-screen': isHidden,
         })}
       >
-        <FilledIconButton data-testid="copy-text" onClick={handleCopyText}>
+        <FilledIconButton data-testid="copy-text" onClick={handleCopyText} data-tooltip={copy} className="tooltipElem">
           <Icon>content_copy</Icon>
         </FilledIconButton>
       </li>
@@ -59,7 +62,7 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
           'animate-fade-out-screen': isHidden,
         })}
       >
-        <FilledIconButton data-testid="prettify">
+        <FilledIconButton data-testid="prettify" data-tooltip={prettify} className="tooltipElem">
           <Icon>mop</Icon>
         </FilledIconButton>
       </li>
@@ -69,7 +72,12 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
           'animate-fade-out-screen': isHidden,
         })}
       >
-        <FilledIconButton data-testid="open-response" onClick={() => onResponseOpen?.((prevState) => !prevState)}>
+        <FilledIconButton
+          data-testid="open-response"
+          onClick={() => onResponseOpen?.((prevState) => !prevState)}
+          data-tooltip={openResp}
+          className="tooltipElem"
+        >
           <Icon>info</Icon>
         </FilledIconButton>
       </li>
