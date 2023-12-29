@@ -19,9 +19,9 @@ const DocsTypeComp = ({ explorer, currType }: { explorer: DocsExplorerType; curr
       const beforeSeparator = <br />;
       const afterSeparator = i >= field.args.length - 1 ? <br /> : null;
       return (
-        <>
+        <p key={argTypeName.concat(i.toString())} className="inline">
           {separation && beforeSeparator}
-          <span className={separation ? 'pl-3' : ''} key={argTypeName}>
+          <span className={separation ? 'pl-3' : ''}>
             <span className="text-tertiary">{arg.name}</span>:&nbsp;
             {before}
             <a className="text-docs-link-text-color hover:underline" href={link} onClick={(e) => clinkHandler(e, link)}>
@@ -30,7 +30,7 @@ const DocsTypeComp = ({ explorer, currType }: { explorer: DocsExplorerType; curr
             {after}
           </span>
           {separation && afterSeparator}
-        </>
+        </p>
       );
     });
     const returnType = getTypeName(field.type);
@@ -56,7 +56,7 @@ const DocsTypeComp = ({ explorer, currType }: { explorer: DocsExplorerType; curr
   });
   const inputFields = currType?.inputFields?.map((field) => {
     return (
-      <li key={field.name}>
+      <li key={field?.type?.name}>
         {field.name}:&nbsp;
         <a
           className="text-docs-link-text-color hover:underline"

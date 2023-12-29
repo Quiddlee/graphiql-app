@@ -7,7 +7,7 @@ type Translation = typeof enTranslation | typeof ruTranslation;
 
 type LanguageContextType = {
   language: string;
-  changeLanguage: () => void;
+  changeLanguage: (lang: 'en' | 'ru') => void;
   translation: Translation;
 };
 
@@ -21,10 +21,13 @@ export const LanguageContext = createContext<LanguageContextType>({} as Language
 export default function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState('en');
 
-  const changeLanguage = useCallback(() => {
-    const newLang = language === 'en' ? 'ru' : 'en';
-    setLanguage(newLang);
-  }, [language]);
+  const changeLanguage = useCallback(
+    (lang: 'en' | 'ru') => {
+      if (lang === language) return;
+      setLanguage(lang);
+    },
+    [language],
+  );
 
   const translation = TranslationFiles[language];
   const contextValue = useMemo(

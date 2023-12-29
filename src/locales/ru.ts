@@ -18,8 +18,40 @@ const ru = {
 		linkClue: 'Уже есть аккаунт?',
 		linkTitle: 'Войти',
 	},
-	header: { h1: { h2: 'русский' } },
-	button: 'Нажми',
+	settingsPage: {
+		headers: {
+			title: 'Сохранять заголовки',
+			firstSub: 'Сохранять заголовки после перезагрузки.',
+			secondSub: 'Включайте, только если доверяете устройству.',
+		},
+		mode: {
+			title: 'Тёмная тема',
+			subtitle: 'Изменить внешний вид интерфейса.',
+		},
+		endpoint: {
+			title: 'API endpoint',
+			subtitle: 'Сменить API endpoint.',
+		},
+		lang: {
+			title: 'Локализация',
+			subtitle: 'Сменить локализацию.',
+		},
+		clear: {
+			title: 'Очистить хранилище',
+			subtitle: 'Очистить все локалько сохранённые данные.',
+			btn: 'Очистить',
+			modal: {
+				title: 'Очистить данные',
+				subtitle: 'Вы уверены, что хотити удалить все локальные данные?',
+				cancel: 'Отмена',
+				confirm: 'Очистить',
+			},
+			undo: {
+				undoTitle: 'Данные хранилища очищены',
+				cancelBtn: 'Отменить',
+			},
+		},
+	},
 };
 
 export default ru;

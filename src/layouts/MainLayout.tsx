@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 
 import Footer from '@components/Footer/Footer';
 import Header from '@components/Header/Header';
@@ -16,6 +17,14 @@ const MainLayout = () => {
         <Nav />
       </div>
       <Outlet />
+      <ToastContainer
+        closeOnClick={false}
+        closeButton={false}
+        autoClose={2000}
+        hideProgressBar
+        pauseOnHover={false}
+        position="bottom-center"
+      />
       <div className="col-start-1 hidden lg:block">
         <Footer />
       </div>

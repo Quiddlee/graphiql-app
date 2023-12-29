@@ -18,7 +18,7 @@ const IconSlot = createComponent({
 
 const PassVisibilityIcon = ({ onClick }: { onClick: () => void }) => {
   return (
-    <IconSlot toggle slot="trailing-icon" onClick={onClick}>
+    <IconSlot toggle slot="trailing-icon" onClick={onClick} type="button">
       <Icon>visibility</Icon>
       <Icon slot="selected">visibility_off</Icon>
     </IconSlot>

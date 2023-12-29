@@ -5,6 +5,7 @@ import { TextFieldType } from '@material/web/textfield/outlined-text-field';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import FormInput from '@/components/loginReg/FormInput';
 import PassVisibilityIcon from '@/components/loginReg/PassVisibilityIcon';
@@ -16,7 +17,6 @@ import useAuth from '@/shared/Context/authHook';
 import useLanguage from '@/shared/Context/hooks';
 import notationLocalizer from '@/shared/helpers/notationLocalizer';
 import switchPassType from '@/shared/helpers/switchPassType';
-import toastifyNotation from '@/shared/helpers/toastifyNotation';
 import { ErrorType, TextInputProps } from '@/shared/types';
 
 export default function SignUpPage() {
@@ -49,8 +49,8 @@ export default function SignUpPage() {
       return null;
     } catch (e) {
       if ((e as ErrorType).code === AUTH_ERRORS.EMAIL_IN_USE)
-        return toastifyNotation(notationLocalizer(language, 'code10'));
-      return toastifyNotation(notationLocalizer(language, 'code11'));
+        return toast(<p className="text-center">{notationLocalizer(language, 'code10')}</p>);
+      return toast(<p className="text-center">{notationLocalizer(language, 'code11')}</p>);
     }
   }
 

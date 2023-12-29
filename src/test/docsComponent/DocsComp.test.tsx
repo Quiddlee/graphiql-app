@@ -132,7 +132,4 @@ describe('Testing for docs component', () => {
       await screen.findByText('A GraphQL schema provides a root type for each kind of operation.'),
     ).toBeInTheDocument();
   });
-  it('fake', () => {
-    expect(1).toBe(1);
-  });
 });
