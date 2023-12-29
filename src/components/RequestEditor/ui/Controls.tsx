@@ -1,7 +1,9 @@
 import { FC, HTMLAttributes } from 'react';
 
+import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import ROUTES from '@shared/constants/routes';
 import urlParams from '@shared/constants/urlParams';
 import cn from '@shared/lib/helpers/cn';
 import useScreen from '@shared/lib/hooks/useScreen';
@@ -20,6 +22,9 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
   const { readUrl } = useUrl();
   const screenType = useScreen();
   const isAnimationsDisabled = screenType === 'tablet' || screenType === 'mobile';
+  const { pathname } = useLocation();
+
+  if (pathname.slice(1) !== ROUTES.MAIN) return null;
 
   const handleCopyText = async () => {
     const query = readUrl(urlParams.QUERY);

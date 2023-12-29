@@ -1,11 +1,13 @@
+import { Dispatch, KeyboardEvent, MouseEvent, ReactNode, SetStateAction } from 'react';
+
 type PropsType = {
-  setIsShown: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsShown: Dispatch<SetStateAction<boolean>>;
   isShown: boolean;
-  children: JSX.Element;
+  children: ReactNode;
 };
 
 const ConfirmOverlay = ({ isShown, setIsShown, children }: PropsType) => {
-  function closeHandler(e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.KeyboardEvent<HTMLDivElement>) {
+  function closeHandler(e: MouseEvent | KeyboardEvent) {
     if ((e.target as HTMLButtonElement).hasAttribute('data-overlay')) {
       setIsShown((prev) => !prev);
     }
