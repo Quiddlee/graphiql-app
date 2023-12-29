@@ -82,17 +82,20 @@ const en = {
 	mainPage: {
 		requestEditor: {
 			controlsTooltips: {
-				play: 'Send request',
-				copy: 'Copy text',
-				prettify: 'Prettify',
+				play: 'Execute query',
+				copy: 'Copy query',
+				prettify: 'Prettify query',
 				openResp: 'Open response',
+			},
+			snackbar: {
+				copy: 'Copied to clipboard',
 			},
 		},
 	},
 	mainLayout: {
 		header: {
 			tooltips: {
-				docs: 'Open docs',
+				docs: 'Show docs',
 			},
 		},
 	},
