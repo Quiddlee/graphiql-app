@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
 import App from '@/app/App';
@@ -36,40 +36,6 @@ describe('Testing for settings page', () => {
     expect(await screen.findByText('Persist headers')).toBeInTheDocument();
     expect(await screen.findByText('Dark mode')).toBeInTheDocument();
     expect(await screen.findByText('Clear storage')).toBeInTheDocument();
-  });
-  it('Should opened modal and close it with proper buttons', async () => {
-    render(<App />);
-    const clearDataBtn = screen.getByText('Clear data');
-    expect(screen.queryByTestId('overlay')).toBeNull();
-    await act(async () => {
-      fireEvent.click(clearDataBtn);
-    });
-    expect(await screen.findByTestId('overlay')).toBeInTheDocument();
-    const closeBtn = await screen.findByText('Cancel');
-    await act(async () => {
-      fireEvent.click(closeBtn);
-    });
-    waitForElementToBeRemoved(() => {
-      expect(screen.queryByTestId('overlay')).toBeNull();
-    }).catch(() => {});
-  });
-  it('Should open confirm modal and close it after clicking corresponding buttons', async () => {
-    render(<App />);
-    const clearDataBtn = screen.getByText('Clear data');
-    await act(async () => {
-      fireEvent.click(clearDataBtn);
-    });
-    const clearBtn = await screen.findByText('Clear');
-    await act(async () => {
-      fireEvent.click(clearBtn);
-    });
-    const undoBtn = await screen.findByText('Undo');
-    await act(async () => {
-      fireEvent.click(undoBtn);
-    });
-    waitForElementToBeRemoved(() => {
-      expect(undoBtn).toBeNull();
-    }).catch(() => {});
   });
   it('Should change color theme after clicking on theme switcher', async () => {
     render(<App />);

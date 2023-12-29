@@ -4,7 +4,6 @@ import useLanguage from '@/shared/Context/hooks';
 import FilledTonalButton from '@/shared/ui/FilledTonalButton';
 
 import ConfirmModal from './ConfirmModal';
-import ConfirmOverlay from './ConfirmOverlay';
 
 const ClearStorageComp = () => {
   const [isModalShown, setIsModalShown] = useState(false);
@@ -21,12 +20,11 @@ const ClearStorageComp = () => {
           {translation.settingsPage.clear.btn}
         </FilledTonalButton>
       </div>
-      <ConfirmOverlay isShown={isModalShown} setIsShown={setIsModalShown}>
-        <ConfirmModal
-          setIsShown={setIsModalShown}
-          locales={{ ...translation.settingsPage.clear.modal, ...translation.settingsPage.clear.undo }}
-        />
-      </ConfirmOverlay>
+      <ConfirmModal
+        open={isModalShown}
+        setIsShown={setIsModalShown}
+        locales={{ ...translation.settingsPage.clear.modal, ...translation.settingsPage.clear.undo }}
+      />
     </>
   );
 };

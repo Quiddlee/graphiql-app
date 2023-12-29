@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 
+import { SNACKBAR_AUTO_HIDE_DURATION } from '@shared/constants/const';
+
 type UndoPropsType = {
   closeToast: () => void;
   title: string;
@@ -17,7 +19,7 @@ const ClearUndo = (props: UndoPropsType) => {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       dataClearance();
-    }, 2000);
+    }, SNACKBAR_AUTO_HIDE_DURATION);
 
     setDeleteDataTimeout(timeoutId);
 
