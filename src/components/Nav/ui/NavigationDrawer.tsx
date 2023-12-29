@@ -6,23 +6,42 @@ import ViewItem from '@components/ViewList/ui/ViewItem';
 import ViewList from '@components/ViewList/ViewList';
 import ROUTES from '@shared/constants/routes';
 import useLanguage from '@shared/Context/hooks';
+import Fab from '@shared/ui/Fab';
 import Icon from '@shared/ui/Icon';
+import IconButton from '@shared/ui/IconButton';
 
 const NavigationDrawer = () => {
   const { translation } = useLanguage();
 
   return (
-    <article className="h-fit w-full text-on-surface-variant-text">
-      <ul>
+    <article className="h-fit w-full overflow-hidden text-on-surface-variant-text lg:overflow-auto">
+      <ul className="mb-11 grid justify-items-center gap-2 lg:hidden">
+        <IconButton>
+          <Icon>menu</Icon>
+        </IconButton>
+        <Fab variant="tertiary">
+          <Icon slot="icon">play_arrow</Icon>
+        </Fab>
+      </ul>
+
+      <ul className="grid gap-4 lg:block">
         <NavItem data-testid="nav-welcome" to={ROUTES.WELCOME_PAGE}>
-          <Icon>spa</Icon> {translation.nav.navbar.welcome}
+          <div className="grid justify-items-center gap-2">
+            <Icon>spa</Icon>
+            <span className="block text-sm lg:hidden">{translation.nav.navbar.welcome}</span>
+          </div>
+          <span className="hidden lg:block">{translation.nav.navbar.welcome}</span>
         </NavItem>
 
         <NavItem data-testid="nav-settings" to={ROUTES.SETTINGS}>
-          <Icon>settings</Icon> {translation.nav.navbar.settings}
+          <div className="grid justify-items-center gap-2">
+            <Icon>settings</Icon>
+            <span className="block text-sm lg:hidden">{translation.nav.navbar.settings}</span>
+          </div>
+          <span className="hidden lg:block">{translation.nav.navbar.settings}</span>
         </NavItem>
 
-        <hr className="ml-4 border-outline-variant" />
+        <hr className="invisible ml-4 border-outline-variant lg:visible" />
       </ul>
       <ViewList
         render={(view) => (
