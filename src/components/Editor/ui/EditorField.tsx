@@ -31,18 +31,21 @@ const EditorField = ({ onChange, value = '', isJson, readOnly }: EditorFieldProp
   const codemirrorLanguage = isJson ? json() : javascript();
 
   useEffect(() => {
+    const extensions = [
+      keymap.of(defaultKeymap),
+      codemirrorLanguage,
+      oneDark,
+      EditorView.lineWrapping,
+      onUpdate,
+      EditorState.readOnly.of(readOnly),
+    ];
+    if (!readOnly) {
+      extensions.push(lineNumbers());
+      extensions.push(gutter({}));
+    }
     const startState = EditorState.create({
       doc: code,
-      extensions: [
-        keymap.of(defaultKeymap),
-        codemirrorLanguage,
-        oneDark,
-        lineNumbers(),
-        gutter({}),
-        EditorView.lineWrapping,
-        onUpdate,
-        EditorState.readOnly.of(readOnly),
-      ],
+      extensions,
     });
     const view = new EditorView({
       state: startState,

@@ -22,7 +22,8 @@ const Controls = () => {
   const handleSubmitRequest = async () => {
     const query = readUrl(urlParams.QUERY);
     const variables = readUrl(urlParams.VARIABLES);
-    const response = await submitRequest(query, variables);
+    const headers = readUrl(urlParams.HEADERS);
+    const response = await submitRequest(query, variables, headers);
     updateCurrentResponse(JSON.stringify(response));
   };
 
