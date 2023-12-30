@@ -398,7 +398,7 @@
   top: 0;
   right: 65px;
   transform: translateY(30%) scale(var(--scale));
-  transition: 150ms transform 300ms;
+  transition: 150ms transform;
   transform-origin: center right;
   content: attr(data-tooltip);
   width: max-content;
