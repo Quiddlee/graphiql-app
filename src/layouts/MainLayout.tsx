@@ -28,7 +28,7 @@ const MainLayout = () => {
         <Header />
         <div
           ref={navContainerRef}
-          className="row-start-3 row-end-4 overflow-auto overflow-hidden sm:col-start-1 sm:row-start-auto sm:row-end-auto lg:overflow-auto"
+          className="row-start-3 row-end-4 sm:col-start-1 sm:row-start-auto sm:row-end-auto lg:overflow-auto"
         >
           <Nav />
         </div>
