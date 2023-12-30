@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import renderWithRouter from '@/test/helpers/RenderWithRouter';
+import Nav from '@components/Nav/Nav';
 import * as useView from '@components/ViewList/hooks/useView';
 import ViewItem from '@components/ViewList/ui/ViewItem';
 
@@ -42,7 +43,7 @@ describe('ViewItem', () => {
   });
 
   it('should call handleAddView with the correct id when clicked', async () => {
-    renderWithRouter();
+    renderWithRouter(<Nav />);
     await userEvent.click(screen.getByTestId('add-view'));
     expect(mockHandleAddView).toHaveBeenCalledOnce();
   });

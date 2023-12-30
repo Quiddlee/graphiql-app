@@ -7,6 +7,10 @@ import { cleanup, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, expect, vi } from 'vitest';
 
+import * as useScreen from '@shared/lib/hooks/useScreen';
+
+vi.spyOn(useScreen, 'default').mockReturnValue('desktop');
+
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: vi.fn().mockImplementation((query) => ({

@@ -25,7 +25,7 @@ const NavigationDrawer = () => {
   const isDesktop = screenType === 'desktop';
 
   useEffect(() => {
-    if (isDesktop) {
+    if (isDesktop && isActive) {
       setIsActive(false);
     }
   }, [isDesktop]);
