@@ -388,10 +388,6 @@
   --md-filled-tonal-button-label-text-color: var(--md-sys-color-primary);
 }
 
-.toasttest {
-  background-color: red;
-}
-
 .tooltipElem {
   position: relative;
 }
