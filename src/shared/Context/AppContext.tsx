@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useCallback, useMemo, useState } from 'react';
 
-import responseFormatter from '@/components/ResponseViewer/lib/responseFormatter';
+import jsonFormater from '@/shared/lib/helpers/jsonFormatter';
 
 type AppContextType = {
   currentResponse: string;
@@ -20,7 +20,7 @@ export default function AppContextProvider({ children }: { children: ReactNode }
   }, []);
 
   const updateCurrentResponse = useCallback((response: string) => {
-    const formattedResponse = responseFormatter(response);
+    const formattedResponse = jsonFormater(response);
     setCurrentResponse(formattedResponse);
   }, []);
 

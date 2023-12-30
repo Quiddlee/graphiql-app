@@ -3,14 +3,6 @@ const isLetter = (char: string) => {
 	return /^[a-zA-Z]$/.test(char);
 };
 
-function formatGraphQLQuery(query: string) {
-	const lines = query.split('\n');
-	const trimmedLines = lines.map((line: string) => line.trim());
-	const nonEmptyLines = trimmedLines.filter((line: string) => line !== '');
-	const formattedQuery = nonEmptyLines.join('\n');
-	return formattedQuery;
-}
-
 function removeTrailingSpaces(str: string) {
 	return str.replace(/\s+$/, '');
 }

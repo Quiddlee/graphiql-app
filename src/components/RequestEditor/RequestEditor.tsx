@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useAppContext } from '@/shared/Context/hooks';
 import Editor from '@components/Editor/Editor';
@@ -12,13 +12,14 @@ import formatRequest from './lib/formatRequest';
 const RequestEditor = () => {
   const [editorState, setEditorState] = useEditorUrlState(urlParams.QUERY, EDITOR_DEFAULT_VALUE);
   const { prettify } = useAppContext();
+  const [prettyKey, setPrettyKey] = useState('');
 
   useEffect(() => {
-    const prettifiedText = formatRequest(editorState);
-    if (prettifiedText === editorState) return;
-    setEditorState(prettifiedText);
-    console.log(prettifiedText, editorState);
-  }, [prettify]);
+    if (prettify) {
+      setPrettyKey(editorState);
+      setEditorState(formatRequest(editorState));
+    }
+  }, [editorState, prettify, setEditorState]);
 
   return (
     <section
@@ -27,7 +28,7 @@ const RequestEditor = () => {
     >
       <Editor
         className="pr-20"
-        key={editorState}
+        key={prettyKey}
         editorState={editorState}
         onChange={setEditorState}
         isJson={false}

@@ -4,6 +4,7 @@
 @import 'theme.light.css' (prefers-color-scheme: light);
 @import 'theme.dark.css' (prefers-color-scheme: dark);
 @import 'tokens.css';
+@import 'codemirror.css';
 
 @tailwind base;
 @tailwind components;
