@@ -61,12 +61,9 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
           <Icon slot="icon">play_arrow</Icon>
         </Fab>
       </li>
-      <li
-        data-tooltip={copy}
-        data-testid="copy-text"
-        className={cn('tooltipElem flex h-12 w-12 origin-bottom items-center justify-center')}
-      >
+      <li data-tooltip={copy} className={cn('tooltipElem flex h-12 w-12 origin-bottom items-center justify-center')}>
         <FilledIconButton
+          data-testid="copy-text"
           onClick={handleCopyText}
           className={cn({
             'animate-fade-in-standard [animation-delay:450ms]': !isHidden && !isAnimationsDisabled,
