@@ -20,7 +20,7 @@ const VariablesEditor = () => {
     }
   }, [editorState, prettify, setEditorState]);
 
-  return <Editor key={prettyKey} editorState={editorState} onChange={setEditorState} isJson readOnly={false} />;
+  return <Editor key={prettyKey} editorState={editorState} onChange={setEditorState} isJson isReadOnly={false} />;
 };
 
 export default VariablesEditor;

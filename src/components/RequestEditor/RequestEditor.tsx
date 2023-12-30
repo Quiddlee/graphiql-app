@@ -34,7 +34,7 @@ const RequestEditor = () => {
         editorState={editorState}
         onChange={setEditorState}
         isJson={false}
-        readOnly={false}
+        isReadOnly={false}
       />
       <Controls />
     </section>

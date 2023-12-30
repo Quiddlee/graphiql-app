@@ -6,7 +6,8 @@ async function sumbitRequest(query: string, variables: string, headers: string) 
 	const headersToParse = isHeadersEmpty ? DEFAULT_HEADERS : headers;
 
 	if (!isHeadersEmpty && isValidJson(headersToParse)) {
-		console.log('invalid headers'); // TODO Show toaster invalid headers
+		const msg = 'Invalid headers';
+		return msg; // TODO maybe show toaster instead
 	}
 
 	try {

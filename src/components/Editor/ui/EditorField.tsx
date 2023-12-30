@@ -13,10 +13,10 @@ type EditorFieldProps = {
   value: string;
   onChange: Dispatch<SetStateAction<string>> | ((value: string) => void);
   isJson: boolean;
-  readOnly: boolean;
+  isReadOnly: boolean;
 };
 
-const EditorField = ({ onChange, value = '', isJson, readOnly }: EditorFieldProps) => {
+const EditorField = ({ onChange, value = '', isJson, isReadOnly }: EditorFieldProps) => {
   const editor = useRef<HTMLPreElement>(null);
   const [code, setCode] = useState(value);
   const { prettifyEditors } = useAppContext();
@@ -37,9 +37,9 @@ const EditorField = ({ onChange, value = '', isJson, readOnly }: EditorFieldProp
       oneDark,
       EditorView.lineWrapping,
       onUpdate,
-      EditorState.readOnly.of(readOnly),
+      EditorState.readOnly.of(isReadOnly),
     ];
-    if (!readOnly) {
+    if (!isReadOnly) {
       extensions.push(lineNumbers());
       extensions.push(gutter({}));
     }
@@ -62,16 +62,3 @@ const EditorField = ({ onChange, value = '', isJson, readOnly }: EditorFieldProp
 EditorField.displayName = 'EditorField';
 
 export default EditorField;
-
-// doc: '{"data":{"film":{"title":"A New Hope","director":"George Lucas","releaseDate":"1977-05-25","openingCrawl":"It is a period of civil war.\r\nRebel spaceships, striking\r\nfrom a hidden base, have won\r\ntheir first victory against\r\nthe evil Galactic Empire.\r\n\r\nDuring the battle, Rebel\r\nspies managed to steal secret\r\nplans to the Empire`s\r\nultimate weapon, the DEATH\r\nSTAR, an armored space\r\nstation with enough power\r\nto destroy an entire planet.\r\n\r\nPursued by the Empire`s\r\nsinister agents, Princess\r\nLeia races home aboard her\r\nstarship, custodian of the\r\nstolen plans that can save her\r\npeople and restore\r\nfreedom to the galaxy...."}}}',
-// <div
-//   data-testid="editor-field"
-//   ref={ref}
-//   tabIndex={0}
-//   aria-label="The text editor"
-//   role="textbox"
-//   contentEditable="plaintext-only"
-//   onInput={handleInput}
-//   className="h-fit w-full whitespace-pre-wrap outline-none"
-//   dangerouslySetInnerHTML={{ __html: defaultValue.current }}
-// />

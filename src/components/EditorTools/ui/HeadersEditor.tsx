@@ -19,7 +19,7 @@ const HeadersEditor = () => {
     }
   }, [editorState, prettify, setEditorState]);
 
-  return <Editor key={prettyKey} editorState={editorState} onChange={setEditorState} isJson readOnly={false} />;
+  return <Editor key={prettyKey} editorState={editorState} onChange={setEditorState} isJson isReadOnly={false} />;
 };
 
 export default HeadersEditor;
