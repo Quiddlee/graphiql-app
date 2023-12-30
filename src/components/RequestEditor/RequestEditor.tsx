@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react';
 
 import { useAppContext } from '@/shared/Context/hooks';
@@ -7,19 +8,20 @@ import { EDITOR_DEFAULT_VALUE } from '@components/RequestEditor/lib/const/const'
 import Controls from '@components/RequestEditor/ui/Controls';
 import urlParams from '@shared/constants/urlParams';
 
-import formatRequest from './lib/formatRequest';
+import RequestFormatter from './lib/formatRequest';
 
 const RequestEditor = () => {
   const [editorState, setEditorState] = useEditorUrlState(urlParams.QUERY, EDITOR_DEFAULT_VALUE);
   const { prettify } = useAppContext();
   const [prettyKey, setPrettyKey] = useState('');
+  const formatter = new RequestFormatter();
 
   useEffect(() => {
     if (prettify) {
       setPrettyKey(editorState);
-      setEditorState(formatRequest(editorState));
+      setEditorState(formatter.formatRequest(editorState));
     }
-  }, [editorState, prettify, setEditorState]);
+  });
 
   return (
     <section
