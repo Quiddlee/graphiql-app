@@ -23,12 +23,13 @@ const NavigationDrawer = () => {
   const [isActive, setIsActive] = useState(false);
 
   const isDesktop = screenType === 'desktop';
+  const isMobile = screenType === 'mobile';
 
   useEffect(() => {
     if (isDesktop && isActive) {
       setIsActive(false);
     }
-  }, [isDesktop]);
+  }, [isActive, isDesktop]);
 
   const handleHideDrawer = useCallback(
     function handleHideDrawer() {
@@ -76,6 +77,8 @@ const NavigationDrawer = () => {
           {
             'absolute left-0 top-0 z-40 h-screen w-[384px] translate-y-0 overflow-auto rounded-r-3xl bg-surface-container p-3 duration-700':
               isActive,
+            'absolute left-0 top-0 w-[90%] max-w-[384px] origin-left scale-x-50': isMobile,
+            'z-40 scale-x-100': isMobile && isActive,
           },
         )}
       >
@@ -92,17 +95,28 @@ const NavigationDrawer = () => {
             hidden: isActive,
           })}
         >
-          <IconButton onClick={handleShowDrawer}>
+          <IconButton
+            className={cn({
+              'scale-x-[2]': isMobile,
+            })}
+            onClick={handleShowDrawer}
+          >
             <Icon>menu</Icon>
           </IconButton>
-          <Fab variant="tertiary">
+          <Fab
+            className={cn({
+              hidden: isMobile,
+            })}
+            variant="tertiary"
+          >
             <Icon slot="icon">play_arrow</Icon>
           </Fab>
         </ul>
 
         <ul
-          className={cn('grid w-20 gap-4 lg:block lg:w-full', {
-            'w-full': isActive,
+          className={cn('grid w-20 justify-center gap-4 lg:block lg:w-full lg:justify-start', {
+            'w-full justify-stretch': isActive,
+            hidden: isMobile,
           })}
         >
           <NavItem
