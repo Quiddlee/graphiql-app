@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import useLanguage from '@/shared/Context/hooks';
 import Icon from '@/shared/ui/Icon';
@@ -43,7 +43,7 @@ const Header = () => {
             }}
             className="ml-[53px] mr-auto font-readex_pro sm:ml-7 lg:ml-4"
           >
-            GraphiQL
+            <Link to={ROUTES.WELCOME_PAGE}>GraphiQL</Link>
           </h1>
         )}
         <IconButton
