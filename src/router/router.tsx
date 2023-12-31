@@ -2,12 +2,12 @@ import { createHashRouter } from 'react-router-dom';
 
 import MainLayout from '@/layouts/MainLayout';
 import LoginPage from '@/pages/LoginPage';
-import MainPage from '@/pages/MainPage';
+import SettignsPage from '@/pages/SettingsPage';
 import SignUpPage from '@/pages/SignUpPage';
 import WelcomePage from '@/pages/WelcomePage';
 import ROUTES from '@/shared/constants/routes';
+import MainPage from '@pages/MainPage/MainPage';
 
-import AuthAllowedOnly from './AuthAllowedOnly';
 import UnauthAllowedOnly from './UnauthAllowedOnly';
 
 export const routes = [
@@ -51,9 +51,17 @@ export const routes = [
       {
         path: ROUTES.MAIN,
         element: (
-          <AuthAllowedOnly>
-            <MainPage />
-          </AuthAllowedOnly>
+          // <AuthAllowedOnly>
+          <MainPage />
+          // </AuthAllowedOnly>
+        ),
+      },
+      {
+        path: ROUTES.SETTINGS,
+        element: (
+          // <AuthAllowedOnly>
+          <SettignsPage />
+          // </AuthAllowedOnly>
         ),
       },
     ],

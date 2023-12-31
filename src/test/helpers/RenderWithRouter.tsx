@@ -18,7 +18,7 @@ function renderWithRouter(element?: ReactNode | null, initialEntries?: string[],
   render(
     <AuthProvider>
       <LanguageProvider>
-        <RouterProvider router={router} />)
+        <RouterProvider router={router} />
       </LanguageProvider>
     </AuthProvider>,
   );

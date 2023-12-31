@@ -5,6 +5,7 @@ import { TextFieldType } from '@material/web/textfield/outlined-text-field';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import PassVisibilityIcon from '@/components/loginReg/PassVisibilityIcon';
 import AUTH_ERRORS from '@/shared/constants/authErrors';
@@ -14,9 +15,8 @@ import useAuth from '@/shared/Context/authHook';
 import { useLanguage } from '@/shared/Context/hooks';
 import notationLocalizer from '@/shared/helpers/notationLocalizer';
 import switchPassType from '@/shared/helpers/switchPassType';
-import toastifyNotation from '@/shared/helpers/toastifyNotation';
 import { ErrorType, TextInputProps } from '@/shared/types';
-import FormInput from '@components/loginReg/FormInput';
+import OutlinedTextField from '@/shared/ui/OutlinedTextField';
 import SubmitBtn from '@components/loginReg/SubmitBtn';
 
 export default function LoginPage() {
@@ -48,10 +48,10 @@ export default function LoginPage() {
       return null;
     } catch (e) {
       if ((e as ErrorType).code === AUTH_ERRORS.INVALID_EMAIL)
-        return toastifyNotation(notationLocalizer(language, 'code8'));
+        return toast(<p className="text-center">{notationLocalizer(language, 'code8')}</p>);
       if ((e as ErrorType).code === AUTH_ERRORS.INVALID_PASS)
-        return toastifyNotation(notationLocalizer(language, 'code9'));
-      return toastifyNotation(notationLocalizer(language, 'code11'));
+        return toast(<p className="text-center">{notationLocalizer(language, 'code9')}</p>);
+      return toast(<p className="text-center">{notationLocalizer(language, 'code11')}</p>);
     }
   }
 
@@ -62,7 +62,7 @@ export default function LoginPage() {
         <h2 className="mt-3 text-center text-base font-[400] text-on-surface-variant">{subtitle}</h2>
         <form noValidate className="mt-8" onSubmit={handleSubmit(onSubmit)}>
           <div className="relative">
-            <FormInput
+            <OutlinedTextField
               style={{ width: '100%' }}
               {...(register('email') as TextInputProps)}
               type="email"
@@ -74,7 +74,7 @@ export default function LoginPage() {
             </p>
           </div>
           <div className="relative mt-12">
-            <FormInput
+            <OutlinedTextField
               className="w-full"
               {...(register('password') as TextInputProps)}
               type={passType as TextFieldType}
@@ -82,7 +82,7 @@ export default function LoginPage() {
               label={passPlaceHold}
             >
               <PassVisibilityIcon onClick={() => setPassType((prev) => switchPassType(prev))} />
-            </FormInput>
+            </OutlinedTextField>
             <p className="absolute left-4 top-[62px] text-sm font-[400] text-on-surface">
               {notationLocalizer(language, errors.password?.message)}
             </p>
