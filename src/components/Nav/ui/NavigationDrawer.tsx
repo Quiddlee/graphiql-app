@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { flushSync } from 'react-dom';
-
 import NavItem from '@components/Nav/ui/NavItem';
 import VirtualScroll from '@components/Nav/ui/VirtualScroll';
 import AddView from '@components/ViewList/ui/AddView';
@@ -11,6 +9,7 @@ import ViewList from '@components/ViewList/ViewList';
 import ROUTES from '@shared/constants/routes';
 import useLanguage from '@shared/Context/hooks';
 import cn from '@shared/lib/helpers/cn';
+import viewTransition from '@shared/lib/helpers/viewTransition';
 import useScreen from '@shared/lib/hooks/useScreen';
 import Blackout from '@shared/ui/Blackout';
 import Fab from '@shared/ui/Fab';
@@ -33,36 +32,14 @@ const NavigationDrawer = () => {
 
   const handleHideDrawer = useCallback(
     function handleHideDrawer() {
-      if (isDesktop || !isActive) return;
-
-      if (!document.startViewTransition) {
-        setIsActive(false);
-        return;
-      }
-
-      document.startViewTransition(() => {
-        flushSync(() => {
-          setIsActive(false);
-        });
-      });
+      if (!isDesktop && isActive) viewTransition(() => setIsActive(false));
     },
     [isActive, isDesktop],
   );
 
   const handleShowDrawer = useCallback(
     function handleShowDrawer() {
-      if (isDesktop) return;
-
-      if (!document.startViewTransition) {
-        setIsActive(true);
-        return;
-      }
-
-      document.startViewTransition(() => {
-        flushSync(() => {
-          setIsActive(true);
-        });
-      });
+      if (!isDesktop) viewTransition(() => setIsActive(true));
     },
     [isDesktop],
   );

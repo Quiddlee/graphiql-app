@@ -13,6 +13,7 @@ type NavButtonProps = NavLinkProps & {
 const NavItem: FC<NavButtonProps> = ({ to, style, isExpand, children, ...props }) => {
   return (
     <NavLink
+      unstable_viewTransition
       style={style}
       className={cn('flex justify-center lg:inline', {
         'max-w-[60px]': !isExpand,
