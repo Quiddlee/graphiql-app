@@ -200,21 +200,13 @@
 ::view-transition-new(root) {
   animation-duration: 700ms;
   animation-timing-function: theme(transitionTimingFunction.emphasized-decelerate);
-}
-
-::view-transition-old(nav-welcome) {
-  scale: 0;
-}
-
-::view-transition-old(nav-settings) {
-  scale: 0;
-}
-
-::view-transition-new(nav-welcome) {
   transform-origin: left;
 }
 
-::view-transition-new(nav-settings) {
+::view-transition-new(nav-welcome),
+::view-transition-new(nav-settings),
+::view-transition-old(nav-settings),
+::view-transition-old(nav-welcome) {
   transform-origin: left;
 }
 
