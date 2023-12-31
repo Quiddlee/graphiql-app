@@ -14,7 +14,7 @@ const RequestEditor = () => {
   const [editorState, setEditorState] = useEditorUrlState(urlParams.QUERY, EDITOR_DEFAULT_VALUE);
   const { prettifyEditors, prettify } = useAppContext();
   const [prettyKey, setPrettyKey] = useState('');
-  const [formatter] = useState(() => new RequestFormatter());
+  const formatter = new RequestFormatter();
 
   useEffect(() => {
     if (prettify) {

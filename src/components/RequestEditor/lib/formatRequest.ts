@@ -8,11 +8,14 @@ class RequestFormatter {
 
 	indentationSpaces: number;
 
+	comments: string;
+
 	constructor(indentationSpaces = 2) {
 		this.indentationSpaces = indentationSpaces;
 		this.outputText = '';
 		this.indentationLevel = 0;
 		this.insideBrackets = false;
+		this.comments = '';
 	}
 
 	isLetter(char: string) {
@@ -32,8 +35,17 @@ class RequestFormatter {
 		return input.trim();
 	}
 
+	removeComments(str: string) {
+		const comments = str.match(/\/\/.*/g);
+		if (comments) {
+			this.comments = comments.join('\n');
+		}
+		return str.replace(/\/\/.*/g, ''); // Remove lines starting with //
+	}
+
 	preFormatString(input: string) {
 		let result = input;
+		result = this.removeComments(result);
 		result = this.removeSpacesAroundSymbols(result);
 		result = this.removeConsecSpaces(result);
 		result = this.removeTrailingSpaces(result);
@@ -63,7 +75,8 @@ class RequestFormatter {
 			}
 		}
 
-		return this.outputText;
+		// Insert comments before the formatted query
+		return `${this.comments}\n\n${this.outputText}`;
 	}
 }
 
