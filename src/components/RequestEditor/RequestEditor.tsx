@@ -12,14 +12,16 @@ import RequestFormatter from './lib/formatRequest';
 
 const RequestEditor = () => {
   const [editorState, setEditorState] = useEditorUrlState(urlParams.QUERY, EDITOR_DEFAULT_VALUE);
-  const { prettify } = useAppContext();
+  const { prettifyEditors, prettify } = useAppContext();
   const [prettyKey, setPrettyKey] = useState('');
-  const formatter = new RequestFormatter();
+  const [formatter] = useState(() => new RequestFormatter());
 
   useEffect(() => {
     if (prettify) {
-      setPrettyKey(editorState);
+      setPrettyKey(String(Math.random()));
       setEditorState(formatter.formatRequest(editorState));
+      console.log(editorState);
+      prettifyEditors(false);
     }
   });
 

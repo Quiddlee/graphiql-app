@@ -5,34 +5,6 @@ import IconButton from '@shared/ui/IconButton';
 
 import EditorField from '../Editor/ui/EditorField';
 
-// const PLACEHOLDER_TEXT = `{
-//   "errors": [
-//     {
-//       "message": "Syntax Error: te",
-//       "locations": [
-//         {
-//           "line": 33,
-//           "column": 1
-//           "column": 1
-//           "column": 1
-//           "column": 1
-//           "column": 1
-//           "column": 1
-//           "column": 1
-//           "column": 1
-//           "column": 1
-//           "column": 1
-//           "column": 1
-//           "column": 1
-//           "column": 1
-//           "column": 1
-//           "column": 1
-//         }
-//       ]
-//     }
-//   ]
-// }`;
-
 const ResponseViewer = () => {
   const rootRef = useScrollbar<HTMLDivElement>();
   const { currentResponse } = useAppContext();

@@ -11,12 +11,13 @@ import urlParams from '@shared/constants/urlParams';
 const VariablesEditor = () => {
   const [editorState, setEditorState] = useEditorUrlState(urlParams.VARIABLES, EDITOR_TOOLS_DEFAULT_VALUE);
   const [prettyKey, setPrettyKey] = useState('');
-  const { prettify } = useAppContext();
+  const { prettifyEditors, prettify } = useAppContext();
 
   useEffect(() => {
     if (prettify && isValidJson(editorState)) {
-      setPrettyKey(editorState);
+      setPrettyKey(String(Math.random()));
       setEditorState(jsonFormatter(editorState));
+      prettifyEditors(false);
     }
   }, [editorState, prettify, setEditorState]);
 

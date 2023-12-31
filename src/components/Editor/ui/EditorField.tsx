@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 
 import { defaultKeymap } from '@codemirror/commands';
@@ -21,16 +22,14 @@ const EditorField = ({ onChange, value = '', isJson, isReadOnly }: EditorFieldPr
   const [code, setCode] = useState(value);
   const { prettifyEditors } = useAppContext();
 
-  const onUpdate = EditorView.updateListener.of((v) => {
-    const newValue = v.state.doc.toString();
-    setCode(newValue);
-    onChange(newValue);
-    prettifyEditors(false);
-  });
-
-  const codemirrorLanguage = isJson ? json() : javascript();
-
   useEffect(() => {
+    const codemirrorLanguage = isJson ? json() : javascript();
+    const onUpdate = EditorView.updateListener.of((v) => {
+      const newValue = v.state.doc.toString();
+      setCode(newValue);
+      onChange(newValue);
+      prettifyEditors(false);
+    });
     const extensions = [
       keymap.of(defaultKeymap),
       codemirrorLanguage,
