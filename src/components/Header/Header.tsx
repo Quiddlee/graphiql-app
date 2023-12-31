@@ -34,7 +34,7 @@ const Header = () => {
                 <Icon>arrow_left_alts</Icon>
               </IconButton>
             </button>
-            Settings
+            <span className="animate-fade-in-settings">Settings</span>
           </h1>
         ) : (
           <h1
