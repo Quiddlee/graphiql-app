@@ -8,7 +8,7 @@ const NavigationBar = () => {
   const { translation } = useLanguage();
 
   return (
-    <ul className={cn('flex h-full w-full items-center justify-around gap-4 lg:block lg:w-full')}>
+    <ul className={cn('flex h-full w-full items-center justify-around gap-4 bg-surface lg:block lg:w-full')}>
       <NavItem className="min-w-[60px]" data-testid="nav-welcome" to={ROUTES.WELCOME_PAGE}>
         <div className="grid justify-items-center gap-2">
           <Icon>spa</Icon>
