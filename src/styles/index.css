@@ -384,6 +384,13 @@
   position: relative;
 }
 
+@media screen and (max-width: 1024px) {
+  .tooltipElem::before {
+    display: none;
+    opacity: 0;
+  }
+}
+
 .tooltipElem::before {
   --scale: 0;
   position: absolute;
