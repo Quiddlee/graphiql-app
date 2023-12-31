@@ -12,7 +12,15 @@ const Header = () => {
 
   return (
     <>
-      <header className="col-start-1 col-end-2 flex w-full justify-end px-2 sm:col-end-3">
+      <header className="col-start-1 col-end-2 flex w-full items-center justify-end py-2 pl-3 pl-[53px] pr-2 sm:col-end-3">
+        <h1
+          style={{
+            viewTransitionName: 'title',
+          }}
+          className="mr-auto font-readex_pro"
+        >
+          GraphiQL
+        </h1>
         <IconButton
           onClick={() => setIsDocsShown((prev) => !prev)}
           data-tooltip={docsTooltip}

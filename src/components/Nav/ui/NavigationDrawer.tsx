@@ -97,7 +97,7 @@ const NavigationDrawer = () => {
         >
           <IconButton
             className={cn({
-              'scale-x-[2]': isMobile,
+              'ml-2 mt-3 scale-x-[2]': isMobile,
             })}
             onClick={handleShowDrawer}
           >
