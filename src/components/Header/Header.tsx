@@ -12,7 +12,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="col-start-1 col-end-2 flex w-full items-center justify-end py-2 pl-3 pl-[53px] pr-2 sm:col-end-3">
+      <header className="col-start-1 col-end-2 flex w-full items-center justify-end py-2 pl-[53px] pr-2 sm:col-end-3 sm:pl-7 lg:pl-4">
         <h1
           style={{
             viewTransitionName: 'title',
