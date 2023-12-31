@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import isValidJson from '@/shared/lib/helpers/isJsonValid';
 
 async function sumbitRequest(query: string, variables: string, headers: string) {
