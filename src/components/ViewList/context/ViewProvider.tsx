@@ -3,8 +3,9 @@ import { createContext, PropsWithChildren, useCallback, useEffect, useMemo, useR
 
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import useEditor from '@components/Editor/lib/hooks/useEditor';
 import { INITIAL_VIEWS, NEW_VIEW } from '@components/ViewList/const/const';
-import { Action, ViewContext as TViewContext, ViewInitialState } from '@components/ViewList/context/types';
+import { Action, ViewContext as TViewContext, View, ViewInitialState } from '@components/ViewList/context/types';
 import localStorageKeys from '@shared/constants/localStorageKeys';
 import ROUTES from '@shared/constants/routes';
 import urlParams from '@shared/constants/urlParams';
@@ -47,13 +48,10 @@ function reducer(state: ViewInitialState, action: Action): ViewInitialState {
       };
 
     case 'view/viewDeleted':
-      const updatedViews = state.views.filter((view) => view.id !== action.payload);
-      const activeView = state.activeView === action.payload ? updatedViews[0].id : state.activeView;
-
       return {
         ...state,
-        activeView,
-        views: updatedViews,
+        activeView: action.payload.activeView,
+        views: action.payload.updatedViews,
       };
 
     default:
@@ -71,6 +69,7 @@ const ViewProvider = ({ children }: PropsWithChildren) => {
   useLocalStorage(localStorageKeys.ACTIVE_VIEW, activeView);
   useLocalStorage(localStorageKeys.VIEWS, views);
   const { translation } = useLanguage();
+  const { invalidateKeys } = useEditor();
 
   const isMain = location.pathname.slice(1) === ROUTES.MAIN;
 
@@ -88,8 +87,9 @@ const ViewProvider = ({ children }: PropsWithChildren) => {
         variables,
         headers,
       });
+      invalidateKeys();
     },
-    [isMain, navigate, setUrl, views],
+    [invalidateKeys, isMain, navigate, setUrl, views],
   );
 
   const handleAddView = useCallback(() => {
@@ -105,24 +105,45 @@ const ViewProvider = ({ children }: PropsWithChildren) => {
       variables: NEW_VIEW.variables,
       headers: NEW_VIEW.headers,
     });
-  }, [setUrl, translation.nav.viewList.newView]);
+    invalidateKeys();
+  }, [invalidateKeys, setUrl, translation.nav.viewList.newView]);
 
   const handleRenameView = useCallback((id: number, newName: string) => {
     dispatch({ type: 'view/viewRenamed', payload: { name: newName, id } });
   }, []);
 
-  const handleDeleteView = useCallback((id: number) => {
-    dispatch({ type: 'view/viewDeleted', payload: id });
-  }, []);
+  const handleDeleteView = useCallback(
+    (id: number) => {
+      const updatedViews = views.filter((view) => view.id !== id);
+      const newActiveViewId = activeView === id ? updatedViews[0].id : activeView;
+      const { query, variables, headers } = updatedViews.find((view) => view.id === newActiveViewId) as View;
+
+      setUrl({
+        query,
+        variables,
+        headers,
+      });
+
+      dispatch({
+        type: 'view/viewDeleted',
+        payload: {
+          updatedViews,
+          activeView: newActiveViewId,
+        },
+      });
+      invalidateKeys();
+    },
+    [activeView, invalidateKeys, setUrl, views],
+  );
 
   useEffect(() => {
     // mutating current view object when user typing in the editor
     // and saving the view array in the localStorage
     // mutating in order not to re-render every time user typing
 
-    const query = readUrl(urlParams.QUERY) ?? '';
-    const headers = readUrl(urlParams.HEADERS) ?? '';
-    const variables = readUrl(urlParams.VARIABLES) ?? '';
+    const query = readUrl(urlParams.QUERY);
+    const headers = readUrl(urlParams.HEADERS);
+    const variables = readUrl(urlParams.VARIABLES);
 
     const currView = views.find((view) => view.id === activeView);
 
