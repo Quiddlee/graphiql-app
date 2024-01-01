@@ -140,9 +140,9 @@ const ViewProvider = ({ children }: PropsWithChildren) => {
     // and saving the view array in the localStorage
     // mutating in order not to re-render every time user typing
 
-    const query = readUrl(urlParams.QUERY);
-    const headers = readUrl(urlParams.HEADERS);
-    const variables = readUrl(urlParams.VARIABLES);
+    const query = readUrl(urlParams.QUERY) ?? '';
+    const headers = readUrl(urlParams.HEADERS) ?? '';
+    const variables = readUrl(urlParams.VARIABLES) ?? '';
 
     const currView = views.find((view) => view.id === activeView);
 
