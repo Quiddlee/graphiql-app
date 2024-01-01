@@ -1,4 +1,3 @@
-/* eslint-disable no-case-declarations */
 import { createContext, PropsWithChildren, useCallback, useEffect, useMemo, useReducer } from 'react';
 
 import { useLocation, useNavigate } from 'react-router-dom';
