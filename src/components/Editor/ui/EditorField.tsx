@@ -58,6 +58,4 @@ const EditorField = ({ onChange, value = '', isJson, isReadOnly }: EditorFieldPr
   return <pre data-testid="editor-field" ref={editor} />;
 };
 
-EditorField.displayName = 'EditorField';
-
 export default EditorField;

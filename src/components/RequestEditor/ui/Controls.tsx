@@ -29,10 +29,9 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
     controlsTooltips: { copy, play, prettify, openResp },
     snackbar: { copy: copySnackbar },
   } = translation.mainPage.requestEditor;
-  const isAnimationsDisabled = screenType === 'tablet' || screenType === 'mobile';
-
   const { pathname } = useLocation();
 
+  const isAnimationsDisabled = screenType === 'tablet' || screenType === 'mobile';
   if (pathname.slice(1) !== ROUTES.MAIN) return null;
 
   const handleCopyText = async () => {

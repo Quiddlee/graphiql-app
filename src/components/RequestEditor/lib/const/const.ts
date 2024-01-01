@@ -1,4 +1,4 @@
-export const EDITOR_DEFAULT_VALUE = `// Welcome to GraphiQL
+const EDITOR_DEFAULT_VALUE = `// Welcome to GraphiQL
 //
 // GraphiQL is an in-browser tool for writing, validating, and
 // testing GraphQL queries.
@@ -17,10 +17,4 @@ export const EDITOR_DEFAULT_VALUE = `// Welcome to GraphiQL
 //         subField
 //       }`;
 
-export const EDITOR_TOOLS_DEFAULT_VALUE = `{
-  ”schedule”: {
-    “pipelineID”: “eqweqwEEWEQWRQWFSADFas”,
-      “cronline: “@midnight”,
-      “label”: “Nightly build”
-  }
-}`;
+export default EDITOR_DEFAULT_VALUE;

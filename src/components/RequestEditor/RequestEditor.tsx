@@ -1,8 +1,8 @@
-/* eslint-disable */
-import { FC, HTMLAttributes, useEffect, useState } from 'react';
+import { FC, HTMLAttributes, useEffect } from 'react';
 
 import { useAppContext } from '@/shared/Context/hooks';
 import Editor from '@components/Editor/Editor';
+import useEditor from '@components/Editor/lib/hooks/useEditor';
 import useEditorUrlState from '@components/Editor/lib/hooks/useEditorUrlState';
 import urlParams from '@shared/constants/urlParams';
 import cn from '@shared/lib/helpers/cn';
@@ -11,17 +11,17 @@ import RequestFormatter from './lib/formatRequest';
 
 const RequestEditor: FC<HTMLAttributes<HTMLElement>> = ({ children, ...props }) => {
   const [editorState, setEditorState] = useEditorUrlState(urlParams.QUERY);
-  const { prettifyEditors, prettify } = useAppContext();
-  const [prettyKey, setPrettyKey] = useState('');
-  const formatter = new RequestFormatter();
+  const { prettify } = useAppContext();
+  const {
+    query: [queryKey, invalidateKey],
+  } = useEditor();
 
   useEffect(() => {
     if (prettify) {
-      setPrettyKey(String(Math.random()));
-      setEditorState(formatter.formatRequest(editorState));
-      prettifyEditors(false);
+      setEditorState(new RequestFormatter().formatRequest(editorState));
+      invalidateKey();
     }
-  }, [prettify]);
+  }, [editorState, invalidateKey, prettify, setEditorState]);
 
   return (
     <section
@@ -33,9 +33,11 @@ const RequestEditor: FC<HTMLAttributes<HTMLElement>> = ({ children, ...props }) 
     >
       <Editor
         className="pr-20"
-        key={prettyKey}
+        key={queryKey}
         editorState={editorState}
-        onChange={setEditorState}
+        onChange={(val: string) => {
+          if (!prettify) setEditorState(val);
+        }}
         isJson={false}
         isReadOnly={false}
       />

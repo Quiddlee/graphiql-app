@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import useUrl from '@shared/lib/hooks/useUrl';
 import { UrlParams } from '@shared/lib/types/types';
@@ -19,12 +19,9 @@ function useEditorUrlState(urlParam: UrlParams, initialState = '') {
 		if (urlState === initialState) setUrl(urlParam, initialState);
 	}, [initialState, setUrl, urlParam, urlState]);
 
-	const handleChange = useCallback(
-		function handleChange(value: string) {
-			setUrl(urlParam, value);
-		},
-		[setUrl, urlParam],
-	);
+	const handleChange = (value: string) => {
+		setUrl(urlParam, value);
+	};
 
 	return [urlState, handleChange] as const;
 }
