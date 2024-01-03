@@ -7,6 +7,7 @@ import Nav from '@components/Nav/Nav';
 import Controls from '@components/RequestEditor/ui/Controls';
 import ViewProvider from '@components/ViewList/context/ViewProvider';
 import { SNACKBAR_AUTO_HIDE_DURATION } from '@shared/constants/const';
+import useScreen from '@shared/lib/hooks/useScreen';
 import useScrollbar from '@shared/lib/hooks/useScrollbar';
 
 const SnackBarTransition = cssTransition({
@@ -15,7 +16,8 @@ const SnackBarTransition = cssTransition({
 });
 
 const MainLayout = () => {
-  const navContainerRef = useScrollbar<HTMLDivElement>();
+  const screenType = useScreen();
+  const navContainerRef = useScrollbar<HTMLDivElement>(screenType === 'desktop');
 
   return (
     <ViewProvider>
@@ -26,7 +28,7 @@ const MainLayout = () => {
         <Header />
         <div
           ref={navContainerRef}
-          className="row-start-3 row-end-4 overflow-auto sm:col-start-1 sm:row-start-auto sm:row-end-auto"
+          className="row-start-3 row-end-4 sm:col-start-1 sm:row-start-auto sm:row-end-auto lg:overflow-auto"
         >
           <Nav />
         </div>
@@ -46,8 +48,8 @@ const MainLayout = () => {
         draggable={false}
         limit={1}
         transition={SnackBarTransition}
-        position="bottom-left"
-        toastClassName="!text-inverse-on-surface origin-bottom !bg-inverse-surface !min-w-[336px] !pl-4 !min-h-[48px] text-left"
+        position="bottom-center"
+        toastClassName="!text-inverse-on-surface origin-bottom !bg-inverse-surface max-w-[337px] !pl-4 !min-h-[48px] text-left"
         bodyClassName="text-sm font-normal relative !p-0 [&>div]:origin-bottom [&>div]:animate-fade-in-snackbar-body [&>div]:truncate w-full [&>div]:pe-16"
       />
     </ViewProvider>

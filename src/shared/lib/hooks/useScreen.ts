@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { ScreenTypes } from '@shared/types';
 
 const DESKTOP_SIZE = 1024;
-const TABLET_SIZE = 768;
+const TABLET_SIZE = 640;
 
 function useScreen() {
 	const [screenType, setScreenType] = useState<ScreenTypes>('desktop');
