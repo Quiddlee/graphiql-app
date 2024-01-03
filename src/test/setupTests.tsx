@@ -8,6 +8,9 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, expect, vi } from 'vitest';
 
 import * as useEditor from '@components/Editor/lib/hooks/useEditor';
+import * as useScreen from '@shared/lib/hooks/useScreen';
+
+vi.spyOn(useScreen, 'default').mockReturnValue('desktop');
 
 vi.spyOn(useEditor, 'default').mockReturnValue({
   query: [1, vi.fn()],
