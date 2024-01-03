@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
+import useAuth from '@/shared/Context/authHook';
 import { useLanguage } from '@/shared/Context/hooks';
 import Icon from '@/shared/ui/Icon';
 import IconButton from '@/shared/ui/IconButton';
@@ -17,6 +18,7 @@ const Header = () => {
   const isSettings = pathname.slice(1) === ROUTES.SETTINGS;
   const navigate = useNavigate();
   const isMobile = useScreen() === 'mobile';
+  const { logOut } = useAuth();
 
   const docsTooltip = translation.mainLayout.header.tooltips.docs;
 
@@ -46,6 +48,9 @@ const Header = () => {
             <Link to={ROUTES.WELCOME_PAGE}>GraphiQL</Link>
           </h1>
         )}
+        <button type="button" onClick={() => logOut()}>
+          Log out
+        </button>
         <IconButton
           onClick={() => setIsDocsShown((prev) => !prev)}
           data-tooltip={docsTooltip}
