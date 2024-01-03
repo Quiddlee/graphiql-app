@@ -2,9 +2,8 @@ import { useState } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { TextFieldType } from '@material/web/textfield/outlined-text-field';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import PassVisibilityIcon from '@/components/loginReg/PassVisibilityIcon';
@@ -22,8 +21,7 @@ import SubmitBtn from '@components/loginReg/SubmitBtn';
 export default function SignUpPage() {
   const [passType, setPassType] = useState('password');
   const [confPassType, setConfPassType] = useState('password');
-  const navigate = useNavigate();
-  const { logInAuth } = useAuth();
+  const { createAccount } = useAuth();
   const { translation, language } = useLanguage();
   const { title, subtitle, emailPlaceHold, passPlaceHold, btnTitle, linkClue, linkTitle, confPassPlaceHold } =
     translation.signUpPage;
@@ -38,15 +36,12 @@ export default function SignUpPage() {
   });
 
   async function onSubmit({ email, password }: { email: string; password: string }) {
-    const auth = getAuth();
     try {
-      const { user } = await createUserWithEmailAndPassword(auth, email, password);
-      if (user) {
+      const isSuccess = await createAccount(email, password);
+      if (isSuccess) {
         reset();
-        logInAuth(user.email as string);
-        navigate(`/${ROUTES.MAIN}`);
       }
-      return null;
+      return undefined;
     } catch (e) {
       if ((e as ErrorType).code === AUTH_ERRORS.EMAIL_IN_USE)
         return toast(<p className="text-center">{notationLocalizer(language, 'code10')}</p>);

@@ -7,7 +7,6 @@ import localStorageKeys from '@/shared/constants/localStorageKeys';
 import AppContextProvider from '@/shared/Context/AppContext';
 import colorThemeSwitcher from '@/shared/helpers/colorThemeSwitcher';
 import EditorProvider from '@components/Editor/context/EditorProvider';
-import AuthProvider from '@shared/Context/AuthContext';
 import LanguageProvider from '@shared/Context/LanguageContext';
 
 const App = () => {
@@ -21,11 +20,9 @@ const App = () => {
   return (
     <EditorProvider>
       <AppContextProvider>
-        <AuthProvider>
-          <LanguageProvider>
-            <RouterProvider router={router} />
-          </LanguageProvider>
-        </AuthProvider>
+        <LanguageProvider>
+          <RouterProvider router={router} />
+        </LanguageProvider>
       </AppContextProvider>
     </EditorProvider>
   );

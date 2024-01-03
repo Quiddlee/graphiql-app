@@ -2,9 +2,8 @@ import { useState } from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { TextFieldType } from '@material/web/textfield/outlined-text-field';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import PassVisibilityIcon from '@/components/loginReg/PassVisibilityIcon';
@@ -20,11 +19,10 @@ import OutlinedTextField from '@/shared/ui/OutlinedTextField';
 import SubmitBtn from '@components/loginReg/SubmitBtn';
 
 export default function LoginPage() {
-  const navigate = useNavigate();
   const [passType, setPassType] = useState('password');
   const { translation, language } = useLanguage();
   const { title, subtitle, emailPlaceHold, passPlaceHold, btnTitle, linkClue, linkTitle } = translation.loginPage;
-  const { logInAuth } = useAuth();
+  const { logIn } = useAuth();
 
   const {
     register,
@@ -37,20 +35,19 @@ export default function LoginPage() {
   });
 
   async function onSubmit({ email, password }: { email: string; password: string }) {
-    const auth = getAuth();
     try {
-      const { user } = await signInWithEmailAndPassword(auth, email, password);
-      if (user) {
-        logInAuth(user.email as string);
+      const isSuccess = await logIn(email, password);
+      if (isSuccess) {
         reset();
-        navigate(`/${ROUTES.MAIN}`);
       }
-      return null;
+      return undefined;
     } catch (e) {
-      if ((e as ErrorType).code === AUTH_ERRORS.INVALID_EMAIL)
+      if ((e as ErrorType).code === AUTH_ERRORS.INVALID_EMAIL) {
         return toast(<p className="text-center">{notationLocalizer(language, 'code8')}</p>);
-      if ((e as ErrorType).code === AUTH_ERRORS.INVALID_PASS)
+      }
+      if ((e as ErrorType).code === AUTH_ERRORS.INVALID_PASS) {
         return toast(<p className="text-center">{notationLocalizer(language, 'code9')}</p>);
+      }
       return toast(<p className="text-center">{notationLocalizer(language, 'code11')}</p>);
     }
   }
