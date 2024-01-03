@@ -2,7 +2,7 @@ import { FC, PropsWithChildren, ReactNode } from 'react';
 
 import { View } from '@components/ViewList/context/types';
 import useView from '@components/ViewList/hooks/useView';
-import useLanguage from '@shared/Context/hooks';
+import { useLanguage } from '@shared/Context/hooks';
 import cn from '@shared/lib/helpers/cn';
 import useScreen from '@shared/lib/hooks/useScreen';
 

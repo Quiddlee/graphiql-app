@@ -1,6 +1,6 @@
 import NavItem from '@components/Nav/ui/NavItem';
 import ROUTES from '@shared/constants/routes';
-import useLanguage from '@shared/Context/hooks';
+import { useLanguage } from '@shared/Context/hooks';
 import cn from '@shared/lib/helpers/cn';
 import Icon from '@shared/ui/Icon';
 

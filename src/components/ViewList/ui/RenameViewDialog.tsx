@@ -5,7 +5,7 @@ import { MdOutlinedTextField } from '@material/web/textfield/outlined-text-field
 import { toast } from 'react-toastify';
 
 import useView from '@components/ViewList/hooks/useView';
-import useLanguage from '@shared/Context/hooks';
+import { useLanguage } from '@shared/Context/hooks';
 import Dialog from '@shared/ui/Dialog';
 import FilledTonalButton from '@shared/ui/FilledTonalButton';
 import OutlinedTextField from '@shared/ui/OutlinedTextField';

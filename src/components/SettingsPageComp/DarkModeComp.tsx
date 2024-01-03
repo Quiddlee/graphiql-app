@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import localStorageKeys from '@/shared/constants/localStorageKeys';
-import useLanguage from '@/shared/Context/hooks';
+import { useLanguage } from '@/shared/Context/hooks';
 import colorThemeSwitcher from '@/shared/helpers/colorThemeSwitcher';
 import Switch from '@/shared/ui/Switch';
 

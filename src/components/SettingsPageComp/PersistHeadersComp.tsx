@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import useLanguage from '@/shared/Context/hooks';
+import { useLanguage } from '@/shared/Context/hooks';
 import Switch from '@/shared/ui/Switch';
 
 type PropsType = {
