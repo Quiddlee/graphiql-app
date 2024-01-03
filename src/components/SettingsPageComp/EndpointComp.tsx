@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import useLanguage from '@/shared/Context/hooks';
+import { useLanguage } from '@/shared/Context/hooks';
 import FilledTextField from '@/shared/ui/FilledTextField';
 import Icon from '@/shared/ui/Icon';
 import IconButton from '@/shared/ui/IconButton';

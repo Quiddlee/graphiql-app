@@ -5,7 +5,7 @@ import Details from '@components/ViewList/ui/Details';
 import ViewItem from '@components/ViewList/ui/ViewItem';
 import ViewList from '@components/ViewList/ViewList';
 import ROUTES from '@shared/constants/routes';
-import useLanguage from '@shared/Context/hooks';
+import { useLanguage } from '@shared/Context/hooks';
 import Icon from '@shared/ui/Icon';
 
 const NavigationDrawer = () => {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import useLanguage from '@/shared/Context/hooks';
+import { useLanguage } from '@/shared/Context/hooks';
 import Icon from '@/shared/ui/Icon';
 import IconButton from '@/shared/ui/IconButton';
 import DocsComp from '@components/DocsComp/DocsComp';

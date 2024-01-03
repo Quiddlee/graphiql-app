@@ -5,7 +5,7 @@ import { MdMenu } from '@material/web/all';
 import useView from '@components/ViewList/hooks/useView';
 import DeleteViewDialog from '@components/ViewList/ui/DeleteViewDialog';
 import RenameViewDialog from '@components/ViewList/ui/RenameViewDialog';
-import useLanguage from '@shared/Context/hooks';
+import { useLanguage } from '@shared/Context/hooks';
 import cn from '@shared/lib/helpers/cn';
 import FilledTonalIconButton from '@shared/ui/FilledTonalIconButton';
 import Icon from '@shared/ui/Icon';

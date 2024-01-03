@@ -4,7 +4,7 @@ import { MdDialog } from '@material/web/all';
 import { toast } from 'react-toastify';
 
 import useView from '@components/ViewList/hooks/useView';
-import useLanguage from '@shared/Context/hooks';
+import { useLanguage } from '@shared/Context/hooks';
 import Dialog from '@shared/ui/Dialog';
 import TextButton from '@shared/ui/TextButton';
 

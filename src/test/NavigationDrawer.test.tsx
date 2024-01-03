@@ -16,13 +16,13 @@ describe('NavigationDrawer', () => {
   });
 
   it('should navigate to the welcome page when welcome nav item is clicked', async () => {
-    expect(screen.getAllByTestId('editor-field')).toHaveLength(2);
+    expect(screen.getAllByTestId('editor-field')).toHaveLength(3);
     await userEvent.click(screen.getByTestId('nav-welcome'));
     expect(screen.queryByTestId('editor-field')).toBeNull();
   });
 
   it('should navigate to the settings page when settings nav item is clicked', async () => {
-    expect(screen.getAllByTestId('editor-field')).toHaveLength(2);
+    expect(screen.getAllByTestId('editor-field')).toHaveLength(3);
     await userEvent.click(screen.getByTestId('nav-settings'));
     expect(screen.queryByTestId('editor-field')).toBeNull();
   });

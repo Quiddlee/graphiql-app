@@ -35,7 +35,7 @@ type ActionRenameView = {
 
 type ActionDeleteView = {
 	type: 'view/viewDeleted';
-	payload: number;
+	payload: { activeView: number; updatedViews: View[] };
 };
 
 export type Action = ActionViewAdded | ActionActiveViewChanged | ActionRenameView | ActionDeleteView;

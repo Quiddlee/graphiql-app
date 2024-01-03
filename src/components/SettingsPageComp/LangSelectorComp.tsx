@@ -1,4 +1,4 @@
-import useLanguage from '@/shared/Context/hooks';
+import { useLanguage } from '@/shared/Context/hooks';
 
 import LangBtns from './LangBtns';
 

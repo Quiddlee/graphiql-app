@@ -1,39 +1,13 @@
 import { FC, useEffect, useRef } from 'react';
 
+import { useAppContext } from '@/shared/Context/hooks';
+import EditorField from '@components/Editor/ui/EditorField';
 import Footer from '@components/Footer/Footer';
 import cn from '@shared/lib/helpers/cn';
 import useScrollbar from '@shared/lib/hooks/useScrollbar';
 import { HandleExpand } from '@shared/types';
 import Icon from '@shared/ui/Icon';
 import IconButton from '@shared/ui/IconButton';
-
-const PLACEHOLDER_TEXT = `{
-  "errors": [
-    {
-      "message": "Syntax Error: te",
-      "locations": [
-        {
-          "line": 33,
-          "column": 1
-          "column": 1
-          "column": 1
-          "column": 1
-          "column": 1
-          "column": 1
-          "column": 1
-          "column": 1
-          "column": 1
-          "column": 1
-          "column": 1
-          "column": 1
-          "column": 1
-          "column": 1
-          "column": 1
-        }
-      ]
-    }
-  ]
-}`;
 
 type ResponseViewerProps = {
   onResponseClose: HandleExpand;
@@ -43,6 +17,7 @@ type ResponseViewerProps = {
 const ResponseViewer: FC<ResponseViewerProps> = ({ onResponseClose, isHidden }) => {
   const rootRef = useScrollbar<HTMLDivElement>();
   const closeBtnRef = useRef(null);
+  const { currentResponse } = useAppContext();
 
   useEffect(() => {
     // initial render close btn animation
@@ -75,7 +50,7 @@ const ResponseViewer: FC<ResponseViewerProps> = ({ onResponseClose, isHidden }) 
           className="h-full w-full justify-between overflow-hidden overflow-y-scroll py-7 pl-4 pr-4 sm:pl-7"
         >
           <article className="h-fit w-fit pr-10">
-            <pre className="h-full w-full whitespace-break-spaces">{PLACEHOLDER_TEXT}</pre>
+            <EditorField key={currentResponse} value={currentResponse} onChange={() => {}} isJson isReadOnly />
           </article>
         </div>
         <div className="mb-7 mt-4 flex w-full justify-center lg:hidden">

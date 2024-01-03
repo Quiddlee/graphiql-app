@@ -8,7 +8,7 @@ import Editor from '@components/Editor/Editor';
 function EditorWrapper() {
   const [editorState, setEditorState] = useState('hello');
 
-  return <Editor editorState={editorState} onChange={setEditorState} />;
+  return <Editor editorState={editorState} onChange={setEditorState} isJson isReadOnly />;
 }
 
 describe('Editor', () => {

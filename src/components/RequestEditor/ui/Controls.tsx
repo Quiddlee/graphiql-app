@@ -3,7 +3,8 @@ import { FC, HTMLAttributes } from 'react';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import useLanguage from '@/shared/Context/hooks';
+import submitRequest from '@/components/Editor/lib/submitRequest';
+import { useAppContext, useLanguage } from '@/shared/Context/hooks';
 import ROUTES from '@shared/constants/routes';
 import urlParams from '@shared/constants/urlParams';
 import cn from '@shared/lib/helpers/cn';
@@ -20,6 +21,7 @@ type ControlsProps = HTMLAttributes<HTMLUListElement> & {
 };
 
 const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) => {
+  const { updateCurrentResponse, prettifyEditors } = useAppContext();
   const { readUrl } = useUrl();
   const screenType = useScreen();
   const { translation } = useLanguage();
@@ -27,16 +29,27 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
     controlsTooltips: { copy, play, prettify, openResp },
     snackbar: { copy: copySnackbar },
   } = translation.mainPage.requestEditor;
-  const isAnimationsDisabled = screenType === 'tablet' || screenType === 'mobile';
-
   const { pathname } = useLocation();
 
+  const isAnimationsDisabled = screenType === 'tablet' || screenType === 'mobile';
   if (pathname.slice(1) !== ROUTES.MAIN) return null;
 
   const handleCopyText = async () => {
     const query = readUrl(urlParams.QUERY);
     await navigator.clipboard.writeText(query);
     toast(copySnackbar);
+  };
+
+  const handleSubmitRequest = async () => {
+    const query = readUrl(urlParams.QUERY);
+    const variables = readUrl(urlParams.VARIABLES);
+    const headers = readUrl(urlParams.HEADERS);
+    const response = await submitRequest(query, variables, headers);
+    updateCurrentResponse(JSON.stringify(response));
+  };
+
+  const handlePrettifier = () => {
+    prettifyEditors(true);
   };
 
   return (
@@ -50,7 +63,13 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
           'animate-fade-out-screen': isHidden,
         })}
       >
-        <Fab data-testid="fab" variant="primary" data-tooltip={play} className="tooltipElem">
+        <Fab
+          data-testid="fab"
+          variant="primary"
+          data-tooltip={play}
+          className="tooltipElem"
+          onClick={handleSubmitRequest}
+        >
           <Icon slot="icon">play_arrow</Icon>
         </Fab>
       </li>
@@ -70,7 +89,12 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
           'animate-fade-out-screen': isHidden,
         })}
       >
-        <FilledIconButton data-testid="prettify" data-tooltip={prettify} className="tooltipElem">
+        <FilledIconButton
+          data-testid="prettify"
+          data-tooltip={prettify}
+          className="tooltipElem"
+          onClick={handlePrettifier}
+        >
           <Icon>mop</Icon>
         </FilledIconButton>
       </li>

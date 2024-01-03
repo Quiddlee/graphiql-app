@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import useLanguage from '@/shared/Context/hooks';
+import { useLanguage } from '@/shared/Context/hooks';
 import FilledTonalButton from '@/shared/ui/FilledTonalButton';
 
 import ConfirmModal from './ConfirmModal';

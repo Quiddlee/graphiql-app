@@ -1,5 +1,5 @@
 import useView from '@components/ViewList/hooks/useView';
-import useLanguage from '@shared/Context/hooks';
+import { useLanguage } from '@shared/Context/hooks';
 import Icon from '@shared/ui/Icon';
 
 const AddView = () => {
