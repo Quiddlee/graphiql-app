@@ -17,9 +17,9 @@ const SettignsPage = () => {
   return (
     <section
       ref={root}
-      className="col-start-1 col-end-2 row-start-2 row-end-3 mx-2 overflow-scroll rounded-3xl bg-surface-container p-7 sm:col-start-2 sm:col-end-3 sm:row-end-4 sm:mx-0"
+      className="col-start-1 col-end-2 row-start-2 row-end-3 mx-2 overflow-scroll rounded-3xl bg-surface-container p-4 sm:col-start-2 sm:col-end-3 sm:row-end-4 sm:mx-0 sm:p-7"
     >
-      <div className="w-[663px] font-[500] text-on-surface">
+      <div className="max-w-[663px] font-[500] text-on-surface">
         <PersistHeaderComp
           checked={settingsState.headers}
           switcher={() => setSettingsState((prev) => ({ ...prev, headers: !prev.headers }))}
