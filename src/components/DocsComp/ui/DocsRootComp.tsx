@@ -45,7 +45,7 @@ const DocsRootComp = ({ types, explorer }: { types: SchemaTypeObj[]; explorer: D
             {types[0].name}
           </a>
         </p>
-        <h4 className="mt-[56px] text-2xl sm:text-[28px]">All schema types:</h4>
+        <h4 className="mt-8 text-2xl sm:mt-[56px] sm:text-[28px]">All schema types:</h4>
         <ul className="mt-4">{allTypes}</ul>
       </div>
     </div>
