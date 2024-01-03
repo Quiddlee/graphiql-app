@@ -9,9 +9,10 @@ import cn from '@shared/lib/helpers/cn';
 type TabItemProps = {
   children: ReactNode;
   id: number;
+  onClick?: () => void;
 };
 
-const ViewItem: FC<TabItemProps> = ({ children, id }) => {
+const ViewItem: FC<TabItemProps> = ({ children, id, onClick }) => {
   const { handleActiveView, activeView } = useView();
   const location = useLocation();
 
@@ -22,6 +23,7 @@ const ViewItem: FC<TabItemProps> = ({ children, id }) => {
   function handleClick() {
     if (id === activeView && isMain) return;
     handleActiveView(id);
+    onClick?.();
   }
 
   return (

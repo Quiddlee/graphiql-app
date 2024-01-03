@@ -9,6 +9,7 @@ import localStorageKeys from '@shared/constants/localStorageKeys';
 import ROUTES from '@shared/constants/routes';
 import urlParams from '@shared/constants/urlParams';
 import { useLanguage } from '@shared/Context/hooks';
+import viewTransition from '@shared/lib/helpers/viewTransition';
 import useLocalStorage from '@shared/lib/hooks/useLocalStorage';
 import useUrl from '@shared/lib/hooks/useUrl';
 
@@ -77,7 +78,7 @@ const ViewProvider = ({ children }: PropsWithChildren) => {
       const newActiveView = views.find((view) => view.id === id);
 
       if (!newActiveView) return;
-      if (!isMain) navigate(ROUTES.MAIN);
+      if (!isMain) viewTransition(() => navigate(ROUTES.MAIN));
 
       const { query, variables, headers } = newActiveView;
       dispatch({ type: 'view/viewChanged', payload: id });
