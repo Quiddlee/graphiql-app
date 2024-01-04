@@ -8,7 +8,7 @@ import CloseDocsBtn from '@components/DocsComp/ui/CloseDocsBtn';
 import DocsLoader from './DocsLoader';
 import DocsRootComp from './DocsRootComp';
 import DocsTypeComp from './DocsTypeComp';
-import SchemaFallback from './SchemaFallback';
+import SchemaFallbackUi from './SchemaFallbackUi';
 import getEndpointSchema from '../lib/helpers/getEndpointSchema';
 
 type PropsType = {
@@ -25,7 +25,7 @@ const DocsModal = ({ setIsDocsShown, explorer }: PropsType) => {
   }, [currEndpoint, setEndpointSchema]);
 
   if (isLoading) return <DocsLoader />;
-  if (!endpointSchema) return <SchemaFallback closeModal={setIsDocsShown} />;
+  if (!endpointSchema) return <SchemaFallbackUi closeModal={setIsDocsShown} />;
 
   const content = explorer.isDocs() ? (
     <DocsRootComp types={endpointSchema.types as SchemaTypeObj[]} explorer={explorer} />

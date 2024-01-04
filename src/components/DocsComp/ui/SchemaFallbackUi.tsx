@@ -8,7 +8,7 @@ type PropsType = {
   closeModal: (value: SetStateAction<boolean>) => void;
 };
 
-const SchemaFallback: FC<PropsType> = ({ closeModal }) => {
+const SchemaFallbackUi: FC<PropsType> = ({ closeModal }) => {
   return (
     <DocsModalLayout>
       <CloseDocsBtn
@@ -24,4 +24,4 @@ const SchemaFallback: FC<PropsType> = ({ closeModal }) => {
   );
 };
 
-export default SchemaFallback;
+export default SchemaFallbackUi;
