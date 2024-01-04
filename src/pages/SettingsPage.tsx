@@ -10,7 +10,6 @@ import useScrollbar from '@shared/lib/hooks/useScrollbar';
 const SettignsPage = () => {
   const [settingsState, setSettingsState] = useState({
     headers: true,
-    endpoint: 'goods',
   });
   const root = useScrollbar();
 
@@ -25,10 +24,7 @@ const SettignsPage = () => {
           switcher={() => setSettingsState((prev) => ({ ...prev, headers: !prev.headers }))}
         />
         <DarkModeComp />
-        <EndpointComp
-          endpoint={settingsState.endpoint}
-          saveEndpoint={(value: string) => setSettingsState((prev) => ({ ...prev, endpoint: value }))}
-        />
+        <EndpointComp />
         <LangSelectorComp />
         <ClearStorageComp />
       </div>
