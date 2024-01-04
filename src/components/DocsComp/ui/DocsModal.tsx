@@ -1,12 +1,13 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
 
-import introspectionQuery from '@/shared/constants/introspectionQuery';
 import { useAppContext } from '@/shared/Context/hooks';
 import { DocsExplorerType, SchemaTypeObj } from '@/shared/types';
 import CloseDocsBtn from '@components/DocsComp/ui/CloseDocsBtn';
 
 import DocsRootComp from './DocsRootComp';
 import DocsTypeComp from './DocsTypeComp';
+import SchemaFallaback from './schemaFallback';
+import getEndpointSchema from '../lib/helpers/getEndpointSchema';
 
 type PropsType = {
   setIsDocsShown: Dispatch<SetStateAction<boolean>>;
@@ -16,24 +17,11 @@ type PropsType = {
 const DocsModal = ({ setIsDocsShown, explorer }: PropsType) => {
   const { currEndpoint, setEndpointSchema, endpointSchema } = useAppContext();
   useEffect(() => {
-    async function fetchDocs(endpoint: string) {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(introspectionQuery),
-      });
-      if (response.ok && response.status === 200) {
-        const res = await response.json();
-        setEndpointSchema(res.data.__schema);
-      }
-      return null;
-    }
-    fetchDocs(currEndpoint);
+    getEndpointSchema(currEndpoint, setEndpointSchema);
   }, [currEndpoint, setEndpointSchema]);
 
-  if (!endpointSchema) return null;
+  if (!endpointSchema) return <SchemaFallaback closeModal={setIsDocsShown} />;
+
   const content = explorer.isDocs() ? (
     <DocsRootComp types={endpointSchema.types as SchemaTypeObj[]} explorer={explorer} />
   ) : (

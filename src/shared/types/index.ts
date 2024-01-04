@@ -76,4 +76,4 @@ export type DocsExplorerType = {
 
 export type DocsSchemaType = {
 	types: SchemaTypeObj[];
-};
+} | null;

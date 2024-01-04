@@ -19,7 +19,7 @@ export const AppContext = createContext<AppContextType>({} as AppContextType);
 
 export default function AppContextProvider({ children }: { children: ReactNode }) {
   const [currEndpoint, setCurrEndpoint] = useState('https://rickandmortyapi.com/graphql');
-  const [endpointSchema, setEndpointSchema] = useState(null as unknown as DocsSchemaType);
+  const [endpointSchema, setEndpointSchema] = useState(null as DocsSchemaType);
   const [currentResponse, setCurrentResponse] = useState<string>('');
   const [prettify, setPrettify] = useState<boolean>(false);
 
