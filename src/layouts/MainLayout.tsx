@@ -44,9 +44,11 @@ const MainLayout = () => {
             </div>
           )}
           <Outlet />
-          <div className="col-start-1 hidden lg:block">
-            <Footer />
-          </div>
+          {isApp && (
+            <div className="col-start-1 hidden lg:block">
+              <Footer />
+            </div>
+          )}
           <Controls className="absolute bottom-36 right-6 z-10 sm:hidden" />
         </main>
 
