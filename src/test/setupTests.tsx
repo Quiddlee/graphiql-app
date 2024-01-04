@@ -10,14 +10,14 @@ import { afterEach, expect, vi } from 'vitest';
 import * as useEditor from '@components/Editor/lib/hooks/useEditor';
 import * as useScreen from '@shared/lib/hooks/useScreen';
 
+vi.spyOn(useScreen, 'default').mockReturnValue('desktop');
+
 vi.spyOn(useEditor, 'default').mockReturnValue({
   query: [1, vi.fn()],
   variables: [2, vi.fn()],
   headers: [3, vi.fn()],
   invalidateKeys: vi.fn(),
 });
-
-vi.spyOn(useScreen, 'default').mockReturnValue('desktop');
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,

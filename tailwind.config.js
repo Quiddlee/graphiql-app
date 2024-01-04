@@ -69,6 +69,16 @@ export default {
             translate: 0,
           },
         },
+        'fade-in-title': {
+          from: {
+            opacity: 0,
+            transform: 'scale(2)',
+          },
+          to: {
+            opacity: 1,
+            transform: 'scale(1)',
+          },
+        },
       },
       animation: {
         'fade-in-screen': 'fade-in 400ms cubic-bezier(0.05, 0.7, 0.1, 1.0) backwards',
@@ -79,6 +89,7 @@ export default {
         'fade-in-snackbar-body': 'fade-in-snackbar-body 500ms cubic-bezier(0, 0, 0, 1) backwards',
         'fade-out-snackbar': 'fade-out-snackbar 200ms cubic-bezier(0.3, 0, 1, 1) forwards',
         'fade-in-settings': 'fade-in-settings 500ms cubic-bezier(0.05, 0.7, 0.1, 1.0) both',
+        'fade-in-title': 'fade-in-title 250ms cubic-bezier(0.05, 0.7, 0.1, 1.0) both',
       },
       colors: {
         primary: 'var(--md-sys-color-primary)',

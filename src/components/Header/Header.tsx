@@ -32,7 +32,7 @@ const Header = () => {
         {isSettings && !isMobile ? (
           <h1 style={{ viewTransitionName: 'title' }} className="mr-auto flex items-center pl-4 font-readex_pro">
             <button type="button" onClick={handleClick} className="flex h-12 w-12 items-center justify-center">
-              <IconButton>
+              <IconButton className="animate-fade-in-screen duration-500">
                 <Icon>arrow_left_alts</Icon>
               </IconButton>
             </button>
@@ -43,7 +43,7 @@ const Header = () => {
             style={{
               viewTransitionName: 'title',
             }}
-            className="ml-[53px] mr-auto font-readex_pro sm:ml-7 lg:ml-4"
+            className="ml-[53px] mr-auto animate-fade-in-title font-readex_pro sm:ml-7 lg:ml-4"
           >
             <Link to={ROUTES.WELCOME_PAGE}>GraphiQL</Link>
           </h1>
