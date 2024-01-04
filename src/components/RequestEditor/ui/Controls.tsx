@@ -3,7 +3,8 @@ import { FC, HTMLAttributes } from 'react';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { useLanguage } from '@/shared/Context/hooks';
+import submitRequest from '@/components/Editor/lib/submitRequest';
+import { useAppContext, useLanguage } from '@/shared/Context/hooks';
 import ROUTES from '@shared/constants/routes';
 import urlParams from '@shared/constants/urlParams';
 import cn from '@shared/lib/helpers/cn';
@@ -20,6 +21,7 @@ type ControlsProps = HTMLAttributes<HTMLUListElement> & {
 };
 
 const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) => {
+  const { updateCurrentResponse, prettifyEditors } = useAppContext();
   const { readUrl } = useUrl();
   const screenType = useScreen();
   const { translation } = useLanguage();
@@ -31,6 +33,18 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
 
   const isAnimationsDisabled = screenType === 'tablet' || screenType === 'mobile';
   if (pathname.slice(1) !== ROUTES.MAIN) return null;
+
+  const handleSubmitRequest = async () => {
+    const query = readUrl(urlParams.QUERY);
+    const variables = readUrl(urlParams.VARIABLES);
+    const headers = readUrl(urlParams.HEADERS);
+    const response = await submitRequest(query, variables, headers);
+    updateCurrentResponse(JSON.stringify(response));
+  };
+
+  const handlePrettifier = () => {
+    prettifyEditors(true);
+  };
 
   const handleCopyText = async () => {
     const query = readUrl(urlParams.QUERY);
@@ -56,6 +70,7 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
             'animate-fade-in-standard [animation-delay:400ms]': !isHidden && !isAnimationsDisabled,
             'animate-fade-out-screen': isHidden,
           })}
+          onClick={handleSubmitRequest}
         >
           <Icon slot="icon">play_arrow</Icon>
         </Fab>
@@ -78,6 +93,7 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
         className={cn('tooltipElem flex h-12 w-12 origin-bottom items-center justify-center')}
       >
         <FilledIconButton
+          onClick={handlePrettifier}
           className={cn({
             'animate-fade-in-screen [animation-delay:500ms]': !isHidden && !isAnimationsDisabled,
             'animate-fade-out-screen': isHidden,
