@@ -34,12 +34,6 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
   const isAnimationsDisabled = screenType === 'tablet' || screenType === 'mobile';
   if (pathname.slice(1) !== ROUTES.MAIN) return null;
 
-  const handleCopyText = async () => {
-    const query = readUrl(urlParams.QUERY);
-    await navigator.clipboard.writeText(query);
-    toast(copySnackbar);
-  };
-
   const handleSubmitRequest = async () => {
     const query = readUrl(urlParams.QUERY);
     const variables = readUrl(urlParams.VARIABLES);
@@ -50,6 +44,12 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
 
   const handlePrettifier = () => {
     prettifyEditors(true);
+  };
+
+  const handleCopyText = async () => {
+    const query = readUrl(urlParams.QUERY);
+    await navigator.clipboard.writeText(query);
+    toast(copySnackbar);
   };
 
   return (

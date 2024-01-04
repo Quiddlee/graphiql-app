@@ -48,8 +48,8 @@ const MainLayout = () => {
         draggable={false}
         limit={1}
         transition={SnackBarTransition}
-        position="bottom-left"
-        toastClassName="!text-inverse-on-surface origin-bottom !bg-inverse-surface !min-w-[336px] !pl-4 !min-h-[48px] text-left"
+        position="bottom-center"
+        toastClassName="!text-inverse-on-surface origin-bottom !bg-inverse-surface max-w-[337px] !pl-4 !min-h-[48px] text-left"
         bodyClassName="text-sm font-normal relative !p-0 [&>div]:origin-bottom [&>div]:animate-fade-in-snackbar-body [&>div]:truncate w-full [&>div]:pe-16"
       />
     </ViewProvider>

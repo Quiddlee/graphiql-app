@@ -12,8 +12,8 @@ const ClearStorageComp = () => {
   return (
     <>
       <div className="mt-6 flex items-center justify-between pb-6">
-        <div className="flex flex-col justify-between">
-          <h4 className="text-[22px]">{translation.settingsPage.clear.title}</h4>
+        <div className="mr-[10px] flex flex-col justify-between">
+          <h4 className="text-sm sm:text-[22px]">{translation.settingsPage.clear.title}</h4>
           <p className="mt-4">{translation.settingsPage.clear.subtitle}</p>
         </div>
         <FilledTonalButton data-clear-btn className="text-primary" onClick={() => setIsModalShown((prev) => !prev)}>
