@@ -4,7 +4,6 @@ import { render } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 
 import { routes as ROUTES } from '@/router/router';
-import AuthProvider from '@shared/Context/AuthContext';
 import LanguageProvider from '@shared/Context/LanguageContext';
 
 function renderWithRouter(element?: ReactNode | null, initialEntries?: string[], initialIndex?: number) {
@@ -16,11 +15,9 @@ function renderWithRouter(element?: ReactNode | null, initialEntries?: string[],
   });
 
   render(
-    <AuthProvider>
-      <LanguageProvider>
-        <RouterProvider router={router} />
-      </LanguageProvider>
-    </AuthProvider>,
+    <LanguageProvider>
+      <RouterProvider router={router} />
+    </LanguageProvider>,
   );
 }
 
