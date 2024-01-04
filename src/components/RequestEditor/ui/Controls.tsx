@@ -34,6 +34,18 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
   const isAnimationsDisabled = screenType === 'tablet' || screenType === 'mobile';
   if (pathname.slice(1) !== ROUTES.MAIN) return null;
 
+  const handleSubmitRequest = async () => {
+    const query = readUrl(urlParams.QUERY);
+    const variables = readUrl(urlParams.VARIABLES);
+    const headers = readUrl(urlParams.HEADERS);
+    const response = await submitRequest(query, variables, headers);
+    updateCurrentResponse(JSON.stringify(response));
+  };
+
+  const handlePrettifier = () => {
+    prettifyEditors(true);
+  };
+
   const handleCopyText = async () => {
     const query = readUrl(urlParams.QUERY);
     await navigator.clipboard.writeText(query);
