@@ -1,13 +1,14 @@
-import { Dispatch, SetStateAction, useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import DocsModalLayout from '@/layouts/DocsModalLayout';
 import { useAppContext } from '@/shared/Context/hooks';
 import { DocsExplorerType, SchemaTypeObj } from '@/shared/types';
 import CloseDocsBtn from '@components/DocsComp/ui/CloseDocsBtn';
 
+import DocsLoader from './DocsLoader';
 import DocsRootComp from './DocsRootComp';
 import DocsTypeComp from './DocsTypeComp';
-import SchemaFallaback from './schemaFallback';
+import SchemaFallback from './SchemaFallback';
 import getEndpointSchema from '../lib/helpers/getEndpointSchema';
 
 type PropsType = {
@@ -17,11 +18,14 @@ type PropsType = {
 
 const DocsModal = ({ setIsDocsShown, explorer }: PropsType) => {
   const { currEndpoint, setEndpointSchema, endpointSchema } = useAppContext();
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
-    getEndpointSchema(currEndpoint, setEndpointSchema);
+    getEndpointSchema(currEndpoint, setEndpointSchema, setIsLoading);
   }, [currEndpoint, setEndpointSchema]);
 
-  if (!endpointSchema) return <SchemaFallaback closeModal={setIsDocsShown} />;
+  if (isLoading) return <DocsLoader />;
+  if (!endpointSchema) return <SchemaFallback closeModal={setIsDocsShown} />;
 
   const content = explorer.isDocs() ? (
     <DocsRootComp types={endpointSchema.types as SchemaTypeObj[]} explorer={explorer} />
