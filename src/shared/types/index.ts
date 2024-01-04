@@ -73,3 +73,7 @@ export type DocsExplorerType = {
 	back: () => void;
 	setInitState: () => void;
 };
+
+export type DocsSchemaType = {
+	types: SchemaTypeObj[];
+};

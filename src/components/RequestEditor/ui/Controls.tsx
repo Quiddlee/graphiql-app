@@ -52,18 +52,6 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
     toast(copySnackbar);
   };
 
-  const handleSubmitRequest = async () => {
-    const query = readUrl(urlParams.QUERY);
-    const variables = readUrl(urlParams.VARIABLES);
-    const headers = readUrl(urlParams.HEADERS);
-    const response = await submitRequest(query, variables, headers);
-    updateCurrentResponse(JSON.stringify(response));
-  };
-
-  const handlePrettifier = () => {
-    prettifyEditors(true);
-  };
-
   return (
     <ul
       data-testid="controls"

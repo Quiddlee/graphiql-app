@@ -1,8 +1,7 @@
-// AFTER LOGIC FOR SAVING AND FETCHING ENDPOINT SHEMA WILL BE ADDED - MUST REMOVE SCHEMA IMPORT AND REPLACE IT FOR DOWNLOADED SCHEMA IN FURTHER CODE
+import { Dispatch, SetStateAction, useEffect } from 'react';
 
-import { Dispatch, SetStateAction } from 'react';
-
-import { swapiSchema } from '@/shared/constants/schemaData';
+import introspectionQuery from '@/shared/constants/introspectionQuery';
+import { useAppContext } from '@/shared/Context/hooks';
 import { DocsExplorerType, SchemaTypeObj } from '@/shared/types';
 import CloseDocsBtn from '@components/DocsComp/ui/CloseDocsBtn';
 
@@ -15,14 +14,35 @@ type PropsType = {
 };
 
 const DocsModal = ({ setIsDocsShown, explorer }: PropsType) => {
+  const { currEndpoint, setEndpointSchema, endpointSchema } = useAppContext();
+  useEffect(() => {
+    async function fetchDocs(endpoint: string) {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(introspectionQuery),
+      });
+      if (response.ok && response.status === 200) {
+        const res = await response.json();
+        setEndpointSchema(res.data.__schema);
+      }
+      return null;
+    }
+    fetchDocs(currEndpoint);
+  }, [currEndpoint, setEndpointSchema]);
+
+  if (!endpointSchema) return null;
   const content = explorer.isDocs() ? (
-    <DocsRootComp types={swapiSchema.data.__schema.types as SchemaTypeObj[]} explorer={explorer} />
+    <DocsRootComp types={endpointSchema.types as SchemaTypeObj[]} explorer={explorer} />
   ) : (
     <DocsTypeComp
       explorer={explorer}
-      currType={swapiSchema.data.__schema.types.find((elem) => elem.name === explorer.current()) as SchemaTypeObj}
+      currType={endpointSchema.types.find((elem) => elem.name === explorer.current()) as SchemaTypeObj}
     />
   );
+
   return (
     <section className="relative z-20 h-[100dvh] w-[270px] cursor-auto rounded-r-[28px] bg-surface p-3 sm:w-[420px]">
       <CloseDocsBtn
