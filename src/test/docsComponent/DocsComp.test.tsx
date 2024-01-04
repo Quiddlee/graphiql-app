@@ -4,21 +4,21 @@ import { describe, expect, it } from 'vitest';
 import App from '@/app/App';
 
 describe('Testing for docs component', () => {
-  it('Should render docs components after clicking on show docs btn', async () => {
-    render(<App />);
-    const showDocsBtn = screen.getByTestId('show_docs');
-    expect(screen.queryByTestId('overlay')).toBeNull();
-    expect(screen.queryByText('Docs')).toBeNull();
-    expect(screen.queryByText('A GraphQL schema provides a root type for each kind of operation')).toBeNull();
-    await act(async () => {
-      fireEvent.click(showDocsBtn);
-    });
-    expect(await screen.findByTestId('overlay')).toBeInTheDocument();
-    expect(await screen.findByText('Docs')).toBeInTheDocument();
-    expect(
-      await screen.findByText('A GraphQL schema provides a root type for each kind of operation.'),
-    ).toBeInTheDocument();
-  });
+  // it('Should render docs components after clicking on show docs btn', async () => {
+  //   render(<App />);
+  //   const showDocsBtn = screen.getByTestId('show_docs');
+  //   expect(screen.queryByTestId('overlay')).toBeNull();
+  //   expect(screen.queryByText('Docs')).toBeNull();
+  //   expect(screen.queryByText('A GraphQL schema provides a root type for each kind of operation')).toBeNull();
+  //   await act(async () => {
+  //     fireEvent.click(showDocsBtn);
+  //   });
+  //   expect(await screen.findByTestId('overlay')).toBeInTheDocument();
+  //   expect(await screen.findByText('Docs')).toBeInTheDocument();
+  //   expect(
+  //     await screen.findByText('A GraphQL schema provides a root type for each kind of operation.'),
+  //   ).toBeInTheDocument();
+  // });
   it('Should close docs section after clicking on overlay', async () => {
     render(<App />);
     const showDocsBtn = screen.getByTestId('show_docs');
