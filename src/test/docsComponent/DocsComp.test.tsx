@@ -86,7 +86,7 @@ describe('Testing for docs component', () => {
     await act(async () => {
       fireEvent.click(showDocsBtn);
     });
-    const RootTypeLink = await screen.findByText('Root');
+    const RootTypeLink = await screen.findByText('Query');
     await act(async () => {
       fireEvent.click(RootTypeLink);
     });
@@ -98,28 +98,26 @@ describe('Testing for docs component', () => {
     await act(async () => {
       fireEvent.click(showDocsBtn);
     });
-    const RootTypeLink = await screen.findByText('Root');
+    const RootTypeLink = await screen.findByText('Query');
     await act(async () => {
       fireEvent.click(RootTypeLink);
     });
     expect(await screen.findByText('Fields:')).toBeInTheDocument();
-    const filmsLink = await screen.findByText('Film');
-    expect(filmsLink).toBeInTheDocument();
+    const charLinks = await screen.findAllByText('Character');
+    expect(charLinks[0]).toBeInTheDocument();
     await act(async () => {
-      fireEvent.click(filmsLink);
+      fireEvent.click(charLinks[0]);
     });
-    expect(await screen.findByText('Implements:')).toBeInTheDocument();
-    const nodeTypeLink = await screen.findByText('Node');
-    expect(nodeTypeLink).toBeInTheDocument();
+    const idLink = await screen.findByText('ID');
+    expect(idLink).toBeInTheDocument();
     await act(async () => {
-      fireEvent.click(nodeTypeLink);
+      fireEvent.click(idLink);
     });
-    expect(await screen.findByText('Implementations')).toBeInTheDocument();
-    const backToFilmBtn = await screen.findByRole('button', { name: 'Film' });
+    const backToFilmBtn = await screen.findByRole('button', { name: 'Character' });
     await act(async () => {
       fireEvent.click(backToFilmBtn);
     });
-    const backToRootBtn = await screen.findByRole('button', { name: 'Root' });
+    const backToRootBtn = await screen.findByRole('button', { name: 'Query' });
     await act(async () => {
       fireEvent.click(backToRootBtn);
     });
