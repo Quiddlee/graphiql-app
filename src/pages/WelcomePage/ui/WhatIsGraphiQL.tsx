@@ -66,7 +66,7 @@ const WhatIsGraphiQl = () => {
           <Card
             icon="tab_duplicate"
             title="Save your’e queries"
-            descr="Your latest queries are automatically saved. You can create different views."
+            descr="Your latest queries and views are automatically saved."
           />
         </li>
 

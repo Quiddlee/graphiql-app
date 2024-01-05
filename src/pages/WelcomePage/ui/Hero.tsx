@@ -8,7 +8,7 @@ const Hero = () => {
       <motion.div
         animate={figureAnimation}
         transition={figureTransition}
-        className="absolute -top-96 h-[800px] w-[800px] rounded-full bg-gradient-to-r from-[#F97583] to-[#381E72] blur-[200px] saturate-150"
+        className="absolute -top-96 h-[800px] w-[800px] rounded-full bg-gradient-to-r from-[#F97583] to-[#381E72] blur-[100px] saturate-150"
       />
 
       <h1 className="isolate text-center text-10xl font-light leading-h1">
