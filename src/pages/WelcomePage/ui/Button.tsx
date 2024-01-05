@@ -2,9 +2,10 @@ import { FC, HTMLAttributes } from 'react';
 
 import cn from '@shared/lib/helpers/cn';
 
-const Button: FC<HTMLAttributes<HTMLButtonElement>> = ({ children, className }) => {
+const Button: FC<HTMLAttributes<HTMLButtonElement>> = ({ children, className, ...props }) => {
   return (
     <button
+      {...props}
       type="button"
       className={cn(
         'group relative inline-block h-[60px] w-[200px] overflow-hidden rounded-full text-black',

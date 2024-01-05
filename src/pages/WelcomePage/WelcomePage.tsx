@@ -1,3 +1,8 @@
+import { useRef } from 'react';
+
+import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+
 import bohdan from '@assets/Bohdan.jpg';
 import appWelcome from '@assets/Desktop-welcome.png';
 import harry from '@assets/Harry.jpg';
@@ -7,81 +12,282 @@ import Button from '@pages/WelcomePage/ui/Button';
 import Card from '@pages/WelcomePage/ui/Card';
 import Header from '@pages/WelcomePage/ui/Header';
 import MemberCard from '@pages/WelcomePage/ui/MemberCard';
+import ROUTES from '@shared/constants/routes';
+
+const headingVariants = {
+  offscreen: {
+    y: '100%',
+    opacity: 0,
+  },
+  onscreen: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      bounce: 0.4,
+      duration: 1.2,
+    },
+  },
+};
+
+const figureAnimation = {
+  scale: [1, 1.1, 1],
+  rotate: [0, 30, 0],
+  skew: [0, 2, 0],
+};
+
+const figureTransition = {
+  duration: 10,
+  ease: 'easeInOut',
+  times: [0, 0.2, 0.5, 0.8, 1],
+  repeat: Infinity,
+  repeatDelay: 1,
+};
+
+const viewPort = { once: true };
+
+const imgVariants = {
+  offscreen: {
+    rotate: 0,
+    opacity: 0,
+  },
+  onscreen: {
+    rotate: 10,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      bounce: 0.4,
+      duration: 1,
+    },
+  },
+};
+
+const imgVievPort = { margin: '-300px' };
 
 const WelcomePage = () => {
+  const navigate = useNavigate();
+
+  const mainImgRef = useRef<HTMLImageElement>(null);
+  const imgSectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: imgSectionRef,
+    offset: ['start end', 'end end'],
+  });
+
+  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+    if (mainImgRef.current) mainImgRef.current.style.scale = `${0.9 + latest * 0.1}`;
+  });
+
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const iframeSectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: scrollIframe } = useScroll({
+    target: iframeSectionRef,
+    offset: ['start end', 'end end'],
+  });
+
+  useMotionValueEvent(scrollIframe, 'change', (latest) => {
+    if (iframeRef.current) iframeRef.current.style.scale = `${0.8 + latest * 0.1}`;
+  });
+
   return (
     <>
       <Header />
       <div className="m-auto max-w-[1200px] space-y-[500px] pb-16 font-readex_pro text-on-surface">
         <section className="relative flex h-screen items-center justify-center">
-          <div className="absolute -top-96 h-[800px] w-[800px] rounded-full bg-gradient-to-r from-[#F97583] to-[#381E72] blur-[200px] saturate-150" />
+          <motion.div
+            animate={figureAnimation}
+            transition={figureTransition}
+            className="absolute -top-96 h-[800px] w-[800px] rounded-full bg-gradient-to-r from-[#F97583] to-[#381E72] blur-[200px] saturate-150"
+          />
 
           <h1 className="isolate text-center text-10xl font-light leading-h1">
-            Welcome to <br /> the{' '}
-            <span className="bg-gradient-to-br from-[#F97583] to-[#381E72] bg-clip-text text-transparent">
+            <motion.span
+              className="inline-block"
+              viewport={viewPort}
+              initial="offscreen"
+              whileInView="onscreen"
+              variants={headingVariants}
+            >
+              Welcome to
+            </motion.span>{' '}
+            <br />{' '}
+            <motion.span
+              className="inline-block"
+              viewport={viewPort}
+              initial="offscreen"
+              whileInView="onscreen"
+              variants={{
+                ...headingVariants,
+                onscreen: {
+                  ...headingVariants.onscreen,
+                  transition: { ...headingVariants.onscreen.transition, delay: 0.1 },
+                },
+              }}
+            >
+              the
+            </motion.span>{' '}
+            <motion.span
+              viewport={viewPort}
+              initial="offscreen"
+              whileInView="onscreen"
+              variants={{
+                ...headingVariants,
+                onscreen: {
+                  ...headingVariants.onscreen,
+                  transition: { ...headingVariants.onscreen.transition, delay: 0.2 },
+                },
+              }}
+              className="inline-block bg-gradient-to-br from-[#F97583] to-[#381E72] bg-clip-text text-transparent"
+            >
               GraphiQL
-            </span>
+            </motion.span>
           </h1>
         </section>
 
         <section className="text-center">
           <h2 className="text-[57px] font-light leading-[64px]">
-            Craft stunning websites <br />
-            with GraphQL superpowers. <br />
-            Introducing GraphiQL,{' '}
-            <span className="bg-gradient-to-br from-[#B69DF8] to-[#79B8FF] bg-clip-text font-medium text-transparent">
-              {' '}
+            <motion.span
+              className="inline-block"
+              viewport={viewPort}
+              initial="offscreen"
+              whileInView="onscreen"
+              variants={headingVariants}
+            >
+              Craft stunning websites
+            </motion.span>{' '}
+            <br />
+            <motion.span
+              className="inline-block"
+              viewport={viewPort}
+              initial="offscreen"
+              whileInView="onscreen"
+              variants={{
+                ...headingVariants,
+                onscreen: {
+                  ...headingVariants.onscreen,
+                  transition: { ...headingVariants.onscreen.transition, delay: 0.1 },
+                },
+              }}
+            >
+              with GraphQL superpowers.
+            </motion.span>
+            <br />
+            <motion.span
+              className="inline-block"
+              viewport={viewPort}
+              initial="offscreen"
+              whileInView="onscreen"
+              variants={{
+                ...headingVariants,
+                onscreen: {
+                  ...headingVariants.onscreen,
+                  transition: { ...headingVariants.onscreen.transition, delay: 0.2 },
+                },
+              }}
+            >
+              Introducing GraphiQL,
+            </motion.span>{' '}
+            <motion.span
+              className="inline-block bg-gradient-to-br from-[#B69DF8] to-[#79B8FF] bg-clip-text font-medium text-transparent"
+              viewport={viewPort}
+              initial="offscreen"
+              whileInView="onscreen"
+              variants={{
+                ...headingVariants,
+                onscreen: {
+                  ...headingVariants.onscreen,
+                  transition: { ...headingVariants.onscreen.transition, delay: 0.5 },
+                },
+              }}
+            >
               your dream IDE.
-            </span>
+            </motion.span>
           </h2>
         </section>
 
-        <section className="relative flex items-center justify-center">
+        <section ref={imgSectionRef} className="relative flex items-center justify-center">
           <div className="absolute -top-52 h-[1000px] w-[1000px] rounded-full bg-gradient-to-br from-[#B69DF8] to-[#79B8FF] blur-[200px] saturate-150" />
 
-          {/* <img */}
-          {/*    className="absolute -top-10 left-6 max-w-[1000px] -rotate-[28deg] blur-[0.7px] brightness-75 transition-all duration-1000 ease-emphasized-accelerate peer-hover:rotate-0 peer-hover:duration-1000 peer-hover:ease-emphasized-decelerate" */}
-          {/*    src={appWelcome} */}
-          {/*    alt="App showcase" */}
-          {/* /> */}
-          {/* <img */}
-          {/*    className="dpeer-hover:uration-1000 absolute -top-5 left-12 m-auto max-w-[1000px] -rotate-[18deg] blur-[0.5px] brightness-90 transition-all delay-100 duration-1000 ease-emphasized-accelerate peer-hover:rotate-0 peer-hover:ease-emphasized-decelerate" */}
-          {/*    src={appWelcome} */}
-          {/*    alt="App showcase" */}
-          {/* /> */}
-          {/* <img */}
-          {/*    className="dpeer-hover:uration-1000 absolute -top-5 left-16 max-w-[1000px] -rotate-[10deg] brightness-95 transition-all delay-200 duration-1000 ease-emphasized-accelerate peer-hover:rotate-0 peer-hover:ease-emphasized-decelerate" */}
-          {/*    src={appWelcome} */}
-          {/*    alt="App showcase" */}
-          {/* /> */}
-
-          <img
+          <motion.img
+            variants={{
+              ...imgVariants,
+              onscreen: {
+                ...imgVariants.onscreen,
+                rotate: -28,
+              },
+            }}
+            viewport={imgVievPort}
+            initial="offscreen"
+            whileInView="onscreen"
             className="absolute -top-10 left-6 max-w-[1000px] -rotate-[28deg] blur-[0.7px] brightness-75 saturate-0"
             src={appWelcome}
             alt="App showcase"
           />
-          <img
+          <motion.img
+            variants={{
+              ...imgVariants,
+              onscreen: {
+                ...imgVariants.onscreen,
+                rotate: -18,
+              },
+            }}
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={imgVievPort}
             className="absolute -top-5 left-12 m-auto max-w-[1000px] -rotate-[18deg] blur-[0.5px] brightness-90 saturate-50"
             src={appWelcome}
             alt="App showcase"
           />
-          <img
+          <motion.img
+            variants={{
+              ...imgVariants,
+              onscreen: {
+                ...imgVariants.onscreen,
+                rotate: -10,
+              },
+            }}
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={imgVievPort}
             className="absolute -top-5 left-16 max-w-[1000px] -rotate-[10deg] brightness-95"
             src={appWelcome}
             alt="App showcase"
           />
-          <img className="max-w-[1000px] brightness-125 saturate-150" src={appWelcome} alt="App showcase" />
+          <img
+            ref={mainImgRef}
+            className="max-w-[1000px] brightness-125 saturate-150 transition-all duration-500 ease-out"
+            src={appWelcome}
+            alt="App showcase"
+          />
         </section>
 
         <section className="relative grid grid-cols-1 items-center justify-items-center gap-20">
-          <div className="absolute -right-52 -top-52 -z-10 h-[450px] w-[450px] rounded-full bg-gradient-to-br from-[#F97583] to-[#FFAB70] opacity-90 blur-[64px]" />
+          <motion.div
+            animate={figureAnimation}
+            transition={figureTransition}
+            className="absolute -right-52 -top-52 -z-10 h-[450px] w-[450px] rounded-full bg-gradient-to-br from-[#F97583] to-[#FFAB70] opacity-90 blur-[64px]"
+          />
 
-          <h2 className="text-7.5xl font-light leading-h2">What is GraphiQL?</h2>
+          <motion.h2
+            viewport={viewPort}
+            initial="offscreen"
+            whileInView="onscreen"
+            className="text-7.5xl font-light leading-h2"
+            variants={headingVariants}
+          >
+            What is GraphiQL?
+          </motion.h2>
 
-          <p className="max-w-[520px] text-center text-outline-text">
+          <motion.p
+            viewport={viewPort}
+            initial="offscreen"
+            whileInView="onscreen"
+            className="max-w-[520px] text-center text-outline-text"
+            variants={headingVariants}
+          >
             GraphiQL: Your interactive GraphQL IDE, empowering website development with syntax highlighting,
             autocompletion, and dynamic documentation.
-          </p>
+          </motion.p>
 
           <ul className="grid grid-cols-3 grid-rows-2 gap-2">
             <li>
@@ -131,9 +337,20 @@ const WelcomePage = () => {
         </section>
 
         <section className="relative grid grid-cols-1 items-center justify-center gap-[200px]">
-          <div className="absolute inset-0 top-40 -z-10 m-auto h-[1100px] w-[1100px] rounded-full bg-gradient-to-br from-[#381E72] to-[#79B8FF] opacity-25 opacity-90 blur-[64px]" />
-
-          <h2 className="justify-self-center text-7.5xl font-light leading-h2">Meet our amazing team</h2>
+          <motion.div
+            animate={figureAnimation}
+            transition={figureTransition}
+            className="absolute inset-0 top-40 -z-10 m-auto h-[1100px] w-[1100px] rounded-full bg-gradient-to-br from-[#381E72] to-[#79B8FF] opacity-25 blur-[64px]"
+          />
+          <motion.h2
+            viewport={viewPort}
+            initial="offscreen"
+            whileInView="onscreen"
+            className="justify-self-center text-7.5xl font-light leading-h2"
+            variants={headingVariants}
+          >
+            Meet our amazing team
+          </motion.h2>
 
           <ul className="grid grid-cols-[1fr_2fr] grid-rows-2 justify-self-start">
             <li className="col-start-2 col-end-3 justify-self-end">
@@ -166,14 +383,30 @@ const WelcomePage = () => {
           </ul>
         </section>
 
-        <section className="relative grid justify-items-center gap-20">
-          <div className="absolute -left-64 -top-72 -z-10 h-[450px] w-[450px] rounded-full bg-gradient-to-br from-[#F02FC2] to-[#F38181] opacity-90 blur-[64px]" />
+        <section ref={iframeSectionRef} className="relative grid justify-items-center gap-20">
+          <motion.div
+            animate={figureAnimation}
+            transition={figureTransition}
+            className="absolute -left-64 -top-72 -z-10 h-[450px] w-[450px] rounded-full bg-gradient-to-br from-[#F02FC2] to-[#F38181] opacity-90 blur-[64px]"
+          />
 
-          <h2 className="text-center text-7.5xl font-light leading-h2">
+          <motion.h2
+            className="inline-block text-center text-7.5xl font-light leading-h2"
+            viewport={viewPort}
+            initial="offscreen"
+            whileInView="onscreen"
+            variants={headingVariants}
+          >
             Built with the Support of The Rolling Scopes School
-          </h2>
+          </motion.h2>
 
-          <p className="max-w-[520px] text-center text-outline-text">
+          <motion.p
+            className="max-w-[520px] text-center text-outline-text"
+            viewport={viewPort}
+            initial="offscreen"
+            whileInView="onscreen"
+            variants={headingVariants}
+          >
             We proud to announce that it is supported by <br /> the{' '}
             <a className="underline" href="https://rs.school/" target="_blank" rel="noreferrer">
               RS School
@@ -184,11 +417,12 @@ const WelcomePage = () => {
               React course
             </a>
             .
-          </p>
+          </motion.p>
 
           <iframe
+            ref={iframeRef}
             title="RS-Conf video"
-            className="rounded-3xl"
+            className="inline-block rounded-3xl transition-all duration-1000 ease-out"
             style={{ border: 'none' }}
             width="1200"
             height="675"
@@ -202,7 +436,13 @@ const WelcomePage = () => {
             <h2 className="text-center text-7.5xl font-light leading-h2">
               Start Using <br /> GraphiQL Now
             </h2>
-            <Button>GraphiQL App</Button>
+            <Button
+              onClick={() => {
+                navigate(ROUTES.MAIN);
+              }}
+            >
+              GraphiQL App
+            </Button>
           </article>
         </section>
 
