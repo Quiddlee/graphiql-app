@@ -34,7 +34,7 @@ const MainLayout = () => {
               isApp,
           })}
         >
-          <Header />
+          {isApp && <Header />}
           {isApp && (
             <div
               ref={navContainerRef}
