@@ -24,7 +24,7 @@ const Card: FC<CardProps> = ({ icon, title, descr }) => {
   const parentRef = useRef<HTMLDivElement>(null);
 
   return (
-    <Tilt rotateRange="5">
+    <Tilt rotateRange="7">
       <div
         ref={parentRef}
         className="rounded-3xl border border-white border-opacity-10 bg-surface-container transition-all duration-500 hover:transition-none"
