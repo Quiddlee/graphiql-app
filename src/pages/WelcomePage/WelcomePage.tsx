@@ -12,9 +12,11 @@ const WelcomePage = () => {
   return (
     <>
       <Header />
-      <div className="m-auto max-w-[1200px] space-y-[350px] pb-16 font-readex_pro text-on-surface">
-        <section className="flex h-screen items-center justify-center">
-          <h1 className="text-center text-10xl font-light leading-h1">
+      <div className="m-auto max-w-[1200px] space-y-[500px] pb-16 font-readex_pro text-on-surface">
+        <section className="relative flex h-screen items-center justify-center">
+          <div className="absolute -top-96 h-[800px] w-[800px] rounded-full bg-gradient-to-r from-[#F97583] to-[#381E72] blur-[200px] saturate-150" />
+
+          <h1 className="isolate text-center text-10xl font-light leading-h1">
             Welcome to <br /> the{' '}
             <span className="bg-gradient-to-br from-[#F97583] to-[#381E72] bg-clip-text text-transparent">
               GraphiQL
@@ -35,6 +37,8 @@ const WelcomePage = () => {
         </section>
 
         <section className="relative flex items-center justify-center">
+          <div className="absolute -top-52 h-[1000px] w-[1000px] rounded-full bg-gradient-to-br from-[#B69DF8] to-[#79B8FF] blur-[200px] saturate-150" />
+
           {/* <img */}
           {/*    className="absolute -top-10 left-6 max-w-[1000px] -rotate-[28deg] blur-[0.7px] brightness-75 transition-all duration-1000 ease-emphasized-accelerate peer-hover:rotate-0 peer-hover:duration-1000 peer-hover:ease-emphasized-decelerate" */}
           {/*    src={appWelcome} */}
@@ -69,7 +73,9 @@ const WelcomePage = () => {
           <img className="max-w-[1000px] brightness-125 saturate-150" src={appWelcome} alt="App showcase" />
         </section>
 
-        <section className="grid grid-cols-1 items-center justify-items-center gap-20">
+        <section className="relative grid grid-cols-1 items-center justify-items-center gap-20">
+          <div className="absolute -right-52 -top-52 -z-10 h-[450px] w-[450px] rounded-full bg-gradient-to-br from-[#F97583] to-[#FFAB70] opacity-90 blur-[64px]" />
+
           <h2 className="text-7.5xl font-light leading-h2">What is GraphiQL?</h2>
 
           <p className="max-w-[520px] text-center text-outline-text">
@@ -124,7 +130,9 @@ const WelcomePage = () => {
           </ul>
         </section>
 
-        <section className="grid grid-cols-1 items-center justify-center gap-[200px]">
+        <section className="relative grid grid-cols-1 items-center justify-center gap-[200px]">
+          <div className="absolute inset-0 top-40 -z-10 m-auto h-[1100px] w-[1100px] rounded-full bg-gradient-to-br from-[#381E72] to-[#79B8FF] opacity-25 opacity-90 blur-[64px]" />
+
           <h2 className="justify-self-center text-7.5xl font-light leading-h2">Meet our amazing team</h2>
 
           <ul className="grid grid-cols-[1fr_2fr] grid-rows-2 justify-self-start">
@@ -158,7 +166,9 @@ const WelcomePage = () => {
           </ul>
         </section>
 
-        <section className="grid justify-items-center gap-20">
+        <section className="relative grid justify-items-center gap-20">
+          <div className="absolute -left-64 -top-72 -z-10 h-[450px] w-[450px] rounded-full bg-gradient-to-br from-[#F02FC2] to-[#F38181] opacity-90 blur-[64px]" />
+
           <h2 className="text-center text-7.5xl font-light leading-h2">
             Built with the Support of The Rolling Scopes School
           </h2>
