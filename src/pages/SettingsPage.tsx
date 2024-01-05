@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import Footer from '@/components/Footer/Footer';
 import ClearStorageComp from '@/components/SettingsPageComp/ClearStorageComp';
 import DarkModeComp from '@/components/SettingsPageComp/DarkModeComp';
 import EndpointComp from '@/components/SettingsPageComp/EndpointComp';
@@ -27,6 +28,9 @@ const SettignsPage = () => {
         <EndpointComp />
         <LangSelectorComp />
         <ClearStorageComp />
+        <div className="mb-4 flex h-fit w-full justify-center border-t-[1px] border-outline-variant pt-6 lg:hidden">
+          <Footer />
+        </div>
       </div>
     </section>
   );

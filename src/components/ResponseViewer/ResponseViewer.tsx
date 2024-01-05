@@ -43,17 +43,17 @@ const ResponseViewer: FC<ResponseViewerProps> = ({ onResponseClose, isHidden }) 
       >
         <Icon>close</Icon>
       </IconButton>
-      <div className="grid h-full w-full overflow-hidden rounded-4xl bg-surface-container lg:max-h-none">
+      <div className="flex h-full w-full flex-col overflow-hidden rounded-4xl bg-surface-container lg:max-h-none">
         <div
           data-testid="response-viewer"
           ref={rootRef}
-          className="h-full w-full justify-between overflow-hidden overflow-y-scroll py-7 pl-4 pr-4 sm:pl-7"
+          className="h-full w-full grow justify-between overflow-hidden overflow-y-scroll py-7 pl-4 pr-4 sm:pl-7"
         >
           <article className="h-fit w-fit pr-10">
             <EditorField key={currentResponse} value={currentResponse} onChange={() => {}} isJson isReadOnly />
           </article>
         </div>
-        <div className="mb-7 mt-4 flex w-full justify-center lg:hidden">
+        <div className="mb-4 mt-6 flex h-fit w-full justify-center lg:hidden">
           <Footer />
         </div>
       </div>
