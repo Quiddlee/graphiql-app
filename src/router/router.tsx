@@ -1,5 +1,6 @@
 import { createHashRouter } from 'react-router-dom';
 
+import ErrorFallback from '@/components/ErrorFallback/ErrorFallback';
 import MainLayout from '@/layouts/MainLayout';
 import LoginPage from '@/pages/LoginPage';
 import SettignsPage from '@/pages/SettingsPage';
@@ -14,6 +15,7 @@ export const routes = [
   {
     path: '/',
     element: <MainLayout />,
+    errorElement: <ErrorFallback />,
     children: [
       {
         path: ROUTES.WELCOME_PAGE,
