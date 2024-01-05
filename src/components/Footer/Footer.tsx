@@ -20,7 +20,7 @@ const Footer = () => {
       </div>
       <div className="mt-[6px] flex items-center gap-3">
         <span>2023</span>
-        <a href="https://rs.school/">
+        <a href="https://rs.school/react/">
           <img src={rsLogo} alt="" className="block w-[50px]" />
         </a>
       </div>

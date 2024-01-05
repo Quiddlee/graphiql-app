@@ -2,9 +2,11 @@ import { act, fireEvent, render, screen, waitForElementToBeRemoved } from '@test
 import { describe, expect, it } from 'vitest';
 
 import App from '@/app/App';
+import { prepareAuthCookie } from '@/shared/helpers/cookieHandlers';
 
 describe('Testing for docs component', () => {
   it('Should render docs components after clicking on show docs btn', async () => {
+    document.cookie = prepareAuthCookie('test@gmail.com');
     render(<App />);
     const showDocsBtn = screen.getByTestId('show_docs');
     expect(screen.queryByTestId('overlay')).toBeNull();
