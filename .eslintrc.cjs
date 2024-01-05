@@ -26,6 +26,7 @@ module.exports = {
   },
   plugins: ['react', 'import', 'react-refresh', '@typescript-eslint', 'simple-import-sort', 'prettier'],
   rules: {
+    'no-param-reassign': 0,
     'react/prop-types': 0,
     'react/jsx-props-no-spreading': 0,
     'react/require-default-props': 0,
