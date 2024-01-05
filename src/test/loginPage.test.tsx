@@ -1,11 +1,11 @@
 import { PropsWithChildren } from 'react';
 
-import { act, fireEvent, screen, waitFor } from '@testing-library/react';
+import { act, fireEvent, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
-import App from '@/app/App';
-
-import userSetup from './setupTests';
+import renderWithRouter from '@/test/helpers/RenderWithRouter';
+import LoginPage from '@pages/LoginPage';
 
 vi.mock('@shared/ui/OutlinedTextField', () => ({
   default: (props: PropsWithChildren) => (
@@ -17,14 +17,9 @@ vi.mock('@shared/ui/OutlinedTextField', () => ({
 
 describe('Testing for login page', () => {
   it('Should render login page properly', async () => {
-    const { user } = userSetup(<App />);
-    const loginLink = await screen.findByText('login');
-    await act(async () => {
-      user.click(loginLink);
-    });
-    screen.debug();
-    const emailInput = await screen.findByPlaceholderText('Email');
-    const passInput = await screen.findByPlaceholderText('Password');
+    renderWithRouter(<LoginPage />);
+    const emailInput = screen.getByPlaceholderText('Email');
+    const passInput = screen.getByPlaceholderText('Password');
     await act(async () => {
       fireEvent.change(emailInput, {
         target: { value: 'asdrogachev@gmail.com' },
@@ -34,9 +29,7 @@ describe('Testing for login page', () => {
       });
     });
     const submit = await screen.findByRole('button', { name: 'Log in' });
-    waitFor(async () => {
-      await user.click(submit);
-    });
+    await userEvent.click(submit);
     expect((emailInput as HTMLInputElement).value).toMatch('asdrogachev@gmail.com');
     expect((passInput as HTMLInputElement).value).toMatch('698830Pa$$');
   });
