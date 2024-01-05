@@ -1,7 +1,8 @@
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 
 import useRadialHover from '@shared/lib/hooks/useRadialHover';
 import Icon from '@shared/ui/Icon';
+import Tilt from '@shared/ui/Tilt';
 
 type CardProps = {
   icon: string;
@@ -20,21 +21,28 @@ const Card: FC<CardProps> = ({ icon, title, descr }) => {
     color: RADIAL_HOVER_COLOR,
   });
 
+  const parentRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div className="rounded-3xl border border-white border-opacity-10 bg-surface-container">
-      <article
-        ref={containerRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseOut}
-        className="grid h-[280px] w-[328px] rounded-3xl bg-surface-container p-6 text-sm text-tertiary"
+    <Tilt rotateRange="5">
+      <div
+        ref={parentRef}
+        className="rounded-3xl border border-white border-opacity-10 bg-surface-container transition-all duration-500 hover:transition-none"
       >
-        <Icon className="h-[100px] w-[100px] justify-self-center text-[100px]">{icon}</Icon>
-        <div className="self-end">
-          <h4>{title}</h4>
-          <p className="text-outline-text">{descr}</p>
-        </div>
-      </article>
-    </div>
+        <article
+          ref={containerRef}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseOut}
+          className="grid h-[280px] w-[328px] rounded-3xl bg-surface-container p-6 text-sm text-tertiary"
+        >
+          <Icon className="h-[100px] w-[100px] justify-self-center text-[100px]">{icon}</Icon>
+          <div className="self-end">
+            <h4>{title}</h4>
+            <p className="text-outline-text">{descr}</p>
+          </div>
+        </article>
+      </div>
+    </Tilt>
   );
 };
 
