@@ -3,6 +3,7 @@ import { createHashRouter } from 'react-router-dom';
 import ErrorFallback from '@/components/ErrorFallback/ErrorFallback';
 import MainLayout from '@/layouts/MainLayout';
 import LoginPage from '@/pages/LoginPage';
+import Page404 from '@/pages/Page404';
 import SettignsPage from '@/pages/SettingsPage';
 import SignUpPage from '@/pages/SignUpPage';
 import WelcomePage from '@/pages/WelcomePage';
@@ -65,6 +66,10 @@ export const routes = [
           <SettignsPage />
           // </AuthAllowedOnly>
         ),
+      },
+      {
+        path: '*',
+        element: <Page404 />,
       },
     ],
   },
