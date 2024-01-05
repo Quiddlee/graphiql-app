@@ -51,7 +51,7 @@ export default function SignUpPage() {
 
   return (
     <section className="mx-5 flex items-center justify-center">
-      <article className="w-[560px] rounded-[30px] bg-surface-container px-7 py-[60px] sm:px-20">
+      <article className="w-full max-w-[560px] rounded-[30px] bg-surface-container px-7 py-[60px] sm:px-20">
         <h1 className="text-center text-2xl font-[400] text-on-surface">{title}</h1>
         <h2 className="mt-3 text-center text-base font-[400] text-on-surface-variant">{subtitle}</h2>
         <form noValidate className="mt-8" onSubmit={handleSubmit(onSubmit)}>
