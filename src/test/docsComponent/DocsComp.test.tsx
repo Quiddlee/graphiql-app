@@ -13,6 +13,9 @@ describe('Testing for docs component', () => {
     await act(async () => {
       fireEvent.click(showDocsBtn);
     });
+    await new Promise((resolve) => {
+      setTimeout(() => resolve('done'), 1000);
+    });
     expect(await screen.findByTestId('overlay')).toBeInTheDocument();
     expect(await screen.findByText('Docs')).toBeInTheDocument();
     expect(

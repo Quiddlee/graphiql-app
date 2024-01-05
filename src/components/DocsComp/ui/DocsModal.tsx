@@ -1,12 +1,14 @@
-import { Dispatch, SetStateAction, useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
+import DocsModalLayout from '@/layouts/DocsModalLayout';
 import { useAppContext } from '@/shared/Context/hooks';
 import { DocsExplorerType, SchemaTypeObj } from '@/shared/types';
 import CloseDocsBtn from '@components/DocsComp/ui/CloseDocsBtn';
 
+import DocsLoader from './DocsLoader';
 import DocsRootComp from './DocsRootComp';
 import DocsTypeComp from './DocsTypeComp';
-import SchemaFallaback from './schemaFallback';
+import SchemaFallbackUi from './SchemaFallbackUi';
 import getEndpointSchema from '../lib/helpers/getEndpointSchema';
 
 type PropsType = {
@@ -16,11 +18,14 @@ type PropsType = {
 
 const DocsModal = ({ setIsDocsShown, explorer }: PropsType) => {
   const { currEndpoint, setEndpointSchema, endpointSchema } = useAppContext();
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
-    getEndpointSchema(currEndpoint, setEndpointSchema);
+    getEndpointSchema(currEndpoint, setEndpointSchema, setIsLoading);
   }, [currEndpoint, setEndpointSchema]);
 
-  if (!endpointSchema) return <SchemaFallaback closeModal={setIsDocsShown} />;
+  if (isLoading) return <DocsLoader />;
+  if (!endpointSchema) return <SchemaFallbackUi closeModal={setIsDocsShown} />;
 
   const content = explorer.isDocs() ? (
     <DocsRootComp types={endpointSchema.types as SchemaTypeObj[]} explorer={explorer} />
@@ -32,7 +37,7 @@ const DocsModal = ({ setIsDocsShown, explorer }: PropsType) => {
   );
 
   return (
-    <section className="relative z-20 h-[100dvh] w-[270px] cursor-auto rounded-r-[28px] bg-surface p-3 sm:w-[420px]">
+    <DocsModalLayout>
       <CloseDocsBtn
         onClick={() => {
           setIsDocsShown((prev) => !prev);
@@ -41,7 +46,7 @@ const DocsModal = ({ setIsDocsShown, explorer }: PropsType) => {
         className="absolute right-[20px] top-[20px] z-20"
       />
       {content}
-    </section>
+    </DocsModalLayout>
   );
 };
 
