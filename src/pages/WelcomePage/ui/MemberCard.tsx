@@ -40,14 +40,14 @@ const MemberCard: FC<MemberCardProps> = ({ photo, name, descr, className }) => {
           scale: 0.8,
         }}
         ref={imgContainerRef}
-        className="h-[400px] w-[400px] overflow-hidden rounded-3xl transition-all duration-1000 ease-out"
+        className="h-[350px] w-[350px] overflow-hidden rounded-3xl transition-all duration-1000 ease-out"
       >
         <img
           style={{
             scale: 1.25,
           }}
           ref={imgRef}
-          className="h-[400px] w-[400px] rounded-3xl object-cover transition-all duration-1000 ease-out"
+          className="h-[350px] w-[350px] rounded-3xl object-cover transition-all duration-1000 ease-out"
           src={photo}
           alt={`Team member ${name}`}
         />
