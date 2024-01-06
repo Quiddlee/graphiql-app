@@ -7,12 +7,21 @@ import StartUsingNow from '@pages/WelcomePage/ui/StartUsingNow';
 import SubHeader from '@pages/WelcomePage/ui/SubHeader';
 import TeamMembers from '@pages/WelcomePage/ui/TeamMembers';
 import WhatIsGraphiQl from '@pages/WelcomePage/ui/WhatIsGraphiQL';
+import { useLanguage } from '@shared/Context/hooks';
+import cn from '@shared/lib/helpers/cn';
 
 const WelcomePage = () => {
+  const { language } = useLanguage();
+  const isEng = language === 'en';
+
   return (
     <>
       <Header />
-      <div className="m-auto max-w-[1200px] space-y-[350px] pb-16 font-readex_pro text-on-surface">
+      <div
+        className={cn('m-auto max-w-[1200px] space-y-[350px] pb-16 font-readex_pro text-on-surface', {
+          'font-roboto': !isEng,
+        })}
+      >
         <Hero />
         <SubHeader />
         <AppShowcase />

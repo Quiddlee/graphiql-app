@@ -16,8 +16,9 @@ export default {
         '4xl': '28px',
       },
       fontFamily: {
-        readex_pro: ['Readex Pro', 'sans-serif'],
-        jetbrains_mono: ['JetBrains Mono', 'sans-serif'],
+        readex_pro: ['Readex Pro', 'system-ui'],
+        jetbrains_mono: ['JetBrains Mono', 'system-ui'],
+        roboto: ['Roboto', 'system-ui'],
       },
       transitionDuration: {
         400: '400ms',
