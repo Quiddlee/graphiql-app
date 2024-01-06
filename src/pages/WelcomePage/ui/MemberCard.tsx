@@ -3,19 +3,17 @@ import { FC, ReactNode, useRef, useState } from 'react';
 import { useMotionValueEvent, useScroll, useSpring } from 'framer-motion';
 
 import { scrollSpring } from '@pages/WelcomePage/const/const';
-import cn from '@shared/lib/helpers/cn';
 
 type MemberCardProps = {
   photo: string;
   name: string;
   descr: string | ReactNode;
-  className?: string;
 };
 
 const SCALE_START = 0.8;
 const SCALE_MULTIPLIER = 0.3;
 
-const MemberCard: FC<MemberCardProps> = ({ photo, name, descr, className }) => {
+const MemberCard: FC<MemberCardProps> = ({ photo, name, descr }) => {
   const cardRef = useRef<HTMLElement>(null);
   const imgRef = useRef<HTMLImageElement>(null);
   const imgContainerRef = useRef<HTMLDivElement>(null);
@@ -37,7 +35,7 @@ const MemberCard: FC<MemberCardProps> = ({ photo, name, descr, className }) => {
   });
 
   return (
-    <article ref={cardRef} className={cn(className)}>
+    <article ref={cardRef} className="relative">
       <div
         style={{
           scale: imgContainerScale.toString(),
