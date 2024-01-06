@@ -12,7 +12,7 @@ const WelcomePage = () => {
   return (
     <>
       <Header />
-      <div className="m-auto max-w-[1200px] space-y-[500px] pb-16 font-readex_pro text-on-surface">
+      <div className="m-auto max-w-[1200px] space-y-[350px] pb-16 font-readex_pro text-on-surface">
         <Hero />
         <SubHeader />
         <AppShowcase />
