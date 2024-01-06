@@ -6,7 +6,7 @@ import ruTranslation from '@/locales/ru';
 type Translation = typeof enTranslation | typeof ruTranslation;
 
 type LanguageContextType = {
-  language: string;
+  language: 'en' | 'ru';
   changeLanguage: {
     (lang: 'en' | 'ru'): void;
     (): void;
@@ -14,15 +14,15 @@ type LanguageContextType = {
   translation: Translation;
 };
 
-const TranslationFiles: { [key: string]: Translation } = {
+const TranslationFiles = {
   en: enTranslation,
   ru: ruTranslation,
-};
+} as const;
 
 export const LanguageContext = createContext<LanguageContextType>({} as LanguageContextType);
 
 export default function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState('en');
+  const [language, setLanguage] = useState<'en' | 'ru'>('en');
 
   const changeLanguage = useCallback(
     (lang?: 'en' | 'ru') => {
