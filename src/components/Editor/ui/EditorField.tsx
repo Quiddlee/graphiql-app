@@ -7,7 +7,6 @@ import { json } from '@codemirror/lang-json';
 import { EditorState } from '@codemirror/state';
 import { oneDark } from '@codemirror/theme-one-dark';
 import { EditorView, gutter, keymap, lineNumbers } from '@codemirror/view';
-
 import { useAppContext } from '@/shared/Context/hooks';
 
 type EditorFieldProps = {
@@ -31,8 +30,8 @@ const EditorField = ({ onChange, value = '', isJson, isReadOnly }: EditorFieldPr
       prettifyEditors(false);
     });
     const extensions = [
-      keymap.of(defaultKeymap),
       codemirrorLanguage,
+      keymap.of(defaultKeymap),
       oneDark,
       EditorView.lineWrapping,
       onUpdate,

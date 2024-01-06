@@ -6,3 +6,7 @@
   background-color: transparent !important;
   margin-right: 20px;
 }
+
+.cm-activeLine {
+  background-color: transparent;
+}

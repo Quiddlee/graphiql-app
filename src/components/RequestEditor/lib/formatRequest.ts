@@ -1,3 +1,4 @@
+/* eslint-disable no-continue */
 /* eslint-disable class-methods-use-this */
 class RequestFormatter {
 	insideBrackets: boolean;
@@ -40,10 +41,11 @@ class RequestFormatter {
 		if (comments) {
 			this.comments = comments.join('\n');
 		}
-		return str.replace(/\/\/.*/g, ''); // Remove lines starting with //
+		return str.replace(/\/\/.*/g, '');
 	}
 
 	preFormatString(input: string) {
+		if (input.length === 0) return '';
 		let result = input;
 		result = this.removeComments(result);
 		result = this.removeSpacesAroundSymbols(result);
@@ -54,14 +56,19 @@ class RequestFormatter {
 
 	formatRequest(input: string) {
 		const text = this.preFormatString(input);
+		if (text.length === 0) {
+			return text;
+		}
 
 		for (let i = 0; i < text.length; i += 1) {
 			const char = text[i];
 
+			if (char === ' ') continue;
 			if (char === '{') {
 				this.insideBrackets = true;
-				this.outputText += `${char}${' '.repeat((this.indentationLevel + 1) * this.indentationSpaces)}`;
+				this.outputText += ` ${char}`;
 				this.indentationLevel += 1;
+				this.outputText.trim();
 			} else if (char === '}') {
 				this.insideBrackets = false;
 				this.indentationLevel -= 1;
@@ -69,14 +76,15 @@ class RequestFormatter {
 			} else if (char === ':' && text[i + 1] !== ' ') {
 				this.outputText += `${char} `;
 			} else if (this.isLetter(char) && this.insideBrackets && (text[i - 1] === ' ' || text[i - 1] === '{')) {
+				this.outputText.trim();
 				this.outputText += `\n${' '.repeat(this.indentationLevel * this.indentationSpaces)}${char}`;
 			} else {
 				this.outputText += char;
 			}
 		}
 
-		// Insert comments before the formatted query
-		return `${this.comments}\n\n${this.outputText}`;
+		if (this.comments.length > 0) return `${this.comments}\n\n${this.outputText}`;
+		return this.outputText;
 	}
 }
 
