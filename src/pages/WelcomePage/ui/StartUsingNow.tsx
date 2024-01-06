@@ -1,10 +1,14 @@
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Button from '@pages/WelcomePage/ui/Button';
 import ROUTES from '@shared/constants/routes';
+import useAuth from '@shared/Context/authHook';
 
 const StartUsingNow = () => {
-  const navigate = useNavigate();
+  const { isAuth } = useAuth();
+
+  const buttonText = isAuth ? 'GraphiQL App' : 'Sign up';
+  const link = isAuth ? ROUTES.MAIN : `/${ROUTES.AUTH}/${ROUTES.SIGNUP}`;
 
   return (
     <section>
@@ -12,13 +16,9 @@ const StartUsingNow = () => {
         <h2 className="text-center text-7.5xl font-light leading-h2">
           Start Using <br /> GraphiQL Now
         </h2>
-        <Button
-          onClick={() => {
-            navigate(ROUTES.MAIN);
-          }}
-        >
-          GraphiQL App
-        </Button>
+        <Link to={link}>
+          <Button>{buttonText}</Button>
+        </Link>
       </article>
     </section>
   );

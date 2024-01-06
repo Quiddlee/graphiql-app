@@ -33,7 +33,7 @@ const Header = () => {
         ) : (
           <>
             <Link to={`${ROUTES.AUTH}/${ROUTES.LOGIN}`}>
-              <OutlinedButton>Sign in</OutlinedButton>
+              <OutlinedButton>Log in</OutlinedButton>
             </Link>
             <Link to={`${ROUTES.AUTH}/${ROUTES.SIGNUP}`}>
               <FilledButton>Sign up</FilledButton>
