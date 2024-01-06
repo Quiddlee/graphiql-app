@@ -11,24 +11,30 @@ import ROUTES from '@shared/constants/routes';
 import viewTransition from '@shared/lib/helpers/viewTransition';
 import useScreen from '@shared/lib/hooks/useScreen';
 
+import LangSwitcher from './ui/LangSwitcher';
+
 const Header = () => {
   const [isDocsShown, setIsDocsShown] = useState(false);
-  const { translation } = useLanguage();
+  const { translation, language, changeLanguage } = useLanguage();
   const { pathname } = useLocation();
   const isSettings = pathname.slice(1) === ROUTES.SETTINGS;
   const navigate = useNavigate();
   const isMobile = useScreen() === 'mobile';
-  const { logOut } = useAuth();
+  const { logOut, isAuth } = useAuth();
 
-  const docsTooltip = translation.mainLayout.header.tooltips.docs;
+  const { docsTip, logOutTip, langTip, homeTip } = translation.mainLayout.header.tooltips;
 
   function handleClick() {
     viewTransition(() => navigate(-1));
   }
 
+  const isDocsToShow = isAuth;
+  const isLogOutToShow = isAuth;
+  const isHomeToShow = pathname !== '/';
+
   return (
     <>
-      <header className="col-start-1 col-end-2 flex w-full items-center justify-end py-2 pr-2 sm:col-end-3">
+      <header className="col-start-1 col-end-2 flex w-full items-center justify-end gap-3 py-2 pr-2 sm:col-end-3 sm:gap-8">
         {isSettings && !isMobile ? (
           <h1 style={{ viewTransitionName: 'title' }} className="mr-auto flex items-center pl-4 font-readex_pro">
             <button type="button" onClick={handleClick} className="flex h-12 w-12 items-center justify-center">
@@ -48,17 +54,27 @@ const Header = () => {
             <Link to={ROUTES.WELCOME_PAGE}>GraphiQL</Link>
           </h1>
         )}
-        <button type="button" onClick={() => logOut()}>
-          Log out
-        </button>
-        <IconButton
-          onClick={() => setIsDocsShown((prev) => !prev)}
-          data-tooltip={docsTooltip}
-          data-testid="show_docs"
-          className="tooltipElem"
-        >
-          <Icon>article</Icon>
-        </IconButton>
+        <LangSwitcher language={language} changeLanguage={changeLanguage} tip={langTip} />
+        {isHomeToShow && (
+          <IconButton data-tooltip={homeTip} className="tooltipElem" onClick={() => navigate(ROUTES.WELCOME_PAGE)}>
+            <Icon>home</Icon>
+          </IconButton>
+        )}
+        {isDocsToShow && (
+          <IconButton
+            onClick={() => setIsDocsShown((prev) => !prev)}
+            data-tooltip={docsTip}
+            data-testid="show_docs"
+            className="tooltipElem"
+          >
+            <Icon>article</Icon>
+          </IconButton>
+        )}
+        {isLogOutToShow && (
+          <IconButton onClick={() => logOut()} className="tooltipElem" data-tooltip={logOutTip}>
+            <Icon>door_open</Icon>
+          </IconButton>
+        )}
       </header>
       <DocsComp isShown={isDocsShown} setIsDocsShown={setIsDocsShown} />
     </>

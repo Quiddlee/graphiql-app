@@ -33,6 +33,7 @@ module.exports = {
     'react/function-component-definition': 0,
     'no-underscore-dangle': 0,
     'jsx-a11y/no-static-element-interactions': 0,
+    'jsx-a11y/control-has-associated-label': 0,
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'sort-imports': ['error', {ignoreCase: true, ignoreDeclarationSort: true}],
     'import/order': [
