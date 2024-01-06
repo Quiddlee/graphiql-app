@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import isValidJson from '@/shared/lib/helpers/isJsonValid';
 
-async function sumbitRequest(query: string, variables: string, headers: string) {
+async function sumbitRequest(currEndpoint: string, query: string, variables: string, headers: string) {
 	const DEFAULT_HEADERS = '{"Content-Type": "application/json"}';
 	const isHeadersEmpty = typeof headers !== 'string' || headers.trim().length === 0;
 	const headersToParse = isHeadersEmpty ? DEFAULT_HEADERS : headers;
@@ -12,7 +12,7 @@ async function sumbitRequest(query: string, variables: string, headers: string) 
 	}
 
 	try {
-		const response = await fetch('https://swapi-graphql.netlify.app/.netlify/functions/index', {
+		const response = await fetch(currEndpoint, {
 			method: 'POST',
 			headers: JSON.parse(headersToParse),
 			body: JSON.stringify({
