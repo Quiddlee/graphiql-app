@@ -1,5 +1,3 @@
-// TODO: uncomment when app is ready
-/*
 import { act, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
@@ -20,14 +18,5 @@ describe('Testing the unauthorized main page route', () => {
     expect(await screen.findByPlaceholderText('Email')).toBeInTheDocument();
     expect(await screen.findByPlaceholderText('Password')).toBeInTheDocument();
     expect(await screen.findByText('to continue to GraphiQL 🚀')).toBeInTheDocument();
-  });
-});
-
- */
-import { describe, expect, it } from 'vitest';
-
-describe('Testing the authorized login page route', () => {
-  it('fake', () => {
-    expect(1).toBe(1);
   });
 });

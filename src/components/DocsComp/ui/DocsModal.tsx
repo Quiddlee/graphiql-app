@@ -3,13 +3,16 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import DocsModalLayout from '@/layouts/DocsModalLayout';
 import { useAppContext } from '@/shared/Context/hooks';
 import { DocsExplorerType, SchemaTypeObj } from '@/shared/types';
-import CloseDocsBtn from '@components/DocsComp/ui/CloseDocsBtn';
+import Icon from '@shared/ui/Icon';
+import IconButton from '@shared/ui/IconButton';
+// import CloseDocsBtn from '@components/DocsComp/ui/CloseDocsBtn';
 
 import DocsLoader from './DocsLoader';
 import DocsRootComp from './DocsRootComp';
 import DocsTypeComp from './DocsTypeComp';
 import SchemaFallbackUi from './SchemaFallbackUi';
 import getEndpointSchema from '../lib/helpers/getEndpointSchema';
+// import CloseDocsBtn from './CloseDocsBtn';
 
 type PropsType = {
   setIsDocsShown: Dispatch<SetStateAction<boolean>>;
@@ -38,13 +41,24 @@ const DocsModal = ({ setIsDocsShown, explorer }: PropsType) => {
 
   return (
     <DocsModalLayout>
-      <CloseDocsBtn
+      {/* <CloseDocsBtn
         onClick={() => {
           setIsDocsShown((prev) => !prev);
           explorer.setInitState();
         }}
         className="absolute right-[20px] top-[20px] z-20"
-      />
+        dataTestId="closeDocs"
+      /> */}
+      <IconButton
+        onClick={() => {
+          setIsDocsShown((prev) => !prev);
+          explorer.setInitState();
+        }}
+        className="absolute right-[20px] top-[20px] z-20"
+        data-testid="closeDocs"
+      >
+        <Icon>close</Icon>
+      </IconButton>
       {content}
     </DocsModalLayout>
   );

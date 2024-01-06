@@ -22,7 +22,6 @@ describe('Testing for login page', () => {
     await act(async () => {
       user.click(loginLink);
     });
-    screen.debug();
     const emailInput = await screen.findByPlaceholderText('Email');
     const passInput = await screen.findByPlaceholderText('Password');
     await act(async () => {

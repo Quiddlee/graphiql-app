@@ -10,6 +10,7 @@ import WelcomePage from '@/pages/WelcomePage';
 import ROUTES from '@/shared/constants/routes';
 import MainPage from '@pages/MainPage/MainPage';
 
+import AuthAllowedOnly from './AuthAllowedOnly';
 import UnauthAllowedOnly from './UnauthAllowedOnly';
 
 export const routes = [
@@ -54,17 +55,17 @@ export const routes = [
       {
         path: ROUTES.MAIN,
         element: (
-          // <AuthAllowedOnly>
-          <MainPage />
-          // </AuthAllowedOnly>
+          <AuthAllowedOnly>
+            <MainPage />
+          </AuthAllowedOnly>
         ),
       },
       {
         path: ROUTES.SETTINGS,
         element: (
-          // <AuthAllowedOnly>
-          <SettignsPage />
-          // </AuthAllowedOnly>
+          <AuthAllowedOnly>
+            <SettignsPage />
+          </AuthAllowedOnly>
         ),
       },
       {

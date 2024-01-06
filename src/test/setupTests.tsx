@@ -1,4 +1,4 @@
-import { HTMLAttributes, PropsWithChildren } from 'react';
+import { forwardRef, PropsWithChildren } from 'react';
 
 import '@testing-library/jest-dom';
 import * as matchers from '@testing-library/jest-dom/matchers';
@@ -102,18 +102,6 @@ vi.mock('@components/loginReg/SubmitBtn', () => ({
   default: () => <button type="submit">Log in</button>,
 }));
 
-vi.mock('@components/loginReg/FormInput', () => ({
-  default: (props: PropsWithChildren) => (
-    <button type="button" {...{ ...props, ref: null }}>
-      {props.children}
-    </button>
-  ),
-}));
-
-vi.mock('@shared/ui/OutlinedTextField', () => ({
-  default: (props: HTMLAttributes<HTMLInputElement>) => <input type="text" {...{ ...props, ref: null }} />,
-}));
-
 vi.mock('@shared/ui/FilledTonalButton', () => ({
   default: (props: { active?: boolean }) => {
     return <button {...{ ...props, active: 'true', ref: null }} type="button" />;
@@ -132,12 +120,32 @@ vi.mock('@components/Header/ui/ShowDocsBtn', () => ({
   ),
 }));
 
-vi.mock('@components/DocsComp/ui/CloseDocsBtn', () => ({
-  default: (props: { onClick: () => void }) => (
-    <button type="button" onClick={props.onClick}>
-      closeDocs
-    </button>
-  ),
+vi.mock('@shared/ui/IconButton', () => ({
+  default: (props: PropsWithChildren) => {
+    return (
+      <button type="button" {...props}>
+        {props.children}
+      </button>
+    );
+  },
+}));
+
+type OutlinedTextFieldPropsType = {
+  placeholder: string;
+  children: JSX.Element;
+  name: string;
+  'data-testid'?: string;
+};
+
+vi.mock('@/shared/ui/OutlinedTextField', () => ({
+  default: forwardRef<HTMLInputElement, OutlinedTextFieldPropsType>(function TextFieldMock(props, _ref) {
+    return (
+      <label>
+        <input placeholder={props.placeholder} name={props.name} ref={_ref} data-testid={props['data-testid']} />
+        {props.children}
+      </label>
+    );
+  }),
 }));
 
 vi.mock('firebase/auth', () => ({
