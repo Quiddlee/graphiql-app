@@ -1,4 +1,4 @@
-import { FC, ReactNode, useRef } from 'react';
+import { FC, ReactNode, useRef, useState } from 'react';
 
 import { useMotionValueEvent, useScroll } from 'framer-motion';
 
@@ -22,29 +22,29 @@ const MemberCard: FC<MemberCardProps> = ({ photo, name, descr, className }) => {
     target: cardRef,
     offset: ['start end', 'end end'],
   });
+  const [imgContainerScale, setImgContainerScale] = useState(SCALE_START);
+  const [imgScale, setImgScale] = useState(1 / SCALE_START);
 
   useMotionValueEvent(scrollYProgress, 'change', (latest) => {
-    if (!imgContainerRef.current || !imgRef.current) return;
-
     const latestScaleValue = SCALE_START + latest * SCALE_MULTIPLIER;
     const inverseScaleValue = 1 / latestScaleValue;
 
-    imgContainerRef.current.style.scale = String(latestScaleValue);
-    imgRef.current.style.scale = String(inverseScaleValue);
+    setImgContainerScale(latestScaleValue);
+    setImgScale(inverseScaleValue);
   });
 
   return (
     <article ref={cardRef} className={cn(className)}>
       <div
         style={{
-          scale: 0.8,
+          scale: imgContainerScale.toString(),
         }}
         ref={imgContainerRef}
         className="h-[350px] w-[350px] overflow-hidden rounded-3xl transition-all duration-1000 ease-out"
       >
         <img
           style={{
-            scale: 1.25,
+            scale: imgScale.toString(),
           }}
           ref={imgRef}
           className="h-[350px] w-[350px] rounded-3xl object-cover transition-all duration-1000 ease-out"
