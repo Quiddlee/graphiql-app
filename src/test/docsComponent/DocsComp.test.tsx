@@ -57,7 +57,7 @@ describe('Testing for docs component', () => {
     await act(async () => {
       fireEvent.click(showDocsBtn);
     });
-    const closeDocsBtn = await screen.findByText('closeDocs');
+    const closeDocsBtn = await screen.findByTestId('closeDocs');
     expect(await screen.findByTestId('overlay')).toBeInTheDocument();
     expect(await screen.findByText('Docs')).toBeInTheDocument();
     expect(

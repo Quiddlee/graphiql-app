@@ -1,8 +1,8 @@
 import { FC, SetStateAction } from 'react';
 
 import DocsModalLayout from '@/layouts/DocsModalLayout';
-
-import CloseDocsBtn from './CloseDocsBtn';
+import Icon from '@/shared/ui/Icon';
+import IconButton from '@/shared/ui/IconButton';
 
 type PropsType = {
   closeModal: (value: SetStateAction<boolean>) => void;
@@ -11,12 +11,15 @@ type PropsType = {
 const SchemaFallbackUi: FC<PropsType> = ({ closeModal }) => {
   return (
     <DocsModalLayout>
-      <CloseDocsBtn
+      <IconButton
         onClick={() => {
           closeModal((prev) => !prev);
         }}
         className="absolute right-[20px] top-[20px] z-20"
-      />
+        data-testid="closeDocs"
+      >
+        <Icon>close</Icon>
+      </IconButton>
       <div className="flex h-full w-full items-center p-6">
         <p className="w-full text-center text-on-surface">There is no schema at provided endpoint :(</p>
       </div>

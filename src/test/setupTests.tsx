@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, PropsWithChildren } from 'react';
 
 import '@testing-library/jest-dom';
 import * as matchers from '@testing-library/jest-dom/matchers';
@@ -120,12 +120,14 @@ vi.mock('@components/Header/ui/ShowDocsBtn', () => ({
   ),
 }));
 
-vi.mock('@components/DocsComp/ui/CloseDocsBtn', () => ({
-  default: (props: { onClick: () => void }) => (
-    <button type="button" onClick={props.onClick}>
-      closeDocs
-    </button>
-  ),
+vi.mock('@shared/ui/IconButton', () => ({
+  default: (props: PropsWithChildren) => {
+    return (
+      <button type="button" {...props}>
+        {props.children}
+      </button>
+    );
+  },
 }));
 
 type OutlinedTextFieldPropsType = {

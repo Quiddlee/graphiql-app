@@ -24,7 +24,7 @@ export default defineConfig({
 		setupFiles: './src/test/setupTests.tsx',
 		css: false,
 		coverage: {
-			provider: 'istanbul',
+			provider: 'v8',
 			thresholds: {
 				statements: 50,
 			},
