@@ -21,7 +21,7 @@ type ControlsProps = HTMLAttributes<HTMLUListElement> & {
 };
 
 const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) => {
-  const { updateCurrentResponse, prettifyEditors } = useAppContext();
+  const { updateCurrentResponse, prettifyEditors, currEndpoint } = useAppContext();
   const { readUrl } = useUrl();
   const screenType = useScreen();
   const { translation } = useLanguage();
@@ -38,7 +38,7 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
     const query = readUrl(urlParams.QUERY);
     const variables = readUrl(urlParams.VARIABLES);
     const headers = readUrl(urlParams.HEADERS);
-    const response = await submitRequest(query, variables, headers);
+    const response = await submitRequest(currEndpoint, query, variables, headers);
     updateCurrentResponse(JSON.stringify(response));
   };
 
