@@ -5,12 +5,14 @@ import ROUTES from '@shared/constants/routes';
 import useAuth from '@shared/Context/authHook';
 import { useLanguage } from '@shared/Context/hooks';
 import FilledButton from '@shared/ui/FilledButton';
+import Icon from '@shared/ui/Icon';
+import IconButton from '@shared/ui/IconButton';
 import OutlinedButton from '@shared/ui/OutlinedButton';
 import TextButton from '@shared/ui/TextButton';
 
 const Header = () => {
   const { changeLanguage, language } = useLanguage();
-  const { isAuth } = useAuth();
+  const { isAuth, logOut } = useAuth();
 
   const lang = language === 'en' ? 'Rus' : 'Eng';
 
@@ -20,9 +22,14 @@ const Header = () => {
       <article className="ml-auto flex items-center gap-3">
         <TextButton onClick={() => changeLanguage()}>{lang}</TextButton>
         {isAuth ? (
-          <Link to={`${ROUTES.MAIN}`}>
-            <Button className="h-[60px] w-[160px] text-sm">GraphiQL App</Button>
-          </Link>
+          <>
+            <IconButton onClick={() => logOut()}>
+              <Icon>door_open</Icon>
+            </IconButton>
+            <Link to={`${ROUTES.MAIN}`}>
+              <Button className="h-[60px] w-[160px] text-sm">GraphiQL App</Button>
+            </Link>
+          </>
         ) : (
           <>
             <Link to={`${ROUTES.AUTH}/${ROUTES.LOGIN}`}>
