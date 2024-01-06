@@ -1,8 +1,11 @@
 import { motion } from 'framer-motion';
 
 import { headingVariants, viewPort } from '@pages/WelcomePage/const/const';
+import { useLanguage } from '@shared/Context/hooks';
 
 const SubHeader = () => {
+  const { translation } = useLanguage();
+
   return (
     <section className="text-center">
       <h2 className="text-[57px] font-light leading-[64px]">
@@ -13,7 +16,7 @@ const SubHeader = () => {
           whileInView="onscreen"
           variants={headingVariants}
         >
-          Craft stunning websites
+          {translation.welcome.subHeader.title.craft}
         </motion.span>{' '}
         <br />
         <motion.span
@@ -29,7 +32,7 @@ const SubHeader = () => {
             },
           }}
         >
-          with GraphQL superpowers.
+          {translation.welcome.subHeader.title.superpowers}
         </motion.span>
         <br />
         <motion.span
@@ -45,7 +48,7 @@ const SubHeader = () => {
             },
           }}
         >
-          Introducing GraphiQL,
+          {translation.welcome.subHeader.title.introducing}
         </motion.span>{' '}
         <motion.span
           className="inline-block bg-gradient-to-br from-[#B69DF8] to-[#79B8FF] bg-clip-text font-medium text-transparent"
@@ -60,7 +63,7 @@ const SubHeader = () => {
             },
           }}
         >
-          your dream IDE.
+          {translation.welcome.subHeader.title.dream}
         </motion.span>
       </h2>
     </section>

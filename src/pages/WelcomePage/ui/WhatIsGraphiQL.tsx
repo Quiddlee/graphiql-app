@@ -2,8 +2,11 @@ import { motion } from 'framer-motion';
 
 import { figureAnimation, figureTransition, headingVariants, viewPort } from '@pages/WelcomePage/const/const';
 import Card from '@pages/WelcomePage/ui/Card';
+import { useLanguage } from '@shared/Context/hooks';
 
 const WhatIsGraphiQl = () => {
+  const { translation } = useLanguage();
+
   return (
     <section className="relative grid grid-cols-1 items-center justify-items-center gap-20">
       <motion.div
@@ -19,7 +22,7 @@ const WhatIsGraphiQl = () => {
         className="text-7.5xl font-light leading-h2"
         variants={headingVariants}
       >
-        What is GraphiQL?
+        {translation.welcome.whatIsGraphiQL.title}
       </motion.h2>
 
       <motion.p
@@ -29,49 +32,56 @@ const WhatIsGraphiQl = () => {
         className="max-w-[520px] text-center text-outline-text"
         variants={headingVariants}
       >
-        GraphiQL: Your interactive GraphQL IDE, empowering website development with syntax highlighting, autocompletion,
-        and dynamic documentation.
+        {translation.welcome.whatIsGraphiQL.subtitle}
       </motion.p>
 
       <ul className="grid grid-cols-3 grid-rows-2 gap-2">
         <li>
-          <Card icon="public" title="Multi language support" descr="Support up to 2 languges — English and Russian." />
+          <Card
+            icon="public"
+            title={translation.welcome.whatIsGraphiQL.cards[0].title}
+            descr={translation.welcome.whatIsGraphiQL.cards[0].descr}
+          />
         </li>
 
         <li>
           <Card
             icon="build_circle"
-            title="Query prettifiying"
-            descr="Allow you to prettify the query you wrote and to focus more on real things."
+            title={translation.welcome.whatIsGraphiQL.cards[1].title}
+            descr={translation.welcome.whatIsGraphiQL.cards[1].descr}
           />
         </li>
 
         <li>
           <Card
             icon="network_node"
-            title="Choose your endpoint"
-            descr="Support for choosing the user specified endpoint."
+            descr={translation.welcome.whatIsGraphiQL.cards[2].descr}
+            title={translation.welcome.whatIsGraphiQL.cards[2].title}
           />
         </li>
 
         <li>
           <Card
             icon="library_books"
-            title="Dynamic documentation"
-            descr="GraphiQL updates the documentation schema dynamically."
+            title={translation.welcome.whatIsGraphiQL.cards[3].title}
+            descr={translation.welcome.whatIsGraphiQL.cards[3].descr}
           />
         </li>
 
         <li>
           <Card
             icon="tab_duplicate"
-            title="Save your’e queries"
-            descr="Your latest queries and views are automatically saved."
+            title={translation.welcome.whatIsGraphiQL.cards[4].title}
+            descr={translation.welcome.whatIsGraphiQL.cards[4].descr}
           />
         </li>
 
         <li>
-          <Card icon="aspect_ratio" title="Editor resizing" descr="Change the editor size based on your needs." />
+          <Card
+            icon="aspect_ratio"
+            title={translation.welcome.whatIsGraphiQL.cards[5].title}
+            descr={translation.welcome.whatIsGraphiQL.cards[5].descr}
+          />
         </li>
       </ul>
     </section>

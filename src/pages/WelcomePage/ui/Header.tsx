@@ -21,6 +21,7 @@ const PADDING = 16;
 const Header = () => {
   const { changeLanguage, language } = useLanguage();
   const { isAuth, logOut } = useAuth();
+  const { translation } = useLanguage();
 
   const [scrollValue, setScrollValue] = useState(1);
   const { scrollYProgress } = useScroll();
@@ -56,16 +57,16 @@ const Header = () => {
               <Icon>door_open</Icon>
             </IconButton>
             <Link to={`${ROUTES.MAIN}`}>
-              <Button className="h-[60px] w-[160px] text-sm">GraphiQL App</Button>
+              <Button className="h-[60px] w-[160px] text-sm">{translation.welcome.start.buttonApp}</Button>
             </Link>
           </>
         ) : (
           <>
             <Link to={`${ROUTES.AUTH}/${ROUTES.LOGIN}`}>
-              <OutlinedButton>Log in</OutlinedButton>
+              <OutlinedButton>{translation.loginPage.btnTitle}</OutlinedButton>
             </Link>
             <Link to={`${ROUTES.AUTH}/${ROUTES.SIGNUP}`}>
-              <FilledButton>Sign up</FilledButton>
+              <FilledButton>{translation.welcome.start.buttonAuth}</FilledButton>
             </Link>
           </>
         )}

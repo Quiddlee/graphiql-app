@@ -1,8 +1,11 @@
 import { motion } from 'framer-motion';
 
 import { figureAnimation, figureTransition, headingVariants, viewPort } from '@pages/WelcomePage/const/const';
+import { useLanguage } from '@shared/Context/hooks';
 
 const Hero = () => {
+  const { translation } = useLanguage();
+
   return (
     <section className="relative flex h-screen items-center justify-center">
       <motion.div
@@ -19,7 +22,7 @@ const Hero = () => {
           whileInView="onscreen"
           variants={headingVariants}
         >
-          Welcome to
+          {translation.welcome.hero.title.welcomeTo}
         </motion.span>{' '}
         <br />{' '}
         <motion.span
@@ -35,7 +38,7 @@ const Hero = () => {
             },
           }}
         >
-          the
+          {translation.welcome.hero.title.the}
         </motion.span>{' '}
         <motion.span
           viewport={viewPort}
@@ -50,7 +53,7 @@ const Hero = () => {
           }}
           className="inline-block bg-gradient-to-br from-[#F97583] to-[#381E72] bg-clip-text text-transparent"
         >
-          GraphiQL
+          {translation.welcome.hero.title.graphiql}
         </motion.span>
       </h1>
     </section>

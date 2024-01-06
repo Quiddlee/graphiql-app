@@ -9,6 +9,7 @@ import {
   scrollSpring,
   viewPort,
 } from '@pages/WelcomePage/const/const';
+import { useLanguage } from '@shared/Context/hooks';
 
 const AboutRsSchool = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -22,6 +23,8 @@ const AboutRsSchool = () => {
   useMotionValueEvent(springValue, 'change', (latest) => {
     if (iframeRef.current) iframeRef.current.style.scale = `${0.8 + latest * 0.1}`;
   });
+
+  const { translation } = useLanguage();
 
   return (
     <section ref={iframeSectionRef} className="relative grid justify-items-center gap-20">
@@ -38,7 +41,7 @@ const AboutRsSchool = () => {
         whileInView="onscreen"
         variants={headingVariants}
       >
-        Built with the Support of The Rolling Scopes School
+        {translation.welcome.rsschool.title.built} <br /> {translation.welcome.rsschool.title.rsschool}
       </motion.h2>
 
       <motion.p
@@ -48,14 +51,15 @@ const AboutRsSchool = () => {
         whileInView="onscreen"
         variants={headingVariants}
       >
-        We proud to announce that it is supported by <br /> the{' '}
+        {translation.welcome.rsschool.descr.proud} <br /> {translation.welcome.rsschool.descr.the}{' '}
         <a className="underline" href="https://rs.school/" target="_blank" rel="noreferrer">
-          RS School
+          {translation.welcome.rsschool.descr.rsschool}
         </a>
-        , a leading provider of <br /> free-of-charge community-based <br /> education programs. <br /> And built as a
-        graduation project for <br /> the{' '}
+        , {translation.welcome.rsschool.descr.provider} <br /> {translation.welcome.rsschool.descr.free} <br />{' '}
+        {translation.welcome.rsschool.descr.education} <br /> {translation.welcome.rsschool.descr.built} <br />{' '}
+        {translation.welcome.rsschool.descr.the}{' '}
         <a className="underline" href="https://rs.school/react/" target="_blank" rel="noreferrer">
-          React course
+          {translation.welcome.rsschool.descr.react}
         </a>
         .
       </motion.p>

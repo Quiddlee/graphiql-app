@@ -33,10 +33,10 @@ const Card: FC<CardProps> = ({ icon, title, descr }) => {
           ref={containerRef}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseOut}
-          className="grid h-[280px] w-[328px] rounded-3xl bg-surface-container p-6 text-sm text-tertiary"
+          className="grid h-[280px] w-[328px] grid-rows-[3fr_1fr] rounded-3xl bg-surface-container p-6 text-sm text-tertiary"
         >
           <Icon className="h-[100px] w-[100px] justify-self-center text-[100px]">{icon}</Icon>
-          <div className="self-end">
+          <div className="self-start">
             <h4>{title}</h4>
             <p className="text-outline-text">{descr}</p>
           </div>
