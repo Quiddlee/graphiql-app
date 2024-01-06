@@ -2,11 +2,13 @@ import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it } from 'vitest';
 
+import { prepareAuthCookie } from '@/shared/helpers/cookieHandlers';
 import renderWithRouter from '@/test/helpers/RenderWithRouter';
 import ROUTES from '@shared/constants/routes';
 
 describe('NavigationDrawer', () => {
   beforeEach(() => {
+    document.cookie = prepareAuthCookie('test@gmail.com');
     renderWithRouter(null, [`/${ROUTES.MAIN}`]);
   });
 
