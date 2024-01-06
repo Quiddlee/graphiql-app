@@ -15,7 +15,7 @@ const TeamMembers = () => {
       <motion.div
         animate={figureAnimation}
         transition={figureTransition}
-        className="absolute inset-0 top-40 -z-10 m-auto h-[1100px] w-[1100px] rounded-full bg-gradient-to-br from-[#381E72] to-[#79B8FF] opacity-25 blur-[64px]"
+        className="absolute inset-0 top-40 z-0 m-auto h-[1100px] w-[1100px] rounded-full bg-gradient-to-br from-[#381E72] to-[#79B8FF] opacity-25 blur-[64px]"
       />
 
       <motion.h2

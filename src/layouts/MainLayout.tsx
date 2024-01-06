@@ -23,6 +23,7 @@ const MainLayout = () => {
   const navContainerRef = useScrollbar<HTMLDivElement>(screenType === 'desktop');
   const { pathname } = useLocation();
   const isApp = pathname.slice(1) === ROUTES.MAIN || pathname.slice(1) === ROUTES.SETTINGS;
+  const isWelcome = pathname === ROUTES.WELCOME_PAGE;
 
   return (
     <AuthProvider>
@@ -32,6 +33,7 @@ const MainLayout = () => {
           className={cn({
             'relative grid h-screen grid-rows-[64px_auto_80px] text-sm text-on-surface-text sm:grid-cols-[80px_1fr] sm:grid-rows-[80px_1fr] sm:pb-3 sm:pr-3 sm:text-base lg:min-h-[initial] lg:grid-cols-[384px_1fr_0fr] lg:gap-4 lg:px-4 lg:pb-4 lg:pr-0':
               isApp,
+            'bg-[#060606]': isWelcome,
           })}
         >
           {isApp && <Header />}

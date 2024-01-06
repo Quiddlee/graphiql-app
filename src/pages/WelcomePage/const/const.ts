@@ -16,12 +16,12 @@ export const headingVariants = {
 
 export const figureAnimation = {
 	scale: [1, 1.1, 1],
-	rotate: [0, 30, 0],
-	skew: [0, 2, 0],
+	rotate: [0, 70, 0],
+	skew: [0, 3, 0],
 };
 
 export const figureTransition = {
-	duration: 10,
+	duration: 8,
 	ease: 'easeInOut',
 	times: [0, 0.2, 0.5, 0.8, 1],
 	repeat: Infinity,

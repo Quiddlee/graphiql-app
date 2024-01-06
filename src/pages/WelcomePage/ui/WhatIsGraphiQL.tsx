@@ -12,7 +12,7 @@ const WhatIsGraphiQl = () => {
       <motion.div
         animate={figureAnimation}
         transition={figureTransition}
-        className="absolute -top-24 right-0 -z-10 h-[250px] w-[250px] rounded-full bg-gradient-to-br from-[#F97583] to-[#FFAB70] opacity-90 blur-[64px]"
+        className="absolute -right-52 -top-24 z-0 h-[350px] w-[350px] rounded-full bg-gradient-to-br from-[#F97583] to-[#FFAB70] opacity-90 blur-[64px]"
       />
 
       <motion.h2

@@ -53,11 +53,10 @@ const ru = {
 				descr: 'Front-end',
 				design: 'Дизайн',
 			},
-
-			// TODO: check if spelling is correct
 			oleksii: {
-				name: 'Алексей Дрогачев',
+				name: 'Алексей Дрогачёв',
 			},
+			// TODO: check if spelling is correct
 			harry: {
 				name: 'Гарри Голубиев',
 			},
