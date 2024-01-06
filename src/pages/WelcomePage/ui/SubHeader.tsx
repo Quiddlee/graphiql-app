@@ -8,7 +8,7 @@ const SubHeader = () => {
 
   return (
     <section className="text-center">
-      <h2 className="text-[57px] font-light leading-[64px]">
+      <h2 className="text-2xl font-light sm:text-3xl md:text-4xl lg:text-6xl xl:text-[57px] xl:leading-[64px]">
         <motion.span
           className="inline-block"
           viewport={viewPort}

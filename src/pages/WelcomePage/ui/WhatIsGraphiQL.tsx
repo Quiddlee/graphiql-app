@@ -12,14 +12,14 @@ const WhatIsGraphiQl = () => {
       <motion.div
         animate={figureAnimation}
         transition={figureTransition}
-        className="absolute -right-52 -top-24 z-0 h-[350px] w-[350px] rounded-full bg-gradient-to-br from-[#F97583] to-[#FFAB70] opacity-90 blur-[64px]"
+        className="absolute -right-24 -top-24 z-0 h-[150px] w-[150px] rounded-full bg-gradient-to-br from-[#F97583] to-[#FFAB70] opacity-90 blur-[64px] md:-right-52 md:h-[350px] md:w-[350px]"
       />
 
       <motion.h2
         viewport={viewPort}
         initial="offscreen"
         whileInView="onscreen"
-        className="text-7.5xl font-light leading-h2"
+        className="text-center text-4xl font-light sm:text-6xl lg:text-7.5xl lg:leading-h2"
         variants={headingVariants}
       >
         {translation.welcome.whatIsGraphiQL.title}
@@ -29,13 +29,13 @@ const WhatIsGraphiQl = () => {
         viewport={viewPort}
         initial="offscreen"
         whileInView="onscreen"
-        className="max-w-[520px] text-center text-outline-text"
+        className="max-w-[520px] text-center text-sm text-outline-text sm:text-base"
         variants={headingVariants}
       >
         {translation.welcome.whatIsGraphiQL.subtitle}
       </motion.p>
 
-      <ul className="grid grid-cols-3 grid-rows-2 gap-2">
+      <ul className="grid gap-2 lg:grid-cols-3 lg:grid-rows-2">
         <li>
           <Card
             icon="public"

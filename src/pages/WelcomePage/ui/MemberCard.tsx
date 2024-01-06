@@ -41,20 +41,20 @@ const MemberCard: FC<MemberCardProps> = ({ photo, name, descr }) => {
           scale: imgContainerScale.toString(),
         }}
         ref={imgContainerRef}
-        className="h-[350px] w-[350px] overflow-hidden rounded-3xl"
+        className="h-[350px] w-full max-w-[350px] overflow-hidden rounded-3xl sm:w-[350px]"
       >
         <img
           style={{
             scale: imgScale.toString(),
           }}
           ref={imgRef}
-          className="h-[350px] w-[350px] rounded-3xl object-cover"
+          className="h-[inherit] w-[inherit] rounded-3xl object-cover"
           src={photo}
           alt={`Team member ${name}`}
         />
       </div>
-      <p className="mt-6 text-lg text-outline-text">{descr}</p>
-      <h3 className="mt-4 text-4xl">{name}</h3>
+      <p className="mt-6 text-outline-text lg:text-lg">{descr}</p>
+      <h3 className="mt-4 text-2xl lg:text-4xl">{name}</h3>
     </article>
   );
 };

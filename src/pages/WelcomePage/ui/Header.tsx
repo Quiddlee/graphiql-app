@@ -7,6 +7,7 @@ import Button from '@pages/WelcomePage/ui/Button';
 import ROUTES from '@shared/constants/routes';
 import useAuth from '@shared/Context/authHook';
 import { useLanguage } from '@shared/Context/hooks';
+import cn from '@shared/lib/helpers/cn';
 import viewTransition from '@shared/lib/helpers/viewTransition';
 import FilledButton from '@shared/ui/FilledButton';
 import Icon from '@shared/ui/Icon';
@@ -38,9 +39,17 @@ const Header = () => {
   const lang = language === 'en' ? 'Rus' : 'Eng';
   const logoScale = 1.5 - scrollValue / 2;
   const translate = scrollValue * -PADDING;
+  const isEng = language === 'en';
 
   return (
-    <header className="sticky left-0 top-0 z-50 flex h-20 w-full items-center px-4 text-on-surface">
+    <header
+      className={cn(
+        'sticky left-0 top-0 z-50 flex h-20 w-full flex-wrap items-center gap-2 px-2 py-2 text-on-surface sm:flex-nowrap sm:gap-0 sm:px-4 sm:py-0',
+        {
+          'font-readex_pro': isEng,
+        },
+      )}
+    >
       <span
         style={{
           viewTransitionName: 'title',
@@ -51,8 +60,9 @@ const Header = () => {
       >
         GraphiQL
       </span>
-      <article className="ml-auto flex items-center gap-3">
+      <article className="flex w-full items-center justify-end gap-3 sm:ml-auto sm:w-fit sm:justify-stretch">
         <TextButton
+          className="max-w-12"
           style={{
             viewTransitionName: 'language-switch',
           }}
@@ -66,7 +76,9 @@ const Header = () => {
               <Icon>door_open</Icon>
             </IconButton>
             <AnimatedLink to={`${ROUTES.MAIN}`}>
-              <Button className="h-[60px] w-[160px] text-sm">{translation.welcome.start.buttonApp}</Button>
+              <Button className="h-[60px] w-[160px] font-readex_pro text-sm">
+                {translation.welcome.start.buttonApp}
+              </Button>
             </AnimatedLink>
           </>
         ) : (

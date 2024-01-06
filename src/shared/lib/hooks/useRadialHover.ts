@@ -1,6 +1,7 @@
 import { MouseEvent, useRef } from 'react';
 
 import createRadialHover from '@shared/lib/helpers/animateRadialHover';
+import useScreen from '@shared/lib/hooks/useScreen';
 
 type UseRadialHoverParams = {
 	size?: number;
@@ -20,12 +21,16 @@ type UseRadialHoverParams = {
 function useRadialHover<TContainer extends HTMLElement>({ size, animationDuration, color }: UseRadialHoverParams) {
 	const containerRef = useRef<TContainer>(null);
 	const [radialHover, cleanUp] = createRadialHover(color, size, animationDuration);
+	const screenType = useScreen();
+	const isTouch = screenType === 'tablet' || screenType === 'mobile';
 
 	const handleMouseMove = (e: MouseEvent) => {
+		if (isTouch) return;
 		if (containerRef.current) radialHover(containerRef.current, e);
 	};
 
 	const handleMouseOut = () => {
+		if (isTouch) return;
 		if (containerRef.current) cleanUp(containerRef.current);
 	};
 

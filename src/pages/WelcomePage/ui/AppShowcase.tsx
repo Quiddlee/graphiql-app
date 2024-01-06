@@ -23,7 +23,7 @@ const AppShowcase = () => {
 
   return (
     <section ref={imgSectionRef} className="relative flex items-center justify-center">
-      <div className="absolute -top-52 h-[1000px] w-[1000px] rounded-full bg-gradient-to-br from-[#B69DF8] to-[#79B8FF] blur-[200px] saturate-150" />
+      <div className="absolute -top-24 h-[400px] w-[400px] rounded-full bg-gradient-to-br from-[#B69DF8] to-[#79B8FF] blur-[200px] saturate-150 md:h-[600px] md:w-[600px] lg:h-[1000px] lg:w-[1000px]" />
 
       <motion.img
         variants={{
@@ -36,7 +36,7 @@ const AppShowcase = () => {
         viewport={imgVievPort}
         initial="offscreen"
         whileInView="onscreen"
-        className="absolute -top-10 left-6 max-w-[1000px] -rotate-[28deg] blur-[0.7px] brightness-75 saturate-0"
+        className="absolute -top-10 left-6 w-5/6 -rotate-[28deg] blur-[0.7px] brightness-75 saturate-0"
         src={appWelcome}
         alt="App showcase"
       />
@@ -51,7 +51,7 @@ const AppShowcase = () => {
         initial="offscreen"
         whileInView="onscreen"
         viewport={imgVievPort}
-        className="absolute -top-5 left-12 m-auto max-w-[1000px] -rotate-[18deg] blur-[0.5px] brightness-90 saturate-50"
+        className="absolute -top-5 left-12 m-auto w-5/6 -rotate-[18deg] blur-[0.5px] brightness-90 saturate-50"
         src={appWelcome}
         alt="App showcase"
       />
@@ -66,16 +66,11 @@ const AppShowcase = () => {
         initial="offscreen"
         whileInView="onscreen"
         viewport={imgVievPort}
-        className="absolute -top-5 left-16 max-w-[1000px] -rotate-[10deg] brightness-95"
+        className="absolute -top-5 left-16 w-5/6 -rotate-[10deg] brightness-95"
         src={appWelcome}
         alt="App showcase"
       />
-      <img
-        ref={mainImgRef}
-        className="max-w-[1000px] brightness-125 saturate-150"
-        src={appWelcome}
-        alt="App showcase"
-      />
+      <img ref={mainImgRef} className="w-5/6 brightness-125 saturate-150" src={appWelcome} alt="App showcase" />
     </section>
   );
 };

@@ -11,10 +11,10 @@ const Hero = () => {
       <motion.div
         animate={figureAnimation}
         transition={figureTransition}
-        className="absolute -top-96 h-[800px] w-[800px] rounded-full bg-gradient-to-r from-[#F97583] to-[#381E72] blur-[100px] saturate-150"
+        className="absolute -top-1/2 h-96 w-96 rounded-full bg-gradient-to-r from-[#F97583] to-[#381E72] blur-[100px] saturate-150 md:h-[400px] md:w-[400px] lg:h-[600px] lg:w-[600px] xl:-top-96 xl:h-[800px] xl:w-[800px]"
       />
 
-      <h1 className="isolate text-center text-10xl font-light leading-h1">
+      <h1 className="isolate text-center text-5xl font-light sm:text-6xl md:text-8xl lg:text-9xl xl:text-10xl xl:leading-h1">
         <motion.span
           className="inline-block"
           viewport={viewPort}

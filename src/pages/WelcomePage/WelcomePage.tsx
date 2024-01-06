@@ -18,9 +18,12 @@ const WelcomePage = () => {
     <>
       <Header />
       <div
-        className={cn('m-auto max-w-[1200px] space-y-[350px] pb-16 font-readex_pro text-on-surface', {
-          'font-roboto': !isEng,
-        })}
+        className={cn(
+          'm-auto max-w-[1200px] space-y-36 px-2 pb-16 font-readex_pro text-on-surface sm:px-0 lg:space-y-[350px]',
+          {
+            'font-roboto': !isEng,
+          },
+        )}
       >
         <Hero />
         <SubHeader />

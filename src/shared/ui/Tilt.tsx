@@ -2,6 +2,7 @@ import { cloneElement, FC, MouseEvent, ReactElement, useRef } from 'react';
 
 import getElementMouseCoord from '@shared/lib/helpers/getElementMouseCoord';
 import linearTransform from '@shared/lib/helpers/getLinearTransformation';
+import useScreen from '@shared/lib/hooks/useScreen';
 
 /**
  * TiltProps type definition.
@@ -22,13 +23,15 @@ type TiltProps = {
  */
 const Tilt: FC<TiltProps> = ({ children, rotateRange = 30, reverse }) => {
   const ref = useRef<HTMLElement>(null);
+  const screenType = useScreen();
+  const isTouch = screenType === 'tablet' || screenType === 'mobile';
 
   /**
    * Handles mouse movement over the component.
    * @param {MouseEvent} e - The mouse event.
    */
   function handleMove(e: MouseEvent) {
-    if (!ref.current) return;
+    if (!ref.current || isTouch) return;
 
     const { posX, posY } = getElementMouseCoord(ref.current, e);
     const elementWidth = ref.current.offsetWidth;

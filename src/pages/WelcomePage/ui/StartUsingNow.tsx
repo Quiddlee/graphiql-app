@@ -12,9 +12,9 @@ const StartUsingNow = () => {
   const link = isAuth ? ROUTES.MAIN : `/${ROUTES.AUTH}/${ROUTES.SIGNUP}`;
 
   return (
-    <section>
-      <article className="grid h-[480px] w-full grid-cols-1 items-center justify-center justify-items-center rounded-full bg-gradient-to-br from-[#F97583] to-[#381E72] p-20">
-        <h2 className="text-center text-7.5xl font-light leading-h2">
+    <section className="px-2 sm:px-8">
+      <article className="grid h-80 w-full grid-cols-1 items-center justify-center justify-items-center gap-8 rounded-[60px] bg-gradient-to-br from-[#F97583] to-[#381E72] p-8 sm:h-80 sm:rounded-full lg:h-[480px] lg:p-20">
+        <h2 className="text-center text-4xl font-light sm:text-6xl lg:text-7.5xl lg:leading-h2">
           {translation.welcome.start.title.start} <br /> {translation.welcome.start.title.now}
         </h2>
         <AnimatedLink to={link}>

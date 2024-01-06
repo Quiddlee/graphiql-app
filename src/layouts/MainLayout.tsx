@@ -45,7 +45,7 @@ const MainLayout = () => {
         <main
           ref={mainRef}
           data-testid="main-layout"
-          className={cn('transition-all duration-500 ease-emphasized-decelerate', {
+          className={cn('overflow-clip transition-all duration-500 ease-emphasized-decelerate', {
             'relative grid h-screen grid-rows-[64px_auto_80px] text-sm text-on-surface-text sm:grid-cols-[80px_1fr] sm:grid-rows-[80px_1fr] sm:pb-3 sm:pr-3 sm:text-base lg:min-h-[initial] lg:grid-cols-[384px_1fr_0fr] lg:gap-4 lg:px-4 lg:pb-4 lg:pr-0':
               isApp,
           })}

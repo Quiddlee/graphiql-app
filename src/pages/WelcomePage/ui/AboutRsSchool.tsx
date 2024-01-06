@@ -31,11 +31,11 @@ const AboutRsSchool = () => {
       <motion.div
         animate={figureAnimation}
         transition={figureTransition}
-        className="absolute -left-32 -top-64 z-0 h-[350px] w-[350px] rounded-full bg-gradient-to-br from-[#F02FC2] to-[#F38181] opacity-90 blur-[64px]"
+        className="absolute -top-24 left-0 z-0 h-[150px] w-[150px] rounded-full bg-gradient-to-br from-[#F02FC2] to-[#F38181] opacity-90 blur-[64px] md:-left-32 md:-top-64 md:h-[350px] md:w-[350px]"
       />
 
       <motion.h2
-        className="inline-block text-center text-7.5xl font-light leading-h2"
+        className="inline-block text-center text-4xl font-light sm:text-6xl lg:text-7.5xl lg:leading-h2"
         viewport={viewPort}
         initial="offscreen"
         whileInView="onscreen"
@@ -45,7 +45,7 @@ const AboutRsSchool = () => {
       </motion.h2>
 
       <motion.p
-        className="max-w-[520px] text-center text-outline-text"
+        className="max-w-[520px] text-center text-sm text-outline-text sm:text-base"
         viewport={viewPort}
         initial="offscreen"
         whileInView="onscreen"
@@ -67,10 +67,8 @@ const AboutRsSchool = () => {
       <iframe
         ref={iframeRef}
         title="RS-Conf video"
-        className="inline-block rounded-3xl"
+        className="inline-block min-h-[170px] w-full max-w-[1200px] rounded-3xl sm:min-h-[400px] md:min-h-[675px]"
         style={{ border: 'none' }}
-        width="1200"
-        height="675"
         frameBorder="0"
         src="https://www.youtube.com/embed/ySaK-AkZojk?autoplay=1&mute=1&controls=0&modestbranding=1"
       />
