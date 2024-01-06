@@ -1,11 +1,13 @@
 import { act, fireEvent, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
+import { prepareAuthCookie } from '@/shared/helpers/cookieHandlers';
 import renderWithRouter from '@/test/helpers/RenderWithRouter';
 import ROUTES from '@shared/constants/routes';
 
 describe('Testing for docs component', () => {
   it('Should render docs components after clicking on show docs btn', async () => {
+    document.cookie = prepareAuthCookie('test@gmail.com');
     renderWithRouter(null, [`/${ROUTES.MAIN}`]);
     const showDocsBtn = screen.getByTestId('show_docs');
     expect(screen.queryByTestId('overlay')).toBeNull();
@@ -13,6 +15,9 @@ describe('Testing for docs component', () => {
     expect(screen.queryByText('A GraphQL schema provides a root type for each kind of operation')).toBeNull();
     await act(async () => {
       fireEvent.click(showDocsBtn);
+    });
+    await new Promise((resolve) => {
+      setTimeout(() => resolve('done'), 1000);
     });
     expect(await screen.findByTestId('overlay')).toBeInTheDocument();
     expect(await screen.findByText('Docs')).toBeInTheDocument();
@@ -53,7 +58,7 @@ describe('Testing for docs component', () => {
     await act(async () => {
       fireEvent.click(showDocsBtn);
     });
-    const closeDocsBtn = await screen.findByText('closeDocs');
+    const closeDocsBtn = await screen.findByTestId('closeDocs');
     expect(await screen.findByTestId('overlay')).toBeInTheDocument();
     expect(await screen.findByText('Docs')).toBeInTheDocument();
     expect(
@@ -87,7 +92,7 @@ describe('Testing for docs component', () => {
     await act(async () => {
       fireEvent.click(showDocsBtn);
     });
-    const RootTypeLink = await screen.findByText('Root');
+    const RootTypeLink = await screen.findByText('Query');
     await act(async () => {
       fireEvent.click(RootTypeLink);
     });
@@ -99,28 +104,26 @@ describe('Testing for docs component', () => {
     await act(async () => {
       fireEvent.click(showDocsBtn);
     });
-    const RootTypeLink = await screen.findByText('Root');
+    const RootTypeLink = await screen.findByText('Query');
     await act(async () => {
       fireEvent.click(RootTypeLink);
     });
     expect(await screen.findByText('Fields:')).toBeInTheDocument();
-    const filmsLink = await screen.findByText('Film');
-    expect(filmsLink).toBeInTheDocument();
+    const charLinks = await screen.findAllByText('Character');
+    expect(charLinks[0]).toBeInTheDocument();
     await act(async () => {
-      fireEvent.click(filmsLink);
+      fireEvent.click(charLinks[0]);
     });
-    expect(await screen.findByText('Implements:')).toBeInTheDocument();
-    const nodeTypeLink = await screen.findByText('Node');
-    expect(nodeTypeLink).toBeInTheDocument();
+    const idLink = await screen.findByText('ID');
+    expect(idLink).toBeInTheDocument();
     await act(async () => {
-      fireEvent.click(nodeTypeLink);
+      fireEvent.click(idLink);
     });
-    expect(await screen.findByText('Implementations')).toBeInTheDocument();
-    const backToFilmBtn = await screen.findByRole('button', { name: 'Film' });
+    const backToFilmBtn = await screen.findByRole('button', { name: 'Character' });
     await act(async () => {
       fireEvent.click(backToFilmBtn);
     });
-    const backToRootBtn = await screen.findByRole('button', { name: 'Root' });
+    const backToRootBtn = await screen.findByRole('button', { name: 'Query' });
     await act(async () => {
       fireEvent.click(backToRootBtn);
     });

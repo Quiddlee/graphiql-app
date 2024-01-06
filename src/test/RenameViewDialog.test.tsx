@@ -1,3 +1,5 @@
+import { HTMLAttributes } from 'react';
+
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
@@ -17,6 +19,10 @@ mockedUseView.mockReturnValue({
   handleRenameView: mockedHandleRenameView,
   handleDeleteView: vi.fn(),
 });
+
+vi.mock('@shared/ui/OutlinedTextField', () => ({
+  default: (props: HTMLAttributes<HTMLInputElement>) => <input type="text" {...{ ...props, ref: null }} />,
+}));
 
 describe('RenameViewDialog', () => {
   afterEach(() => {

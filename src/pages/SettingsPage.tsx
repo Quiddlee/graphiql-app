@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import Footer from '@/components/Footer/Footer';
 import ClearStorageComp from '@/components/SettingsPageComp/ClearStorageComp';
 import DarkModeComp from '@/components/SettingsPageComp/DarkModeComp';
 import EndpointComp from '@/components/SettingsPageComp/EndpointComp';
@@ -10,7 +11,6 @@ import useScrollbar from '@shared/lib/hooks/useScrollbar';
 const SettignsPage = () => {
   const [settingsState, setSettingsState] = useState({
     headers: true,
-    endpoint: 'goods',
   });
   const root = useScrollbar();
 
@@ -25,12 +25,12 @@ const SettignsPage = () => {
           switcher={() => setSettingsState((prev) => ({ ...prev, headers: !prev.headers }))}
         />
         <DarkModeComp />
-        <EndpointComp
-          endpoint={settingsState.endpoint}
-          saveEndpoint={(value: string) => setSettingsState((prev) => ({ ...prev, endpoint: value }))}
-        />
+        <EndpointComp />
         <LangSelectorComp />
         <ClearStorageComp />
+        <div className="mb-4 flex h-fit w-full justify-center border-t-[1px] border-outline-variant pt-6 lg:hidden">
+          <Footer />
+        </div>
       </div>
     </section>
   );

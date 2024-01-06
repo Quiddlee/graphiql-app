@@ -183,7 +183,10 @@ const ru = {
 	mainLayout: {
 		header: {
 			tooltips: {
-				docs: 'Документация',
+				docsTip: 'Документация',
+				logOutTip: 'Выйти',
+				langTip: 'Сменить язык',
+				homeTip: 'Домой',
 			},
 		},
 	},

@@ -180,7 +180,10 @@ const en = {
 	mainLayout: {
 		header: {
 			tooltips: {
-				docs: 'Show docs',
+				docsTip: 'Show docs',
+				logOutTip: 'Log out',
+				langTip: 'Change lang',
+				homeTip: 'Home',
 			},
 		},
 	},

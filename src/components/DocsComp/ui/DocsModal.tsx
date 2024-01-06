@@ -1,13 +1,16 @@
-// AFTER LOGIC FOR SAVING AND FETCHING ENDPOINT SHEMA WILL BE ADDED - MUST REMOVE SCHEMA IMPORT AND REPLACE IT FOR DOWNLOADED SCHEMA IN FURTHER CODE
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-import { Dispatch, SetStateAction } from 'react';
-
-import { swapiSchema } from '@/shared/constants/schemaData';
+import DocsModalLayout from '@/layouts/DocsModalLayout';
+import { useAppContext } from '@/shared/Context/hooks';
 import { DocsExplorerType, SchemaTypeObj } from '@/shared/types';
-import CloseDocsBtn from '@components/DocsComp/ui/CloseDocsBtn';
+import Icon from '@shared/ui/Icon';
+import IconButton from '@shared/ui/IconButton';
 
+import DocsLoader from './DocsLoader';
 import DocsRootComp from './DocsRootComp';
 import DocsTypeComp from './DocsTypeComp';
+import SchemaFallbackUi from './SchemaFallbackUi';
+import getEndpointSchema from '../lib/helpers/getEndpointSchema';
 
 type PropsType = {
   setIsDocsShown: Dispatch<SetStateAction<boolean>>;
@@ -15,25 +18,39 @@ type PropsType = {
 };
 
 const DocsModal = ({ setIsDocsShown, explorer }: PropsType) => {
+  const { currEndpoint, setEndpointSchema, endpointSchema } = useAppContext();
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    getEndpointSchema(currEndpoint, setEndpointSchema, setIsLoading);
+  }, [currEndpoint, setEndpointSchema]);
+
+  if (isLoading) return <DocsLoader />;
+  if (!endpointSchema) return <SchemaFallbackUi closeModal={setIsDocsShown} />;
+
   const content = explorer.isDocs() ? (
-    <DocsRootComp types={swapiSchema.data.__schema.types as SchemaTypeObj[]} explorer={explorer} />
+    <DocsRootComp types={endpointSchema.types as SchemaTypeObj[]} explorer={explorer} />
   ) : (
     <DocsTypeComp
       explorer={explorer}
-      currType={swapiSchema.data.__schema.types.find((elem) => elem.name === explorer.current()) as SchemaTypeObj}
+      currType={endpointSchema.types.find((elem) => elem.name === explorer.current()) as SchemaTypeObj}
     />
   );
+
   return (
-    <section className="relative z-20 h-[100dvh] w-[270px] cursor-auto rounded-r-[28px] bg-surface p-3 sm:w-[420px]">
-      <CloseDocsBtn
+    <DocsModalLayout>
+      <IconButton
         onClick={() => {
           setIsDocsShown((prev) => !prev);
           explorer.setInitState();
         }}
         className="absolute right-[20px] top-[20px] z-20"
-      />
+        data-testid="closeDocs"
+      >
+        <Icon>close</Icon>
+      </IconButton>
       {content}
-    </section>
+    </DocsModalLayout>
   );
 };
 

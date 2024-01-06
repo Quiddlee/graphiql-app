@@ -1,19 +1,23 @@
 import { createHashRouter } from 'react-router-dom';
 
+import ErrorFallback from '@/components/ErrorFallback/ErrorFallback';
 import MainLayout from '@/layouts/MainLayout';
 import LoginPage from '@/pages/LoginPage';
+import Page404 from '@/pages/Page404';
 import SettignsPage from '@/pages/SettingsPage';
 import SignUpPage from '@/pages/SignUpPage';
 import ROUTES from '@/shared/constants/routes';
 import MainPage from '@pages/MainPage/MainPage';
 import WelcomePage from '@pages/WelcomePage/WelcomePage';
 
+import AuthAllowedOnly from './AuthAllowedOnly';
 import UnauthAllowedOnly from './UnauthAllowedOnly';
 
 export const routes = [
   {
     path: '/',
     element: <MainLayout />,
+    errorElement: <ErrorFallback />,
     children: [
       {
         path: ROUTES.WELCOME_PAGE,
@@ -51,18 +55,22 @@ export const routes = [
       {
         path: ROUTES.MAIN,
         element: (
-          // <AuthAllowedOnly>
-          <MainPage />
-          // </AuthAllowedOnly>
+          <AuthAllowedOnly>
+            <MainPage />
+          </AuthAllowedOnly>
         ),
       },
       {
         path: ROUTES.SETTINGS,
         element: (
-          // <AuthAllowedOnly>
-          <SettignsPage />
-          // </AuthAllowedOnly>
+          <AuthAllowedOnly>
+            <SettignsPage />
+          </AuthAllowedOnly>
         ),
+      },
+      {
+        path: '*',
+        element: <Page404 />,
       },
     ],
   },
