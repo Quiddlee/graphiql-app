@@ -47,3 +47,9 @@ export const imgVariants = {
 };
 
 export const imgVievPort = { margin: '-300px' };
+
+export const scrollSpring = {
+	stiffness: 100,
+	damping: 50,
+	restDelta: 0.001,
+};

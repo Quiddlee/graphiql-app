@@ -1,9 +1,9 @@
 import { useRef } from 'react';
 
-import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { motion, useMotionValueEvent, useScroll, useSpring } from 'framer-motion';
 
 import appWelcome from '@assets/Desktop-welcome.png';
-import { imgVariants, imgVievPort } from '@pages/WelcomePage/const/const';
+import { imgVariants, imgVievPort, scrollSpring } from '@pages/WelcomePage/const/const';
 
 const SCALE_START = 0.9;
 const SCALE_MULTIPLIER = 0.1;
@@ -16,7 +16,8 @@ const AppShowcase = () => {
     offset: ['start end', 'end end'],
   });
 
-  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+  const springValue = useSpring(scrollYProgress, scrollSpring);
+  useMotionValueEvent(springValue, 'change', (latest) => {
     if (mainImgRef.current) mainImgRef.current.style.scale = `${SCALE_START + latest * SCALE_MULTIPLIER}`;
   });
 
@@ -71,7 +72,7 @@ const AppShowcase = () => {
       />
       <img
         ref={mainImgRef}
-        className="max-w-[1000px] brightness-125 saturate-150 transition-all duration-500 ease-out"
+        className="max-w-[1000px] brightness-125 saturate-150"
         src={appWelcome}
         alt="App showcase"
       />

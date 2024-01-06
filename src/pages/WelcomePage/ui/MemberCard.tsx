@@ -1,7 +1,8 @@
 import { FC, ReactNode, useRef, useState } from 'react';
 
-import { useMotionValueEvent, useScroll } from 'framer-motion';
+import { useMotionValueEvent, useScroll, useSpring } from 'framer-motion';
 
+import { scrollSpring } from '@pages/WelcomePage/const/const';
 import cn from '@shared/lib/helpers/cn';
 
 type MemberCardProps = {
@@ -23,11 +24,13 @@ const MemberCard: FC<MemberCardProps> = ({ photo, name, descr, className }) => {
     offset: ['start end', 'end end'],
   });
   const [imgContainerScale, setImgContainerScale] = useState(SCALE_START);
-  const [imgScale, setImgScale] = useState(1 / SCALE_START);
+  const [imgScale, setImgScale] = useState(0.96 / SCALE_START);
 
-  useMotionValueEvent(scrollYProgress, 'change', (latest) => {
+  const springValue = useSpring(scrollYProgress, scrollSpring);
+
+  useMotionValueEvent(springValue, 'change', (latest) => {
     const latestScaleValue = SCALE_START + latest * SCALE_MULTIPLIER;
-    const inverseScaleValue = 1 / latestScaleValue;
+    const inverseScaleValue = 0.96 / latestScaleValue;
 
     setImgContainerScale(latestScaleValue);
     setImgScale(inverseScaleValue);
@@ -40,14 +43,14 @@ const MemberCard: FC<MemberCardProps> = ({ photo, name, descr, className }) => {
           scale: imgContainerScale.toString(),
         }}
         ref={imgContainerRef}
-        className="h-[350px] w-[350px] overflow-hidden rounded-3xl transition-all duration-1000 ease-out"
+        className="h-[350px] w-[350px] overflow-hidden rounded-3xl"
       >
         <img
           style={{
             scale: imgScale.toString(),
           }}
           ref={imgRef}
-          className="h-[350px] w-[350px] rounded-3xl object-cover transition-all duration-1000 ease-out"
+          className="h-[350px] w-[350px] rounded-3xl object-cover"
           src={photo}
           alt={`Team member ${name}`}
         />

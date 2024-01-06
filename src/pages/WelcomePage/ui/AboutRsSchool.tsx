@@ -1,18 +1,25 @@
 import { useRef } from 'react';
 
-import { motion, useMotionValueEvent, useScroll } from 'framer-motion';
+import { motion, useMotionValueEvent, useScroll, useSpring } from 'framer-motion';
 
-import { figureAnimation, figureTransition, headingVariants, viewPort } from '@pages/WelcomePage/const/const';
+import {
+  figureAnimation,
+  figureTransition,
+  headingVariants,
+  scrollSpring,
+  viewPort,
+} from '@pages/WelcomePage/const/const';
 
 const AboutRsSchool = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const iframeSectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress: scrollIframe } = useScroll({
+  const { scrollYProgress } = useScroll({
     target: iframeSectionRef,
     offset: ['start end', 'end end'],
   });
 
-  useMotionValueEvent(scrollIframe, 'change', (latest) => {
+  const springValue = useSpring(scrollYProgress, scrollSpring);
+  useMotionValueEvent(springValue, 'change', (latest) => {
     if (iframeRef.current) iframeRef.current.style.scale = `${0.8 + latest * 0.1}`;
   });
 
@@ -56,7 +63,7 @@ const AboutRsSchool = () => {
       <iframe
         ref={iframeRef}
         title="RS-Conf video"
-        className="inline-block rounded-3xl transition-all duration-1000 ease-out"
+        className="inline-block rounded-3xl"
         style={{ border: 'none' }}
         width="1200"
         height="675"
