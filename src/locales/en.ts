@@ -72,7 +72,7 @@ const en = {
 				free: 'free-of-charge community-based',
 				education: 'education programs.',
 				built: 'And built as a graduation project for',
-				react: 'React course.',
+				react: 'React course',
 			},
 		},
 		start: {
