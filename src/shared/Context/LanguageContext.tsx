@@ -7,7 +7,10 @@ type Translation = typeof enTranslation | typeof ruTranslation;
 
 type LanguageContextType = {
   language: string;
-  changeLanguage: (lang: 'en' | 'ru') => void;
+  changeLanguage: {
+    (lang: 'en' | 'ru'): void;
+    (): void;
+  };
   translation: Translation;
 };
 
@@ -22,9 +25,10 @@ export default function LanguageProvider({ children }: { children: ReactNode }) 
   const [language, setLanguage] = useState('en');
 
   const changeLanguage = useCallback(
-    (lang: 'en' | 'ru') => {
+    (lang?: 'en' | 'ru') => {
       if (lang === language) return;
-      setLanguage(lang);
+      const newLang = lang || (language === 'en' ? 'ru' : 'en');
+      setLanguage(newLang);
     },
     [language],
   );

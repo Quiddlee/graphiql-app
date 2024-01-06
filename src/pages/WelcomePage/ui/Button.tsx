@@ -12,7 +12,7 @@ const Button: FC<HTMLAttributes<HTMLButtonElement>> = ({ children, className, ..
         className,
       )}
     >
-      <div className="h-[60px] w-[200px] overflow-hidden rounded-full bg-[#FFAB70] [transition:_transform_1.8s_cubic-bezier(.19,1,.22,1)] group-hover:scale-[.94]">
+      <div className="h-[inherit] w-[inherit] overflow-hidden rounded-full bg-[#FFAB70] [transition:_transform_1.8s_cubic-bezier(.19,1,.22,1)] group-hover:scale-[.94]">
         <span className="absolute bottom-0 left-1/2 z-20 block h-[200%] w-[120%] -translate-x-0 translate-y-[120px] bg-[#a474ff] [border-radius:999px_999px_0_0] [translate:-50%] group-hover:translate-y-[10px] group-hover:[border-radius:60%_60%_0_0] group-hover:[transition:_transform_1.2s_cubic-bezier(.19,1,.22,1)_200ms,_border-radius_.2s_cubic-bezier(.19,1,.22,1)_270ms]" />
         <span className="absolute bottom-0 left-1/2 z-20 block h-[200%] w-[120%] -translate-x-0 translate-y-[120px] bg-[#17f1d1] [border-radius:999px_999px_0_0] [translate:-50%] group-hover:translate-y-[10px] group-hover:[border-radius:60%_60%_0_0] group-hover:[transition:_transform_1.2s_cubic-bezier(.19,1,.22,1)_300ms,_border-radius_.2s_cubic-bezier(.19,1,.22,1)_470ms]" />
         <span className="absolute bottom-0 left-1/2 z-20 block h-[200%] w-[120%] -translate-x-0 translate-y-[120px] bg-[#FFAB70] [border-radius:999px_999px_0_0] [translate:-50%] group-hover:translate-y-[10px] group-hover:[border-radius:60%_60%_0_0] group-hover:[transition:_transform_1.2s_cubic-bezier(.19,1,.22,1)_380ms,_border-radius_.2s_cubic-bezier(.19,1,.22,1)_670ms]" />
