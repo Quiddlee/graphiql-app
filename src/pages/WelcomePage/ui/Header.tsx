@@ -7,6 +7,7 @@ import Button from '@pages/WelcomePage/ui/Button';
 import ROUTES from '@shared/constants/routes';
 import useAuth from '@shared/Context/authHook';
 import { useLanguage } from '@shared/Context/hooks';
+import viewTransition from '@shared/lib/helpers/viewTransition';
 import FilledButton from '@shared/ui/FilledButton';
 import Icon from '@shared/ui/Icon';
 import IconButton from '@shared/ui/IconButton';
@@ -51,7 +52,14 @@ const Header = () => {
         GraphiQL
       </span>
       <article className="ml-auto flex items-center gap-3">
-        <TextButton onClick={() => changeLanguage()}>{lang}</TextButton>
+        <TextButton
+          style={{
+            viewTransitionName: 'language-switch',
+          }}
+          onClick={() => viewTransition(() => changeLanguage())}
+        >
+          {lang}
+        </TextButton>
         {isAuth ? (
           <>
             <IconButton onClick={() => logOut()}>
@@ -63,10 +71,20 @@ const Header = () => {
           </>
         ) : (
           <>
-            <AnimatedLink to={`${ROUTES.AUTH}/${ROUTES.LOGIN}`}>
+            <AnimatedLink
+              style={{
+                viewTransitionName: 'login',
+              }}
+              to={`${ROUTES.AUTH}/${ROUTES.LOGIN}`}
+            >
               <OutlinedButton>{translation.loginPage.btnTitle}</OutlinedButton>
             </AnimatedLink>
-            <AnimatedLink to={`${ROUTES.AUTH}/${ROUTES.SIGNUP}`}>
+            <AnimatedLink
+              style={{
+                viewTransitionName: 'sign up',
+              }}
+              to={`${ROUTES.AUTH}/${ROUTES.SIGNUP}`}
+            >
               <FilledButton>{translation.welcome.start.buttonAuth}</FilledButton>
             </AnimatedLink>
           </>
