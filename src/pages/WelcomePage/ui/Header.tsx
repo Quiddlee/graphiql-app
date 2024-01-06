@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 import { useMotionValueEvent, useScroll, useSpring } from 'framer-motion';
-import { Link } from 'react-router-dom';
 
+import AnimatedLink from '@pages/WelcomePage/ui/AnimatedLink';
 import Button from '@pages/WelcomePage/ui/Button';
 import ROUTES from '@shared/constants/routes';
 import useAuth from '@shared/Context/authHook';
@@ -23,7 +23,7 @@ const Header = () => {
   const { isAuth, logOut } = useAuth();
   const { translation } = useLanguage();
 
-  const [scrollValue, setScrollValue] = useState(1);
+  const [scrollValue, setScrollValue] = useState(0);
   const { scrollYProgress } = useScroll();
   const springValue = useSpring(scrollYProgress, {
     duration: SPRING_DURATION,
@@ -42,6 +42,7 @@ const Header = () => {
     <header className="sticky left-0 top-0 z-50 flex h-20 w-full items-center px-4 text-on-surface">
       <span
         style={{
+          viewTransitionName: 'title',
           scale: String(logoScale),
           transform: `translateX(${translate}%)`,
         }}
@@ -56,18 +57,18 @@ const Header = () => {
             <IconButton onClick={() => logOut()}>
               <Icon>door_open</Icon>
             </IconButton>
-            <Link to={`${ROUTES.MAIN}`}>
+            <AnimatedLink to={`${ROUTES.MAIN}`}>
               <Button className="h-[60px] w-[160px] text-sm">{translation.welcome.start.buttonApp}</Button>
-            </Link>
+            </AnimatedLink>
           </>
         ) : (
           <>
-            <Link to={`${ROUTES.AUTH}/${ROUTES.LOGIN}`}>
+            <AnimatedLink to={`${ROUTES.AUTH}/${ROUTES.LOGIN}`}>
               <OutlinedButton>{translation.loginPage.btnTitle}</OutlinedButton>
-            </Link>
-            <Link to={`${ROUTES.AUTH}/${ROUTES.SIGNUP}`}>
+            </AnimatedLink>
+            <AnimatedLink to={`${ROUTES.AUTH}/${ROUTES.SIGNUP}`}>
               <FilledButton>{translation.welcome.start.buttonAuth}</FilledButton>
-            </Link>
+            </AnimatedLink>
           </>
         )}
       </article>

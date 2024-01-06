@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 import { Outlet, useLocation } from 'react-router-dom';
 import { cssTransition, ToastContainer } from 'react-toastify';
 
@@ -24,16 +26,28 @@ const MainLayout = () => {
   const { pathname } = useLocation();
   const isApp = pathname.slice(1) === ROUTES.MAIN || pathname.slice(1) === ROUTES.SETTINGS;
   const isWelcome = pathname === ROUTES.WELCOME_PAGE;
+  const mainRef = useRef<HTMLElement>(null);
+  const isLight = document.body.hasAttribute('data-user-theme');
+
+  useEffect(() => {
+    if (!mainRef.current) return;
+
+    if (isLight || !isWelcome) {
+      mainRef.current.style.backgroundColor = '';
+    } else if (!isLight && isWelcome) {
+      mainRef.current.style.backgroundColor = '#060606';
+    }
+  }, [isLight, isWelcome]);
 
   return (
     <AuthProvider>
       <ViewProvider>
         <main
+          ref={mainRef}
           data-testid="main-layout"
-          className={cn({
+          className={cn('transition-all duration-500 ease-emphasized-decelerate', {
             'relative grid h-screen grid-rows-[64px_auto_80px] text-sm text-on-surface-text sm:grid-cols-[80px_1fr] sm:grid-rows-[80px_1fr] sm:pb-3 sm:pr-3 sm:text-base lg:min-h-[initial] lg:grid-cols-[384px_1fr_0fr] lg:gap-4 lg:px-4 lg:pb-4 lg:pr-0':
               isApp,
-            'bg-[#060606]': isWelcome,
           })}
         >
           {isApp && <Header />}

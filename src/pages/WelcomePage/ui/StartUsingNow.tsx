@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom';
-
+import AnimatedLink from '@pages/WelcomePage/ui/AnimatedLink';
 import Button from '@pages/WelcomePage/ui/Button';
 import ROUTES from '@shared/constants/routes';
 import useAuth from '@shared/Context/authHook';
@@ -18,9 +17,9 @@ const StartUsingNow = () => {
         <h2 className="text-center text-7.5xl font-light leading-h2">
           {translation.welcome.start.title.start} <br /> {translation.welcome.start.title.now}
         </h2>
-        <Link to={link}>
+        <AnimatedLink to={link}>
           <Button>{buttonText}</Button>
-        </Link>
+        </AnimatedLink>
       </article>
     </section>
   );
