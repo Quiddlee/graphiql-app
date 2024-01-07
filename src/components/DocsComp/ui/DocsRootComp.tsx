@@ -26,16 +26,18 @@ const DocsRootComp = ({ types, explorer }: { types: SchemaTypeObj[]; explorer: D
     });
   const rootRef = useScrollbar<HTMLDivElement>();
   return (
-    <div ref={rootRef} className="h-full">
-      <div className="rounded-[24px] bg-surface-container px-8 py-10 text-left text-on-surface sm:p-[56px]">
+    <div ref={rootRef} className="h-full animate-fade-in-section">
+      <div className="animate-fade-in-section rounded-[24px] bg-surface-container px-8 py-10 text-left text-on-surface ease-emphasized-decelerate sm:p-[56px]">
         <h3 className="text-[36px] font-[500] sm:text-[57px]">Docs</h3>
         <p className="sm:text-md mt-10 text-left text-sm">
           A GraphQL schema provides a root type for each kind of operation.
         </p>
       </div>
-      <div className="mt-0 pl-10 pr-4 pt-10 text-left font-[500] sm:mt-[56px] sm:p-10 sm:px-[56px]">
-        <h4 className="text-2xl sm:text-[28px]">Root types:</h4>
-        <p className="mt-4">
+      <div className="mt-0 pl-10 pr-4 pt-10 text-left font-[500] ease-emphasized-decelerate sm:mt-[56px] sm:p-10 sm:px-[56px]">
+        <h4 className="animation-delay-200 animate-fade-in-section text-2xl ease-emphasized-decelerate sm:text-[28px]">
+          Root types:
+        </h4>
+        <p className="animation-delay-200 mt-4 animate-fade-in-section ease-emphasized-decelerate">
           query:&nbsp;
           <a
             className="text-docs-link-text-color hover:underline"
@@ -45,8 +47,10 @@ const DocsRootComp = ({ types, explorer }: { types: SchemaTypeObj[]; explorer: D
             {types[0].name}
           </a>
         </p>
-        <h4 className="mt-8 text-2xl sm:mt-[56px] sm:text-[28px]">All schema types:</h4>
-        <ul className="mt-4">{allTypes}</ul>
+        <h4 className="animation-delay-300 mt-8 animate-fade-in-section text-2xl ease-emphasized-decelerate sm:mt-[56px] sm:text-[28px]">
+          All schema types:
+        </h4>
+        <ul className="animation-delay-300 mt-4 animate-fade-in-section ease-emphasized-decelerate">{allTypes}</ul>
       </div>
     </div>
   );

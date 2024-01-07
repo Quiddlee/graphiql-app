@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
+import { AnimatePresence } from 'framer-motion';
+
 import NavItem from '@components/Nav/ui/NavItem';
 import VirtualScroll from '@components/Nav/ui/VirtualScroll';
 import AddView from '@components/ViewList/ui/AddView';
@@ -154,21 +156,30 @@ const NavigationDrawer = () => {
 
           <hr className="invisible ml-4 border-outline-variant lg:visible" />
         </ul>
-        <ViewList
-          isActive={isActive}
-          render={(view) => (
-            <ViewItem onClick={handleHideDrawer} key={view.id} id={view.id}>
-              <span className="animation-delay-200 flex animate-fade-in-standard items-center">
-                <Icon>tab</Icon>
-              </span>
-              <span className="truncate group-hover:pe-8 [&:has(+_article_.visible)]:pe-8">{view.name}</span>
-              <Details id={view.id} />
-            </ViewItem>
-          )}
-        >
-          <AddView />
-          <VirtualScroll size="7" />
-        </ViewList>
+        <AnimatePresence>
+          <ViewList
+            isActive={isActive}
+            render={(view) => (
+              <ViewItem onClick={handleHideDrawer} key={view.id} id={view.id}>
+                <span className="animation-delay-200 flex animate-fade-in-standard items-center">
+                  <Icon>tab</Icon>
+                </span>
+                <span
+                  style={{
+                    viewTransitionName: `view-list-item-${view.id}`,
+                  }}
+                  className="truncate group-hover:pe-8 [&:has(+_article_.visible)]:pe-8"
+                >
+                  {view.name}
+                </span>
+                <Details id={view.id} />
+              </ViewItem>
+            )}
+          >
+            <AddView />
+            <VirtualScroll size="7" />
+          </ViewList>
+        </AnimatePresence>
       </article>
     </>
   );

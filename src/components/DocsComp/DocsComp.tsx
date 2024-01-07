@@ -18,9 +18,12 @@ const DocsComp = ({ isShown, setIsDocsShown }: PropsType) => {
   return (
     <DocsOverlay isShown={isShown} setIsDocsShown={setIsDocsShown} explorer={schemaExplorer}>
       <ErrorBoundary fallback={<DocsFallback />}>
-        <Suspense fallback={<SuspenseFallback />}>
-          <DocsModal setIsDocsShown={setIsDocsShown} explorer={schemaExplorer} />
-        </Suspense>
+        <>
+          <span className="absolute left-0 top-0 m-auto h-full w-[270px] origin-left animate-fade-in-docs rounded-r-4xl bg-surface sm:w-[420px]" />
+          <Suspense fallback={<SuspenseFallback />}>
+            <DocsModal setIsDocsShown={setIsDocsShown} explorer={schemaExplorer} />
+          </Suspense>
+        </>
       </ErrorBoundary>
     </DocsOverlay>
   );

@@ -28,7 +28,7 @@ const DocsOverlay = ({ isShown, setIsDocsShown, explorer, children }: PropsType)
       data-overlay
       onClick={(e) => closeHandler(e)}
       onKeyDown={(e) => closeHandler(e)}
-      className="overlay absolute left-0 top-0 z-20 flex h-full w-full justify-start bg-black/60 "
+      className="overlay absolute left-0 top-0 z-20 flex h-full w-full justify-start bg-black/60"
     >
       {children}
     </div>
