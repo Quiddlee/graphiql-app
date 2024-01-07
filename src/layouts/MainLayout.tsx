@@ -32,8 +32,9 @@ const MainLayout = () => {
   useEffect(() => {
     if (!mainRef.current) return;
 
-    const isLight = localStorage.getItem(LocalStorageKeys.LIGHT_THEME);
-
+    const isLight =
+      localStorage.getItem(LocalStorageKeys.LIGHT_THEME) ||
+      (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches);
     if (isLight || !isWelcome) {
       mainRef.current.style.backgroundColor = '';
     } else if (!isLight && isWelcome) {
