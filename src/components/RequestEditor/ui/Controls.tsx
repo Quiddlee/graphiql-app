@@ -18,9 +18,10 @@ import Icon from '@shared/ui/Icon';
 type ControlsProps = HTMLAttributes<HTMLUListElement> & {
   onResponseOpen?: HandleExpand;
   isHidden?: boolean;
+  isResponseHidden?: boolean;
 };
 
-const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) => {
+const Controls: FC<ControlsProps> = ({ onResponseOpen, isResponseHidden, isHidden, className }) => {
   const { updateCurrentResponse, prettifyEditors, currEndpoint } = useAppContext();
   const { readUrl } = useUrl();
   const screenType = useScreen();
@@ -40,6 +41,10 @@ const Controls: FC<ControlsProps> = ({ onResponseOpen, isHidden, className }) =>
     const headers = readUrl(urlParams.HEADERS);
     const response = await submitRequest(currEndpoint, query, variables, headers);
     updateCurrentResponse(JSON.stringify(response));
+
+    if (isResponseHidden) {
+      onResponseOpen?.((prevState) => !prevState);
+    }
   };
 
   const handlePrettifier = () => {

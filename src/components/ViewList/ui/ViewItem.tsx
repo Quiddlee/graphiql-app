@@ -16,7 +16,6 @@ type TabItemProps = {
 const animations = {
   initial: { scale: 0, opacity: 0 },
   animate: { scale: 1, opacity: 1 },
-  exit: { scale: 0, opacity: 0 },
   transition: { type: 'spring', stiffness: 550, damping: 40 },
 };
 
@@ -41,7 +40,7 @@ const ViewItem: FC<TabItemProps> = ({ children, id, onClick }) => {
       data-testid="view-item"
       type="button"
       onClick={handleClick}
-      className="group relative inline-block w-full rounded-full"
+      className="group relative inline-block w-full animate-fade-in-screen rounded-full"
     >
       <span
         className={cn(
