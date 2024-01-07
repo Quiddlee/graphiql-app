@@ -9,13 +9,14 @@ import useAuth from '@shared/Context/authHook';
 import { useLanguage } from '@shared/Context/hooks';
 import cn from '@shared/lib/helpers/cn';
 import viewTransition from '@shared/lib/helpers/viewTransition';
+import useScreen from '@shared/lib/hooks/useScreen';
 import FilledButton from '@shared/ui/FilledButton';
 import Icon from '@shared/ui/Icon';
 import IconButton from '@shared/ui/IconButton';
 import OutlinedButton from '@shared/ui/OutlinedButton';
 import TextButton from '@shared/ui/TextButton';
 
-const SPRING_DURATION = 1000;
+const SPRING_DURATION = 600;
 const HEADER_HEIGHT = 80;
 const SCROLL_VALUE_MAX = 1;
 const PADDING = 16;
@@ -24,6 +25,8 @@ const Header = () => {
   const { changeLanguage, language } = useLanguage();
   const { isAuth, logOut } = useAuth();
   const { translation } = useLanguage();
+  const screenType = useScreen();
+  const isTouch = screenType === 'tablet' || screenType === 'mobile';
 
   const [scrollValue, setScrollValue] = useState(0);
   const { scrollYProgress } = useScroll();
@@ -43,8 +46,12 @@ const Header = () => {
 
   return (
     <header
+      style={{
+        backdropFilter: isTouch ? `blur(${scrollValue * 16}px)` : '',
+        backgroundColor: isTouch ? `rgba(255, 255, 255, ${scrollValue / 2})` : '',
+      }}
       className={cn(
-        'sticky left-0 top-0 z-50 flex h-20 w-full flex-wrap items-center gap-2 px-2 py-2 text-on-surface sm:flex-nowrap sm:gap-0 sm:px-4 sm:py-0',
+        'sticky left-0 top-0 z-50 flex h-20 w-full flex-wrap items-center gap-1 px-2 py-2 text-on-surface sm:flex-nowrap sm:gap-0 sm:px-4 sm:py-0',
         {
           'font-readex_pro': isEng,
         },
