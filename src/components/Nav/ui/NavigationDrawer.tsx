@@ -11,7 +11,6 @@ import { useLanguage } from '@shared/Context/hooks';
 import cn from '@shared/lib/helpers/cn';
 import viewTransition from '@shared/lib/helpers/viewTransition';
 import useScreen from '@shared/lib/hooks/useScreen';
-import useScrollbar from '@shared/lib/hooks/useScrollbar';
 import Blackout from '@shared/ui/Blackout';
 import Fab from '@shared/ui/Fab';
 import Icon from '@shared/ui/Icon';
@@ -21,7 +20,6 @@ const NavigationDrawer = () => {
   const { translation } = useLanguage();
   const screenType = useScreen();
   const [isActive, setIsActive] = useState(false);
-  const rootRef = useScrollbar();
 
   const isDesktop = screenType === 'desktop';
   const isMobile = screenType === 'mobile';
@@ -51,7 +49,6 @@ const NavigationDrawer = () => {
       <Blackout isBlackout={isActive} unlock={handleHideDrawer} />
 
       <article
-        ref={rootRef}
         className={cn(
           'h-full w-20 text-on-surface-variant-text transition-all duration-400 ease-emphasized-decelerate lg:relative lg:block lg:h-full lg:w-full lg:translate-y-0',
           {
