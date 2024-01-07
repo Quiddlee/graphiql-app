@@ -17,7 +17,7 @@ const animations = {
   initial: { scale: 0, opacity: 0 },
   animate: { scale: 1, opacity: 1 },
   exit: { scale: 0, opacity: 0 },
-  transition: { type: 'spring', stiffness: 600, damping: 40 },
+  transition: { type: 'spring', stiffness: 550, damping: 40 },
 };
 
 const ViewItem: FC<TabItemProps> = ({ children, id, onClick }) => {
