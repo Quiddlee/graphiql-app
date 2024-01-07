@@ -1,13 +1,23 @@
+import { FC } from 'react';
+
 import DocsModalLayout from '@/layouts/DocsModalLayout';
 
-const DocsFallback = () => {
+type PropsType = {
+  text: {
+    partOne: string;
+    partTwo: string;
+  };
+};
+
+const DocsFallback: FC<PropsType> = ({ text }) => {
+  const { partOne, partTwo } = text;
   return (
     <DocsModalLayout>
       <div className="flex h-full w-full items-center justify-center">
         <p className="p-6 text-center">
-          Something gone wrong with our docs... <br />
+          {partOne} <br />
           <br />
-          Please, reload docs section to continue browsing schema documentation.
+          {partTwo}
         </p>
       </div>
     </DocsModalLayout>

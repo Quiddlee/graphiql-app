@@ -187,6 +187,21 @@ const en = {
 			},
 		},
 	},
+	docsSection: {
+		fallback: {
+			partOne: 'Something gone wrong with our docs...',
+			partTwo: 'Please, reload docs section to continue browsing schema documentation.',
+		},
+		suspense: 'Soon here will be docs section...',
+		loader: 'We are loading your docs...',
+		schemaFallback: 'There is no schema at provided endpoint :(',
+		rootDocsComp: {
+			title: 'Docs',
+			subtitle: 'A GraphQL schema provides a root type for each kind of operation.',
+			rootTypes: 'Root types:',
+			allTypesTitle: 'All schema types:',
+		},
+	},
 };
 
 export default en;

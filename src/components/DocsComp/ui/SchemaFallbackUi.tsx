@@ -6,9 +6,10 @@ import IconButton from '@/shared/ui/IconButton';
 
 type PropsType = {
   closeModal: (value: SetStateAction<boolean>) => void;
+  text: string;
 };
 
-const SchemaFallbackUi: FC<PropsType> = ({ closeModal }) => {
+const SchemaFallbackUi: FC<PropsType> = ({ closeModal, text }) => {
   return (
     <DocsModalLayout>
       <IconButton
@@ -21,7 +22,7 @@ const SchemaFallbackUi: FC<PropsType> = ({ closeModal }) => {
         <Icon>close</Icon>
       </IconButton>
       <div className="flex h-full w-full items-center p-6">
-        <p className="w-full text-center text-on-surface">There is no schema at provided endpoint :(</p>
+        <p className="w-full text-center text-on-surface">{text}</p>
       </div>
     </DocsModalLayout>
   );

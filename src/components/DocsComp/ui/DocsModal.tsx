@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import DocsModalLayout from '@/layouts/DocsModalLayout';
-import { useAppContext } from '@/shared/Context/hooks';
+import { useAppContext, useLanguage } from '@/shared/Context/hooks';
 import { DocsExplorerType, SchemaTypeObj } from '@/shared/types';
 import Icon from '@shared/ui/Icon';
 import IconButton from '@shared/ui/IconButton';
@@ -20,16 +20,19 @@ type PropsType = {
 const DocsModal = ({ setIsDocsShown, explorer }: PropsType) => {
   const { currEndpoint, setEndpointSchema, endpointSchema } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
+  const { translation } = useLanguage();
+
+  const { loader, schemaFallback, rootDocsComp } = translation.docsSection;
 
   useEffect(() => {
     getEndpointSchema(currEndpoint, setEndpointSchema, setIsLoading);
   }, [currEndpoint, setEndpointSchema]);
 
-  if (isLoading) return <DocsLoader />;
-  if (!endpointSchema) return <SchemaFallbackUi closeModal={setIsDocsShown} />;
+  if (isLoading) return <DocsLoader text={loader} />;
+  if (!endpointSchema) return <SchemaFallbackUi closeModal={setIsDocsShown} text={schemaFallback} />;
 
   const content = explorer.isDocs() ? (
-    <DocsRootComp types={endpointSchema.types as SchemaTypeObj[]} explorer={explorer} />
+    <DocsRootComp types={endpointSchema.types as SchemaTypeObj[]} explorer={explorer} translation={rootDocsComp} />
   ) : (
     <DocsTypeComp
       explorer={explorer}
