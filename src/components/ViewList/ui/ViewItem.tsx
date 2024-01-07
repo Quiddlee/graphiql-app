@@ -1,5 +1,6 @@
 import { FC, ReactNode } from 'react';
 
+import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 
 import useView from '@components/ViewList/hooks/useView';
@@ -10,6 +11,13 @@ type TabItemProps = {
   children: ReactNode;
   id: number;
   onClick?: () => void;
+};
+
+const animations = {
+  initial: { scale: 0, opacity: 0 },
+  animate: { scale: 1, opacity: 1 },
+  exit: { scale: 0, opacity: 0 },
+  transition: { type: 'spring', stiffness: 600, damping: 40 },
 };
 
 const ViewItem: FC<TabItemProps> = ({ children, id, onClick }) => {
@@ -27,11 +35,13 @@ const ViewItem: FC<TabItemProps> = ({ children, id, onClick }) => {
   }
 
   return (
-    <button
+    <motion.button
+      {...animations}
+      layout
       data-testid="view-item"
       type="button"
       onClick={handleClick}
-      className="group relative inline-block w-full animate-fade-in-screen rounded-full"
+      className="group relative inline-block w-full rounded-full"
     >
       <span
         className={cn(
@@ -52,7 +62,7 @@ const ViewItem: FC<TabItemProps> = ({ children, id, onClick }) => {
       >
         {children}
       </span>
-    </button>
+    </motion.button>
   );
 };
 

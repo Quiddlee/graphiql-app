@@ -1,5 +1,7 @@
 import { FC, PropsWithChildren, ReactNode } from 'react';
 
+import { motion } from 'framer-motion';
+
 import { View } from '@components/ViewList/context/types';
 import useView from '@components/ViewList/hooks/useView';
 import { useLanguage } from '@shared/Context/hooks';
@@ -9,6 +11,12 @@ import useScreen from '@shared/lib/hooks/useScreen';
 type ViewListProps = PropsWithChildren & {
   render: (view: View, i: number) => ReactNode;
   isActive?: boolean;
+};
+
+const transition = {
+  type: 'spring',
+  stiffness: 800,
+  damping: 40,
 };
 
 const ViewList: FC<ViewListProps> = ({ render, children, isActive }) => {
@@ -28,7 +36,9 @@ const ViewList: FC<ViewListProps> = ({ render, children, isActive }) => {
       >
         <h2 className="relative px-4 py-[18px]">{translation.nav.viewList.title}</h2>
         {views.map(render)}
-        {children}
+        <motion.div layout transition={transition}>
+          {children}
+        </motion.div>
       </ul>
     )
   );
