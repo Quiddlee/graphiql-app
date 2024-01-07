@@ -26,7 +26,7 @@ const DocsRootComp = ({ types, explorer }: { types: SchemaTypeObj[]; explorer: D
     });
   const rootRef = useScrollbar<HTMLDivElement>();
   return (
-    <div ref={rootRef} className="h-full">
+    <div ref={rootRef} className="h-full animate-fade-in-section">
       <div className="animate-fade-in-section rounded-[24px] bg-surface-container px-8 py-10 text-left text-on-surface ease-emphasized-decelerate sm:p-[56px]">
         <h3 className="text-[36px] font-[500] sm:text-[57px]">Docs</h3>
         <p className="sm:text-md mt-10 text-left text-sm">

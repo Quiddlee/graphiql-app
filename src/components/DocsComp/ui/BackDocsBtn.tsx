@@ -9,10 +9,12 @@ const BackDocsBtn: FC<PropsType> = ({ onClick, title }: PropsType) => {
     <button
       type="button"
       onClick={onClick}
-      className="flex w-full items-center gap-1 rounded-full p-2 hover:bg-slate-500/30 "
+      className="flex w-fit animate-fade-in-section items-center gap-1 rounded-full px-4 py-2 ease-emphasized-decelerate hover:bg-slate-500/30 "
     >
-      <Icon>arrow_back_ios</Icon>
-      <span className="truncate text-2xl">{title}</span>
+      <Icon className="animation-delay-200 animate-fade-in-screen ease-standard-decelerate">arrow_back_ios</Icon>
+      <span key={title} className="animate-fade-in-section truncate text-2xl ease-emphasized-decelerate">
+        {title}
+      </span>
     </button>
   );
 };
