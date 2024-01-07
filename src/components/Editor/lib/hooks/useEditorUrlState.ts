@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+
+import useView from '@components/ViewList/hooks/useView';
 import useUrl from '@shared/lib/hooks/useUrl';
 import { UrlParams } from '@shared/lib/types/types';
 
@@ -11,6 +14,13 @@ import { UrlParams } from '@shared/lib/types/types';
 function useEditorUrlState(urlParam: UrlParams) {
 	const { readUrl, setUrl } = useUrl();
 	const urlState = readUrl(urlParam);
+	const { handleActiveView, activeView } = useView();
+
+	useEffect(() => {
+		if (urlState === null) {
+			handleActiveView(activeView);
+		}
+	}, [activeView, handleActiveView, urlState]);
 
 	const handleChange = (value: string) => {
 		setUrl(urlParam, value);
