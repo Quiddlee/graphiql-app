@@ -106,7 +106,7 @@ const RequestEditorResized: FC<RequestEditorResizedProps> = ({
           height: !isTablet ? `${height}px` : '',
         }}
         className={cn(
-          'animation-delay-400 animate-fade-in-screen absolute bottom-0 left-0 z-10 row-start-2 row-end-3 h-full w-full origin-bottom-left sm:relative',
+          'animation-delay-400 absolute bottom-0 left-0 z-10 row-start-2 row-end-3 h-full w-full origin-bottom-left animate-fade-in-screen sm:relative',
           {
             'transition-enter-screen': !isCollapsed,
             'transition-exit-screen': isCollapsed,

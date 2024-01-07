@@ -95,7 +95,7 @@ const MainPage = () => {
             transform: !isTablet ? `scale3d(${interpolateResponse}, ${interpolateResponse}, 1)` : '',
             opacity: !isTablet ? oneZeroResponse : '',
           }}
-          className={cn('animation-delay-600 animate-fade-in-screen relative mb-24 h-full w-full origin-bottom-right', {
+          className={cn('animation-delay-600 relative mb-24 h-full w-full origin-bottom-right animate-fade-in-screen', {
             'transition-enter-screen': !isResponseHidden,
             'transition-exit-screen': isResponseHidden,
             'transition-none': isResized.current,
