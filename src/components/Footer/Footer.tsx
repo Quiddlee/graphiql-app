@@ -1,23 +1,23 @@
 import { FC, HTMLAttributes } from 'react';
 
-import ghIcon from '@assets/github.svg';
 import rsLogo from '@assets/rs_school.svg';
 import cn from '@shared/lib/helpers/cn';
+import GithubIcon from '@shared/ui/GithubIcon';
 
 const Footer: FC<HTMLAttributes<HTMLElement>> = ({ className }) => {
   return (
     <footer className={cn('grid items-center justify-center justify-items-center gap-1.5 text-on-surface', className)}>
       <div className="flex gap-3">
-        <a href="https://github.com/Quiddlee" className="flex gap-[7px]">
-          <img src={ghIcon} alt="" />
+        <a href="https://github.com/Quiddlee" className="flex items-center gap-[7px]">
+          <GithubIcon />
           <span>Quiddle</span>
         </a>
-        <a href="https://github.com/Tedzury" className="flex gap-[7px]">
-          <img src={ghIcon} alt="" />
+        <a href="https://github.com/Tedzury" className="flex items-center gap-[7px]">
+          <GithubIcon />
           <span>Tedzury</span>
         </a>
-        <a href="https://github.com/barrydilan" className="flex gap-[7px]">
-          <img src={ghIcon} alt="" />
+        <a href="https://github.com/barrydilan" className="flex items-center gap-[7px]">
+          <GithubIcon />
           <span>Barrydilan</span>
         </a>
       </div>
