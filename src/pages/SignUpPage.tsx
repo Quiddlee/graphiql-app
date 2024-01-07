@@ -53,7 +53,7 @@ export default function SignUpPage() {
   }
 
   return (
-    <section className="grid h-screen w-full items-center justify-center gap-6 py-4 sm:mx-5 sm:py-8">
+    <section className="grid h-screen w-full animate-fade-in-section items-center justify-center gap-6 py-4 ease-emphasized-decelerate sm:mx-5 sm:py-8">
       <article
         ref={containerRef}
         className="h-full max-h-[524px] w-full overflow-auto rounded-[30px] bg-surface-container px-7 py-[60px] sm:min-w-[560px] sm:px-20"

@@ -11,7 +11,10 @@ import LanguageProvider from '@shared/Context/LanguageContext';
 
 const App = () => {
   useEffect(() => {
-    const isLightTheme = localStorage.getItem(localStorageKeys.LIGHT_THEME);
+    const isLightTheme =
+      localStorage.getItem(localStorageKeys.LIGHT_THEME) ||
+      (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches);
+
     if (isLightTheme) {
       colorThemeSwitcher.setLight();
     }

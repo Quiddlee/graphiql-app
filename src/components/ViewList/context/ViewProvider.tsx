@@ -145,11 +145,16 @@ const ViewProvider = ({ children }: PropsWithChildren) => {
     const currView = views.find((view) => view.id === activeView);
 
     if (!currView) return;
-    if (!readUrl(urlParams.QUERY) || readUrl(urlParams.HEADERS) || readUrl(urlParams.VARIABLES)) return;
+    if (
+      readUrl(urlParams.QUERY) === null ||
+      readUrl(urlParams.HEADERS) === null ||
+      readUrl(urlParams.VARIABLES) === null
+    )
+      return;
 
-    const query = readUrl(urlParams.QUERY) ?? '';
-    const headers = readUrl(urlParams.HEADERS) ?? '';
-    const variables = readUrl(urlParams.VARIABLES) ?? '';
+    const query = readUrl(urlParams.QUERY);
+    const headers = readUrl(urlParams.HEADERS);
+    const variables = readUrl(urlParams.VARIABLES);
 
     currView.query = query;
     currView.headers = headers;
