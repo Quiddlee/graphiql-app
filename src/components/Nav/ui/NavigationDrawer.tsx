@@ -164,7 +164,14 @@ const NavigationDrawer = () => {
                 <span className="animation-delay-200 flex animate-fade-in-standard items-center">
                   <Icon>tab</Icon>
                 </span>
-                <span className="truncate group-hover:pe-8 [&:has(+_article_.visible)]:pe-8">{view.name}</span>
+                <span
+                  style={{
+                    viewTransitionName: `view-list-item-${view.id}`,
+                  }}
+                  className="truncate group-hover:pe-8 [&:has(+_article_.visible)]:pe-8"
+                >
+                  {view.name}
+                </span>
                 <Details id={view.id} />
               </ViewItem>
             )}

@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 
 import useView from '@components/ViewList/hooks/useView';
 import { useLanguage } from '@shared/Context/hooks';
+import viewTransition from '@shared/lib/helpers/viewTransition';
 import Dialog from '@shared/ui/Dialog';
 import FilledTonalButton from '@shared/ui/FilledTonalButton';
 import OutlinedTextField from '@shared/ui/OutlinedTextField';
@@ -39,7 +40,7 @@ const RenameViewDialog: FC<RenameViewDialogProps> = ({ id, open, onToggle }) => 
 
   const handleRename = useCallback(
     (newName: string) => {
-      handleRenameView(id, newName);
+      viewTransition(() => handleRenameView(id, newName));
       handleCloseDialog();
       toast(
         <>
