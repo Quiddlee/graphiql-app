@@ -38,7 +38,7 @@ const RequestEditor: FC<HTMLAttributes<HTMLElement>> = ({ children, ...props }) 
         onChange={(val: string) => {
           if (!prettify) setEditorState(val);
         }}
-        isJson={false}
+        isJson
         isReadOnly={false}
       />
       {children}

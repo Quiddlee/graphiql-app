@@ -26,6 +26,7 @@
     "@hookform/resolvers": "^3.3.2",
     "@lit/react": "^1.0.2",
     "@material/web": "^1.0.1",
+    "codemirror": "^6.0.1",
     "firebase": "^10.7.1",
     "framer-motion": "^10.17.9",
     "overlayscrollbars": "^2.4.5",

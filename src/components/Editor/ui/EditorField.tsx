@@ -31,8 +31,8 @@ const EditorField = ({ onChange, value = '', isJson, isReadOnly }: EditorFieldPr
       prettifyEditors(false);
     });
     const extensions = [
-      keymap.of(defaultKeymap),
       codemirrorLanguage,
+      keymap.of(defaultKeymap),
       oneDark,
       EditorView.lineWrapping,
       onUpdate,
