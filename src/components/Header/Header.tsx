@@ -34,7 +34,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="col-start-1 col-end-2 flex w-full items-center justify-end gap-3 py-2 pr-2 sm:col-end-3 sm:gap-8">
+      <header className="col-start-1 col-end-2 flex w-full items-center justify-end py-2 pr-2 sm:col-end-3">
         {isSettings && !isMobile ? (
           <h1 style={{ viewTransitionName: 'title' }} className="mr-auto flex items-center pl-4 font-readex_pro">
             <button type="button" onClick={handleClick} className="flex h-12 w-12 items-center justify-center">
