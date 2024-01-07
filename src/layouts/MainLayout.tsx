@@ -9,6 +9,7 @@ import Nav from '@components/Nav/Nav';
 import Controls from '@components/RequestEditor/ui/Controls';
 import ViewProvider from '@components/ViewList/context/ViewProvider';
 import { SNACKBAR_AUTO_HIDE_DURATION } from '@shared/constants/const';
+import LocalStorageKeys from '@shared/constants/localStorageKeys';
 import ROUTES from '@shared/constants/routes';
 import AuthProvider from '@shared/Context/AuthContext';
 import cn from '@shared/lib/helpers/cn';
@@ -27,17 +28,18 @@ const MainLayout = () => {
   const isApp = pathname.slice(1) === ROUTES.MAIN || pathname.slice(1) === ROUTES.SETTINGS;
   const isWelcome = pathname === ROUTES.WELCOME_PAGE;
   const mainRef = useRef<HTMLElement>(null);
-  const isLight = document.body.hasAttribute('data-user-theme');
 
   useEffect(() => {
     if (!mainRef.current) return;
+
+    const isLight = localStorage.getItem(LocalStorageKeys.LIGHT_THEME);
 
     if (isLight || !isWelcome) {
       mainRef.current.style.backgroundColor = '';
     } else if (!isLight && isWelcome) {
       mainRef.current.style.backgroundColor = '#060606';
     }
-  }, [isLight, isWelcome]);
+  }, [isWelcome]);
 
   return (
     <AuthProvider>
