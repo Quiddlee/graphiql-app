@@ -122,6 +122,9 @@
     --md-sys-color-surface-dim: var(--md-sys-color-surface-dim-light);
     --md-secondary-tab-container-color: transparent;
     --md-primary-tab-container-color: transparent;
+    .cm-line {
+      color: black;
+    }
   }
 
   ::selection {
@@ -427,4 +430,8 @@
 .tooltipElemVert:hover::before,
 .tooltipElem:hover::before {
   --scale: 1;
+}
+
+.cm-editor {
+  outline: none !important;
 }
