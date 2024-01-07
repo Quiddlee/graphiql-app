@@ -13,11 +13,13 @@ import viewTransition from '@shared/lib/helpers/viewTransition';
 import useLocalStorage from '@shared/lib/hooks/useLocalStorage';
 import useUrl from '@shared/lib/hooks/useUrl';
 
+const initialViews = localStorage.getItem(localStorageKeys.VIEWS)
+  ? JSON.parse(localStorage.getItem(localStorageKeys.VIEWS) as string)
+  : INITIAL_VIEWS;
+
 const initialState: ViewInitialState = {
-  views: localStorage.getItem(localStorageKeys.VIEWS)
-    ? JSON.parse(localStorage.getItem(localStorageKeys.VIEWS) as string)
-    : INITIAL_VIEWS,
-  activeView: Number(localStorage.getItem(localStorageKeys.ACTIVE_VIEW)) || 0,
+  views: initialViews,
+  activeView: Number(localStorage.getItem(localStorageKeys.ACTIVE_VIEW)) || initialViews[0].id,
 };
 
 function reducer(state: ViewInitialState, action: Action): ViewInitialState {
