@@ -9,7 +9,6 @@ import localStorageKeys from '@shared/constants/localStorageKeys';
 import ROUTES from '@shared/constants/routes';
 import urlParams from '@shared/constants/urlParams';
 import { useLanguage } from '@shared/Context/hooks';
-import viewTransition from '@shared/lib/helpers/viewTransition';
 import useLocalStorage from '@shared/lib/hooks/useLocalStorage';
 import useUrl from '@shared/lib/hooks/useUrl';
 
@@ -80,7 +79,7 @@ const ViewProvider = ({ children }: PropsWithChildren) => {
       const newActiveView = views.find((view) => view.id === id);
 
       if (!newActiveView) return;
-      if (!isMain) viewTransition(() => navigate(ROUTES.MAIN));
+      if (!isMain) navigate(ROUTES.MAIN);
 
       const { query, variables, headers } = newActiveView;
       dispatch({ type: 'view/viewChanged', payload: id });
@@ -143,13 +142,14 @@ const ViewProvider = ({ children }: PropsWithChildren) => {
     // and saving the view array in the localStorage
     // mutating in order not to re-render every time user typing
 
-    const query = readUrl(urlParams.QUERY) ?? '';
-    const headers = readUrl(urlParams.HEADERS) ?? '';
-    const variables = readUrl(urlParams.VARIABLES) ?? '';
-
     const currView = views.find((view) => view.id === activeView);
 
     if (!currView) return;
+    if (!readUrl(urlParams.QUERY) || readUrl(urlParams.HEADERS) || readUrl(urlParams.VARIABLES)) return;
+
+    const query = readUrl(urlParams.QUERY) ?? '';
+    const headers = readUrl(urlParams.HEADERS) ?? '';
+    const variables = readUrl(urlParams.VARIABLES) ?? '';
 
     currView.query = query;
     currView.headers = headers;
