@@ -16,7 +16,7 @@ const LangSwitcher: FC<PropsType> = ({ language, changeLanguage, tip }) => {
       onClick={() => changeLanguage(switchLang)}
       type="button"
       data-tooltip={tip}
-      className="tooltipElem max-h-10 max-w-10"
+      className="tooltipElemVert max-h-10 max-w-10"
     >
       {text}
     </TextButton>

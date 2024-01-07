@@ -56,7 +56,7 @@ const Header = () => {
         )}
         <LangSwitcher language={language} changeLanguage={changeLanguage} tip={langTip} />
         {isHomeToShow && (
-          <IconButton data-tooltip={homeTip} className="tooltipElem" onClick={() => navigate(ROUTES.WELCOME_PAGE)}>
+          <IconButton data-tooltip={homeTip} className="tooltipElemVert" onClick={() => navigate(ROUTES.WELCOME_PAGE)}>
             <Icon>home</Icon>
           </IconButton>
         )}
@@ -65,13 +65,13 @@ const Header = () => {
             onClick={() => setIsDocsShown((prev) => !prev)}
             data-tooltip={docsTip}
             data-testid="show_docs"
-            className="tooltipElem"
+            className="tooltipElemVert"
           >
             <Icon>article</Icon>
           </IconButton>
         )}
         {isLogOutToShow && (
-          <IconButton onClick={() => logOut()} className="tooltipElem" data-tooltip={logOutTip}>
+          <IconButton onClick={() => logOut()} className="tooltipElemVert" data-tooltip={logOutTip}>
             <Icon>door_open</Icon>
           </IconButton>
         )}
