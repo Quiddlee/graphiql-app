@@ -1,11 +1,12 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import ROUTES from '@/shared/constants/routes';
 import * as useView from '@components/ViewList/hooks/useView';
 import DeleteViewDialog from '@components/ViewList/ui/DeleteViewDialog';
 import LanguageProvider from '@shared/Context/LanguageContext';
+import { prepareAuthCookie } from '@shared/helpers/cookieHandlers';
 
 import renderWithRouter from './helpers/RenderWithRouter';
 
@@ -27,6 +28,9 @@ mockedUseView.mockReturnValue({
 describe('RenameViewDialog', () => {
   afterEach(() => {
     vi.clearAllMocks();
+  });
+  beforeEach(() => {
+    document.cookie = prepareAuthCookie('test@gmail.com');
   });
 
   it('should render without crashing', () => {

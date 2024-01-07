@@ -32,6 +32,5 @@ describe('Testing the error boundary components', () => {
       fireEvent.click(btn);
     });
     expect(await screen.findByText(/Somehow something managed to crash our app.../i));
-    screen.debug();
   });
 });

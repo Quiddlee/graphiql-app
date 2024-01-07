@@ -36,7 +36,6 @@ describe('RenameViewDialog', () => {
       </LanguageProvider>,
     );
 
-    screen.debug();
     const input = screen.getByTestId<HTMLInputElement>('rename-input');
     expect(input.value).toBe('Test View');
   });
