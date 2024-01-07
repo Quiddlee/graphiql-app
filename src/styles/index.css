@@ -435,3 +435,7 @@
 .cm-editor {
   outline: none !important;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
