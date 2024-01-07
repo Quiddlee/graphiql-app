@@ -63,7 +63,7 @@ export default function LoginPage() {
       >
         <h1
           style={{
-            viewTransitionName: 'title',
+            viewTransitionName: 'title-auth',
           }}
           className="text-center text-2xl font-[400] text-on-surface"
         >
@@ -71,7 +71,7 @@ export default function LoginPage() {
         </h1>
         <h2
           style={{
-            viewTransitionName: 'subtitle',
+            viewTransitionName: 'subtitle-auth',
           }}
           className="mt-3 text-center text-base font-[400] text-on-surface-variant"
         >

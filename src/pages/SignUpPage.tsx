@@ -58,8 +58,22 @@ export default function SignUpPage() {
         ref={containerRef}
         className="h-full max-h-[524px] w-full overflow-auto rounded-[30px] bg-surface-container px-7 py-[60px] sm:min-w-[560px] sm:px-20"
       >
-        <h1 className="text-center text-2xl font-[400] text-on-surface">{title}</h1>
-        <h2 className="mt-3 text-center text-base font-[400] text-on-surface-variant">{subtitle}</h2>
+        <h1
+          style={{
+            viewTransitionName: 'title-auth',
+          }}
+          className="text-center text-2xl font-[400] text-on-surface"
+        >
+          {title}
+        </h1>
+        <h2
+          style={{
+            viewTransitionName: 'subtitle-auth',
+          }}
+          className="mt-3 text-center text-base font-[400] text-on-surface-variant"
+        >
+          {subtitle}
+        </h2>
         <form noValidate className="mt-8" onSubmit={handleSubmit(onSubmit)}>
           <div className="relative">
             <OutlinedTextField
