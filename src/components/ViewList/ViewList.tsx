@@ -25,22 +25,23 @@ const ViewList: FC<ViewListProps> = ({ render, children, isActive }) => {
   const screenType = useScreen();
 
   const isDesktop = screenType === 'desktop';
+  const isHidden = !isDesktop && !isActive;
+
+  if (isHidden) return null;
 
   return (
-    (isActive || isDesktop) && (
-      <ul
-        className={cn('invisible lg:visible', {
-          'visible overflow-auto': isActive,
-        })}
-        data-testid="view-list"
-      >
-        <h2 className="relative px-4 py-[18px]">{translation.nav.viewList.title}</h2>
-        {views.map(render)}
-        <motion.div layout transition={transition}>
-          {children}
-        </motion.div>
-      </ul>
-    )
+    <ul
+      className={cn('invisible lg:visible', {
+        'visible overflow-auto': isActive,
+      })}
+      data-testid="view-list"
+    >
+      <h2 className="relative px-4 py-[18px]">{translation.nav.viewList.title}</h2>
+      {views.map(render)}
+      <motion.div layout transition={transition}>
+        {children}
+      </motion.div>
+    </ul>
   );
 };
 

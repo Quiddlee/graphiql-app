@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { AnimatePresence } from 'framer-motion';
-
 import NavItem from '@components/Nav/ui/NavItem';
 import VirtualScroll from '@components/Nav/ui/VirtualScroll';
 import AddView from '@components/ViewList/ui/AddView';
@@ -13,6 +11,7 @@ import { useLanguage } from '@shared/Context/hooks';
 import cn from '@shared/lib/helpers/cn';
 import viewTransition from '@shared/lib/helpers/viewTransition';
 import useScreen from '@shared/lib/hooks/useScreen';
+import useScrollbar from '@shared/lib/hooks/useScrollbar';
 import Blackout from '@shared/ui/Blackout';
 import Fab from '@shared/ui/Fab';
 import Icon from '@shared/ui/Icon';
@@ -22,6 +21,7 @@ const NavigationDrawer = () => {
   const { translation } = useLanguage();
   const screenType = useScreen();
   const [isActive, setIsActive] = useState(false);
+  const rootRef = useScrollbar();
 
   const isDesktop = screenType === 'desktop';
   const isMobile = screenType === 'mobile';
@@ -51,8 +51,9 @@ const NavigationDrawer = () => {
       <Blackout isBlackout={isActive} unlock={handleHideDrawer} />
 
       <article
+        ref={rootRef}
         className={cn(
-          'h-full w-20 overflow-hidden text-on-surface-variant-text transition-all duration-400 ease-emphasized-decelerate lg:relative lg:block lg:h-full lg:w-full lg:translate-y-0',
+          'h-full w-20 text-on-surface-variant-text transition-all duration-400 ease-emphasized-decelerate lg:relative lg:block lg:h-full lg:w-full lg:translate-y-0',
           {
             'absolute left-0 top-0 z-40 h-screen w-[384px] translate-y-0 overflow-auto rounded-r-3xl bg-surface-container p-3 duration-700':
               isActive,
@@ -156,30 +157,29 @@ const NavigationDrawer = () => {
 
           <hr className="invisible ml-4 border-outline-variant lg:visible" />
         </ul>
-        <AnimatePresence>
-          <ViewList
-            isActive={isActive}
-            render={(view) => (
-              <ViewItem onClick={handleHideDrawer} key={view.id} id={view.id}>
-                <span className="animation-delay-200 flex animate-fade-in-standard items-center">
-                  <Icon>tab</Icon>
-                </span>
-                <span
-                  style={{
-                    viewTransitionName: `view-list-item-${view.id}`,
-                  }}
-                  className="truncate group-hover:pe-8 [&:has(+_article_.visible)]:pe-8"
-                >
-                  {view.name}
-                </span>
-                <Details id={view.id} />
-              </ViewItem>
-            )}
-          >
-            <AddView />
-            <VirtualScroll size="7" />
-          </ViewList>
-        </AnimatePresence>
+        <ViewList
+          key={isDesktop ? 'desktop' : 'mobile'}
+          isActive={isActive}
+          render={(view) => (
+            <ViewItem onClick={handleHideDrawer} key={view.id} id={view.id}>
+              <span className="animation-delay-200 flex animate-fade-in-standard items-center">
+                <Icon>tab</Icon>
+              </span>
+              <span
+                style={{
+                  viewTransitionName: `view-list-item-${view.id}`,
+                }}
+                className="truncate group-hover:pe-8 [&:has(+_article_.visible)]:pe-8"
+              >
+                {view.name}
+              </span>
+              <Details id={view.id} />
+            </ViewItem>
+          )}
+        >
+          <AddView />
+          <VirtualScroll size="7" />
+        </ViewList>
       </article>
     </>
   );
