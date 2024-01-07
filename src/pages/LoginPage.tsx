@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { TextFieldType } from '@material/web/textfield/outlined-text-field';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import PassVisibilityIcon from '@/components/loginReg/PassVisibilityIcon';
@@ -16,7 +15,10 @@ import notationLocalizer from '@/shared/helpers/notationLocalizer';
 import switchPassType from '@/shared/helpers/switchPassType';
 import { ErrorType, TextInputProps } from '@/shared/types';
 import OutlinedTextField from '@/shared/ui/OutlinedTextField';
+import Footer from '@components/Footer/Footer';
 import SubmitBtn from '@components/loginReg/SubmitBtn';
+import AnimatedLink from '@pages/WelcomePage/ui/AnimatedLink';
+import useScrollbar from '@shared/lib/hooks/useScrollbar';
 
 export default function LoginPage() {
   const [passType, setPassType] = useState('password');
@@ -33,6 +35,7 @@ export default function LoginPage() {
     resolver: yupResolver(loginValidationSchema),
     mode: 'all',
   });
+  const containerRef = useScrollbar();
 
   async function onSubmit({ email, password }: { email: string; password: string }) {
     try {
@@ -53,14 +56,31 @@ export default function LoginPage() {
   }
 
   return (
-    <section className="mx-5 flex items-center justify-center">
-      <article className="w-full max-w-[560px] rounded-[30px] bg-surface-container px-7 py-[60px] sm:px-20">
-        <h1 className="text-center text-2xl font-[400] text-on-surface">{title}</h1>
-        <h2 className="mt-3 text-center text-base font-[400] text-on-surface-variant">{subtitle}</h2>
+    <section className="grid h-screen w-full flex-col items-center justify-center gap-6 py-4 sm:mx-5 sm:py-8">
+      <article
+        ref={containerRef}
+        className="h-full max-h-[524px] w-full overflow-auto rounded-[30px] bg-surface-container px-7 py-[60px] sm:min-w-[560px] sm:px-20"
+      >
+        <h1
+          style={{
+            viewTransitionName: 'title',
+          }}
+          className="text-center text-2xl font-[400] text-on-surface"
+        >
+          {title}
+        </h1>
+        <h2
+          style={{
+            viewTransitionName: 'subtitle',
+          }}
+          className="mt-3 text-center text-base font-[400] text-on-surface-variant"
+        >
+          {subtitle}
+        </h2>
         <form noValidate className="mt-8" onSubmit={handleSubmit(onSubmit)}>
           <div className="relative">
             <OutlinedTextField
-              style={{ width: '100%' }}
+              style={{ width: '100%', viewTransitionName: 'email' }}
               {...(register('email') as TextInputProps)}
               type="email"
               placeholder={emailPlaceHold}
@@ -72,6 +92,9 @@ export default function LoginPage() {
           </div>
           <div className="relative mt-12">
             <OutlinedTextField
+              style={{
+                viewTransitionName: 'password',
+              }}
               className="w-full"
               {...(register('password') as TextInputProps)}
               type={passType as TextFieldType}
@@ -84,17 +107,24 @@ export default function LoginPage() {
               {notationLocalizer(language, errors.password?.message)}
             </p>
           </div>
-          <SubmitBtn className="mt-[52px] w-full" disabled={!isValid}>
+          <SubmitBtn
+            style={{
+              viewTransitionName: 'action',
+            }}
+            className="mt-[52px] w-full"
+            disabled={!isValid}
+          >
             {btnTitle}
           </SubmitBtn>
         </form>
         <p className="mt-8 text-center text-sm font-[400] text-on-surface-variant">
           {linkClue}{' '}
-          <Link className="text-primary" to={`/${ROUTES.AUTH}/${ROUTES.SIGNUP}`}>
+          <AnimatedLink className="text-primary" to={`/${ROUTES.AUTH}/${ROUTES.SIGNUP}`}>
             {linkTitle}
-          </Link>
+          </AnimatedLink>
         </p>
       </article>
+      <Footer className="self-end" />
     </section>
   );
 }
