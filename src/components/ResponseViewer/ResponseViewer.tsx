@@ -36,8 +36,9 @@ const ResponseViewer: FC<ResponseViewerProps> = ({ onResponseClose, isHidden }) 
       <IconButton
         ref={closeBtnRef}
         data-testid="close-response"
-        className={cn('invisible absolute right-4 top-4 z-10 animate-fade-out-standard lg:visible', {
+        className={cn('invisible absolute right-4 top-4 z-10 transition-all lg:visible', {
           'animate-fade-in-standard [animation-delay:250ms]': !isHidden,
+          'invisible opacity-0': isHidden,
         })}
         onClick={() => onResponseClose(false)}
       >
