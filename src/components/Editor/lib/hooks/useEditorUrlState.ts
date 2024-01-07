@@ -18,7 +18,7 @@ function useEditorUrlState(urlParam: UrlParams) {
 
 	useEffect(() => {
 		if (urlState === null) {
-			handleActiveView(activeView);
+			handleActiveView?.(activeView);
 		}
 	}, [activeView, handleActiveView, urlState]);
 

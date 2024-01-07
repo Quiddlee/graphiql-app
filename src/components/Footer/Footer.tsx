@@ -6,7 +6,7 @@ import cn from '@shared/lib/helpers/cn';
 
 const Footer: FC<HTMLAttributes<HTMLElement>> = ({ className }) => {
   return (
-    <footer className={cn('grid items-center justify-center justify-items-center gap-1.5', className)}>
+    <footer className={cn('grid items-center justify-center justify-items-center gap-1.5 text-on-surface', className)}>
       <div className="flex gap-3">
         <a href="https://github.com/Quiddlee" className="flex gap-[7px]">
           <img src={ghIcon} alt="" />

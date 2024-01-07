@@ -10,8 +10,7 @@ const enLocale = {
 	code10: 'Error, email is occupied',
 	code11: 'Unexpected error have happened...',
 	code12: 'Must contain at least 1 digit',
-	code13: 'Must contain at least 1 lowercase letter',
-	code14: 'Must contain at least 1 uppercase letter',
+	code13: 'Must contain at least 1 letter',
 	code15: 'Must contain at least 1 special character',
 };
 const ruLocale = {
@@ -27,7 +26,6 @@ const ruLocale = {
 	code11: 'Произошла непредвиденная ошибка...',
 	code12: 'Должен содержать как минимум 1 цифру',
 	code13: 'Должен содержать как минимум 1 букву',
-	code14: 'Должен содержать как минимум 1 загл. букву',
 	code15: 'Должен содержать как минимум 1 спец. символ',
 };
 

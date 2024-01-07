@@ -2,8 +2,7 @@ import * as Yup from 'yup';
 
 const emailRegEx = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 const atLeastOneDigit = /[0-9]/;
-const atLeastOneLowerCase = /[a-z]/;
-const atLeastOneUpperCase = /[A-Z]/;
+const atLeastOneUnicodeChar = /^(?=.*\p{L})[^\s]+$/u;
 const atLeastOneSpecialCharacter = /[^\w\s]/g;
 
 const email = () => {
@@ -17,8 +16,7 @@ const password = () => {
 		password: Yup.string()
 			.min(8, 'code3')
 			.matches(atLeastOneDigit, 'code12')
-			.matches(atLeastOneLowerCase, 'code13')
-			.matches(atLeastOneUpperCase, 'code14')
+			.matches(atLeastOneUnicodeChar, 'code13')
 			.matches(atLeastOneSpecialCharacter, 'code15')
 			.required('code5'),
 	};
