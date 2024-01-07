@@ -1,4 +1,4 @@
-export const GithubIcon = () => {
+const GithubIcon = () => {
   return (
     <svg
       className="fill-inherit"
