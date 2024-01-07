@@ -24,6 +24,7 @@ const INITIAL_HEIGHT = 300;
 type RequestEditorResizedProps = HTMLAttributes<HTMLDivElement> & {
   onResponseOpen: HandleExpand;
   isOutEditorHidden: boolean;
+  isResponseHidden: boolean;
 };
 
 const RequestEditorResized: FC<RequestEditorResizedProps> = ({
@@ -31,6 +32,7 @@ const RequestEditorResized: FC<RequestEditorResizedProps> = ({
   isOutEditorHidden,
   onResponseOpen,
   children,
+  isResponseHidden,
   ...props
 }) => {
   const [initialHeight] = useState(
@@ -96,6 +98,7 @@ const RequestEditorResized: FC<RequestEditorResizedProps> = ({
         }}
       >
         <Controls
+          isResponseHidden={isResponseHidden}
           className="absolute right-6 top-7 hidden sm:grid"
           onResponseOpen={onResponseOpen}
           isHidden={isEditorHidden || isOutEditorHidden}

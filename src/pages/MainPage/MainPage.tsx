@@ -79,6 +79,7 @@ const MainPage = () => {
       <RequestEditorResized
         onResponseOpen={handleExpand}
         isOutEditorHidden={isEditorHidden}
+        isResponseHidden={isResponseHidden}
         style={{
           transform: !isTablet ? `scale3d(${interpolateEditor}, ${interpolateEditor}, 1)` : '',
           opacity: !isTablet ? oneZeroEditor : '',
