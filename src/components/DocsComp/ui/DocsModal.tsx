@@ -44,7 +44,7 @@ const DocsModal = ({ setIsDocsShown, explorer }: PropsType) => {
           setIsDocsShown((prev) => !prev);
           explorer.setInitState();
         }}
-        className="absolute right-[20px] top-[20px] z-20"
+        className="animation-delay-200 absolute right-[20px] top-[20px] z-20 animate-fade-in-screen ease-standard-decelerate"
         data-testid="closeDocs"
       >
         <Icon>close</Icon>

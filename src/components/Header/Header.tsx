@@ -1,5 +1,4 @@
-import { useState } from 'react';
-
+import { useCycle } from 'framer-motion';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import useAuth from '@/shared/Context/authHook';
@@ -14,7 +13,7 @@ import useScreen from '@shared/lib/hooks/useScreen';
 import LangSwitcher from './ui/LangSwitcher';
 
 const Header = () => {
-  const [isDocsShown, setIsDocsShown] = useState(false);
+  const [isDocsShown, setIsDocsShown] = useCycle(false, true);
   const { translation, language, changeLanguage } = useLanguage();
   const { pathname } = useLocation();
   const isSettings = pathname.slice(1) === ROUTES.SETTINGS;
@@ -62,7 +61,7 @@ const Header = () => {
         )}
         {isDocsToShow && (
           <IconButton
-            onClick={() => setIsDocsShown((prev) => !prev)}
+            onClick={() => setIsDocsShown()}
             data-tooltip={docsTip}
             data-testid="show_docs"
             className="tooltipElemVert"
@@ -76,7 +75,7 @@ const Header = () => {
           </IconButton>
         )}
       </header>
-      <DocsComp isShown={isDocsShown} setIsDocsShown={setIsDocsShown} />
+      <DocsComp isShown={isDocsShown} setIsDocsShown={() => viewTransition(setIsDocsShown)} />
     </>
   );
 };

@@ -98,6 +98,16 @@ export default {
             scale: '1',
           },
         },
+        'fade-in-docs': {
+          from: {
+            opacity: 0,
+            scale: '0.8 1',
+          },
+          to: {
+            opacity: 1,
+            scale: '1',
+          },
+        },
       },
       animation: {
         'fade-in-screen': 'fade-in 400ms cubic-bezier(0.05, 0.7, 0.1, 1.0) backwards',
@@ -110,6 +120,7 @@ export default {
         'fade-in-settings': 'fade-in-settings 500ms cubic-bezier(0.05, 0.7, 0.1, 1.0) both',
         'fade-in-title': 'fade-in-title 250ms cubic-bezier(0.05, 0.7, 0.1, 1.0) both',
         'fade-in-section': 'fade-in-section 500ms cubic-bezier(0.05, 0.7, 0.1, 1.0) both',
+        'fade-in-docs': 'fade-in-docs 700ms cubic-bezier(0.05, 0.7, 0.1, 1.0) both',
       },
       colors: {
         primary: 'var(--md-sys-color-primary)',
