@@ -56,9 +56,8 @@ const ru = {
 			oleksii: {
 				name: 'Алексей Дрогачёв',
 			},
-			// TODO: check if spelling is correct
 			harry: {
-				name: 'Гарри Голубиев',
+				name: 'Гарри Голубев',
 			},
 		},
 		rsschool: {
