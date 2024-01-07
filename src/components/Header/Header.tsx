@@ -34,7 +34,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="col-start-1 col-end-2 flex w-full items-center justify-end gap-3 py-2 pr-2 sm:col-end-3 sm:gap-8">
+      <header className="col-start-1 col-end-2 flex w-full items-center justify-end gap-2 py-2 pr-2 sm:col-end-3">
         {isSettings && !isMobile ? (
           <h1 style={{ viewTransitionName: 'title' }} className="mr-auto flex items-center pl-4 font-readex_pro">
             <button type="button" onClick={handleClick} className="flex h-12 w-12 items-center justify-center">
@@ -56,7 +56,7 @@ const Header = () => {
         )}
         <LangSwitcher language={language} changeLanguage={changeLanguage} tip={langTip} />
         {isHomeToShow && (
-          <IconButton data-tooltip={homeTip} className="tooltipElem" onClick={() => navigate(ROUTES.WELCOME_PAGE)}>
+          <IconButton data-tooltip={homeTip} className="tooltipElemVert" onClick={() => navigate(ROUTES.WELCOME_PAGE)}>
             <Icon>home</Icon>
           </IconButton>
         )}
@@ -65,13 +65,13 @@ const Header = () => {
             onClick={() => setIsDocsShown((prev) => !prev)}
             data-tooltip={docsTip}
             data-testid="show_docs"
-            className="tooltipElem"
+            className="tooltipElemVert"
           >
             <Icon>article</Icon>
           </IconButton>
         )}
         {isLogOutToShow && (
-          <IconButton onClick={() => logOut()} className="tooltipElem" data-tooltip={logOutTip}>
+          <IconButton onClick={() => logOut()} className="tooltipElemVert" data-tooltip={logOutTip}>
             <Icon>door_open</Icon>
           </IconButton>
         )}

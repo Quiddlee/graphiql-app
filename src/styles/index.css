@@ -215,7 +215,8 @@
   background-color: var(--md-sys-color-primary) !important;
   cursor: grab;
   transition: all 0.1s theme(transitionTimingFunction.out) !important;
-  padding: 2px;
+  padding: 3px;
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.2);
 }
 
 .os-scrollbar-handle:active {
@@ -381,17 +382,20 @@
   --md-filled-tonal-button-label-text-color: var(--md-sys-color-primary);
 }
 
+.tooltipElemVert,
 .tooltipElem {
   position: relative;
 }
 
 @media screen and (max-width: 1024px) {
+  .tooltipElemVert::before,
   .tooltipElem::before {
     display: none;
     opacity: 0;
   }
 }
 
+.tooltipElemVert:before,
 .tooltipElem::before {
   --scale: 0;
   position: absolute;
@@ -412,6 +416,15 @@
   font-weight: 500;
 }
 
+.tooltipElemVert::before {
+  top: 45px;
+  right: 0;
+  left: 0;
+  translate: -20% 0;
+  transform-origin: bottom;
+}
+
+.tooltipElemVert:hover::before,
 .tooltipElem:hover::before {
   --scale: 1;
 }

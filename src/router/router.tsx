@@ -6,9 +6,9 @@ import LoginPage from '@/pages/LoginPage';
 import Page404 from '@/pages/Page404';
 import SettignsPage from '@/pages/SettingsPage';
 import SignUpPage from '@/pages/SignUpPage';
-import WelcomePage from '@/pages/WelcomePage';
 import ROUTES from '@/shared/constants/routes';
 import MainPage from '@pages/MainPage/MainPage';
+import WelcomePage from '@pages/WelcomePage/WelcomePage';
 
 import AuthAllowedOnly from './AuthAllowedOnly';
 import UnauthAllowedOnly from './UnauthAllowedOnly';

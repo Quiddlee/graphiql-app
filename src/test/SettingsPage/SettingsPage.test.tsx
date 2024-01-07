@@ -1,18 +1,19 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import App from '@/app/App';
 import { prepareAuthCookie } from '@/shared/helpers/cookieHandlers';
+import renderWithRouter from '@/test/helpers/RenderWithRouter';
+import ROUTES from '@shared/constants/routes';
 
 document.cookie = prepareAuthCookie('test@gmail.com');
 
 describe('Testing for settings page', () => {
   it('Should render settigns page properly', async () => {
-    render(<App />);
+    renderWithRouter(null, [`/${ROUTES.MAIN}`]);
     expect(screen.queryByText('Persist headers')).toBeNull();
     expect(screen.queryByText('Dark mode')).toBeNull();
     expect(screen.queryByText('Clear storage')).toBeNull();
-    const settingsLink = await screen.findByText('settings page');
+    const settingsLink = await screen.findByTestId('nav-settings');
     await act(async () => {
       fireEvent.click(settingsLink);
     });
@@ -21,7 +22,7 @@ describe('Testing for settings page', () => {
     expect(await screen.findByText('Clear storage')).toBeInTheDocument();
   });
   it('Should change app language interface after clicking on russian language button and back', async () => {
-    render(<App />);
+    renderWithRouter(null, [`/${ROUTES.SETTINGS}`]);
     const RuslangBtn = await screen.findByText('Русский');
     const EngLangBtn = await screen.findByText('English');
     await act(async () => {
@@ -38,7 +39,7 @@ describe('Testing for settings page', () => {
     expect(await screen.findByText('Clear storage')).toBeInTheDocument();
   });
   it('Should change color theme after clicking on theme switcher', async () => {
-    render(<App />);
+    renderWithRouter(null, [`/${ROUTES.SETTINGS}`]);
     expect(document.body.getAttribute('data-user-theme')).toBeNull();
     const switcher = screen.getByTestId('themeSwitcher');
     await act(async () => {

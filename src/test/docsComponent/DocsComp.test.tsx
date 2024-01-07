@@ -1,13 +1,14 @@
-import { act, fireEvent, render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { act, fireEvent, screen, waitForElementToBeRemoved } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import App from '@/app/App';
 import { prepareAuthCookie } from '@/shared/helpers/cookieHandlers';
+import renderWithRouter from '@/test/helpers/RenderWithRouter';
+import ROUTES from '@shared/constants/routes';
 
 describe('Testing for docs component', () => {
   it('Should render docs components after clicking on show docs btn', async () => {
     document.cookie = prepareAuthCookie('test@gmail.com');
-    render(<App />);
+    renderWithRouter(null, [`/${ROUTES.MAIN}`]);
     const showDocsBtn = screen.getByTestId('show_docs');
     expect(screen.queryByTestId('overlay')).toBeNull();
     expect(screen.queryByText('Docs')).toBeNull();
@@ -25,7 +26,7 @@ describe('Testing for docs component', () => {
     ).toBeInTheDocument();
   });
   it('Should close docs section after clicking on overlay', async () => {
-    render(<App />);
+    renderWithRouter(null, [`/${ROUTES.MAIN}`]);
     const showDocsBtn = screen.getByTestId('show_docs');
     expect(screen.queryByTestId('overlay')).toBeNull();
     expect(screen.queryByText('Docs')).toBeNull();
@@ -49,7 +50,7 @@ describe('Testing for docs component', () => {
     }).catch(() => {});
   });
   it('Should close docs section after clicking on close docs button', async () => {
-    render(<App />);
+    renderWithRouter(null, [`/${ROUTES.MAIN}`]);
     const showDocsBtn = screen.getByTestId('show_docs');
     expect(screen.queryByTestId('overlay')).toBeNull();
     expect(screen.queryByText('Docs')).toBeNull();
@@ -73,7 +74,7 @@ describe('Testing for docs component', () => {
     }).catch(() => {});
   });
   it('Should navigate and display info about proper type after cliking on that type', async () => {
-    render(<App />);
+    renderWithRouter(null, [`/${ROUTES.MAIN}`]);
     const showDocsBtn = screen.getByTestId('show_docs');
     await act(async () => {
       fireEvent.click(showDocsBtn);
@@ -86,7 +87,7 @@ describe('Testing for docs component', () => {
     expect(await screen.findByText('The `Boolean` scalar type represents `true` or `false`.')).toBeInTheDocument();
   });
   it('Should navigate and display info about proper info about root type after cliking on that type', async () => {
-    render(<App />);
+    renderWithRouter(null, [`/${ROUTES.MAIN}`]);
     const showDocsBtn = screen.getByTestId('show_docs');
     await act(async () => {
       fireEvent.click(showDocsBtn);
@@ -98,7 +99,7 @@ describe('Testing for docs component', () => {
     expect(await screen.findByText('Fields:')).toBeInTheDocument();
   });
   it('Should navigate and display info about proper info about root type after cliking on that type and all following clicked types as well as navigating back', async () => {
-    render(<App />);
+    renderWithRouter(null, [`/${ROUTES.MAIN}`]);
     const showDocsBtn = screen.getByTestId('show_docs');
     await act(async () => {
       fireEvent.click(showDocsBtn);

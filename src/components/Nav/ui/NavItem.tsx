@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 
-import { NavLink, NavLinkProps } from 'react-router-dom';
+import { NavLink, NavLinkProps, unstable_useViewTransitionState as useViewTransitionState } from 'react-router-dom';
 
 import cn from '@shared/lib/helpers/cn';
 
@@ -11,6 +11,8 @@ type NavButtonProps = NavLinkProps & {
 };
 
 const NavItem: FC<NavButtonProps> = ({ to, style, isExpand, children, ...props }) => {
+  useViewTransitionState(to);
+
   return (
     <NavLink
       unstable_viewTransition

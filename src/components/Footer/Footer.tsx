@@ -1,9 +1,12 @@
-import ghIcon from '@assets/Github.svg';
-import rsLogo from '@assets/rs_school_js.svg';
+import { FC, HTMLAttributes } from 'react';
 
-const Footer = () => {
+import ghIcon from '@assets/github.svg';
+import rsLogo from '@assets/rs_school.svg';
+import cn from '@shared/lib/helpers/cn';
+
+const Footer: FC<HTMLAttributes<HTMLElement>> = ({ className }) => {
   return (
-    <footer className="flex h-fit flex-col items-center justify-center">
+    <footer className={cn('grid items-center justify-center justify-items-center gap-1.5', className)}>
       <div className="flex gap-3">
         <a href="https://github.com/Quiddlee" className="flex gap-[7px]">
           <img src={ghIcon} alt="" />

@@ -1,4 +1,89 @@
 const en = {
+	welcome: {
+		hero: {
+			title: {
+				welcomeTo: 'Welcome to',
+				the: 'the',
+				graphiql: 'GraphiQL',
+			},
+		},
+		subHeader: {
+			title: {
+				craft: 'Craft stunning websites',
+				superpowers: 'with GraphQL superpowers.',
+				introducing: 'Introducing GraphiQL,',
+				dream: 'your dream IDE.',
+			},
+		},
+		whatIsGraphiQL: {
+			title: 'What is GraphiQL?',
+			subtitle:
+				'GraphiQL: Your interactive GraphQL IDE, empowering website development with syntax highlighting, autocompletion, and dynamic documentation.',
+			cards: [
+				{
+					title: 'Multi language support',
+					descr: 'Support up to 2 languges — English and Russian.',
+				},
+				{
+					title: 'Query prettifiying',
+					descr: 'Prettify your queries with one click.',
+				},
+				{
+					title: 'Choose your endpoint',
+					descr: 'Change your API endpoint on the fly.',
+				},
+				{
+					title: 'Dynamic documentation',
+					descr: 'GraphiQL updates the documentation schema dynamically.',
+				},
+				{
+					title: 'Query saving',
+					descr: 'Save your queries and reuse them later.',
+				},
+				{
+					title: 'Editor resizing',
+					descr: 'Resize the editor to your liking.',
+				},
+			],
+		},
+		team: {
+			title: 'Meet our amazing team',
+			bohdan: {
+				name: 'Bohdan Shcherbyna',
+				design: 'Design',
+			},
+			oleksii: {
+				name: 'Oleksii Drohachov',
+			},
+			harry: {
+				name: 'Harry Holubiev',
+			},
+		},
+		rsschool: {
+			title: {
+				built: 'Built with the Support of',
+				rsschool: 'The Rolling Scopes School',
+			},
+			descr: {
+				proud: 'We proud to announce that it is supported by',
+				the: 'the',
+				rsschool: 'RS School',
+				provider: 'a leading provider of',
+				free: 'free-of-charge community-based',
+				education: 'education programs.',
+				built: 'And built as a graduation project for',
+				react: 'React course',
+			},
+		},
+		start: {
+			title: {
+				start: 'Start Using',
+				now: 'GraphiQL Now',
+			},
+			buttonAuth: 'Sign up',
+			buttonApp: 'GraphiQL App',
+		},
+	},
 	nav: {
 		navbar: {
 			welcome: 'Welcome',

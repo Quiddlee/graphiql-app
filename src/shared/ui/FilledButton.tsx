@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { createComponent } from '@lit/react';
-import { MdFilledButton } from '@material/web/button/filled-button';
+import { MdFilledButton } from '@material/web/all';
 
 const FilledButton = createComponent({
   react: React,
