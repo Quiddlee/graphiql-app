@@ -4,6 +4,8 @@
 
 ***GraphiQL:** Your interactive GraphQL IDE, empowering website development with syntax highlighting, autocompletion, and dynamic documentation 🤩.*
 
+**Deployed project preview - [GraphiQL](https://quiddlee.github.io/graphiql-app/#) 👀**
+
 # Getting Started 🚀
 To run our project locally, you would have to download zip file with our repository or clone it to your computer. ✨
 
